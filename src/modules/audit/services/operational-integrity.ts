@@ -30,10 +30,13 @@ export function checkOperational(snapshot: AuditSnapshot): OperationalCheck {
       const next = bid as unknown as BidCommitment;
       const previous = bids.at(-1);
       const minimum = previous ? BigInt(previous.amountCents) + BigInt(auction.minIncrementCents) : BigInt(auction.startingBidCents);
+      const remaining = Date.parse(auction.endsAt) - Date.parse(next.createdAt);
+      const expectedEndsAt = remaining > 0 && remaining <= 120000
+        ? new Date(Date.parse(auction.endsAt) + 120000).toISOString() : auction.endsAt;
       if (auction.status !== 'PUBLISHED' || next.bidSequence !== String(bids.length + 1) ||
           BigInt(next.amountCents) < minimum || next.bidderRef === previous?.bidderRef ||
           next.createdAt !== event.createdAt || next.createdAt < auction.startsAt || next.createdAt >= auction.endsAt ||
-          typeof endsAt !== 'string' || endsAt < auction.endsAt) return mismatch('INVALID_BID_COMMITMENT');
+          endsAt !== expectedEndsAt) return mismatch('INVALID_BID_COMMITMENT');
       bids.push(next);
       auction = { ...auction, currentBidId: next.bidId, endsAt };
     } else if (event.eventType === 'AUCTION_SETTLED') {

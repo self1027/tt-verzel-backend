@@ -53,7 +53,7 @@ export async function auctionFixture() {
       });
     }
     return { ...database, url: http.url, ownerId, otherId, bidderId, snapshotId, tokens, clock, payload, fixture, addBid, request,
-      async reset() { await database.pool.query('DELETE FROM audit_anchors; DELETE FROM audit_events; UPDATE auctions SET current_bid_id = NULL; DELETE FROM bids; DELETE FROM auctions'); },
+      async reset() { await database.pool.query('DELETE FROM bid_operations; DELETE FROM wallet_reservations; DELETE FROM audit_anchors; DELETE FROM audit_events; UPDATE auctions SET current_bid_id = NULL; DELETE FROM bids; DELETE FROM auctions'); },
       async close() { await http.close(); await database.close(); },
     };
   } catch (error) {
