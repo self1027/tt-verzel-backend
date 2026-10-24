@@ -1,5 +1,16 @@
 # Monolito modular por dominio
 
+## Estado atual
+
+Este documento registra tambem convencoes da base inicial. A implementacao atual
+inclui wallets/ledger, BidService, auditoria com witness, settlements e realtime.
+`settlements` coordena captura, ledger, estado e auditoria na mesma transacao;
+`realtime` adapta uma porta de eventos publicos emitidos apos COMMIT a Socket.IO.
+O [relatorio de conclusao](implementation-reports/backend-completion.md) descreve
+o fluxo atual, os limites de integridade e os testes. `docker compose up -d --build`
+inicia PostgreSQL, API e witness, migrations, seed e workers; use `up -d postgres`
+quando quiser somente o banco para desenvolvimento local.
+
 ## Escopo inicial
 
 A base de persistencia contem schemas, tipos inferidos e migracao das 12 tabelas.

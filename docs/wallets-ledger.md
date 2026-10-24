@@ -93,7 +93,7 @@ consistent=false e nunca modificam o saldo. Não existe endpoint de reconciliaç
 
 `ReservationOperations` recebe a transação PostgreSQL do chamador em cada operação.
 `DrizzleReservationOperations` implementa reserveFunds/releaseReservation e é usado
-pelo [BidService](bids.md). Captura permanece um contrato para a fase de liquidação.
+pelo [BidService](bids.md). A captura também está implementada e é usada pelo SettlementService.
 
 - reserveFunds: carteira/auction/bid devem corresponder, valor positivo e disponível
   suficiente; incrementar reserved e criar ACTIVE atomicamente, sem alterar balance
@@ -112,8 +112,10 @@ pelo [BidService](bids.md). Captura permanece um contrato para a fase de liquida
 O adaptador valida carteira/usuário/lance, saldos e soma das reservas ACTIVE; os locks
 das carteiras são adquiridos por UUID em ordem crescente antes das reservas. Um índice
 parcial único impede duas reservas ACTIVE no mesmo leilão. Reservar/liberar não gera
-movimento contábil nem altera balanceCents. Captura e SettlementService/Worker ainda
-não estão implementados. A auditoria existente recebe os lances na mesma transação.
+movimento contábil nem altera balanceCents. Captura e SettlementService/Worker estão
+implementados: a captura reconcilia ambos os saldos contra o ledger, debita vencedor,
+credita vendedor e grava duas entradas opostas com referência à reserva. Settlement,
+estado do lote e auditoria compartilham o COMMIT. Veja o [relatório atual](implementation-reports/backend-completion.md).
 
 ## Exemplos no CMD
 

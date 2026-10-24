@@ -23,9 +23,9 @@ de schema, enum ou migration foi necessaria.
 | CLOSED_NO_BIDS | qualquer horario | CLOSED_NO_BIDS |
 
 FINALIZING significa prazo vencido com encerramento/liquidacao ainda pendentes.
-Nao significa pagamento realizado. Nao existe job para abrir leiloes ou worker para
-liquidar nesta fase. Um leilao vencido permanece PUBLISHED/FINALIZING ate um futuro
-fluxo de encerramento; o modulo atual so cria PUBLISHED e permite cancelar.
+Nao significa pagamento realizado. O SettlementWorker encerra os lotes vencidos
+apos verificacao externa VERIFIED e revalidacao transacional. Sem prova disponivel,
+o lote permanece FINALIZING. Nao existe job para abrir leiloes: LIVE e calculado.
 
 ## Endpoints
 
@@ -42,7 +42,8 @@ O proprietario sempre vem do subject JWT validado pelo middleware. IDs ou papeis
 enviados no corpo nunca substituem essa identidade. GETs publicos nao exigem token,
 nao consultam usuarios e nao expoem hashes, emails ou dados de carteiras.
 
-Listas aceitam limit (padrao 30, de 1 a 100), skip (padrao 0, de 0 a 2147483647) e
+Listas aceitam busca, faixa de preco, ordenacao e page conforme o [guia de filtros](auction-filters.md),
+alem de limit (padrao 30, de 1 a 100), skip (padrao 0, de 0 a 2147483647) e
 lifecycleState opcional com um dos seis estados de apresentacao. PUBLISHED nao e
 um filtro de apresentacao valido. Parametros desconhecidos ou repetidos sao rejeitados.
 Ordenacao: createdAt DESC, id ASC. Filtros temporais sao aplicados no SQL antes da
@@ -124,7 +125,7 @@ podera aceitar PUBLISHED com startsAt <= databaseNow < endsAt. Anti-sniping deve
 alterar endsAt na mesma transacao do lance. Settlement devera selecionar publicados
 vencidos, bloquear/revalidar e executar liquidacao transacional e idempotente.
 BidService implementa essas regras em `modules/bids`, incluindo reservas e auditoria.
-SettlementService/Worker continuam pendentes.
+SettlementService/Worker implementam esse protocolo; veja o [relatorio atual](implementation-reports/backend-completion.md).
 
 ## Erros e testes
 
@@ -147,7 +148,8 @@ npm run build
 O projeto usa node:test, preservado nesta fase. Testes de lifecycle e Service usam
 instantes explicitos. Integracao usa PostgreSQL real em schemas temporarios, com
 seed isolado, e verifica locks atraves de pg_blocking_pids. Lances usados nos testes
-sao apenas fixtures SQL para exercitar as restricoes, nao um modulo de lances.
+incluem fixtures SQL para exercitar as restricoes; os testes do BidService tambem
+exercitam o fluxo real transacional.
 
 ## Arquivos
 
@@ -163,5 +165,5 @@ sao apenas fixtures SQL para exercitar as restricoes, nao um modulo de lances.
 - tests/helpers/auctions.js: ambiente isolado e fixtures.
 
 O valor inicial e definido pelo leiloeiro, sem utilizar preco externo de produto.
-Wallets, ledger, lances e auditoria possuem guias proprios; liquidacao, jobs de
-settlement e WebSockets continuam pendentes. Nao ha Redis ou fila externa.
+Wallets, ledger, lances e auditoria possuem guias proprios. Liquidacao, worker,
+comprovantes publicos e Socket.IO estao implementados. Nao ha Redis ou fila externa.
