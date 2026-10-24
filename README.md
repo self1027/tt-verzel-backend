@@ -33,9 +33,11 @@ Não versione `.env`, chaves privadas ou credenciais reais.
 | Login e papéis | [Autenticação](docs/authentication.md) |
 | Produtos externos e snapshots | [Catálogo](docs/catalog.md) |
 | Lotes, edição e cancelamento | [Leilões](docs/auctions.md) |
+| Lances, liderança e idempotência | [BidService](docs/bids.md) |
 | Depósitos simulados e ledger | [Carteiras](docs/wallets-ledger.md) |
 | Auditoria pública e witness independente | [Auditoria](docs/audit-infrastructure.md) |
 | Implementação e evidências desta etapa | [Relatório](docs/implementation-reports/audit-infrastructure.md) |
+| Implementação e concorrência dos lances | [Relatório BidService](docs/implementation-reports/bid-service.md) |
 
 Valores monetários são strings decimais de centavos na API e `bigint` internamente.
 Use login para obter Bearer JWT nas rotas protegidas. A consulta
@@ -64,7 +66,8 @@ uma ancoragem de produção configurada.
 
 ## Próximas etapas
 
-Reservas concretas, BidService, liquidação/worker, comprovantes, WebSockets,
+Lances, reservas e liberação ao ser superado estão implementados e auditados na mesma transação.
+Captura de reservas, liquidação/worker, comprovantes, WebSockets,
 frontend React e deploy público ainda estão pendentes. Os eventos futuros já têm
-contratos, mas não substituem os serviços financeiros. O escopo e as garantias
+contratos de settlement, mas não substituem a captura/transferência financeira. O escopo e as garantias
 criptográficas estão detalhados no relatório e no guia de auditoria.

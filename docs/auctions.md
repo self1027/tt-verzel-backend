@@ -1,5 +1,9 @@
 # Auctions e lifecycle
 
+Lances transacionais, reservas e consultas de liderança estão documentados em
+[BidService](bids.md). Criação, edição e cancelamento também registram eventos pela
+[auditoria existente](audit-infrastructure.md).
+
 O modulo usa exclusivamente snapshots locais e autenticacao existente. Nao importa
 DummyJSON, nao consulta temp e nao atualiza o produto associado. Nenhuma alteracao
 de schema, enum ou migration foi necessaria.
@@ -113,13 +117,14 @@ Os locks seguem a [documentacao de bloqueios explicitos](https://www.postgresql.
 A criacao protege o snapshot com FOR KEY SHARE para impedir sua exclusao antes do
 INSERT, sem modifica-lo; o horario e obtido depois dessa verificacao.
 
-Futuros BidService e SettlementService/Worker devem obrigatoriamente bloquear a
+BidService e futuros SettlementService/Worker devem obrigatoriamente bloquear a
 mesma linha de auctions primeiro, antes de decidir ou bloquear registros filhos.
 Depois do lock, devem obter databaseNow e verificar status/datas. BidService so
 podera aceitar PUBLISHED com startsAt <= databaseNow < endsAt. Anti-sniping devera
 alterar endsAt na mesma transacao do lance. Settlement devera selecionar publicados
 vencidos, bloquear/revalidar e executar liquidacao transacional e idempotente.
-Esses componentes nao foram implementados aqui.
+BidService implementa essas regras em `modules/bids`, incluindo reservas e auditoria.
+SettlementService/Worker continuam pendentes.
 
 ## Erros e testes
 
@@ -157,6 +162,6 @@ sao apenas fixtures SQL para exercitar as restricoes, nao um modulo de lances.
 - tests/integration/auctions.test.js e auctions-concurrency.test.js: HTTP/PostgreSQL.
 - tests/helpers/auctions.js: ambiente isolado e fixtures.
 
-Nenhuma implementacao de wallets, ledger, lances, liquidacao, auditoria completa,
-jobs, filas, Redis ou WebSockets foi adicionada. O valor inicial e definido pelo
-leiloeiro, sem utilizar preco externo de produto.
+O valor inicial e definido pelo leiloeiro, sem utilizar preco externo de produto.
+Wallets, ledger, lances e auditoria possuem guias proprios; liquidacao, jobs de
+settlement e WebSockets continuam pendentes. Nao ha Redis ou fila externa.

@@ -89,10 +89,11 @@ o cálculo, evitando divergência falsa por depósitos concorrentes. Reservas n�
 somadas ou subtraídas do ledger. Divergência ou invariantes inválidas resultam em
 consistent=false e nunca modificam o saldo. Não existe endpoint de reconciliação.
 
-## Contratos de reservas para a próxima fase
+## Reservas transacionais
 
 `ReservationOperations` recebe a transação PostgreSQL do chamador em cada operação.
-São contratos; não há implementação de lances, reservas ou liquidação nesta fase.
+`DrizzleReservationOperations` implementa reserveFunds/releaseReservation e é usado
+pelo [BidService](bids.md). Captura permanece um contrato para a fase de liquidação.
 
 - reserveFunds: carteira/auction/bid devem corresponder, valor positivo e disponível
   suficiente; incrementar reserved e criar ACTIVE atomicamente, sem alterar balance
@@ -108,9 +109,11 @@ São contratos; não há implementação de lances, reservas ou liquidação nes
   Não se usa releasedAt para representar captura. Os dois lados da transferência
   e a liquidação futura devem compartilhar a transação do chamador.
 
-Ainda pendentes: implementar esses contratos junto ao BidService/SettlementService,
-com os locks e validações de correspondência, fundos e transições acima. Não há
-SettlementWorker, WebSockets ou auditoria completa.
+O adaptador valida carteira/usuário/lance, saldos e soma das reservas ACTIVE; os locks
+das carteiras são adquiridos por UUID em ordem crescente antes das reservas. Um índice
+parcial único impede duas reservas ACTIVE no mesmo leilão. Reservar/liberar não gera
+movimento contábil nem altera balanceCents. Captura e SettlementService/Worker ainda
+não estão implementados. A auditoria existente recebe os lances na mesma transação.
 
 ## Exemplos no CMD
 

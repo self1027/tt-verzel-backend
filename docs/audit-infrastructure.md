@@ -6,7 +6,7 @@ Este guia descreve a implementação em `src/modules/audit`, seus limites e a op
 
 O PDF exige consulta anônima do histórico, identificação de alterações, inserções e remoções feitas diretamente no banco, preservação dos dados pessoais e uma página pública de auditoria. As sete páginas foram lidas visualmente nesta revisão. Os endpoints JSON fornecem a infraestrutura de consulta; uma interface React pública e o deploy obrigatório continuam sendo entregas separadas. O seed atual cria usuários, carteiras e contas contábeis; ainda falta o lote publicado com lances abertos exigido na página 5.
 
-Criação, edição e cancelamento de lotes registram eventos na mesma transação da alteração operacional. Há contratos e replay para lances, encerramento e liquidação, mas o fluxo financeiro completo de lance, reserva, captura e comprovante ainda não está integrado. A auditoria compara a projeção das tabelas de lotes, lances e liquidações; não prova o dinheiro liquidado no ledger, saldos ou reservas. `receiptHash` compromete o token do comprovante, sem publicar esse token; não verifica o conteúdo de uma página de comprovante nem a transferência contábil.
+Criação, edição, cancelamento e [lances aceitos](bids.md) registram eventos na mesma transação da alteração operacional. BidService também faz reservas/liberações; captura, liquidação e comprovante continuam pendentes. A auditoria compara a projeção das tabelas de lotes, lances e liquidações; não prova o dinheiro liquidado no ledger, saldos ou reservas. `receiptHash` compromete o token do comprovante, sem publicar esse token; não verifica o conteúdo de uma página de comprovante nem a transferência contábil.
 
 ## Componentes e dependências
 
@@ -89,7 +89,7 @@ Ele é estável dentro do lote e diferente em outros lotes. Não é autenticaç�
 
 ## Verificação e alcance da prova
 
-O replay exige uma criação inicial antes de alterações, respeita estados terminais e compara todos os compromissos ao snapshot operacional. Para lances, compara sequência, valor mínimo, alternância de líder, horário e fim prorrogado; para liquidação, vencedor, valor, horário e compromisso de comprovante. Essas checagens estruturais ainda não substituem a implementação das regras de negócio, como reservas de saldo e a regra exata de anti-sniping de dois minutos.
+O replay exige uma criação inicial antes de alterações, respeita estados terminais e compara todos os compromissos ao snapshot operacional. Para lances, compara sequência, valor mínimo, alternância de líder, horário e fim prorrogado; para liquidação, vencedor, valor, horário e compromisso de comprovante. Anti-sniping exige exatamente o prazo anterior mais 120000ms quando restam até dois minutos; fora da janela, o prazo não muda. BidService valida o replay completo antes do commit. As reservas são validadas pelo módulo financeiro; captura e transferência do ledger continuam fora dessa projeção.
 
 | Estado | Interpretação |
 | --- | --- |
@@ -269,8 +269,8 @@ Ficam fora da garantia: comprometimento ou rollback da testemunha, roubo de sua 
 
 TLS, isolamento da rede, atualização de certificados, gestão de segredos e operação independente ainda precisam existir no deploy real. O token de publicação via HTTP pode ser interceptado. A chave pública fixada evita aceitar assinaturas de outra testemunha, mas não fornece, sozinha, disponibilidade, frescor ou proteção contra rollback. Troca de chave/namespace requer procedimento explícito de migração de confiança; não há rotação automática implementada.
 
-## Verificações observadas nesta revisão
+## Verificações da fase de infraestrutura
 
-Na integração final, `npm test` aprovou 55 cenários, com zero falhas e um cenário ignorado por privilégio de symlink no Windows. `npm run test:db` aprovou 93 cenários no PostgreSQL real. Lint, typecheck e build passaram. Os testes cobrem canonicalização, whitelist, encadeamento, replay, reescrita contra head remoto, exclusão de cauda, indisponibilidade, privacidade e protocolo da testemunha. O relatório de implementação detalha evidências e a exceção do teste ignorado.
+Na fase de infraestrutura, `npm test` aprovou 55 cenários, com zero falhas e um cenário ignorado por privilégio de symlink no Windows. `npm run test:db` aprovou 93 cenários no PostgreSQL real. Lint, typecheck e build passaram. Os testes cobrem canonicalização, whitelist, encadeamento, replay, reescrita contra head remoto, exclusão de cauda, indisponibilidade, privacidade e protocolo da testemunha. Resultados atuais, incluindo lances reais, constam no [relatório BidService](implementation-reports/bid-service.md).
 
 Este guia não afirma que foi realizado deploy, configurada ancoragem de produção, entregue a interface pública React ou provada a liquidação financeira. Consulte `docs/implementation-reports/audit-infrastructure.md` para as evidências finais e pendências da entrega.
