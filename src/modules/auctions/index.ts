@@ -7,12 +7,15 @@ import { DrizzleAuctionRepository } from './repositories/drizzle-auction-reposit
 import { AuctionService } from './services/auction-service.js';
 import { DrizzleAuditAppender } from '../audit/repositories/drizzle-audit-appender.js';
 import { createBidModule } from '../bids/index.js';
+import { silentAuctionEvents, type AuctionEventSink } from '../../shared/events/auction-events.js';
+import { createReceiptRouter } from '../settlements/receipt-router.js';
 
-export function createAuctionModule(database: Database, authenticate: ReturnType<typeof authentication>): Router {
-  const controller = new AuctionController(new AuctionService(new DrizzleAuctionRepository(database, (tx) => new DrizzleAuditAppender(tx))));
+export function createAuctionModule(database: Database, authenticate: ReturnType<typeof authentication>, events: AuctionEventSink = silentAuctionEvents): Router {
+  const controller = new AuctionController(new AuctionService(new DrizzleAuctionRepository(database, (tx) => new DrizzleAuditAppender(tx), events)));
   const router = Router();
   const auctioneer = authorize('AUCTIONEER');
-  router.use(createBidModule(database, authenticate));
+  router.use(createBidModule(database, authenticate, events));
+  router.use(createReceiptRouter(database));
   router.get('/', controller.list);
   router.get('/mine', authenticate, auctioneer, controller.mine);
   router.get('/:id', controller.get);
