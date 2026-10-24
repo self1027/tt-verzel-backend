@@ -19,6 +19,7 @@ async function main(): Promise<void> {
   const auditConfig = readAuditConfig(process.env);
   const external = auditConfig ? new HttpAnchorProvider({ baseUrl: auditConfig.baseUrl, namespace: auditConfig.namespace,
     publicKey: await readFile(auditConfig.publicKeyFile, 'utf8'), timeoutMs: auditConfig.timeoutMs,
+    allowInsecureHttpForDevelopment: auditConfig.allowInsecureHttpForDevelopment,
     ...(auditConfig.publishToken ? { publishToken: auditConfig.publishToken } : {}) }) : undefined;
   const { db, pool } = createDatabase(readDatabaseURL(process.env));
   try {

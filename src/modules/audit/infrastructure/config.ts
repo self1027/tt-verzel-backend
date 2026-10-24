@@ -12,8 +12,11 @@ export function readAuditConfig(env: Record<string, string | undefined>) {
     AUDIT_WITNESS_PUBLISH_TOKEN: z.string().min(16).optional(),
     AUDIT_WITNESS_TIMEOUT_MS: z.coerce.number().int().min(1).max(30000).default(5000),
     AUDIT_ANCHOR_POLL_MS: z.coerce.number().int().min(100).max(3600000).default(5000),
+    AUDIT_WITNESS_ALLOW_INSECURE_HTTP: z.enum(['true', 'false']).default('false'),
   }).parse(env);
+  const allowInsecureHttpForDevelopment = value.AUDIT_WITNESS_ALLOW_INSECURE_HTTP === 'true';
+  if (allowInsecureHttpForDevelopment && env.NODE_ENV !== 'development') throw new Error('Insecure witness HTTP requires NODE_ENV=development');
   return { baseUrl: value.AUDIT_WITNESS_URL, namespace: value.AUDIT_WITNESS_NAMESPACE,
     publicKeyFile: value.AUDIT_WITNESS_PUBLIC_KEY_FILE, publishToken: value.AUDIT_WITNESS_PUBLISH_TOKEN,
-    timeoutMs: value.AUDIT_WITNESS_TIMEOUT_MS, pollMs: value.AUDIT_ANCHOR_POLL_MS };
+    timeoutMs: value.AUDIT_WITNESS_TIMEOUT_MS, pollMs: value.AUDIT_ANCHOR_POLL_MS, allowInsecureHttpForDevelopment };
 }

@@ -160,6 +160,8 @@ test('provider requires authenticated TLS outside the explicit loopback developm
   const { HttpAnchorProvider } = await modules();
   assert.throws(() => new HttpAnchorProvider({ baseUrl: 'http://witness.example', namespace: 'test-auctions', publicKey }), /HTTPS|TLS/i);
   assert.doesNotThrow(() => new HttpAnchorProvider({ baseUrl: 'https://witness.example', namespace: 'test-auctions', publicKey }));
+  assert.doesNotThrow(() => new HttpAnchorProvider({ baseUrl: 'http://audit-witness:8081', namespace: 'test-auctions', publicKey,
+    allowInsecureHttpForDevelopment: true }));
 });
 
 test('journal replay rejects changed signed records, duplicate sequences and reversed CAS history', async (t) => {

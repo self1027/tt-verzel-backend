@@ -23,6 +23,63 @@ services:
       timeout: 5s
       retries: 5
 
+  audit-witness:
+    build: .
+    init: true
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      WITNESS_NAMESPACE: verzel-dev
+      WITNESS_JOURNAL_PATH: /var/lib/verzel-witness/journal.jsonl
+      WITNESS_PRIVATE_KEY_FILE: /var/lib/verzel-witness/private.pem
+      WITNESS_PUBLIC_KEY_FILE: /var/lib/verzel-witness-public/public.pem
+      WITNESS_PUBLISH_TOKEN: ${AUDIT_WITNESS_PUBLISH_TOKEN:-verzel-development-publish-token}
+    volumes:
+      - witness_data:/var/lib/verzel-witness
+      - witness_public:/var/lib/verzel-witness-public
+    command: ["node", "docker/witness/start.mjs"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8081/v1/namespaces/verzel-dev/auctions/health/latest').then(r=>process.exit(r.ok||r.status===404?0:1)).catch(()=>process.exit(1))"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    init: true
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      audit-witness:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://verzel:verzel_dev@postgres:5432/verzel_auction
+      PORT: "3000"
+      JWT_SECRET: ${JWT_SECRET:-verzel-development-jwt-secret-at-least-32-bytes}
+      JWT_EXPIRES_IN_SECONDS: ${JWT_EXPIRES_IN_SECONDS:-3600}
+      SEED_AUCTIONEER_PASSWORD: ${SEED_AUCTIONEER_PASSWORD:-AuctioneerDemo2026!}
+      SEED_BIDDER1_PASSWORD: ${SEED_BIDDER1_PASSWORD:-BidderOneDemo2026!}
+      SEED_BIDDER2_PASSWORD: ${SEED_BIDDER2_PASSWORD:-BidderTwoDemo2026!}
+      AUDIT_WITNESS_URL: http://audit-witness:8081
+      AUDIT_WITNESS_NAMESPACE: verzel-dev
+      AUDIT_WITNESS_PUBLIC_KEY_FILE: /var/lib/verzel-witness-public/public.pem
+      AUDIT_WITNESS_PUBLISH_TOKEN: ${AUDIT_WITNESS_PUBLISH_TOKEN:-verzel-development-publish-token}
+      AUDIT_WITNESS_ALLOW_INSECURE_HTTP: "true"
+      AUDIT_ANCHOR_POLL_MS: "1000"
+    volumes:
+      - witness_public:/var/lib/verzel-witness-public:ro
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    command: ["sh", "-c", "npm run db:migrate && npm run db:seed && exec node dist/server.js"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/auctions?limit=1').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
   seed:
     build: .
     profiles: ["tools"]
@@ -31,10 +88,12 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgresql://verzel:verzel_dev@postgres:5432/verzel_auction
-      SEED_AUCTIONEER_PASSWORD: ${SEED_AUCTIONEER_PASSWORD:-}
-      SEED_BIDDER1_PASSWORD: ${SEED_BIDDER1_PASSWORD:-}
-      SEED_BIDDER2_PASSWORD: ${SEED_BIDDER2_PASSWORD:-}
+      SEED_AUCTIONEER_PASSWORD: ${SEED_AUCTIONEER_PASSWORD:-AuctioneerDemo2026!}
+      SEED_BIDDER1_PASSWORD: ${SEED_BIDDER1_PASSWORD:-BidderOneDemo2026!}
+      SEED_BIDDER2_PASSWORD: ${SEED_BIDDER2_PASSWORD:-BidderTwoDemo2026!}
     command: ["npm", "run", "db:seed"]
 
 volumes:
   postgres_data:
+  witness_data:
+  witness_public:

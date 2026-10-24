@@ -7,6 +7,7 @@ export interface HttpAnchorProviderOptions {
   publicKey: string;
   publishToken?: string;
   timeoutMs?: number;
+  allowInsecureHttpForDevelopment?: boolean;
 }
 /** The application has only the pinned public key; its database never discovers the witness head. */
 export class HttpAnchorProvider implements AnchorPublisher, AnchorVerifier {
@@ -17,7 +18,8 @@ export class HttpAnchorProvider implements AnchorPublisher, AnchorVerifier {
     requireIdentifier(options.namespace);
     const url = new URL(options.baseUrl);
     if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw new Error('Invalid witness URL');
-    if (url.protocol !== 'https:' && !['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)) throw new Error('Witness requires HTTPS outside loopback');
+    if (url.protocol !== 'https:' && !['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)
+      && !options.allowInsecureHttpForDevelopment) throw new Error('Witness requires HTTPS outside loopback');
     this.baseUrl = options.baseUrl.replace(/\/+$/, '');
     this.publicKey = pinnedKey(options.publicKey);
     this.timeoutMs = options.timeoutMs ?? 5000;
