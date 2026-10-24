@@ -10,17 +10,23 @@ import type { AuditAppender } from '../../audit/contracts/audit.js';
 import type { BidRepository, BidWriteContext } from '../contracts/bids.js';
 import { DrizzleBidOperationStore } from './drizzle-bid-operation-store.js';
 import { appendAcceptedBid } from '../infrastructure/transactional-bid-audit.js';
+import type { Bid } from '../contracts/bids.js';
+import { bidderReference } from '../../audit/domain/cryptography.js';
+import { silentAuctionEvents, type AuctionEventSink } from '../../../shared/events/auction-events.js';
 
 export class DrizzleBidRepository implements BidRepository {
   constructor(private readonly db: Database,
     private readonly reservations: Pick<ReservationOperations, 'reserveFunds' | 'releaseReservation'>,
-    private readonly auditFactory: (tx: DatabaseTransaction) => AuditAppender) {}
+    private readonly auditFactory: (tx: DatabaseTransaction) => AuditAppender, private readonly events: AuctionEventSink = silentAuctionEvents) {}
 
   transaction<T>(work: (tx: BidWriteContext) => Promise<T>): Promise<T> {
+    let accepted: { bid: Bid; endsAt: Date } | undefined;
+    let previousEndsAt: Date | undefined;
     return this.db.transaction((tx) => work({
       operations: new DrizzleBidOperationStore(tx),
       async lockAuction(id) {
         const [auction] = await tx.select().from(auctions).where(eq(auctions.id, id)).for('update');
+        previousEndsAt = auction?.endsAt;
         return auction ?? null;
       },
       async actor(id) {
@@ -53,7 +59,17 @@ export class DrizzleBidRepository implements BidRepository {
       async updateLeader(auctionId, bidId, endsAt, at) {
         await tx.update(auctions).set({ currentBidId: bidId, endsAt, updatedAt: at }).where(eq(auctions.id, auctionId));
       },
-      appendAudit: (bid, endsAt) => appendAcceptedBid(tx, bid, endsAt, this.auditFactory(tx)),
-    }), { isolationLevel: 'read committed' });
+      appendAudit: async (bid, endsAt) => { await appendAcceptedBid(tx, bid, endsAt, this.auditFactory(tx)); accepted = { bid, endsAt }; },
+    }), { isolationLevel: 'read committed' }).then(result => {
+      if (accepted) {
+        const { bid, endsAt } = accepted;
+        try {
+          this.events.publish({ type: 'bid:accepted', auctionId: bid.auctionId, data: { id: bid.id, bidderRef: bidderReference(bid.auctionId, bid.bidderId),
+            amountCents: String(bid.amountCents), sequence: String(bid.sequence), createdAt: bid.createdAt.toISOString(), endsAt: endsAt.toISOString() } });
+          if (previousEndsAt && +previousEndsAt !== +endsAt) this.events.publish({ type: 'auction:extended', auctionId: bid.auctionId, data: { endsAt: endsAt.toISOString() } });
+        } catch { /* REST recovers missed best-effort notifications. */ }
+      }
+      return result;
+    });
   }
 }

@@ -8,10 +8,11 @@ import { BidService } from './services/bid-service.js';
 import { DrizzleBidRepository } from './repositories/drizzle-bid-repository.js';
 import { DrizzleBidQueryRepository } from './repositories/drizzle-bid-query-repository.js';
 import { BidController } from './controllers/bid-controller.js';
+import { silentAuctionEvents, type AuctionEventSink } from '../../shared/events/auction-events.js';
 
-export function createBidModule(db: Database, authenticate: ReturnType<typeof authentication>): Router {
+export function createBidModule(db: Database, authenticate: ReturnType<typeof authentication>, events: AuctionEventSink = silentAuctionEvents): Router {
   const controller = new BidController(new BidService(new DrizzleBidRepository(db, new DrizzleReservationOperations(),
-    (tx) => new DrizzleAuditAppender(tx)), new DrizzleBidQueryRepository(db)));
+    (tx) => new DrizzleAuditAppender(tx), events), new DrizzleBidQueryRepository(db)));
   const router = Router();
   router.get('/bids/mine', authenticate, authorize('BIDDER'), controller.mine);
   router.get('/:auctionId/bids', controller.history);

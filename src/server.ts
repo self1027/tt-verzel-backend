@@ -1,15 +1,20 @@
 import 'dotenv/config';
 import { readFile } from 'node:fs/promises';
+import { createServer } from 'node:http';
 import { createApp } from './app.js';
 import { createAuthModule } from './modules/auth/index.js';
 import { createAuctionModule } from './modules/auctions/index.js';
 import { createCatalogModule } from './modules/catalog/index.js';
 import { createWalletModule } from './modules/wallets/index.js';
 import { createAuditModule } from './modules/audit/index.js';
+import { createSettlementModule } from './modules/settlements/index.js';
+import { attachAuctionSockets } from './modules/realtime/auction-sockets.js';
+import { readCorsOrigins } from './shared/http/cors.js';
+import { silentAuctionEvents, type AuctionEventSink } from './shared/events/auction-events.js';
 import { readAuditConfig } from './modules/audit/infrastructure/config.js';
 import { HttpAnchorProvider } from './modules/audit/infrastructure/http-anchor-provider.js';
 import { DummyJsonProvider } from './modules/catalog/infrastructure/dummyjson-provider.js';
-import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort } from './shared/config.js';
+import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort, readSettlementInterval } from './shared/config.js';
 import { createDatabase } from './shared/database/client.js';
 
 async function main(): Promise<void> {
@@ -17,6 +22,8 @@ async function main(): Promise<void> {
   const port = readPort(process.env);
   const catalogTimeout = readCatalogTimeout(process.env);
   const auditConfig = readAuditConfig(process.env);
+  const settlementInterval = readSettlementInterval(process.env);
+  const documentation: unknown = JSON.parse(await readFile(new URL('../docs/openapi.json', import.meta.url), 'utf8'));
   const external = auditConfig ? new HttpAnchorProvider({ baseUrl: auditConfig.baseUrl, namespace: auditConfig.namespace,
     publicKey: await readFile(auditConfig.publicKeyFile, 'utf8'), timeoutMs: auditConfig.timeoutMs,
     allowInsecureHttpForDevelopment: auditConfig.allowInsecureHttpForDevelopment,
@@ -26,9 +33,13 @@ async function main(): Promise<void> {
     await pool.query('SELECT 1');
     const auth = await createAuthModule(db, config);
     const catalog = createCatalogModule(db, auth.authenticate, new DummyJsonProvider({ timeoutMs: catalogTimeout }));
-    const auctionRouter = createAuctionModule(db, auth.authenticate);
+    let activeEvents: AuctionEventSink = silentAuctionEvents;
+    const events: AuctionEventSink = { publish: event => { activeEvents.publish(event); } };
+    const auctionRouter = createAuctionModule(db, auth.authenticate, events);
     const walletRouter = createWalletModule(db, auth.authenticate);
     const audit = createAuditModule(db, external);
+    const settlement = createSettlementModule(db, external, events);
+    const origins = readCorsOrigins(process.env);
     let workerTask: Promise<unknown> = Promise.resolve();
     let publishing = false;
     const publish = (): void => {
@@ -41,17 +52,24 @@ async function main(): Promise<void> {
     const timer = auditConfig?.publishToken ? setInterval(publish, auditConfig.pollMs) : undefined;
     timer?.unref();
     if (timer) publish();
-    const server = createApp(auth.router, catalog, auctionRouter, walletRouter, audit.router).listen(port, () => {
+    const server = createServer(createApp(auth.router, catalog, auctionRouter, walletRouter, audit.router, { corsOrigins: origins, documentation }));
+    const sockets = attachAuctionSockets(server, origins);
+    activeEvents = sockets.events;
+    settlement.worker.start(settlementInterval);
+    server.listen(port, () => {
       console.log(`Server is running on port ${String(port)}`);
     });
     server.on('error', () => {
       console.error('HTTP server failed');
       clearInterval(timer);
-      void workerTask.then(() => pool.end()).finally(() => { process.exitCode = 1; });
+      void Promise.allSettled([workerTask, settlement.worker.stop(), sockets.close()]).then(() => pool.end()).finally(() => { process.exitCode = 1; });
     });
+    let stopping = false;
     const shutdown = (): void => {
+      if (stopping) return;
+      stopping = true;
       clearInterval(timer);
-      server.close(() => { void workerTask.then(() => pool.end()); });
+      void Promise.allSettled([workerTask, settlement.worker.stop(), sockets.close()]).then(() => pool.end());
     };
     process.once('SIGTERM', shutdown);
     process.once('SIGINT', shutdown);
