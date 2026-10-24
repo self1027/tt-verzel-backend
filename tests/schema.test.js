@@ -10,11 +10,12 @@ const configs = new Map(tables.map((table) => {
   return [config.name, config];
 }));
 
-test('exports exactly the twelve domain tables and five enums', () => {
+test('exports exactly the thirteen domain tables and five enums', () => {
   assert.deepEqual([...configs.keys()].sort(), [
     'users', 'product_snapshots', 'auctions', 'bids', 'wallets',
     'wallet_reservations', 'ledger_accounts', 'ledger_transactions',
     'ledger_entries', 'auction_settlements', 'audit_events', 'audit_anchors',
+    'bid_operations',
   ].sort());
   const enums = Object.values(schema).filter(isPgEnum);
   assert.deepEqual(Object.fromEntries(enums.map((item) => [item.enumName, item.enumValues])), {
@@ -54,7 +55,7 @@ test('preserves UUID primary keys, nullable fields, bigint precision and explici
   }
 });
 
-test('preserves all seventeen foreign keys, including the circular auction bid reference', () => {
+test('preserves all twenty foreign keys, including the circular auction bid reference', () => {
   const actual = [];
   for (const [name, config] of configs) {
     for (const key of config.foreignKeys) {
@@ -78,6 +79,7 @@ test('preserves all seventeen foreign keys, including the circular auction bid r
     'auction_settlements.winning_bid_id -> bids.id',
     'auction_settlements.ledger_transaction_id -> ledger_transactions.id',
     'audit_events.auction_id -> auctions.id', 'audit_anchors.auction_id -> auctions.id',
+    'bid_operations.user_id -> users.id', 'bid_operations.auction_id -> auctions.id', 'bid_operations.bid_id -> bids.id',
   ].sort());
 });
 
@@ -98,10 +100,13 @@ test('preserves unique columns and ordered composite unique indexes', () => {
     users: ['email'], wallets: ['user_id'], wallet_reservations: ['bid_id'],
     ledger_accounts: ['wallet_id'], ledger_transactions: ['idempotency_key'],
     auction_settlements: ['auction_id', 'winning_bid_id', 'ledger_transaction_id', 'receipt_token'],
+    bid_operations: ['bid_id'],
   });
   assert.deepEqual(indexes, {
     bids: [['auction_id', 'sequence']],
     audit_events: [['auction_id', 'sequence']],
     audit_anchors: [['auction_id', 'last_sequence']],
+    wallet_reservations: [['auction_id']],
+    bid_operations: [['user_id', 'auction_id', 'key']],
   });
 });

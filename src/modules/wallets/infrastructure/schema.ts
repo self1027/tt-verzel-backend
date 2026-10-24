@@ -1,4 +1,5 @@
-import { bigint, pgEnum, pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
+import { bigint, pgEnum, pgTable, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
 import { auctions, bids } from '../../auctions/infrastructure/schema.js';
 import { users } from '../../users/infrastructure/schema.js';
 
@@ -22,7 +23,9 @@ export const walletReservations = pgTable('wallet_reservations', {
   status: reservationStatus('status').notNull(),
   createdAt: timestamp('created_at').notNull(),
   releasedAt: timestamp('released_at'),
-});
+}, (table) => [
+  uniqueIndex('wallet_reservations_active_auction_unique').on(table.auctionId).where(sql`${table.status} = 'ACTIVE'`),
+]);
 
 export type WalletRecord = typeof wallets.$inferSelect;
 export type NewWalletRecord = typeof wallets.$inferInsert;
