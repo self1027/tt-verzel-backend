@@ -10,11 +10,20 @@ const terms = z.strictObject({ startingBidCents: money, minIncrementCents: money
 const createInput = terms.extend({ productSnapshotId: z.uuid() });
 const editInput = terms.partial().refine((value) => Object.keys(value).length > 0, 'Provide at least one editable field');
 const unsigned = z.string().regex(/^\d+$/).transform(Number).pipe(z.number().int().nonnegative());
+const price = z.string().regex(/^(0|[1-9]\d*)$/).max(19).transform(BigInt).pipe(z.bigint().max(9223372036854775807n));
 const listInput = z.strictObject({
   limit: unsigned.pipe(z.number().min(1).max(100)).default(30),
-  skip: unsigned.pipe(z.number().max(2147483647)).default(0),
+  skip: unsigned.pipe(z.number().max(2147483647)).optional(),
+  page: unsigned.pipe(z.number().min(1).max(2147483648)).optional(),
+  q: z.string().optional(),
+  minPriceCents: price.optional(),
+  maxPriceCents: price.optional(),
+  sort: z.enum(['price_asc', 'price_desc', 'endsAt_asc', 'endsAt_desc']).optional(),
   lifecycleState: z.enum(['SCHEDULED', 'LIVE', 'FINALIZING', 'CANCELLED', 'SETTLED', 'CLOSED_NO_BIDS']).optional(),
-});
+}).refine((input) => input.page === undefined || input.skip === undefined, 'Use either page or skip')
+  .refine((input) => input.minPriceCents === undefined || input.maxPriceCents === undefined || input.minPriceCents <= input.maxPriceCents, 'Minimum price must not exceed maximum')
+  .refine((input) => input.page === undefined || (input.page - 1) * input.limit <= 2147483647, 'Page offset is too large')
+  .transform((input) => ({ ...input, skip: input.page === undefined ? input.skip ?? 0 : (input.page - 1) * input.limit }));
 
 function owner(response: Response<unknown, AuthLocals>): string {
   const user = response.locals.user;

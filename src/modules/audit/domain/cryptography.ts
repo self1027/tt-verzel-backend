@@ -87,7 +87,9 @@ export function validateInput(input: AuditInput): void {
     case 'AUCTION_CREATED':
     case 'AUCTION_UPDATED':
     case 'AUCTION_CANCELLED':
-      fields(payload, ['productSnapshotId', 'startingBidCents', 'minIncrementCents', 'startsAt', 'endsAt', 'status', 'currentBidId']);
+      fields(payload, ['productSnapshotId', 'startingBidCents', 'minIncrementCents', 'startsAt', 'endsAt', 'status', 'currentBidId',
+        ...(input.eventType === 'AUCTION_CANCELLED' && 'reason' in payload ? ['reason'] : [])]);
+      if ('reason' in payload && payload.reason !== 'SELLER_REQUEST') throw new Error('Invalid cancellation reason');
       uuid(payload.productSnapshotId);
       decimal(payload.startingBidCents, true);
       decimal(payload.minIncrementCents, true);

@@ -40,6 +40,11 @@ export interface AuctionView extends Omit<AuctionWithSnapshot, 'startingBidCents
 export interface AuctionListInput {
   limit: number;
   skip: number;
+  page?: number | undefined;
+  q?: string | undefined;
+  minPriceCents?: bigint | undefined;
+  maxPriceCents?: bigint | undefined;
+  sort?: 'price_asc' | 'price_desc' | 'endsAt_asc' | 'endsAt_desc' | undefined;
   lifecycleState?: LifecycleState | undefined;
 }
 

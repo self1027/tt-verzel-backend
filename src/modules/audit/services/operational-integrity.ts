@@ -18,12 +18,13 @@ export function checkOperational(snapshot: AuditSnapshot): OperationalCheck {
     } else if (!auction) {
       return mismatch('MISSING_AUCTION_COMMITMENT');
     } else if (event.eventType === 'AUCTION_UPDATED' || event.eventType === 'AUCTION_CANCELLED') {
+      const state = Object.fromEntries(Object.entries(p).filter(([key]) => key !== 'reason'));
       if (bids.length || auction.status !== 'PUBLISHED') return mismatch('INVALID_AUCTION_TRANSITION');
       if (p.productSnapshotId !== auction.productSnapshotId ||
           (event.eventType === 'AUCTION_UPDATED' && (event.createdAt >= auction.startsAt || typeof p.startsAt !== 'string' || event.createdAt >= p.startsAt)) ||
           (event.eventType === 'AUCTION_CANCELLED' && (event.createdAt >= auction.endsAt ||
-            canonicalJson({ ...p, status: auction.status }) !== canonicalJson(auction)))) return mismatch('INVALID_AUCTION_TRANSITION');
-      auction = p as unknown as AuctionCommitment;
+            canonicalJson({ ...state, status: auction.status }) !== canonicalJson(auction)))) return mismatch('INVALID_AUCTION_TRANSITION');
+      auction = state as unknown as AuctionCommitment;
       if (auction.currentBidId !== null) return mismatch('UNRECORDED_CURRENT_BID');
     } else if (event.eventType === 'BID_ACCEPTED') {
       const { endsAt, ...bid } = p;
