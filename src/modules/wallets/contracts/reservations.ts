@@ -11,8 +11,8 @@ export interface Reservation {
   releasedAt: Date | null;
 }
 
-/** Future implementation must use ONLY tx; lock auction, sorted wallets, then reservations.
- * No implementation/endpoints in this phase. Full transition rules: docs/wallets-ledger.md.
+/** Operations use ONLY tx; lock auction, sorted wallets, then reservations.
+ * Reserve/release are implemented; capture remains a SettlementService contract.
  */
 export interface ReservationOperations {
   /** Positive amount <= available, matching bid/auction/wallet. Unique bidId is the key.
