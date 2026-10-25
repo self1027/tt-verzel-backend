@@ -6,3 +6,4 @@ export * from '../../modules/wallets/infrastructure/schema.js';
 export * from '../../modules/ledger/infrastructure/schema.js';
 export * from '../../modules/audit/infrastructure/schema.js';
 export * from '../../modules/bids/infrastructure/operations.schema.js';
+export * from '../../modules/auth/infrastructure/rate-limit.schema.js';

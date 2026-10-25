@@ -5,9 +5,10 @@ import { AppError } from './shared/http/app-error.js';
 import { errorHandler } from './shared/http/error-handler.js';
 import { corsMiddleware } from './shared/http/cors.js';
 
-export function createApp(authRouter: Router, catalogRouter?: Router, auctionRouter?: Router, walletRouter?: Router, auditRouter?: Router, options: { corsOrigins?: string[]; documentation?: unknown } = {}): Express {
+export function createApp(authRouter: Router, catalogRouter?: Router, auctionRouter?: Router, walletRouter?: Router, auditRouter?: Router, options: { corsOrigins?: string[]; documentation?: unknown; trustedProxies?: string[] } = {}): Express {
   const app = express();
   app.disable('x-powered-by');
+  app.set('trust proxy', options.trustedProxies ?? []);
   app.use(corsMiddleware(options.corsOrigins ?? []));
   app.use(express.json({ limit: '16kb' }));
   if (options.documentation) {

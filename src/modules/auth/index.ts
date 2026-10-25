@@ -8,6 +8,7 @@ import { JwtTokens } from './infrastructure/jwt-tokens.js';
 import { AuthService } from './services/auth-service.js';
 import { AuthController } from './controllers/auth-controller.js';
 import { authentication } from './middleware/authentication.js';
+import { loginRateLimit } from './infrastructure/login-rate-limit.js';
 
 export async function createAuthModule(
   database: Database, config: AuthConfig,
@@ -24,7 +25,7 @@ export async function createAuthModule(
     response.setHeader('Cache-Control', 'no-store');
     next();
   });
-  router.post('/login', controller.login);
+  router.post('/login', loginRateLimit(database), controller.login);
   router.get('/me', authenticate, controller.me);
   return { router, authenticate };
 }

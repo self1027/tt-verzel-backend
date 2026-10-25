@@ -1,0 +1,146 @@
+{
+  "type": "diff",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "5f830a24-6060-4b8e-843a-6d3824ff2439",
+  "prevIds": [
+    "f6368af8-b050-4881-b287-ad4643c2c46a"
+  ],
+  "footprints": [
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "login_rate_limits"
+      ],
+      "writes": [
+        "s|tbl|public.login_rate_limits",
+        "n|tbl|public.login_rate_limits",
+        "e|tbl|public.login_rate_limits",
+        "n|rel|public.login_rate_limits",
+        "n|type|public.login_rate_limits",
+        "n|rel|public.login_rate_limits_pkey"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": [
+        "index",
+        "public",
+        "login_rate_limits",
+        "login_rate_limits_expires_at_idx"
+      ],
+      "writes": [
+        "s|idx|public.login_rate_limits_expires_at_idx",
+        "n|idx|public.login_rate_limits_expires_at_idx",
+        "e|idx|public.login_rate_limits_expires_at_idx",
+        "n|rel|public.login_rate_limits_expires_at_idx"
+      ],
+      "reads": [
+        "n|tbl|public.login_rate_limits",
+        "n|sch|public",
+        "n|col|public.login_rate_limits.expires_at"
+      ]
+    }
+  ],
+  "deltas": [
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "name": "login_rate_limits",
+        "isRlsEnabled": false,
+        "entityType": "tables"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "login_rate_limits",
+        "name": "key",
+        "type": "varchar(80)",
+        "typeSchema": null,
+        "notNull": true,
+        "dimensions": 0,
+        "default": null,
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "login_rate_limits",
+        "name": "attempts",
+        "type": "integer",
+        "typeSchema": null,
+        "notNull": true,
+        "dimensions": 0,
+        "default": null,
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "login_rate_limits",
+        "name": "expires_at",
+        "type": "timestamp",
+        "typeSchema": null,
+        "notNull": true,
+        "dimensions": 0,
+        "default": null,
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "login_rate_limits",
+        "name": "login_rate_limits_expires_at_idx",
+        "nameExplicit": true,
+        "columns": [
+          {
+            "value": "expires_at",
+            "isExpression": false,
+            "asc": true,
+            "nullsFirst": false,
+            "opclass": null
+          }
+        ],
+        "isUnique": false,
+        "where": null,
+        "with": "",
+        "method": "btree",
+        "concurrently": false,
+        "entityType": "indexes"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "login_rate_limits",
+        "name": "login_rate_limits_pkey",
+        "columns": [
+          "key"
+        ],
+        "nameExplicit": false,
+        "entityType": "pks"
+      }
+    }
+  ]
+}

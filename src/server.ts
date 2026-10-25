@@ -15,7 +15,7 @@ import { silentAuctionEvents, type AuctionEventSink } from './shared/events/auct
 import { readAuditConfig } from './modules/audit/infrastructure/config.js';
 import { HttpAnchorProvider } from './modules/audit/infrastructure/http-anchor-provider.js';
 import { DummyJsonProvider } from './modules/catalog/infrastructure/dummyjson-provider.js';
-import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort, readSettlementInterval } from './shared/config.js';
+import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort, readSettlementInterval, readTrustedProxies } from './shared/config.js';
 import { createDatabase } from './shared/database/client.js';
 
 async function main(): Promise<void> {
@@ -54,7 +54,7 @@ async function main(): Promise<void> {
     const timer = auditConfig?.publishToken ? setInterval(publish, auditConfig.pollMs) : undefined;
     timer?.unref();
     if (timer) publish();
-    const server = createServer(createApp(auth.router, catalog, auctionRouter, walletRouter, audit.router, { corsOrigins: origins, documentation }));
+    const server = createServer(createApp(auth.router, catalog, auctionRouter, walletRouter, audit.router, { corsOrigins: origins, documentation, trustedProxies: readTrustedProxies(process.env) }));
     const sockets = attachAuctionSockets(server, origins);
     activeEvents = sockets.events;
     settlement.worker.start(settlementInterval);

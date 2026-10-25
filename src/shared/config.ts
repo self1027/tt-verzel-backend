@@ -1,4 +1,19 @@
 import { z } from 'zod';
+import { isIP } from 'node:net';
+
+export function readTrustedProxies(env: Record<string, string | undefined>): string[] {
+  if (!env.TRUST_PROXY_CIDRS?.trim()) return [];
+  return env.TRUST_PROXY_CIDRS.split(',').map(value => {
+    const entry = value.trim();
+    const [address = '', bits, ...extra] = entry.split('/');
+    const version = isIP(address);
+    const maximum = version === 4 ? 32 : 128;
+    if (!version || extra.length || (bits !== undefined && (!/^\d+$/.test(bits) || Number(bits) < 1 || Number(bits) > maximum))) {
+      throw new Error('TRUST_PROXY_CIDRS must contain explicit trusted IP addresses or CIDRs');
+    }
+    return entry;
+  });
+}
 
 const password = z.string().min(12).max(1024);
 const databaseURL = z.url().refine((value) => ['postgres:', 'postgresql:'].includes(new URL(value).protocol));

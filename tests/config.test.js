@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort, readSeedConfig } from '../src/shared/config.ts';
+import { readAuthConfig, readCatalogTimeout, readDatabaseURL, readPort, readSeedConfig, readTrustedProxies } from '../src/shared/config.ts';
+
+test('trusted proxy configuration is explicit and defaults to no forwarded trust', () => {
+  assert.deepEqual(readTrustedProxies({}),[]);
+  assert.deepEqual(readTrustedProxies({TRUST_PROXY_CIDRS:'127.0.0.1/32, ::1/128'}),['127.0.0.1/32','::1/128']);
+  for(const value of ['true','1','0.0.0.0/0','::/0','127.0.0.1/33','proxy.example','127.0.0.1/32/1'])assert.throws(()=>readTrustedProxies({TRUST_PROXY_CIDRS:value}));
+});
 
 test('authentication configuration requires a secret and a valid expiration', () => {
   for (const value of [undefined, '', 'short']) {
