@@ -8,10 +8,10 @@ import { users } from '../../modules/users/infrastructure/schema.js';
 import { wallets, walletReservations } from '../../modules/wallets/infrastructure/schema.js';
 import { DrizzleWalletRepository } from '../../modules/wallets/repositories/drizzle-wallet-repository.js';
 import { WalletService } from '../../modules/wallets/services/wallet-service.js';
-import { demoProduct } from './demo-product.js';
+import { demoProducts } from './demo-products.js';
+import { auditEvents } from '../../modules/audit/infrastructure/schema.js';
 
-const snapshotId = 'd3b80001-34ef-4000-8000-000000000001';
-const auctionId = 'd3b80001-34ef-4000-8000-000000000002';
+const demoId = (value: number) => `d3b80001-34ef-4000-8000-${String(value).padStart(12, '0')}`;
 const bidderEmails = ['bidder1@verzel.local', 'bidder2@verzel.local'];
 
 /** Optional demonstration data; call only after the foundational seed. */
@@ -37,25 +37,52 @@ export async function seedDemonstration(db: Database): Promise<void> {
       const [reservation] = await tx.select({ id: walletReservations.id }).from(walletReservations).where(eq(walletReservations.walletId, wallet.id)).limit(1);
       if (!history && !reservation) await funding.deposit(wallet.userId, 100000n, 'demo-bootstrap-v1');
     }
-    const [existing] = await tx.select({ id: auctions.id }).from(auctions).where(eq(auctions.id, auctionId));
-    if (existing) return;
     const result = await tx.execute<{ now: string }>(sql`SELECT to_char(clock_timestamp() AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS now`);
     const timestamp = result.rows[0]?.now;
     if (!timestamp) throw new Error('Database clock returned no value');
     const now = new Date(timestamp);
-    await tx.insert(productSnapshots).values({
-      id: snapshotId, externalId: String(demoProduct.id), source: 'dummyjson-demo-fixture', title: demoProduct.title,
-      description: demoProduct.description, imageUrl: demoProduct.imageUrl, capturedAt: now,
-      attributes: { ...demoProduct.attributes, demoProvenance: 'tests/fixtures/dummyjson/product_1.json; public whitelist; offline demo v1' },
-    }).onConflictDoNothing({ target: productSnapshots.id });
-    const createdAt = new Date(+now - 2000);
-    const startsAt = new Date(+now - 1000);
-    const endsAt = new Date(+now + 7200000);
-    await tx.insert(auctions).values({ id: auctionId, auctioneerId: owner.id, productSnapshotId: snapshotId,
-      currentBidId: null, startingBidCents: 1000n, minIncrementCents: 100n,
-      startsAt, endsAt, status: 'PUBLISHED', createdAt, updatedAt: createdAt });
-    await new DrizzleAuditAppender(tx).append({ auctionId, eventType: 'AUCTION_CREATED', createdAt: createdAt.toISOString(),
-      payload: { productSnapshotId: snapshotId, startingBidCents: '1000', minIncrementCents: '100',
-        startsAt: startsAt.toISOString(), endsAt: endsAt.toISOString(), status: 'PUBLISHED', currentBidId: null } });
+    for (const [index, product] of demoProducts.entries()) {
+      const snapshotId = demoId(index * 2 + 1);
+      const auctionId = demoId(index * 2 + 2);
+      const [existing] = await tx.select({ id: auctions.id }).from(auctions).where(eq(auctions.id, auctionId));
+      if (existing) continue;
+      const closed = index >= 18;
+      const scheduled = index >= 14 && index < 18;
+      const scenario = index === 21 ? 'tampered-price' : index === 22 ? 'tampered-dates'
+        : index === 23 ? 'tampered-event' : closed ? 'closed-no-bids' : scheduled ? 'scheduled' : 'live';
+      await tx.insert(productSnapshots).values({
+        id: snapshotId, externalId: String(product.id), source: index === 0 ? 'dummyjson-demo-fixture' : 'local-demo-catalog',
+        title: product.title, description: product.description, imageUrl: product.imageUrl, capturedAt: now,
+        attributes: { ...product.attributes, demoScenario: scenario,
+          demoProvenance: index === 0 ? 'tests/fixtures/dummyjson/product_1.json; public whitelist; offline demo v1'
+            : 'src/shared/database/demo-products.ts; curated offline demo v2' },
+      }).onConflictDoNothing({ target: productSnapshots.id });
+      const startsAt = new Date(+now + (closed ? -(index + 1) * 86400000 : scheduled ? (index - 13) * 86400000 : -1000));
+      const createdAt = new Date(Math.min(+now - 2000, +startsAt - 3600000));
+      const endsAt = new Date(+startsAt + (closed ? 7200000 : scheduled ? 86400000 : 7201000 + index * 3600000));
+      const startingBidCents = BigInt(1000 + index * 1250);
+      const minIncrementCents = BigInt(100 + (index % 4) * 50);
+      await tx.insert(auctions).values({ id: auctionId, auctioneerId: owner.id, productSnapshotId: snapshotId,
+        currentBidId: null, startingBidCents, minIncrementCents,
+        startsAt, endsAt, status: 'PUBLISHED', createdAt, updatedAt: createdAt });
+      const audit = new DrizzleAuditAppender(tx);
+      await audit.append({ auctionId, eventType: 'AUCTION_CREATED', createdAt: createdAt.toISOString(),
+        payload: { productSnapshotId: snapshotId, startingBidCents: String(startingBidCents), minIncrementCents: String(minIncrementCents),
+          startsAt: startsAt.toISOString(), endsAt: endsAt.toISOString(), status: 'PUBLISHED', currentBidId: null } });
+      if (closed) {
+        const closedAt = new Date(+endsAt + 1000);
+        await tx.update(auctions).set({ status: 'CLOSED_NO_BIDS', updatedAt: closedAt }).where(eq(auctions.id, auctionId));
+        await audit.append({ auctionId, eventType: 'AUCTION_CLOSED_NO_BIDS', createdAt: closedAt.toISOString(), payload: {} });
+      }
+      // Deliberate demo attacks after a valid close: preserve the original commitments.
+      if (scenario === 'tampered-price') {
+        await tx.update(auctions).set({ startingBidCents: startingBidCents + 50000n }).where(eq(auctions.id, auctionId));
+      } else if (scenario === 'tampered-dates') {
+        await tx.update(auctions).set({ endsAt: new Date(+endsAt + 3600000) }).where(eq(auctions.id, auctionId));
+      } else if (scenario === 'tampered-event') {
+        await tx.update(auditEvents).set({ payload: { reason: 'DEMO_FORGED_CLOSE' } })
+          .where(and(eq(auditEvents.auctionId, auctionId), eq(auditEvents.eventType, 'AUCTION_CLOSED_NO_BIDS')));
+      }
+    }
   });
 }
