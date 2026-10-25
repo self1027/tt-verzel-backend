@@ -1,5 +1,12 @@
 # Auctions e lifecycle
 
+Atualização de cancelamento: [recuperação financeira e adulteração](auction-recovery.md).
+A vitrine pública exclui cancelados e incidentes antes da paginação/contagem;
+consulta por ID e lista do proprietário preservam o histórico. Cancelamento
+voluntário libera reservas aplicáveis atomicamente. Cancelamento por adulteração
+é registrado somente depois da confirmação financeira, em incidente separado da
+cadeia comprometida. Valores capturados exigem compensação específica.
+
 Lances transacionais, reservas e consultas de liderança estão documentados em
 [BidService](bids.md). Criação, edição e cancelamento também registram eventos pela
 [auditoria existente](audit-infrastructure.md).
