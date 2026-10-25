@@ -21,6 +21,10 @@ export const errorHandler: ErrorRequestHandler = (error: unknown, _request, resp
     return;
   }
   if (error instanceof Error && 'type' in error) {
+    if (error.type === 'charset.unsupported' || error.type === 'encoding.unsupported') {
+      response.status(415).json({ error: { code: 'UNSUPPORTED_MEDIA_TYPE', message: 'Unsupported request body charset or encoding' } });
+      return;
+    }
     if (error.type === 'entity.parse.failed') {
       response.status(400).json({ error: { code: 'INVALID_JSON', message: 'Invalid JSON body' } });
       return;
