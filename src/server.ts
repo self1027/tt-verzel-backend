@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { readFile } from 'node:fs/promises';
+import { parse } from 'yaml';
 import { createServer } from 'node:http';
 import { createApp } from './app.js';
 import { createAuthModule } from './modules/auth/index.js';
@@ -23,7 +24,7 @@ async function main(): Promise<void> {
   const catalogTimeout = readCatalogTimeout(process.env);
   const auditConfig = readAuditConfig(process.env);
   const settlementInterval = readSettlementInterval(process.env);
-  const documentation: unknown = JSON.parse(await readFile(new URL('../docs/openapi.json', import.meta.url), 'utf8'));
+  const documentation: unknown = parse(await readFile(new URL('../docs/openapi.yaml', import.meta.url), 'utf8'));
   const external = auditConfig ? new HttpAnchorProvider({ baseUrl: auditConfig.baseUrl, namespace: auditConfig.namespace,
     publicKey: await readFile(auditConfig.publicKeyFile, 'utf8'), timeoutMs: auditConfig.timeoutMs,
     allowInsecureHttpForDevelopment: auditConfig.allowInsecureHttpForDevelopment,

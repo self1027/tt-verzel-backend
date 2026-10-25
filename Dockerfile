@@ -7,7 +7,7 @@ COPY tsconfig.json drizzle.config.js ./
 COPY src ./src
 COPY drizzle ./drizzle
 COPY docker ./docker
-COPY docs/openapi.json ./docs/openapi.json
+COPY docs/openapi.yaml ./docs/openapi.yaml
 RUN npm run build \
     && mkdir -p /var/lib/verzel-witness /var/lib/verzel-witness-public \
     && chown node:node /var/lib/verzel-witness /var/lib/verzel-witness-public

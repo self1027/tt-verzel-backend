@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
+import { parse } from 'yaml';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { AuctionController } from '../src/modules/auctions/controllers/auction-controller.ts';
 
-const load = () => readFile(new URL('../docs/openapi.json', import.meta.url), 'utf8').then(JSON.parse);
+const load = () => readFile(new URL('../docs/openapi.yaml', import.meta.url), 'utf8').then(parse);
 const verbs = new Set(['get', 'post', 'patch', 'put', 'delete', 'options', 'head']);
 
 test('OpenAPI resolves local references and declares every required path argument', async () => {
