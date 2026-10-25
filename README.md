@@ -68,6 +68,13 @@ O Compose cria esse banco na primeira inicialização do volume.
 
 ## Limitações e comportamentos conhecidos
 
+- **Provas legadas v1:** permanecem verificáveis com cobertura limitada. Lotes
+  legados com lances ainda não liquidados ficam adiados com `LEGACY_INTEGRITY_UNBOUND`, pois
+  não existe compromisso confiável do vendedor/produto original. Recibos com
+  cadeia v1 válida continuam disponíveis com aviso; sem lances, o fechamento
+  legado não transfere dinheiro e continua permitido. Novos leilões usam v2; veja
+  [versionamento criptográfico](docs/cryptographic-binding-v2.md).
+
 - **Sem cadastro:** use as contas do seed; não há perfil de administrador.
 - **Lote suspeito:** `TAMPERED` bloqueia a liquidação, sem fluxo de desbloqueio
   ou liberação automática de saldo reservado pela detecção.

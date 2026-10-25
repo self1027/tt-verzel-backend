@@ -1,5 +1,11 @@
 # Infraestrutura de auditoria pública
 
+**Patch01:** novos leilões usam hashVersion2 para vincular vendedor e snapshot;
+v1 mantém suas garantias originais com cobertura limitada explícita. O formato v1
+descrito nas seções históricas abaixo não foi reescrito. Consulte
+[Compromissos v2 e operação de legados](cryptographic-binding-v2.md) para regras
+atuais de criação, settlement, recibos e rollback.
+
 Este guia descreve a implementação em `src/modules/audit`, seus limites e a operação da testemunha externa. A infraestrutura não constitui um deploy de produção: a ancoragem externa em produção ainda não está configurada. Sem testemunha configurada e acessível, a aplicação deve responder `VERIFICATION_UNAVAILABLE`, nunca simular `VERIFIED`.
 
 ## Escopo atual e requisitos

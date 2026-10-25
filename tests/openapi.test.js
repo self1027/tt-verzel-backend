@@ -74,3 +74,13 @@ test('documented list enums are accepted by the controller and price boundaries 
     await assert.rejects(parse({ minPriceCents: value }));
   }
 });
+
+test('public proof contracts distinguish legacy coverage and support both immutable hash versions', async () => {
+  const { components } = await load();
+  assert.deepEqual(components.schemas.AuditEvent.properties.hashVersion.enum, [1, 2]);
+  assert.deepEqual(components.schemas.IntegrityCoverage.enum, ['SELLER_PRODUCT_V2', 'LEGACY_V1', 'UNAVAILABLE']);
+  for (const name of ['PublicReceipt', 'AuditVerification']) {
+    assert.ok(components.schemas[name].required.includes('integrityCoverage'));
+    assert.equal(components.schemas[name].properties.integrityCoverage.$ref, '#/components/schemas/IntegrityCoverage');
+  }
+});
