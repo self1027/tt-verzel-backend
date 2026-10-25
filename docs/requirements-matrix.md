@@ -1,5 +1,8 @@
 # Matriz de rastreabilidade dos requisitos
 
+> Registro histórico do backend. A avaliação atual de frontend e backend, os
+> comandos reproduzíveis e as limitações estão no [guia unificado do recrutador](guia-recrutador.md).
+
 Fonte: `requirements.pdf`, sete páginas revisadas visualmente durante o trabalho.
 Esta matriz cobre o backend. Frontend e deploy estão fora do escopo deste repositório.
 Os caminhos apontam para implementação e testes executáveis; a mera existência de um

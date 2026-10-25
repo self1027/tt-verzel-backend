@@ -4,6 +4,12 @@ Backend de leilões com Node.js 22+, TypeScript, Express 5, PostgreSQL 17 e Driz
 Inclui JWT, catálogo DummyJSON, lances concorrentes, carteiras, liquidação
 automática, Socket.IO e auditoria com testemunha independente (witness).
 
+Para avaliar o desafio, comece pelo [guia unificado do recrutador](docs/guia-recrutador.md):
+ele relaciona cada requisito do PDF com passos, testes executáveis e uma breve
+explicação da implementação, incluindo a jornada com o frontend real.
+O [frontend tem seu próprio repositório](https://github.com/self1027/tt-verzel-frontend);
+os dois projetos podem ser clonados em quaisquer diretórios e se integram pela URL da API.
+
 ## Executar com Docker
 
 Com Docker e Compose instalados:
@@ -59,6 +65,7 @@ Rotas, exemplos e respostas estão no [OpenAPI](docs/openapi.yaml).
 ```sh
 npm test
 npm run test:db
+npm run test:requirements
 npm run lint
 npm run typecheck
 npm run build
@@ -95,4 +102,4 @@ O Compose cria esse banco na primeira inicialização do volume.
 [Arquitetura](docs/architecture.md) · [Seed](docs/demo-seed.md) ·
 [Auditoria e suas garantias](docs/audit-infrastructure.md) ·
 [Integração frontend](docs/frontend-integration.md) ·
-[Cobertura dos requisitos](docs/requirements-matrix.md)
+[Guia e cobertura unificada dos requisitos](docs/guia-recrutador.md)
