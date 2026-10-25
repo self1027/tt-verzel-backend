@@ -4,6 +4,11 @@ Backend de leilões com Node.js 22+, TypeScript, Express 5, PostgreSQL 17 e Driz
 Inclui JWT, catálogo DummyJSON, lances concorrentes, carteiras, liquidação
 automática, Socket.IO e auditoria com testemunha independente (witness).
 
+## Deploys
+
+- [Aplicação web](https://auctionverzel.murilod.dev/)
+- [Documentação da API (Swagger UI)](https://api.auctionverzel.murilod.dev/docs/)
+
 ## Executar com Docker
 
 Com Docker e Compose instalados:
