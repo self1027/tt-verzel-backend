@@ -37,6 +37,14 @@ async function finances(f) {
     ledger: (await f.pool.query('SELECT id FROM ledger_transactions ORDER BY id')).rows,
   };
 }
+async function assertRecoveredWithoutTransfer(f, original) {
+  const expected = { ...original,
+    wallets: original.wallets.map(wallet => ({ ...wallet, reserved_cents: '0' })),
+    reservations: original.reservations.map(reservation => ({ ...reservation, status: 'RELEASED' })),
+  };
+  assert.deepEqual(await finances(f), expected);
+  assert.equal((await f.pool.query('SELECT state FROM auction_recoveries')).rows[0].state, 'RELEASED');
+}
 async function alternateSeller(f) {
   const id = randomUUID();
   await f.pool.query('INSERT INTO users(id,email,password_hash,display_name,role,created_at,updated_at) SELECT $1,$2,password_hash,$3,role,created_at,updated_at FROM users WHERE id=$4', [id, `${id}@test.invalid`, 'Other seller', f.users.auctioneer]);
@@ -68,7 +76,7 @@ for (const anchored of [false, true]) {
     const result = await f.verifier.verify(a.id);
     assert.equal(result.status, 'TAMPERED');
     assert.equal((await f.settlementService.settle(a.id)).status, 'TAMPERED');
-    assert.deepEqual(await finances(f), before);
+    await assertRecoveredWithoutTransfer(f, before);
   });
   test(`snapshot substitution ${anchored ? 'after' : 'before'} anchoring is detected without any transfer`, async t => {
     const f = await fixture(t); const a = await f.expiredAuction(); if (!anchored) f.heads.clear();
@@ -76,7 +84,7 @@ for (const anchored of [false, true]) {
     await f.pool.query('UPDATE product_snapshots SET title=$1 WHERE id=$2', ['Altered item', a.productSnapshotId]);
     assert.equal((await f.verifier.verify(a.id)).status, 'TAMPERED');
     assert.equal((await f.settlementService.settle(a.id)).status, 'TAMPERED');
-    assert.deepEqual(await finances(f), before);
+    await assertRecoveredWithoutTransfer(f, before);
   });
 }
 test('legitimate bound settlement retries conserve funds and receipt rejects later product changes', async t => {
@@ -165,7 +173,7 @@ test('rehashing a substituted seller binding cannot overwrite its independently 
   const result = await f.verifier.verify(a.id);
   assert.equal(result.status, 'TAMPERED'); assert.equal(result.reason, 'EXTERNAL_ANCHOR_MISMATCH');
   assert.equal((await f.settlementService.settle(a.id)).status, 'TAMPERED');
-  assert.deepEqual(await f.external.latest(a.id), originalHead); assert.deepEqual(await finances(f), initial);
+  assert.deepEqual(await f.external.latest(a.id), originalHead); await assertRecoveredWithoutTransfer(f, initial);
 });
 test('creation locks product content before any insert or response snapshot read', async t => {
   const f = await fixture(t);
@@ -192,7 +200,7 @@ test('submillisecond captured timestamp mutation is visible to the product commi
   await f.pool.query("UPDATE product_snapshots SET captured_at=captured_at+interval '1 microsecond' WHERE id=$1", [a.productSnapshotId]);
   assert.equal((await f.verifier.verify(a.id)).status, 'TAMPERED');
   assert.equal((await f.settlementService.settle(a.id)).status, 'TAMPERED');
-  assert.deepEqual(await finances(f), initial);
+  await assertRecoveredWithoutTransfer(f, initial);
 });
 test('product SHARE lock is retained through capture and blocks concurrent snapshot writes', async t => {
   const f = await fixture(t); const a = await f.expiredAuction();

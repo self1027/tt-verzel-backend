@@ -1,3 +1,4 @@
+import { assertAuctionNotBlocked } from '../../auctions/infrastructure/recovery-guard.js';
 import { randomUUID } from 'node:crypto';
 import { and, eq, sql } from 'drizzle-orm';
 import type { DatabaseTransaction } from '../../../shared/database/client.js';
@@ -60,6 +61,7 @@ export class DrizzleReservationOperations implements ReservationOperations {
     const [located] = await tx.select().from(walletReservations).where(eq(walletReservations.id, input.reservationId));
     if (!located) throw new AppError(404, 'RESERVATION_NOT_FOUND', 'Reservation not found');
     const auction = await lockAuction(tx, located.auctionId);
+    await assertAuctionNotBlocked(tx, located.auctionId);
     const locked = await lockReservationWallets(tx, [located.walletId, input.recipientWalletId]);
     const [reservation] = await tx.select().from(walletReservations)
       .where(eq(walletReservations.id, input.reservationId)).for('update');
@@ -124,6 +126,7 @@ export class DrizzleReservationOperations implements ReservationOperations {
       throw new AppError(400, 'INVALID_RESERVATION_AMOUNT', 'Reservation amount must be positive and fit BIGINT');
     }
     await lockAuction(tx, input.auctionId);
+    await assertAuctionNotBlocked(tx, input.auctionId);
     const [bid] = await tx.select().from(bids).where(eq(bids.id, input.bidId));
     if (!bid) throw new AppError(404, 'BID_NOT_FOUND', 'Bid not found');
     if (bid.auctionId !== input.auctionId || bid.amountCents !== input.amountCents) {

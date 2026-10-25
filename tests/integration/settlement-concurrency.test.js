@@ -68,19 +68,22 @@ for (const step of ['capture', 'insert', 'finish', 'auditSettlement']) {
   });
 }
 
-test('unavailable witness, pending anchor and tampered audit leave financial state unchanged', async () => {
+test('unavailable witness and pending anchor defer; confirmed tampering releases reservations', async () => {
   const auction = await f.expiredAuction();
   const before = await financialState(auction.id);
   const unavailable = new DrizzleSettlementAuditGate(f.db, { async latest() { throw new Error('witness offline'); } });
   const deferred = await new SettlementService(f.settlementRepository, unavailable).settle(auction.id);
   assert.equal(deferred.status, 'DEFERRED');
-  assert.equal(deferred.reason, 'VERIFICATION_UNAVAILABLE');
+  assert.equal(deferred.reason, 'WITNESS_UNAVAILABLE');
   f.heads.clear();
   assert.equal((await f.settlementService.settle(auction.id)).status, 'DEFERRED');
+  assert.deepEqual(await financialState(auction.id), before);
   await f.anchor(auction.id);
   await f.pool.query("UPDATE audit_events SET previous_hash=$1 WHERE auction_id=$2 AND sequence=1", ['f'.repeat(64), auction.id]);
   assert.equal((await f.settlementService.settle(auction.id)).status, 'TAMPERED');
-  assert.deepEqual(await financialState(auction.id), before);
+  assert.equal((await f.pool.query('SELECT status FROM auctions WHERE id=$1', [auction.id])).rows[0].status, 'CANCELLED');
+  assert.equal((await f.pool.query('SELECT state FROM auction_recoveries WHERE auction_id=$1', [auction.id])).rows[0].state, 'RELEASED');
+  assert.equal((await f.pool.query("SELECT count(*) FROM wallet_reservations WHERE status='ACTIVE'")).rows[0].count, '0');
 });
 
 test('operational proof changes between verification and auction lock defer capture', async () => {

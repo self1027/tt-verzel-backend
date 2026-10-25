@@ -66,18 +66,18 @@ test('sorts use stable id ties and mine retains owner scope with all filters', a
   assert.equal(mine.auctions[0].id, ties[1]);
 });
 
-test('foreign current bid cannot change auction price and defaults retain terminal rows and ordering', async () => {
+test('foreign current bid cannot change auction price and defaults exclude cancelled lots and preserve historical direct access', async () => {
   const now = await f.clock();
   const a = await f.fixture({ startingBidCents: 1000n, createdAt: now, status: 'CANCELLED' });
   const b = await f.fixture({ startingBidCents: 2000n, createdAt: now });
   const foreign = await bid(b, '9223372036854775807');
   await f.pool.query('UPDATE auctions SET current_bid_id = $1 WHERE id = $2', [foreign, a.id]);
   const filtered = await page('minPriceCents=1000&maxPriceCents=1000');
-  assert.equal(filtered.total, 1);
-  assert.equal(filtered.auctions[0].id, a.id);
-  const result = await page('limit=1&skip=1');
-  assert.equal(result.total, 2);
-  assert.equal(result.auctions[0].id, [a.id, b.id].sort()[1]);
+  assert.equal(filtered.total, 0);
+  assert.equal((await (await f.request(`/${a.id}`)).json()).auction.id, a.id);
+  const result = await page('limit=1');
+  assert.equal(result.total, 1);
+  assert.equal(result.auctions[0].id, b.id);
   assert.deepEqual(Object.keys(result).sort(), ['asOf', 'auctions', 'limit', 'skip', 'total']);
 });
 

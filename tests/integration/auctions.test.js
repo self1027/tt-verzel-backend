@@ -189,14 +189,17 @@ test('SQL lifecycle filters precede pagination and counts, with deterministic or
     const response = await f.request(`?lifecycleState=${state}&limit=1&skip=1`);
     const page = await response.json();
     assert.equal(response.status, 200);
+    if (state === 'CANCELLED') {
+      assert.equal(page.total, 0); assert.deepEqual(page.auctions, []); continue;
+    }
     assert.equal(page.total, 2);
     assert.equal(page.auctions.length, 1);
     assert.equal(page.auctions[0].lifecycleState, state);
     assert.equal(lifecycleState({ ...page.auctions[0], startsAt: new Date(page.auctions[0].startsAt), endsAt: new Date(page.auctions[0].endsAt) }, new Date(page.asOf)), state);
   }
   const page = await (await f.request('?limit=3&skip=2')).json();
-  assert.equal(page.total, 12);
-  assert.deepEqual(page.auctions.map((auction) => auction.id), all.map((auction) => auction.id).sort().slice(2, 5));
+  assert.equal(page.total, 10);
+  assert.deepEqual(page.auctions.map((auction) => auction.id), all.filter(auction => auction.status !== 'CANCELLED').map((auction) => auction.id).sort().slice(2, 5));
   for (const query of ['limit=0', 'limit=101', 'skip=-1', 'limit=1&limit=2', 'lifecycleState=PUBLISHED', 'auctioneerId=other']) {
     assert.equal((await f.request(`?${query}`)).status, 400, query);
   }

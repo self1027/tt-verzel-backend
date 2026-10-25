@@ -1,6 +1,7 @@
 import type { SettlementRepository, SettlementUseCases } from '../contracts/settlements.js';
 
 interface WorkerOptions {
+  recover?: () => Promise<void>;
   now?: () => number; baseDelayMs?: number; maxDelayMs?: number; batchSize?: number;
   log?: (entry: { auctionId: string; status: string; reason?: string }) => void;
 }
@@ -21,6 +22,7 @@ export class SettlementWorker {
   }
 
   private async cycle(): Promise<void> {
+    await this.options.recover?.();
     const now = this.options.now ?? Date.now;
     const excluded = [...this.retries].filter(([, retry]) => retry.at > now()).map(([id]) => id);
     const ids = await this.repository.due(this.options.batchSize ?? 20, excluded);

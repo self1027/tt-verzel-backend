@@ -1,3 +1,5 @@
+import { assertAuctionNotBlocked } from '../../auctions/infrastructure/recovery-guard.js';
+import { auctionRecoveries } from '../../auctions/infrastructure/recovery.schema.js';
 import { createHash } from 'node:crypto';
 import { and, asc, eq, inArray, lte, notInArray, sql } from 'drizzle-orm';
 import type { Database } from '../../../shared/database/client.js';
@@ -18,6 +20,8 @@ export class DrizzleSettlementRepository implements SettlementRepository {
   constructor(private readonly db: Database) {}
 
   async terminal(id: string) {
+    const [incident] = await this.db.select().from(auctionRecoveries).where(eq(auctionRecoveries.auctionId, id));
+    if (incident) return { auctionId: id, status: 'TAMPERED' as const, reason: incident.reason };
     const [auction] = await this.db.select().from(auctions).where(eq(auctions.id, id));
     if (!auction) throw new AppError(404, 'AUCTION_NOT_FOUND', 'Auction not found');
     if (auction.status === 'SETTLED') {
@@ -46,6 +50,7 @@ export class DrizzleSettlementRepository implements SettlementRepository {
       return work({
         async lockAuction(id) {
           const [row] = await tx.select().from(auctions).where(eq(auctions.id, id)).for('update');
+          if (row) await assertAuctionNotBlocked(tx, id);
           if (row) await tx.select({ id: productSnapshots.id }).from(productSnapshots).where(eq(productSnapshots.id, row.productSnapshotId)).for('share');
           return row ?? null;
         },

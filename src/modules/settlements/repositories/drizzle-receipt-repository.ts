@@ -12,11 +12,26 @@ import { checkOperational } from '../../audit/services/operational-integrity.js'
 import { AppError } from '../../../shared/http/app-error.js';
 import { auditEvents } from '../../audit/infrastructure/schema.js';
 import { auditSelection, selectedAuditEvent, MAX_AUDIT_EVENTS } from '../../audit/repositories/audit-record.js';
+import { AuditCorruptionError } from '../../audit/contracts/errors.js';
+import { RecoveryService } from '../../auctions/services/recovery-service.js';
 
 export class DrizzleReceiptRepository implements ReceiptRepository {
   constructor(private readonly db: Database) {}
 
-  find(auctionId: string): Promise<ReceiptRecords | null> {
+  async find(auctionId: string): Promise<ReceiptRecords | null> {
+    try { return await this.read(auctionId); }
+    catch (error) {
+      // Persist detection only after the read-only snapshot has ended, without financial locks across reads.
+      if (error instanceof AuditCorruptionError) {
+        await new RecoveryService(this.db).detect(auctionId, { status: 'TAMPERED', reason: 'RECEIPT_AUDIT_CORRUPT',
+          verificationEvidence: typeof error.cause === 'string' ? error.cause : undefined });
+        throw new AppError(409, 'RECEIPT_INCONSISTENT', 'Receipt financial records are inconsistent');
+      }
+      throw error;
+    }
+  }
+
+  private read(auctionId: string): Promise<ReceiptRecords | null> {
     return this.db.transaction(async tx => {
       const [auction] = await tx.select().from(auctions).where(eq(auctions.id, auctionId));
       if (!auction || auction.status !== 'SETTLED') return null;
@@ -37,18 +52,27 @@ export class DrizzleReceiptRepository implements ReceiptRepository {
       const entries = await tx.select({ type: ledgerAccounts.type, userId: wallets.userId, amountCents: ledgerEntries.amountCents })
         .from(ledgerEntries).innerJoin(ledgerAccounts, eq(ledgerAccounts.id, ledgerEntries.accountId))
         .leftJoin(wallets, eq(wallets.id, ledgerAccounts.walletId)).where(eq(ledgerEntries.transactionId, settlement.ledgerTransactionId));
+      let evidence: unknown;
       try {
         const rows = await tx.select(auditSelection).from(auditEvents).where(eq(auditEvents.auctionId, auctionId))
           .orderBy(asc(auditEvents.sequence)).limit(MAX_AUDIT_EVENTS + 1);
+        evidence = { rows, auction, settlement, product, bid, reservation, transaction, entries };
         if (!rows.length || rows.length > MAX_AUDIT_EVENTS) throw new Error('Receipt audit history missing or oversized');
         const events = rows.map(selectedAuditEvent);
-        if (!checkChain(auctionId, events).valid) throw new Error('Receipt audit chain is invalid');
+        if (!checkChain(auctionId, events).valid) throw new AuditCorruptionError('Receipt audit chain is invalid');
         const version = events[0]?.hashVersion;
         const state = version === 2 ? await readSettlementProof(tx, auctionId) : null;
+        if (state) evidence = { receipt: evidence, snapshot: state.snapshot };
+        const integrityConsistent = !state || (checkChain(auctionId, state.snapshot.events).valid && checkOperational(state.snapshot).consistent);
+        if (!integrityConsistent) throw new AuditCorruptionError('Receipt operational commitment diverges');
         return { auction, settlement, product: product ?? null, bid: bid ?? null, reservation: reservation ?? null, transaction: transaction ?? null, entries,
           integrityCoverage: version === 2 ? 'SELLER_PRODUCT_V2' : version === 1 ? 'LEGACY_V1' : 'UNAVAILABLE',
-          integrityConsistent: !state || (checkChain(auctionId, state.snapshot.events).valid && checkOperational(state.snapshot).consistent) };
-      } catch { throw new AppError(409, 'RECEIPT_INCONSISTENT', 'Receipt financial records are inconsistent'); }
+          integrityConsistent };
+      } catch (error) {
+        if (error instanceof AuditCorruptionError) throw new AuditCorruptionError(error.message,
+          { cause: JSON.stringify(evidence, (_key, value: unknown) => typeof value === 'bigint' ? String(value) : value) });
+        throw new AppError(409, 'RECEIPT_INCONSISTENT', 'Receipt financial records are inconsistent');
+      }
     }, { isolationLevel: 'repeatable read', accessMode: 'read only' });
   }
 }

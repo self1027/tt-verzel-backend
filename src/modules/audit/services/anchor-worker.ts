@@ -1,12 +1,13 @@
 import type { AnchorPublisher, AnchorVerifier } from '../contracts/anchors.js';
 import type { AuditRepository } from '../contracts/audit.js';
 import { AuditCorruptionError } from '../contracts/errors.js';
-import { inspectSnapshot } from './audit-verifier.js';
+import { inspectSnapshot, type VerificationResult } from './audit-verifier.js';
 
 /** Polling durable outbox: a restart simply constructs another worker over the same repository. */
 export class AnchorWorker {
   private running = false;
-  constructor(private readonly repository: AuditRepository, private readonly external: AnchorPublisher & AnchorVerifier) {}
+  constructor(private readonly repository: AuditRepository, private readonly external: AnchorPublisher & AnchorVerifier,
+    private readonly onTampered?: (result: VerificationResult, evidence?: string) => Promise<void>) {}
 
   async runOnce(limit = 100): Promise<{ confirmed: number; failed: number; blocked: number }> {
     if (this.running) return { confirmed: 0, failed: 0, blocked: 0 };
@@ -23,6 +24,7 @@ export class AnchorWorker {
             continue;
           }
           const check = inspectSnapshot(snapshot, head);
+          if (check.status === 'TAMPERED') await this.onTampered?.(check, JSON.stringify({ snapshot, head }, (_key, value: unknown) => typeof value === 'bigint' ? String(value) : value));
           if (check.status === 'TAMPERED' || check.operationalCoverage !== 'CONSISTENT') {
             await this.repository.quarantine(pending, 'INTEGRITY_CHECK_FAILED');
             blocked++;
@@ -44,7 +46,12 @@ export class AnchorWorker {
           confirmed++;
         } catch (error) {
           if (error instanceof AuditCorruptionError) {
-            try { await this.repository.quarantine(pending, 'CORRUPT_RECORD'); blocked++; }
+            try {
+              await this.onTampered?.({ auctionId: pending.auctionId, status: 'TAMPERED', reason: 'CORRUPT_STORED_RECORD',
+                localSequence: String(pending.sequence), externallyVerifiedSequence: '0', externalHeadSequence: null,
+                operationalCoverage: 'UNAVAILABLE', integrityCoverage: 'UNAVAILABLE' });
+              await this.repository.quarantine(pending, 'CORRUPT_RECORD'); blocked++;
+            }
             catch { failed++; }
           } else failed++;
         }

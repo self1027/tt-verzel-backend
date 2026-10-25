@@ -1,3 +1,4 @@
+import { RecoveryService } from '../auctions/services/recovery-service.js';
 import type { Database } from '../../shared/database/client.js';
 import type { AnchorVerifier } from '../audit/contracts/anchors.js';
 import { silentAuctionEvents, type AuctionEventSink } from '../../shared/events/auction-events.js';
@@ -10,7 +11,8 @@ export function createSettlementModule(db: Database, external?: AnchorVerifier, 
   const repository = new DrizzleSettlementRepository(db);
   const gate = new DrizzleSettlementAuditGate(db, external ?? { latest: () => Promise.reject(new Error('Witness unavailable')) });
   const service = new SettlementService(repository, gate, events);
-  const worker = new SettlementWorker(repository, service, { log: entry => {
+  const recovery = new RecoveryService(db, events);
+  const worker = new SettlementWorker(repository, service, { recover: () => recovery.runOnce(), log: entry => {
     if (['TAMPERED', 'RETRY', 'DEFERRED'].includes(entry.status)) console.warn('Settlement processing', entry);
     else if (['SETTLED', 'CLOSED_NO_BIDS'].includes(entry.status)) console.info('Settlement completed', entry);
   } });

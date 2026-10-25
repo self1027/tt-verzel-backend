@@ -36,9 +36,17 @@ export function inspectSnapshot(snapshot: AuditSnapshot, anchor: ExternalAnchor 
 }
 
 export class AuditVerifier {
-  constructor(private readonly repository: AuditRepository, private readonly external: AnchorVerifier) {}
+  constructor(private readonly repository: AuditRepository, private readonly external: AnchorVerifier,
+    private readonly onTampered?: (result: VerificationResult, evidence?: string) => Promise<void>) {}
 
   async verify(auctionId: string): Promise<VerificationResult> {
+    let evidence: string | undefined;
+    const result = await this.inspect(auctionId, value => { evidence = value; });
+    if (result.status === 'TAMPERED') await this.onTampered?.(result, evidence);
+    return result;
+  }
+
+  private async inspect(auctionId: string, preserve: (evidence: string) => void): Promise<VerificationResult> {
     let anchor: ExternalAnchor | null = null;
     let available = true;
     try { anchor = await this.external.latest(auctionId); } catch { available = false; }
@@ -48,6 +56,7 @@ export class AuditVerifier {
     catch (error) { return { auctionId, status: error instanceof AuditCorruptionError ? 'TAMPERED' : 'VERIFICATION_UNAVAILABLE',
       localSequence: '0', externallyVerifiedSequence: '0', externalHeadSequence: anchor?.sequence ?? null,
       operationalCoverage: 'UNAVAILABLE', integrityCoverage: 'UNAVAILABLE', reason: error instanceof AuditCorruptionError ? 'NONCANONICAL_STORED_TIMESTAMP' : 'SNAPSHOT_UNAVAILABLE' }; }
+    preserve(JSON.stringify({ snapshot, anchor }, (_key, value: unknown) => typeof value === 'bigint' ? String(value) : value));
     if (!snapshot) {
       if (anchor) return { auctionId, status: 'TAMPERED', localSequence: '0', externallyVerifiedSequence: '0', externalHeadSequence: anchor.sequence,
         operationalCoverage: 'DIVERGENT', integrityCoverage: 'UNAVAILABLE', reason: 'ANCHORED_AUCTION_MISSING' };

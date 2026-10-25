@@ -29,6 +29,7 @@ export class AuditController {
     try { events = await this.repository.page(id, input.after, input.limit); }
     catch (error) {
       if (!(error instanceof AuditCorruptionError)) throw error;
+      await this.verifier.verify(id);
       response.json({ auctionId: id, status: 'TAMPERED', reason: 'INVALID_PUBLIC_EVENT', events: [] });
       return;
     }
@@ -39,6 +40,7 @@ export class AuditController {
         if (!/^[a-f0-9]{64}$/.test(eventHash) || hashEvent(unsigned) !== eventHash) throw new Error('Invalid public event');
       }
     } catch {
+      await this.verifier.verify(id);
       response.json({ auctionId: id, status: 'TAMPERED', reason: 'INVALID_PUBLIC_EVENT', events: [] });
       return;
     }

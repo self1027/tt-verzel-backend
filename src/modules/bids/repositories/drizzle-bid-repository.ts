@@ -1,3 +1,4 @@
+import { assertAuctionNotBlocked } from '../../auctions/infrastructure/recovery-guard.js';
 import { and, asc, eq, inArray, sql } from 'drizzle-orm';
 import type { Database, DatabaseTransaction } from '../../../shared/database/client.js';
 import { AppError } from '../../../shared/http/app-error.js';
@@ -26,6 +27,7 @@ export class DrizzleBidRepository implements BidRepository {
       operations: new DrizzleBidOperationStore(tx),
       async lockAuction(id) {
         const [auction] = await tx.select().from(auctions).where(eq(auctions.id, id)).for('update');
+        if (auction) await assertAuctionNotBlocked(tx, id);
         previousEndsAt = auction?.endsAt;
         return auction ?? null;
       },

@@ -1,3 +1,4 @@
+import { RecoveryService } from '../../auctions/services/recovery-service.js';
 import { createHash } from 'node:crypto';
 import { asc, eq } from 'drizzle-orm';
 import type { Database, DatabaseTransaction } from '../../../shared/database/client.js';
@@ -28,17 +29,25 @@ export async function readSettlementProof(tx: DatabaseTransaction, id: string) {
 export class DrizzleSettlementAuditGate implements SettlementAuditGate {
   constructor(private readonly db: Database, private readonly external: AnchorVerifier) {}
   async inspect(id: string) {
-    let anchor;
+    const result = await this.inspectProof(id);
+    if (result.status === 'TAMPERED') await new RecoveryService(this.db).detect(id, result);
+    return result;
+  }
+
+  private async inspectProof(id: string) {
+    let anchor = null;
+    let available = true;
     try { anchor = await this.external.latest(id); }
-    catch { return { status: 'VERIFICATION_UNAVAILABLE' as const }; }
+    catch { available = false; }
     try {
       return await this.db.transaction(async tx => {
         const state = await readSettlementProof(tx, id);
         const result = inspectSnapshot(state.snapshot, anchor);
+        if (!available && result.status !== 'TAMPERED') return { status: 'VERIFICATION_UNAVAILABLE' as const, reason: 'WITNESS_UNAVAILABLE' };
         if (result.status === 'VERIFIED' && result.integrityCoverage !== 'SELLER_PRODUCT_V2' && state.snapshot.operational.bids.length > 0) {
           return { status: 'VERIFICATION_UNAVAILABLE' as const, reason: 'LEGACY_INTEGRITY_UNBOUND' };
         }
-        return result.status === 'VERIFIED' ? { status: result.status, proof: state.proof } : { status: result.status };
+        return result.status === 'VERIFIED' ? { status: result.status, proof: state.proof } : { status: result.status, reason: result.reason ?? result.status, verificationEvidence: JSON.stringify({ snapshot: state.snapshot, anchor }, (_key, value: unknown) => typeof value === 'bigint' ? String(value) : value) };
       }, { isolationLevel: 'repeatable read', accessMode: 'read only' });
     } catch (error) {
       return { status: error instanceof AuditCorruptionError ? 'TAMPERED' as const : 'VERIFICATION_UNAVAILABLE' as const };

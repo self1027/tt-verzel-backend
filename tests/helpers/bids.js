@@ -65,7 +65,7 @@ export async function bidFixture() {
     return { ...database, url: http.url, users, tokens, createAuction, request, deposit, clock, repository,
       service: new BidService(repository, new DrizzleBidQueryRepository(database.db)),
       async reset() {
-        await database.pool.query('DELETE FROM bid_operations; DELETE FROM wallet_reservations; DELETE FROM audit_anchors; DELETE FROM audit_events; UPDATE auctions SET current_bid_id=NULL; DELETE FROM bids; DELETE FROM auctions; DELETE FROM ledger_entries; DELETE FROM ledger_transactions; UPDATE wallets SET balance_cents=0,reserved_cents=0');
+        await database.pool.query('DELETE FROM auction_recoveries; DELETE FROM bid_operations; DELETE FROM wallet_reservations; DELETE FROM audit_anchors; DELETE FROM audit_events; UPDATE auctions SET current_bid_id=NULL; DELETE FROM bids; DELETE FROM auctions; DELETE FROM ledger_entries; DELETE FROM ledger_transactions; UPDATE wallets SET balance_cents=0,reserved_cents=0');
       },
       async close() { await http.close(); await database.close(); },
     };

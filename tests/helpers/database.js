@@ -10,7 +10,8 @@ export async function isolatedDatabase() {
   const name = `auth_test_${randomUUID().replaceAll('-', '')}`;
   const admin = new pg.Pool({ connectionString: process.env.TEST_DATABASE_URL });
   await admin.query(`CREATE SCHEMA "${name}"`);
-  const pool = new pg.Pool({ connectionString: process.env.TEST_DATABASE_URL, options: `-c search_path=${name}` });
+  // The 23-caller concurrency test also needs connections for its lock holder and observer.
+  const pool = new pg.Pool({ connectionString: process.env.TEST_DATABASE_URL, options: `-c search_path=${name}`, max: 32 });
   const db = drizzle({ client: pool });
   async function close() {
     await pool.end();
