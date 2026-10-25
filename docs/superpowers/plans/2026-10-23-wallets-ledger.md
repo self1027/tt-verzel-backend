@@ -1,31 +1,31 @@
-# Wallets & Ledger Implementation Plan
+# Plano de implementação de carteiras e ledger
 
-> Execute inline with TDD; preserve the existing modular architecture.
+> Executar diretamente com TDD e preservar a arquitetura modular existente.
 
-**Goal:** simulated deposits, own-wallet history, reconciliation and future reservation contracts.
+**Objetivo:** depósitos simulados, histórico da própria carteira, conciliação e contratos para reservas futuras.
 
-**Architecture:** wallet controller/service/repository; a ledger adapter bound to the caller's Drizzle transaction. Existing unique wallet/account/key constraints suffice. No schema changes or new dependencies.
+**Arquitetura:** controller/service/repository de carteira; adaptador do ledger vinculado à transação Drizzle chamadora. As restrições únicas existentes para carteira/conta/chave são suficientes. Sem mudança de schema ou novas dependências.
 
-**Constraints:** monetary API strings, bigint arithmetic, authenticated identity, BIDDER-only deposits, append-only ledger, PostgreSQL locks, no bids or settlement implementation.
+**Restrições:** valores monetários como strings na API, aritmética bigint, identidade autenticada, depósitos exclusivos de BIDDER, ledger somente de acréscimo e bloqueios PostgreSQL; sem implementar lances ou liquidação.
 
-## Tasks
+## Tarefas
 
-- [x] Write financial integration tests and observe missing wallet routes fail (404 instead of 401).
-- [x] Define wallet, ledger and transaction-bound reservation contracts before classes.
-- [x] Implement atomic provisioning, wallet locking, scoped persistent idempotency and balanced ledger append.
-- [x] Add authenticated HTTP routes, history and internal reconciliation.
-- [x] Exercise limits, concurrent retries, independent deposits, rollback, isolation and corrupt balances on real PostgreSQL.
-- [x] Document lock order, receipts, reservation pre/postconditions and next-phase work.
-- [x] Run npm test (24), npm run test:db (65), lint, typecheck and build; all exit 0. Independent read-only review found no actionable defect.
+- [x] Escrever testes financeiros de integração e confirmar a falha das rotas de carteira ausentes (404 em vez de 401).
+- [x] Definir contratos de carteira, ledger e reserva vinculada à transação antes das classes.
+- [x] Implementar provisionamento atômico, bloqueio de carteira, idempotência persistente com escopo e lançamentos equilibrados no ledger.
+- [x] Adicionar rotas HTTP autenticadas, histórico e conciliação interna.
+- [x] Testar limites, tentativas simultâneas, depósitos independentes, rollback, isolamento e saldos corrompidos em PostgreSQL real.
+- [x] Documentar ordem dos bloqueios, comprovantes, pré e pós-condições de reservas e trabalho da próxima etapa.
+- [x] Executar npm test (24), npm run test:db (65), lint, typecheck e build; todos terminaram com código 0. Revisão independente e somente de leitura não encontrou defeitos que exigissem ação.
 
-## Review focus
+## Pontos de revisão
 
-Retry after later deposits must return the original receipt; overflow must precede writes; missing accounts on funded wallets must not hide lost accounting; reconciliation must use a consistent snapshot; duplicate headers and extra fields must be rejected.
+Uma repetição após depósitos posteriores deve retornar o comprovante original; detectar estouro antes de gravar; contas ausentes em carteiras financiadas não podem ocultar perda contábil; a conciliação deve usar snapshot consistente; rejeitar headers duplicados e campos extras.
 
-## Decisions
+## Decisões
 
-- Receipt contains transactionId, amountCents and createdAt, never a changing balance.
-- Store `deposit:<authenticated UUID>:<client key>` in the existing unique idempotency key, wallet ID in referenceId, amount in ledger entries.
-- Require the seeded clearing account; do not create alternative clearing accounts during requests.
-- Reserve/release/capture are contracts for the next phase, with no executable reservation or settlement workflow in this phase.
-- Future locks: auction row first, wallet rows ordered by UUID, reservation rows, then ledger writes. Deposits lock only their wallet.
+- O comprovante contém transactionId, amountCents e createdAt; nunca um saldo que muda.
+- Armazenar `deposit:<UUID autenticado>:<chave do cliente>` na chave única de idempotência existente, o ID da carteira em referenceId e o valor nos lançamentos do ledger.
+- Exigir a conta de compensação criada pelo seed; não criar contas alternativas durante requisições.
+- Reserva/liberação/captura ficam como contratos para a próxima etapa; esta fase não tem fluxo executável de reserva ou liquidação.
+- Bloqueios futuros: primeiro a linha do leilão, depois carteiras em ordem de UUID, linhas de reserva e, por fim, gravações no ledger. Depósitos bloqueiam somente sua carteira.

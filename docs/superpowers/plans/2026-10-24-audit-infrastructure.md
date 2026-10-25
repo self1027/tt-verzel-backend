@@ -1,76 +1,76 @@
-# Audit infrastructure implementation plan
+# Plano de implementação da infraestrutura de auditoria
 
-> Execution: specialized subagents in parallel, integrated and reviewed by the lead agent.
+> Execução: agentes especializados trabalharam em paralelo; o agente principal integrou e revisou o resultado.
 
-**Goal:** public verification of per-auction commitments against an independent signed witness.
-**Spec:** user execution prompt and requirements.pdf, pages 2, 3, 4 and 5 (all seven pages read visually).
-**Architecture:** domain ports, transaction-bound Drizzle appender, durable outbox in audit_anchors,
-HTTP witness outside the audited database, public read-only verification.
-**Stack:** existing TypeScript/Express/Drizzle/PostgreSQL; native SHA-256, Ed25519 and fetch.
+**Objetivo:** verificar publicamente os compromissos de cada leilão usando um witness independente e assinado.
+**Especificação:** pedido do usuário e páginas 2, 3, 4 e 5 de requirements.pdf (as sete páginas foram lidas visualmente).
+**Arquitetura:** portas de domínio, gravador Drizzle vinculado à transação, outbox durável em audit_anchors,
+witness HTTP fora do banco auditado e verificação pública somente de leitura.
+**Tecnologias:** TypeScript/Express/Drizzle/PostgreSQL existentes; SHA-256, Ed25519 e fetch nativos.
 
-## Constraints and decisions
+## Restrições e decisões
 
-- Preserve existing work (only untracked temp/ at start), no push, <=500 added+deleted lines per commit.
-- Work in the provided checkout; all mutations/shared migrations and commits owned by lead.
-- Two execution waves because the environment permits three child agents plus the lead.
-- No private credentials or witness data/key inside application DB/container volume.
-- Witness is independently operated HTTP service, append-only API, durable journal and Ed25519 signatures.
-- Trust excludes compromise/rollback of the witness and compromise of application runtime/publish credentials.
-- An attacker with SQL access can rewrite an unanchored suffix; never report it VERIFIED.
-- No production anchor configured means VERIFICATION_UNAVAILABLE, not a simulated verification success.
-- Existing events without hash version receive version 0; verifier rejects rather than silently endorsing them.
-- Existing auctions without baseline are NOT_RECORDED; never backfill a trusted historic baseline silently.
-- Future bids and settlements use typed, strict public payloads with per-auction bidder pseudonyms.
+- Preservar o trabalho existente (somente temp/ estava sem rastreamento no início), sem push e até 500 linhas adicionadas/removidas por commit.
+- Trabalhar no checkout fornecido; alterações compartilhadas, migrations e commits ficam sob responsabilidade do agente principal.
+- Duas etapas de execução, pois o ambiente permite três agentes filhos além do principal.
+- Não armazenar credenciais privadas nem dados/chaves do witness no banco ou volume do container da aplicação.
+- O witness é um serviço HTTP operado independentemente, com API somente de acréscimo, diário durável e assinaturas Ed25519.
+- O modelo de confiança não cobre comprometimento/reversão do witness nem comprometimento do runtime da aplicação ou das credenciais de publicação.
+- Um atacante com acesso SQL pode reescrever um trecho ainda não ancorado; nunca classificá-lo como VERIFIED.
+- Sem âncora de produção configurada, retornar VERIFICATION_UNAVAILABLE; não simular uma verificação bem-sucedida.
+- Eventos existentes sem versão de hash recebem versão 0; o verificador os rejeita em vez de aprová-los silenciosamente.
+- Leilões sem registro inicial são NOT_RECORDED; nunca preencher silenciosamente um estado histórico considerado confiável.
+- Lances e liquidações usam payloads públicos tipados e estritos, com pseudônimos de licitante por leilão.
 
-## Ownership and dependencies
+## Responsáveis e dependências
 
-1. Lead defines contracts/audit.ts and contracts/anchors.ts before dispatch.
-2. A: domain/ (canonical JSON, event validation, hashing, chain validation), tests/audit-domain.test.js.
-3. B: repositories/ (transaction-bound appender, outbox/read repository),
+1. O agente principal define contracts/audit.ts e contracts/anchors.ts antes de delegar.
+2. A: domain/ (JSON canônico, validação de evento, hash e validação da cadeia), tests/audit-domain.test.js.
+3. B: repositories/ (gravador vinculado à transação, outbox/repositório de leitura),
    auctions/repositories/drizzle-auction-audit-reader.ts, tests/integration/audit-persistence.test.js.
-   Consumes domain functions specified below. No schema or migration edits.
+   Usa as funções de domínio descritas abaixo. Sem alterar schema ou migrations.
 4. C: infrastructure/http-anchor-provider.ts, witness/*, tests/audit-witness.test.js.
-   Consumes anchor ports; HTTP provider verifies pinned public key, namespace and signatures.
-5. Lead: schema/migration, services/verifier, services/anchor-worker, controller/composition/config;
-   inject audit appenders into existing auction persistence; tests covering public verification and attacks.
-6. Second wave: E independently reviews attacks and adds adversarial tests; F reviews PDF adherence/docs;
-   A/B/C review other components when ownership is released. Lead integrates fixes.
+   Usa as portas de âncora; o provider HTTP verifica chave pública fixada, namespace e assinaturas.
+5. Principal: schema/migration, services/verifier, services/anchor-worker, controller/composição/configuração;
+   integrar gravadores de auditoria à persistência de leilões existente; testar verificação pública e ataques.
+6. Segunda etapa: E revisa ataques de forma independente e adiciona testes adversariais; F revisa aderência ao PDF e documentação;
+   A/B/C revisam os demais componentes quando liberados. O principal integra as correções.
 
-## Shared domain API (A)
+## API compartilhada do domínio (A)
 
-- canonicalJson(value: unknown): string; reject non-JSON, unsafe/non-integer numbers, cycles/prototypes.
-- validateInput(input: AuditInput): void; strict per-type payload fields, canonical UTC millisecond dates.
-- hashEvent(event: Omit<AuditEvent, 'eventHash'>): string; versioned domain-separated SHA-256, includes id.
+- canonicalJson(value: unknown): string; rejeitar dados não JSON, números inseguros/não inteiros, ciclos e protótipos.
+- validateInput(input: AuditInput): void; campos estritos por tipo de payload e datas UTC canônicas em milissegundos.
+- hashEvent(event: Omit<AuditEvent, 'eventHash'>): string; SHA-256 versionado e separado por domínio, incluindo ID.
 - checkChain(auctionId: string, events: AuditEvent[]): { valid: boolean; reason: string | null }.
-- GENESIS_HASH: 64 zeroes. Sequence starts at 1, strictly contiguous, hashVersion=1.
-- bidderReference(auctionId: string, bidderId: string): string; SHA-256 per-auction pseudonym.
-- auction payload: all AuctionCommitment fields, spread at root.
-- BID_ACCEPTED payload: BidCommitment fields plus endsAt (post anti-sniping).
-- AUCTION_SETTLED payload: SettlementCommitment fields.
-- AUCTION_CLOSED_NO_BIDS payload: empty object.
+- GENESIS_HASH: 64 zeros. A sequência começa em 1, sem lacunas; hashVersion=1.
+- bidderReference(auctionId: string, bidderId: string): string; pseudônimo SHA-256 exclusivo por leilão.
+- payload do leilão: todos os campos AuctionCommitment no nível raiz.
+- payload BID_ACCEPTED: campos BidCommitment e endsAt (após anti-sniping).
+- payload AUCTION_SETTLED: campos SettlementCommitment.
+- payload AUCTION_CLOSED_NO_BIDS: objeto vazio.
 
-## Checks and delivery
+## Verificações e entrega
 
-- [x] Record baseline npm test/test:db/lint/typecheck/build.
-- [x] Each implementer writes tests before implementation and records red/green commands.
-- [x] Validate canonicalization, chain continuity, privacy, rollback and concurrent appends.
-- [x] Exercise independent witness publication, retries, lost response, restart, immutable references.
-- [x] Verify direct SQL update/insert/delete/truncation/rewrites, bid changes, no-login endpoint.
-- [x] Validate same-transaction auction writes; no network before commit; lock auction first.
-- [x] Re-run all five mandatory checks after integration; record exact results.
-- [x] Write docs/implementation-reports/audit-infrastructure.md sections A-H in Portuguese.
-- [x] Commit cohesive groups only after checking staged added+deleted <=500; no push.
+- [x] Registrar resultados de referência de npm test/test:db/lint/typecheck/build.
+- [x] Cada pessoa implementadora escreve testes antes do código e registra os comandos red/green.
+- [x] Validar canonicalização, continuidade da cadeia, privacidade, rollback e gravações concorrentes.
+- [x] Testar publicação no witness independente, novas tentativas, perda de resposta, reinício e referências imutáveis.
+- [x] Verificar alterações SQL diretas (update/insert/delete/truncamento/reescrita), mudanças de lances e endpoint sem login.
+- [x] Validar gravações do leilão na mesma transação; sem acesso à rede antes do commit; bloquear primeiro o leilão.
+- [x] Reexecutar as cinco verificações obrigatórias após integrar e registrar resultados exatos.
+- [x] Escrever em português as seções A–H de docs/implementation-reports/audit-infrastructure.md.
+- [x] Criar commits coesos somente após conferir até 500 linhas adicionadas/removidas preparadas; sem push.
 
-## Review focus
+## Pontos de revisão
 
-- Never trust a deleted/forged local audit_anchors row to discover the latest external head.
-- Never return raw tampered JSON (could contain attacker-injected PII) in public event pages.
-- Distinguish snapshot/provider races from corruption; re-read DB after reading external head.
-- Pending outbox survives crash between commit/publication and publication/confirmation.
-- Confirmation is compare-and-set; external duplicate sequence/different hash conflicts.
-- Full verification is bounded; exceeding bounds returns unavailable, never partial VERIFIED.
+- Nunca confiar em uma linha audit_anchors local apagada ou forjada para descobrir o último estado externo.
+- Nunca retornar JSON adulterado bruto (pode conter PII injetada por atacante) em páginas públicas de eventos.
+- Distinguir condições de corrida entre snapshot/provider de corrupção; reler o banco após consultar o estado externo.
+- A outbox pendente sobrevive a falhas entre commit/publicação e publicação/confirmação.
+- A confirmação usa compare-and-set; sequência externa duplicada com hash diferente gera conflito.
+- A verificação completa tem limites; excedê-los retorna indisponível, nunca VERIFIED parcial.
 
-## Deferred assessment
+## Avaliação adiada
 
-Reservation implementation is optional after audit stabilizes; do not expand into BidService or
-capture/settlement without sufficient integration evidence. Existing reservation ports remain intact.
+A implementação de reservas é opcional após estabilizar a auditoria; não expandir para BidService ou
+captura/liquidação sem evidências suficientes de integração. As portas de reserva existentes permanecem intactas.

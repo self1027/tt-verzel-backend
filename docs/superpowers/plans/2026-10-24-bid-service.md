@@ -1,82 +1,82 @@
-# BidService implementation plan
+# Plano de implementação do BidService
 
-> Execution authorized by the user: specialized subagents in parallel; lead integrates and verifies.
+> Execução autorizada pelo usuário: agentes especializados trabalharam em paralelo; o agente principal integrou e verificou.
 
-**Goal:** transactional PlaceBid with one funded leader, persistent replay and existing audit outbox.
-**Architecture:** bids domain/contracts; transaction-bound wallet and audit adapters; Node service
-coordinates READ COMMITTED, PostgreSQL serializes writes. No external calls while locked.
-**Spec:** requirements.pdf all seven scanned pages reread visually; explicit current user brief.
-**Stack:** preserve Express/Drizzle/PostgreSQL/node:test, no new dependencies.
+**Objetivo:** executar PlaceBid transacionalmente, com um único líder financiado, repetição persistente e uso da outbox de auditoria existente.
+**Arquitetura:** domínio/contratos de bids, adaptadores de carteira e auditoria vinculados à transação e serviço Node.js
+coordena READ COMMITTED; o PostgreSQL serializa as gravações. Não fazer chamadas externas enquanto houver bloqueios.
+**Especificação:** releitura visual das sete páginas digitalizadas de requirements.pdf e pedido explícito do usuário.
+**Tecnologias:** manter Express/Drizzle/PostgreSQL/node:test, sem novas dependências.
 
-## Findings and global constraints
+## Constatações e restrições gerais
 
-- Baseline HEAD 8d54bcb; user-staged temp/ must remain byte-for-byte staged and outside our commits.
-- Max500 additions+deletions/commit, no push; commit with explicit pathspec so staged temp/ is preserved.
-- Graph has417 nodes built at96206370, before wallets/audit; inspect graph then real source.
-- ReservationOperations is a port only; reserve/release implementation missing.
-- ACTIVE-per-auction uniqueness is absent in actual schema; add partial unique index, never rewrite old migration.
-- AuditAppender(tx), BID_ACCEPTED payload, bidderReference and durable audit_anchors outbox already work.
-- External production witness still unconfigured; preserve documented anchored-prefix limits.
-- Anti-sniping ambiguity in PDF page4 is resolved explicitly by user: old endsAt+120000ms, never now+120000ms.
-- Capture/settlement, sockets, UI and deployment remain out of scope.
+- HEAD de referência 8d54bcb; temp/ preparada pelo usuário deve permanecer intacta e fora dos nossos commits.
+- Máximo de 500 linhas adicionadas/removidas por commit, sem push; usar pathspec explícito para preservar temp/.
+- O grafo tinha 417 nós, gerado em 96206370 antes de carteiras/auditoria; conferir o código-fonte atual.
+- ReservationOperations existia somente como porta; faltavam implementações de reserva/liberação.
+- O schema não garantia unicidade de reservas ACTIVE por leilão; adicionar índice único parcial sem reescrever migrations antigas.
+- AuditAppender(tx), payload BID_ACCEPTED, bidderReference e outbox durável audit_anchors já funcionavam.
+- Witness de produção ainda não estava configurado; manter documentados os limites do trecho ancorado.
+- O usuário esclareceu a ambiguidade de anti-sniping na página 4 do PDF: usar endsAt anterior + 120000 ms, nunca now + 120000 ms.
+- Captura/liquidação, sockets, interface e deploy permanecem fora do escopo.
 
-## Shared contracts before parallel implementation
+## Contratos compartilhados antes da implementação em paralelo
 
-`src/modules/bids/contracts/bids.ts` defines BidAuction, Bid, PublicBid/BidReceipt,
-BidWriteContext, BidRepository, query ports and operation-store ports. Domain API:
+`src/modules/bids/contracts/bids.ts` define BidAuction, Bid, PublicBid/BidReceipt,
+BidWriteContext, BidRepository, portas de consulta e de armazenamento de operações. API do domínio:
 `validateBid(auction:BidAuction,current:Bid|null,userId:string,amount:bigint,now:Date):Date`
-returns resulting endsAt or typed AppError. `validateHistory(auction:BidAuction,bids:Bid[]):Bid|null`
-checks contiguous seq, pointer, amount/ownership consistency; internal corruption =>409.
+retorna o endsAt resultante ou um AppError tipado. `validateHistory(auction:BidAuction,bids:Bid[]):Bid|null`
+verifica sequência contínua, ponteiro e coerência de valor/propriedade; corrupção interna retorna 409.
 
-Reservation adapter API: `DrizzleReservationOperations implements Pick<ReservationOperations,
+API do adaptador de reservas: `DrizzleReservationOperations implements Pick<ReservationOperations,
 'reserveFunds'|'releaseReservation'>`; `lockReservationWallets(tx,walletIds:string[]):Promise<BidWallet[]>`
-(public wallet DTO may be declared locally structurally, no dependency on bids domain).
-Explicit sorted UUID loop acquires wallet locks BEFORE any reservation FOR UPDATE.
-Methods reacquire only locks already held by BidService; standalone methods lock parent auction,
-wallet(s), then reservation. Never implement capture early. Check reserved sum vs ACTIVE rows.
+(o DTO público da carteira pode ser declarado estruturalmente no próprio módulo, sem dependência do domínio de bids).
+Um loop explícito em ordem crescente de UUID bloqueia as carteiras ANTES das reservas com FOR UPDATE.
+Os métodos readquirem somente bloqueios já mantidos pelo BidService; métodos independentes bloqueiam primeiro o leilão,
+depois as carteiras e, por fim, a reserva. Não antecipar a implementação de captura. Conferir o total reservado contra as linhas ACTIVE.
 
-Idempotency API: `bidFingerprint(amountCents:bigint):string` SHA256 of versioned canonical payload;
-`DrizzleBidOperationStore(tx)` implements port. Table bid_operations: id UUID PK, userId FK,
-auctionId FK, key varchar128, fingerprint varchar64, bidId FK unique, result JSON, createdAt.
-Unique(userId,auctionId,key); operation is implicit PlaceBid. Key bound to canonical amount.
+API de idempotência: `bidFingerprint(amountCents:bigint):string` SHA256 de payload canônico versionado;
+`DrizzleBidOperationStore(tx)` implementa a porta. Tabela bid_operations: id UUID PK, userId FK,
+auctionId FK, key varchar128, fingerprint varchar64, bidId FK único, result JSON, createdAt.
+Unicidade por (userId, auctionId, key); a operação PlaceBid é implícita. A chave fica vinculada ao valor canônico.
 
-## Ownership / execution waves
+## Responsáveis e etapas de execução
 
-1. A: bids/domain/bid-rules.ts, tests/bid-rules.test.js (pure validation/minimum/anti-sniping).
-2. B: wallets/repositories/drizzle-reservation-operations.ts, tests/integration/reservations.test.js.
-   No schema edits. Wait for root migration before PostgreSQL green checks if needed.
-3. C: bids/infrastructure/operations.schema.ts, bids/repositories/drizzle-bid-operation-store.ts,
-   bids/domain/idempotency.ts, tests/integration/bid-idempotency.test.js. No migration/shared exports edits.
-4. Lead: migrations/schema exports/tests updates, BidService, DrizzleBidRepository, shared fixtures.
-5. When A completes: E owns controller/query repository (contracts stable); root composition only.
-6. When C completes: D reviews/integrates audit strict anti-sniping replay + rollback tests.
-7. When B completes: F real concurrency/adversarial integration tests using root fixtures.
-8. Independent final read-only review after integration, lead fixes findings and writes report.
+1. A: bids/domain/bid-rules.ts e tests/bid-rules.test.js (validação pura, mínimo e anti-sniping).
+2. B: wallets/repositories/drizzle-reservation-operations.ts e tests/integration/reservations.test.js.
+   Sem alterações no schema. Se necessário, aguardar a migration principal antes dos testes PostgreSQL aprovados.
+3. C: bids/infrastructure/operations.schema.ts e bids/repositories/drizzle-bid-operation-store.ts,
+   bids/domain/idempotency.ts e tests/integration/bid-idempotency.test.js. Sem alterar migrations ou exports compartilhados.
+4. Principal: atualizar migrations/schema/exports/testes, BidService, DrizzleBidRepository e fixtures compartilhadas.
+5. Quando A concluir, E assume controller/repositório de consultas (contratos estáveis); composição fica com o principal.
+6. Quando C concluir, D revisa/integra reprodução estrita de anti-sniping na auditoria e testes de rollback.
+7. Quando B concluir, F cria testes reais de integração de concorrência/ataques usando as fixtures principais.
+8. Revisão final independente e somente de leitura após integração; o principal corrige achados e redige o relatório.
 
-Max3 children+lead; roles run in waves, not six simultaneous agents. Unique schemas isolate suites.
-Only lead edits shared files, migrations or commits. Agents write tests first and record red/green.
+Máximo de três agentes filhos além do principal; execução em etapas, não seis agentes simultâneos. Schemas exclusivos isolam as suítes.
+Somente o agente principal altera arquivos compartilhados, migrations ou commits. Os agentes escrevem testes primeiro e registram red/green.
 
-## PlaceBid sequence
+## Sequência de PlaceBid
 
-- [x] Validate syntax/key/positiveBIGINT outside tx; lock auction first and read DB wallclock.
-- [x] Check current user exists/BIDDER. Read idempotency BEFORE current business state; replay original result.
-- [x] Validate contiguous history/current pointer, LIVE/minimum/not-own-lead/sequence overflow.
-- [x] Resolve both wallets, lock actual wallet UUIDs ascending, then all active auction reservations.
-- [x] Check only prior leader has exact ACTIVE reservation, matching user/bid/amount; validate wallet invariants.
-- [x] Re-read DB clock after lock waits; revalidate LIVE and compute old endsAt+2min if remaining<=2min.
-- [x] Check available balance, release old reservation, insert bid, reserve new funds, update pointer/endsAt.
-- [x] Append BID_ACCEPTED to existing audit in tx, persist immutable operation receipt, COMMIT.
-- [x] Only durable existing worker publishes anchors after commit; no premature sockets or external calls.
+- [x] Validar sintaxe/chave/BIGINT positivo fora da transação; bloquear primeiro o leilão e consultar o relógio do banco.
+- [x] Confirmar que o usuário existe e é BIDDER. Consultar a idempotência ANTES do estado atual do negócio e repetir o resultado original.
+- [x] Validar histórico contínuo/ponteiro atual/estado LIVE/valor mínimo/não ser o próprio líder/estouro da sequência.
+- [x] Resolver as duas carteiras, bloqueá-las em ordem crescente de UUID e, então, bloquear todas as reservas ativas do leilão.
+- [x] Confirmar que apenas o líder anterior possui reserva ACTIVE exata, com usuário/lance/valor correspondentes; validar invariantes da carteira.
+- [x] Reler o relógio do banco após esperas por bloqueios; revalidar LIVE e somar dois minutos ao endsAt anterior quando restarem até dois minutos.
+- [x] Conferir saldo disponível, liberar reserva anterior, inserir lance, reservar novos valores e atualizar ponteiro/endsAt.
+- [x] Adicionar BID_ACCEPTED à auditoria na transação, persistir comprovante imutável da operação e executar COMMIT.
+- [x] Somente o worker durável existente publica âncoras após o commit; sem sockets antecipados ou chamadas externas.
 
-## Validation and review focus
+## Validação e pontos de revisão
 
-- [x] Baseline and final npm test/test:db/lint/typecheck/build.
-- [x] Required28 PostgreSQL scenarios from brief, including23 same-user concurrent attempts.
-- [x] Barrier/pg_blocking_pids synchronization; no reliance solely on HTTP arrival order/timeouts.
-- [x] Cross-auction shared-wallet contention, crossed wallet order, deposit-vs-reserve and expiration after waits.
-- [x] Rollback after old reservation release/audit failure/operation-save failure restores all rows.
-- [x] Replay after leader/status/deadline changes, same-key payload conflict and concurrent dedup.
-- [x] Public pages pseudonymized, private mine scoped, strict duplicate Idempotency-Key/queries/body validation.
-- [x] Exact120000ms boundary, successive extensions based on olddeadline; rejected bids never extend.
-- [x] Preserve existing tests; document additive constraints require cleanup of invalid legacy ACTIVE rows.
-- [x] Full PT-BR docs/implementation-reports/bid-service.md and API guide, honest remaining limitations.
+- [x] Executar npm test/test:db/lint/typecheck/build antes e depois.
+- [x] Cobrir os 28 cenários PostgreSQL do pedido, incluindo 23 tentativas simultâneas do mesmo usuário.
+- [x] Sincronização por barreira/pg_blocking_pids; não depender somente da ordem de chegada HTTP ou de timeouts.
+- [x] Cobrir disputa por carteira compartilhada entre leilões, ordem cruzada de bloqueios, depósito versus reserva e expiração após esperas.
+- [x] Rollback após liberar reserva antiga ou falhar auditoria/salvamento da operação deve restaurar todas as linhas.
+- [x] Cobrir repetição após mudanças de líder/status/prazo, conflito de payload com a mesma chave e deduplicação concorrente.
+- [x] Páginas públicas pseudonimizadas, consulta privada limitada ao usuário e validação estrita de Idempotency-Key duplicada, consultas e corpo.
+- [x] Cobrir o limite exato de 120000 ms e extensões sucessivas a partir do prazo anterior; lances rejeitados nunca estendem o prazo.
+- [x] Preservar testes existentes; documentar que as restrições aditivas exigem limpeza de linhas ACTIVE antigas inválidas.
+- [x] Documentação integral em português em docs/implementation-reports/bid-service.md e no guia da API, com limitações restantes descritas com clareza.

@@ -1,67 +1,67 @@
-# Backend completion plan
+# Plano de conclusão do backend
 
-**Spec:** current user mission + all seven pages of requirements.pdf visually reread before edits.
-**Goal:** finish the existing backend, including explicit search/filter optional, without frontend/deploy.
-**Architecture:** existing ports/adapters and transaction-bound ledger/reservations/audit; simple polling.
-**Constraints:** <=500 additions+deletions per commit; no push; no private keys/versioned real secrets.
+**Especificação:** pedido atual do usuário e releitura visual das sete páginas de requirements.pdf antes das alterações.
+**Objetivo:** concluir o backend existente, incluindo busca/filtros opcionais explícitos, sem frontend ou deploy.
+**Arquitetura:** portas/adaptadores existentes e ledger/reservas/auditoria vinculados à transação; polling simples.
+**Restrições:** no máximo 500 linhas adicionadas/removidas por commit; sem push, chaves privadas ou segredos reais versionados.
 
-## Initial traceability
+## Rastreabilidade inicial
 
-| PDF | Requirement | Initial state/evidence | Required action |
+| PDF | Requisito | Estado/evidência inicial | Ação necessária |
 | --- | --- | --- | --- |
-| p2,p4 | roles/auth | existing auth middleware + tests | regress, preserve |
-| p2,p4 | local product snapshots/external outage | catalog adapter + tests | regress |
-| p3,p4 | auctions lifecycle/admin | auctions services + tests | preserve cancellation policy |
-| p4 | live/minimum/leader/anti-sniping/reserves | bids service + PostgreSQL concurrency tests | regress against settlement |
-| p4 | settlement/winner/no bids | schema only, capture absent | implement atomic service/worker/capture |
-| p2,p3 | shareable public receipt | absent | implement persisted public REST representation |
-| p2,p3,p4 | public tamper audit/no PII | implemented with witness/outbox | verified preflight and locked token recheck |
-| p3 | live updates | absent | Socket.IO best-effort after commit + REST recovery |
-| p5 | demo users/open lot | users/wallet seed only | separate idempotent audited demo seed, no repeated bids |
-| p6 optional | search/filter | lifecycle+skip only | extend GET /auctions PostgreSQL filters/sort/page |
-| p6 optional | cancellation/refund | only no-bid cancel; no admin role | preserve safe no-bid flow; reject inconsistencies; document no authority for bidder-reserve incident cancellation |
-| p5 | README/run docs | partially current | update matrix/API/OpenAPI/frontend guide |
-| p2,p7 | React/deploy | outside this repo/task | explicitly pending, no deploy |
+| p2,p4 | papéis/autenticação | middleware de autenticação e testes existentes | validar regressões e preservar |
+| p2,p4 | snapshots locais de produtos/falha externa | adaptador de catálogo e testes | validar regressões |
+| p3,p4 | ciclo de vida/administração de leilões | serviços e testes de leilão | preservar política de cancelamento |
+| p4 | lances ao vivo/mínimo/líder/anti-sniping/reservas | serviço de lances e testes de concorrência PostgreSQL | validar em conjunto com a liquidação |
+| p4 | liquidação/vencedor/sem lances | somente schema; sem captura | implementar serviço/worker/captura atômicos |
+| p2,p3 | comprovante público compartilhável | ausente | implementar representação REST pública persistida |
+| p2,p3,p4 | auditoria pública de adulteração/sem PII | witness/outbox implementados | verificação prévia e nova checagem sob bloqueios |
+| p3 | atualizações ao vivo | ausentes | Socket.IO de melhor esforço após commit e recuperação via REST |
+| p5 | usuários/lote de demonstração | seed apenas de usuários/carteiras | seed de demonstração separado, idempotente e auditado, sem repetição de lances |
+| p6 opcional | busca/filtro | apenas ciclo de vida e skip | adicionar filtros/ordenação/paginação PostgreSQL em GET /auctions |
+| p6 opcional | cancelamento/estorno | cancelamento somente sem lances; sem papel admin | manter fluxo seguro, rejeitar inconsistências e documentar limites de autoridade |
+| p5 | README/instruções de execução | parcialmente atualizados | atualizar matriz, API, OpenAPI e guia de frontend |
+| p2,p7 | React/deploy | fora deste repositório/pedido | registrar como pendente, sem deploy |
 
-## Ownership and dependencies
+## Responsáveis e dependências
 
-1. Agent filters owns auction contracts/controller/repository and filter tests/docs section only.
-2. Agent capture owns wallet reservation adapter+capture financial tests, existing contract reused.
-3. Agent frontend owns shared/http/cors.ts, realtime/*, app.ts options integration + CORS/socket tests.
-4. Lead owns settlement contracts/service/repos/worker/receipt, seed, server/composition and migrations.
-5. After first wave, agents independently test settlement concurrency/audit TOCTOU and review docs/requirements.
+1. O agente de filtros fica responsável pelos contratos/controller/repositório de leilões e pela seção de documentação e testes de filtros.
+2. O agente de captura fica responsável pelo adaptador de reservas da carteira e testes financeiros de captura, reutilizando o contrato existente.
+3. O agente de frontend fica responsável por shared/http/cors.ts, realtime/*, integração de opções em app.ts e testes de CORS/socket.
+4. O principal fica responsável por contratos/serviço/repositórios/worker/comprovante da liquidação, seed, servidor/composição e migrations.
+5. Após a primeira etapa, os agentes testam independentemente concorrência/TOCTOU da liquidação e revisam documentação/requisitos.
 
-No shared edits before ownership release. Max3 children+lead. PostgreSQL tests each use UUID schema.
-Missing local TEST_DATABASE_URL caused initial DB failures; use explicit disposable Compose test URL.
+Não editar arquivos compartilhados antes da liberação de responsabilidade. Máximo de três agentes além do principal. Testes PostgreSQL usam schemas com UUID.
+A ausência local de TEST_DATABASE_URL causou falhas iniciais no banco; usar a URL explícita do banco descartável do Compose.
 
-## Decisions
+## Decisões
 
-- No admin exists: do not authorize seller to cancel a bid winner or a TAMPERED incident.
-- External verification before BEGIN financial locks. Proof binds last seq/hash + canonical operational snapshot + seller identity as observed.
-- After auction lock and financial lock waits, reread DB clock/state/proof; abort/defer if any verified position changed.
-- Existing terminal settlement may replay locally without requiring its new event to have been anchored yet.
-- Capture uses caller key `settlement:<auctionId>` in existing ledger, referenceId=reservationId, exact paired entries.
-- Public notifications via AuctionEventSink (new shared pure port); never network inside transaction; best effort, client REST re-fetch mandatory.
-- Socket.IO is required, so add socket.io runtime + socket.io-client test dependency. No broker/Redis.
-- Query price means current own-auction bid amount or startingBidCents; all filters/count/order/offset in PostgreSQL.
-- Keep legacy skip; page is one-based, reject explicit page+skip, default ordering unchanged.
-- Demo seed separate from foundational seed so old test fixtures/zero wallets remain unchanged.
+- Não há papel admin: não autorizar o vendedor a cancelar lance vencedor nem incidente TAMPERED.
+- Verificar externamente antes de obter bloqueios financeiros. A prova vincula última sequência/hash, snapshot operacional canônico e identidade observada do vendedor.
+- Após bloquear o leilão e aguardar bloqueios financeiros, reler relógio/estado/prova do banco; abortar/adiar se qualquer posição verificada mudou.
+- Uma liquidação terminal existente pode ser repetida localmente sem exigir que seu novo evento já esteja ancorado.
+- A captura usa a chave chamadora `settlement:<auctionId>` no ledger existente, referenceId=reservationId e lançamentos pareados exatos.
+- Notificações públicas via AuctionEventSink (nova porta compartilhada); nunca acessar a rede dentro da transação; envio de melhor esforço, cliente deve buscar os dados REST novamente.
+- Socket.IO é necessário: adicionar socket.io para execução e socket.io-client para testes. Sem broker/Redis.
+- Preço de busca é o lance atual daquele leilão ou startingBidCents; filtros/contagem/ordem/deslocamento são executados no PostgreSQL.
+- Manter skip legado; page baseado em um, rejeitar page+skip explícitos e preservar ordenação padrão.
+- Manter o seed de demonstração separado do seed básico para preservar fixtures antigas e carteiras zeradas.
 
-## Execution checklist
+## Lista de execução
 
-- [x] Baseline actual unit/PG/lint/typecheck/build, record environment failure and corrected run.
-- [x] Independent filters, capture and Socket/CORS work in parallel with tests first.
-- [x] Implement verified proof gate, capture-backed settlement and no-bid close, concurrent/idempotent rollback tests.
-- [x] Implement retry/backoff worker, incidents and graceful stop, no external work while locked.
-- [x] Public receipt + query validation + economic consistency checks.
-- [x] Safe cancellation reason/event/invariant handling within existing roles; document authorization limit.
-- [x] Idempotent demo snapshot/open lot and consistent simulated deposits without changing existing users.
-- [x] Compose starts all workers + CORS/env; actual end-to-end Docker bid/settlement/receipt/socket test.
-- [x] OpenAPI maintained/validated + matrix/report + final full checks + independent review.
-- [x] Local commits <=500 lines, no push (staged line-count guard for each commit).
+- [x] Executar testes unitários/PostgreSQL, lint, typecheck e build de referência; registrar falha de ambiente e execução corrigida.
+- [x] Desenvolver filtros, captura e Socket/CORS em paralelo, sempre começando pelos testes.
+- [x] Implementar bloqueio por prova verificada, liquidação com captura, encerramento sem lances e testes de concorrência/idempotência/rollback.
+- [x] Implementar worker com novas tentativas/espera progressiva, incidentes e encerramento seguro; sem operações externas durante bloqueios.
+- [x] Criar comprovante público, validação de consultas e verificações de consistência financeira.
+- [x] Tratar motivo/evento de cancelamento seguro e invariantes nos papéis existentes; documentar limites de autorização.
+- [x] Criar snapshot/lote de demonstração idempotente e depósitos simulados coerentes sem alterar usuários existentes.
+- [x] Configurar workers e CORS/ambiente no Compose; testar lance/liquidação/comprovante/socket de ponta a ponta no Docker.
+- [x] Manter/validar OpenAPI, matriz e relatório; executar verificações finais completas e revisão independente.
+- [x] Criar commits locais com até 500 linhas, sem push; conferir contagem de linhas preparadas por commit.
 
-Final ownership: after initial release, frontend agent implemented receipts,
-filters agent implemented seed/docs, capture agent added adversarial/worker tests.
-Lead integrated and a fresh fourth reviewer performed a read-only final review.
-Evidence: 94 unit/HTTP/provider passes + one Windows privilege skip; 195 PG passes;
-lint/typecheck/build and actual Compose settlement/outage recovery passed.
+Responsáveis finais: após a liberação inicial, o agente de frontend implementou comprovantes,
+o agente de filtros implementou o seed e a documentação; o agente de captura adicionou testes adversariais e do worker.
+O agente principal integrou o trabalho e um quarto revisor realizou uma revisão final somente de leitura.
+Evidências: 94 testes unitários/HTTP/provider aprovados e um ignorado por privilégio do Windows; 195 testes PostgreSQL aprovados;
+lint/typecheck/build e liquidação/recuperação real após indisponibilidade no Compose foram aprovados.
