@@ -35,6 +35,23 @@ after(async () => { await f?.close(); });
 function input(eventType = 'AUCTION_CREATED', payload = commitment) { return { auctionId, eventType, payload, createdAt }; }
 function append(value = input()) { return f.db.transaction((tx) => new DrizzleAuditAppender(tx).append(value)); }
 
+test('quarantine persists evidence, excludes only that checkpoint and refuses stale identity or confirmation', async () => {
+  await append();
+  const [pending] = await repository.pending(1);
+  await assert.rejects(repository.quarantine({ ...pending, hash: 'f'.repeat(64) }, 'CORRUPT_RECORD'), /conflict/i);
+  assert.equal((await repository.pending(1)).length, 1);
+  await repository.quarantine(pending, 'INTEGRITY_CHECK_FAILED');
+  await repository.quarantine(pending, 'INTEGRITY_CHECK_FAILED');
+  assert.deepEqual(await new DrizzleAuditRepository(f.db).pending(1), []);
+  const row = (await f.pool.query('SELECT * FROM audit_anchors WHERE id=$1', [pending.id])).rows[0];
+  assert.equal(row.blocked_reason, 'INTEGRITY_CHECK_FAILED');
+  assert.ok(row.blocked_at);
+  assert.equal(row.external_reference, null);
+  assert.equal(row.last_hash, pending.hash);
+  assert.equal((await repository.snapshot(auctionId)).events.length, 1);
+  await assert.rejects(repository.confirm(pending.id, 'false-proof', createdAt, pending), /conflict/i);
+});
+
 test('confirmation rejects a checkpoint changed after the worker read its pending row', async () => {
   await append();
   const [pending] = await repository.pending(1);
@@ -64,7 +81,7 @@ test('concurrent appends serialize under the parent auction lock with contiguous
     assert.equal(snapshot.events[index].previousHash, snapshot.events[index - 1].eventHash);
   }
   assert.equal(new Set(snapshot.events.map((event) => event.id)).size, 9);
-  assert.equal(snapshot.events[0].hashVersion, 1);
+  assert.equal(snapshot.events[0].hashVersion, 2);
   assert.equal(snapshot.events[0].createdAt, createdAt);
   assert.equal((await repository.pending(20)).length, 9);
   assert.deepEqual((await repository.page(auctionId, 3n, 2)).map((event) => event.sequence), [4n, 5n]);
@@ -126,8 +143,12 @@ test('operational commitments contain pseudonymous bids and a hashed receipt onl
 
 test('snapshot rejects an oversized history instead of exposing a partial verified prefix', async () => {
   await append();
-  await f.pool.query('INSERT INTO audit_events (id,auction_id,sequence,event_type,payload,previous_hash,event_hash,created_at,hash_version) SELECT gen_random_uuid(),auction_id,n,event_type,payload,previous_hash,event_hash,created_at,hash_version FROM audit_events CROSS JOIN generate_series(2,10001) AS n');
+  await f.pool.query('INSERT INTO audit_events (id,auction_id,sequence,event_type,payload,previous_hash,event_hash,created_at,hash_version) SELECT gen_random_uuid(),auction_id,n,event_type,payload,previous_hash,event_hash,created_at,hash_version FROM audit_events CROSS JOIN generate_series(2,10002) AS n');
   await assert.rejects(repository.snapshot(auctionId), /limit|large|10000/i);
+  const { AnchorWorker } = await import('../../src/modules/audit/services/anchor-worker.ts');
+  const worker = new AnchorWorker(repository, { latest: async () => null, publish: async () => { throw new Error('must not publish'); } });
+  assert.deepEqual(await worker.runOnce(), { confirmed: 0, failed: 0, blocked: 1 });
+  assert.deepEqual(await repository.pending(1), []);
 });
 
 test('snapshot keeps auction, bids and events at one repeatable read point during a concurrent commit', async () => {

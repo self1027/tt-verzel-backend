@@ -10,12 +10,12 @@ const configs = new Map(tables.map((table) => {
   return [config.name, config];
 }));
 
-test('exports exactly the thirteen domain tables and five enums', () => {
+test('exports the domain and login budget tables and five enums', () => {
   assert.deepEqual([...configs.keys()].sort(), [
     'users', 'product_snapshots', 'auctions', 'bids', 'wallets',
     'wallet_reservations', 'ledger_accounts', 'ledger_transactions',
     'ledger_entries', 'auction_settlements', 'audit_events', 'audit_anchors',
-    'bid_operations',
+    'bid_operations', 'login_rate_limits',
   ].sort());
   const enums = Object.values(schema).filter(isPgEnum);
   assert.deepEqual(Object.fromEntries(enums.map((item) => [item.enumName, item.enumValues])), {
@@ -32,9 +32,13 @@ test('preserves UUID primary keys, nullable fields, bigint precision and explici
     product_snapshots: ['description', 'image_url', 'attributes'],
     auctions: ['current_bid_id'], wallet_reservations: ['released_at'],
     ledger_accounts: ['wallet_id'], ledger_transactions: ['reference_id'],
-    audit_anchors: ['external_reference'],
+    audit_anchors: ['external_reference', 'blocked_reason', 'blocked_at'],
   };
   for (const [name, config] of configs) {
+    if (name === 'login_rate_limits') {
+      assert.equal(config.columns.find(column => column.name === 'key').primary, true);
+      continue;
+    }
     const id = config.columns.find((column) => column.name === 'id');
     assert.equal(id.primary, true, name);
     assert.equal(id.getSQLType(), 'uuid', name);
@@ -89,6 +93,10 @@ test('preserves unique columns and ordered composite unique indexes', () => {
   for (const [name, config] of configs) {
     const columns = config.columns.filter((column) => column.isUnique).map((column) => column.name);
     if (columns.length) uniqueColumns[name] = columns;
+    if (name === 'login_rate_limits') {
+      assert.deepEqual(config.indexes.map(index => index.config.columns.map(column => column.name)), [['expires_at']]);
+      continue;
+    }
     if (config.indexes.length) {
       indexes[name] = config.indexes.map((index) => {
         assert.equal(index.config.unique, true);

@@ -221,12 +221,13 @@ test('external outage after a committed auction preserves outbox state and a res
   const auction = await createAuction();
   const unavailable = provider;
   await stopWitness();
-  assert.deepEqual(await new AnchorWorker(repository, unavailable).runOnce(), { confirmed: 0, failed: 1 });
-  assert.equal((await repository.pending(10)).length, 1);
-  assert.equal((await verify(auction.id, unavailable)).status, 'VERIFICATION_UNAVAILABLE');
-  assert.equal((await repository.snapshot(auction.id)).events.length, 1);
-  await startWitness();
-  assert.deepEqual(await new AnchorWorker(repository, provider).runOnce(), { confirmed: 1, failed: 0 });
+  try {
+    assert.deepEqual(await new AnchorWorker(repository, unavailable).runOnce(), { confirmed: 0, failed: 1, blocked: 0 });
+    assert.equal((await repository.pending(10)).length, 1);
+    assert.equal((await verify(auction.id, unavailable)).status, 'VERIFICATION_UNAVAILABLE');
+    assert.equal((await repository.snapshot(auction.id)).events.length, 1);
+  } finally { await startWitness(); }
+  assert.deepEqual(await new AnchorWorker(repository, provider).runOnce(), { confirmed: 1, failed: 0, blocked: 0 });
   assert.deepEqual(await repository.pending(10), []);
   assert.equal((await verify(auction.id)).status, 'VERIFIED');
 });
@@ -248,14 +249,14 @@ test('lost publication response retries reconcile one durable receipt after work
     } catch { response.destroy(); }
   });
   t.after(() => proxy.close());
-  assert.deepEqual(await new AnchorWorker(repository, httpProvider(proxy.url)).runOnce(), { confirmed: 0, failed: 1 });
+  assert.deepEqual(await new AnchorWorker(repository, httpProvider(proxy.url)).runOnce(), { confirmed: 0, failed: 1, blocked: 0 });
   assert.equal(dropped, true);
   const head = await provider.latest(auction.id);
   assert.equal(head.sequence, '1');
   assert.equal((await repository.pending(10)).length, 1);
   await stopWitness(); await startWitness();
   assert.deepEqual(await provider.latest(auction.id), head);
-  assert.deepEqual(await new AnchorWorker(repository, provider).runOnce(), { confirmed: 1, failed: 0 });
+  assert.deepEqual(await new AnchorWorker(repository, provider).runOnce(), { confirmed: 1, failed: 0, blocked: 0 });
   assert.equal((await verify(auction.id)).status, 'VERIFIED');
   const entries = (await readFile(options.journalPath, 'utf8')).trim().split('\n').map(JSON.parse);
   assert.equal(entries.filter((entry) => entry.auctionId === auction.id).length, 1);
