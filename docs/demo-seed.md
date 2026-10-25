@@ -1,72 +1,100 @@
-# Seed de demonstração opcional
+# Dados de demonstração
 
-Execute primeiro o seed básico e depois chame `seedDemonstration(db)` em
-`src/shared/database/demo-seed.ts`. O seed básico permanece independente; testes e
-instalações que precisam de carteiras zeradas podem continuar usando somente ele.
-O seed de demonstração não acessa a rede e não altera senhas.
+`npm run db:seed` preserva o seed básico e acrescenta seis cenários v3. O básico
+continua exportado em `seed.ts` para testes que precisam de carteiras zeradas.
+Não há exclusão, reset de senhas, alteração de lotes anteriores ou adulteração no
+seed padrão. Produtos locais incluem o exemplo público exigido do DummyJSON;
+nenhuma consulta ao catálogo externo é necessária.
 
-Na primeira execução, ele cria 24 snapshots locais de produtos e 24 lotes, mantendo
-os mesmos três usuários básicos:
+## Contas
 
-| Cenário | Quantidade | Estado inicial |
-| --- | ---: | --- |
-| Ativos | 14 | `PUBLISHED`, já iniciados, com prazos escalonados |
-| Agendados | 4 | `PUBLISHED`, início entre 1 e 4 dias |
-| Encerrados legítimos | 3 | `CLOSED_NO_BIDS`, eventos de criação e encerramento coerentes |
-| Encerrados adulterados | 3 | `CLOSED_NO_BIDS`, inconsistências deliberadas detectadas pela auditoria |
-
-Os cenários encerrados não possuem lances, vendas, comprovantes ou transferências
-financeiras. Datas históricas de criação, início, fim e encerramento seguem ordem
-cronológica. Valores iniciais e incrementos mínimos variam no catálogo.
-
-Os três ataques deliberados são aplicados somente ao criar os respectivos lotes,
-após registrar um encerramento válido na auditoria:
-
-| Sufixo do UUID do lote | Cenário | Adulteração |
+| E-mail | Papel | Senha padrão no Compose |
 | --- | --- | --- |
-| `000000000044` | `tampered-price` | Valor inicial alterado sem evento de auditoria |
-| `000000000046` | `tampered-dates` | Prazo alterado sem evento de auditoria |
-| `000000000048` | `tampered-event` | Conteúdo do evento de encerramento alterado sem recalcular seu hash |
+| auctioneer@verzel.local | Leiloeiro | AuctioneerDemo2026! |
+| bidder1@verzel.local | Licitante | BidderOneDemo2026! |
+| bidder2@verzel.local | Licitante | BidderTwoDemo2026! |
 
-Os exemplos adulterados devem retornar `TAMPERED`. Os exemplos legítimos permanecem
-`PENDING_ANCHOR` até que o witness independente os confirme; o seed não forja
-confirmações. Com o witness configurado e disponível, o worker de ancoragem pode
-levá-los ao estado `VERIFIED`.
+Fora do Compose, use `SEED_AUCTIONEER_PASSWORD`, `SEED_BIDDER1_PASSWORD` e
+`SEED_BIDDER2_PASSWORD` de `.env.example`. Senhas de contas existentes são
+preservadas. Cada licitante recebe R$ 1.000,00 simulados somente se a carteira
+estiver zerada e sem histórico financeiro/reservas. Dinheiro gasto não é reposto.
+Depósitos e lances usam as chaves de idempotência dos serviços existentes.
 
-`attributes.demoScenario` identifica o cenário como metadado descritivo. O verificador
-detecta as inconsistências reais sem confiar nesse rótulo. Os exemplos adulterados
-fazem parte do conjunto de demonstração e não são corrigidos em reexecuções.
+## Cenários
 
-O snapshot original é uma lista de campos públicos copiada de
-`tests/fixtures/dummyjson/product_1.json`, com origem `dummyjson-demo-fixture`.
-Os outros 23 produtos são registros locais de demonstração definidos em
-`src/shared/database/demo-products.ts`, com origem `local-demo-catalog`. Incluem
-beleza, fragrâncias, móveis e alimentos, com descrições, categorias, SKUs e URLs de
-imagem. O seed não consulta a rede; exibir imagens requer acesso ao host remoto.
-Não são importados reviews, identidades de avaliadores ou preços externos. A origem
-fica registrada em `attributes.demoProvenance`. Os dados estão em `src`, portanto
-a imagem Docker compilada não precisa das fixtures de teste.
+| Identificação na interface | Comportamento na primeira execução |
+| --- | --- |
+| lote agendado | SCHEDULED, início em 24 horas |
+| disputa aberta | LIVE após aguardar início real; duração de 24 horas |
+| disputa com lances | LIVE; lance real de R$ 50,00 de bidder1 e reserva ativa |
+| liquidação automática | Lance real de R$ 50,00 de bidder2; prazo de 150 segundos e posterior SETTLED |
+| encerramento sem lances | Prazo real curto; CLOSED_NO_BIDS após verificação independente |
+| cancelamento voluntário | CANCELLED pelo serviço do proprietário, sem lances |
 
-Os IDs usam o prefixo `d3b80001-34ef-4000-8000-`: sufixos ímpares de snapshot vão
-de 1 a 47; sufixos pares de lote vão de 2 a 48, preenchidos até 12 dígitos.
-O snapshot (`...000001`) e o lote (`...000002`) originais mantêm seus IDs.
+O identificador descreve a finalidade da demonstração, não afirma um estado
+financeiro. O status exibido e os comprovantes vêm do backend. Cancelados estão
+fora da vitrine; use o link impresso pelo seed ou o painel do leiloeiro.
 
-Cada licitante recebe um depósito simulado de 100000 centavos somente se sua carteira
-estiver com saldo e reservas zerados, sem lançamentos no ledger nem histórico de
-reservas. O `WalletService` cria lançamentos equilibrados com a chave
-`deposit:<userId>:demo-bootstrap-v1`. Se houver saldo ou histórico, o crédito é
-ignorado; valores gastos não são repostos ao reiniciar. Trata-se de crédito de
-simulação, não de integração de pagamentos.
+## Execução
 
-Um bloqueio consultivo transacional serializa execuções simultâneas. Carteiras são
-bloqueadas em ordem crescente de UUID antes da criação de lotes; transações do serviço
-de carteira usam savepoints dentro da transação externa. Crédito, snapshots, lotes,
-adulterações deliberadas e eventos de auditoria são confirmados juntos ou revertidos
-juntos.
+```sh
+npm run db:migrate
+npm run db:seed
+# Com witness independente configurado e publicável:
+npm run db:seed -- --wait-for-settlement
+# Dentro do Compose já em execução:
+docker compose exec api npm run db:seed -- --wait-for-settlement
+```
 
-Reexecuções preservam lotes existentes, datas, estados finais e histórico de auditoria.
-Cenários ausentes são acrescentados mesmo quando o lote original já existe, permitindo
-atualizar o seed antigo de um único lote sem limpar o banco. Prazos não são estendidos,
-lotes não são reabertos e adulterações não são reaplicadas a lotes existentes. Execute
-`npm run db:seed` depois das migrations; a inicialização da API pelo Docker já faz isso.
-`seed(db, config)`, o seed básico, permanece inalterado.
+A opção de espera pode levar cerca de dois minutos e meio na primeira execução.
+Ela aguarda o relógio real do PostgreSQL; não injeta datas históricas ou provas
+fabricadas. O prazo evita a extensão anti-sniping normal de dois minutos. Sem a
+opção, o seed retorna rapidamente; o worker liquida depois, ou uma reexecução do
+seed pode concluir o lote vencido. Reexecutar não renova prazos de lotes antigos.
+
+O Compose configura o witness. Fora dele, configure `AUDIT_WITNESS_*` conforme
+[auditoria](audit-infrastructure.md). Somente cabeças íntegras dos seis lotes v3
+são publicadas, pelo provedor existente. O seed não publica eventos de terceiros.
+Sem witness/prova disponível, o lote permanece LIVE ou FINALIZING conforme o
+relógio; o resumo informa `INDEPENDENT_WITNESS_REQUIRED` ou pendência. Não é gravado
+SETTLED/CLOSED_NO_BIDS artificialmente. O seed não sobrepõe saldo ou histórico
+inconsistente e não deposita mais dinheiro para forçar um lance.
+
+Snapshots fixos `d3b80003-34ef-4000-8000-000000000001` a `...000006` identificam a
+versão atual; UUIDs dos leilões são produzidos pelo serviço e impressos no resumo.
+Um lock transacional serializa somente a criação. Reexecuções, inclusive
+concorrentes, reutilizam os mesmos lotes e operações financeiras. Progresso parcial
+é persistido e pode ser retomado. Lotes/snapshots antigos, inclusive demonstrações
+adulteradas de versões anteriores, não são apagados ou reparados por este seed.
+
+## Adulteração e recuperação opcionais, isoladas
+
+PowerShell, usando o banco de testes local (nunca `DATABASE_URL` como fallback):
+
+```powershell
+$env:NODE_ENV = 'test'
+$env:TEST_DATABASE_URL = 'postgresql://verzel:verzel_dev@localhost:5432/verzel_auction_test'
+npm run demo:recovery:isolated
+```
+
+O comando recusa produção, hosts remotos e nomes de banco sem test/demo/sandbox.
+Cria e migra um schema UUID novo, cria os dados pelos serviços, adultera apenas o
+hash de um evento desse schema e executa verificação/recuperação reais. Confirma
+TAMPERED, RELEASED e CANCELLED, exibindo reservado/liberado/capturado. Não consulta
+nem publica no witness compartilhado e não usa sua configuração. A prova deste
+ataque é o hash local inválido; não se afirma ancoragem externa.
+
+O cenário é efêmero: remove somente o schema que acabou de criar. Dados existentes
+permanecem intactos. O resultado fica no terminal, não na interface compartilhada.
+Para persistência/consulta histórica na aplicação, use os fluxos normais; não
+injete adulterações no banco compartilhado. Veja [garantias de recuperação](auction-recovery.md).
+
+## Testes
+
+```powershell
+$env:TEST_DATABASE_URL = 'postgresql://verzel:verzel_dev@localhost:5432/verzel_auction_test'
+node --import tsx --test tests/integration/seed.test.js tests/integration/demo-scenarios.test.js tests/demo-recovery.test.js
+# Teste opt-in de liquidação: witness assinado efêmero + espera real de 150 segundos:
+$env:DEMO_TEST_SETTLEMENT_WAIT = '1'
+node --import tsx --test tests/integration/demo-scenarios.test.js
+```

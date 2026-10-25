@@ -12,7 +12,8 @@
     "dev": "tsx watch src/server.ts",
     "audit:witness": "tsx src/modules/audit/witness/main.ts",
     "typecheck": "tsc --noEmit",
-    "db:seed": "tsx src/shared/database/run-seed.ts"
+    "db:seed": "tsx src/shared/database/run-seed.ts",
+    "demo:recovery:isolated": "node --import tsx scripts/demo-recovery.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

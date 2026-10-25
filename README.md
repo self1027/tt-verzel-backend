@@ -24,8 +24,10 @@ O contrato é mantido em `docs/openapi.yaml`, sem anotações nas rotas, e servi
 | `bidder1@verzel.local` | `BidderOneDemo2026!` |
 | `bidder2@verzel.local` | `BidderTwoDemo2026!` |
 
-O seed cria 24 produtos/lotes: 14 ativos, 4 agendados e 6 encerrados sem lances,
-sendo 3 íntegros e 3 adulterados intencionalmente para demonstrar a auditoria.
+O seed cria seis cenários legítimos: agendado, ativo, ativo com lances, liquidação,
+encerramento sem lances e cancelamento voluntário. Nenhuma adulteração faz parte
+do seed padrão. Encerramentos exigem prazo real e witness independente; veja os
+[comandos e limites do seed](docs/demo-seed.md), incluindo `--wait-for-settlement`.
 Cada licitante recebe R$ 1.000,00 simulados em uma carteira sem movimentação.
 Reexecuções preservam senhas, saldos e prazos; não reabrem lotes vencidos.
 Um `.env` pode sobrescrever `PORT` e as senhas `SEED_*`, sem alterar contas existentes.
@@ -76,8 +78,9 @@ O Compose cria esse banco na primeira inicialização do volume.
   [versionamento criptográfico](docs/cryptographic-binding-v2.md).
 
 - **Sem cadastro:** use as contas do seed; não há perfil de administrador.
-- **Lote suspeito:** `TAMPERED` bloqueia a liquidação, sem fluxo de desbloqueio
-  ou liberação automática de saldo reservado pela detecção.
+- **Adulteração confirmada:** `TAMPERED` bloqueia lances e liquidação e inicia
+  recuperação persistente das reservas; capturas exigem compensação específica.
+  Veja [recuperação financeira](docs/auction-recovery.md).
 - **Encerramento pendente:** sem witness ou com ancoragem pendente, o lote pode
   ficar em `FINALIZING` até uma nova tentativa do worker.
 - **Edição e cancelamento:** exigem ausência de lances; edição somente antes
