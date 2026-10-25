@@ -15,7 +15,7 @@ test('exports the domain and login budget tables and five enums', () => {
     'users', 'product_snapshots', 'auctions', 'bids', 'wallets',
     'wallet_reservations', 'ledger_accounts', 'ledger_transactions',
     'ledger_entries', 'auction_settlements', 'audit_events', 'audit_anchors',
-    'bid_operations', 'login_rate_limits',
+    'bid_operations', 'login_rate_limits', 'auction_recoveries',
   ].sort());
   const enums = Object.values(schema).filter(isPgEnum);
   assert.deepEqual(Object.fromEntries(enums.map((item) => [item.enumName, item.enumValues])), {
@@ -33,13 +33,14 @@ test('preserves UUID primary keys, nullable fields, bigint precision and explici
     auctions: ['current_bid_id'], wallet_reservations: ['released_at'],
     ledger_accounts: ['wallet_id'], ledger_transactions: ['reference_id'],
     audit_anchors: ['external_reference', 'blocked_reason', 'blocked_at'],
+    auction_recoveries: ['last_error', 'completed_at'],
   };
   for (const [name, config] of configs) {
     if (name === 'login_rate_limits') {
       assert.equal(config.columns.find(column => column.name === 'key').primary, true);
       continue;
     }
-    const id = config.columns.find((column) => column.name === 'id');
+    const id = config.columns.find((column) => column.name === (name === 'auction_recoveries' ? 'auction_id' : 'id'));
     assert.equal(id.primary, true, name);
     assert.equal(id.getSQLType(), 'uuid', name);
     assert.deepEqual(config.columns.filter((column) => !column.notNull).map((column) => column.name).sort(), (nullable[name] ?? []).sort(), name);
@@ -50,7 +51,9 @@ test('preserves UUID primary keys, nullable fields, bigint precision and explici
       if (column.getSQLType().startsWith('timestamp')) {
         assert.equal(column.getSQLType(), 'timestamp');
       }
-      if (column.hasDefault) {
+      if (column.hasDefault && name === 'auction_recoveries') {
+        assert.deepEqual({ state: 'PENDING', attempts: 0, released_cents: 0n, captured_cents: 0n }[column.name], column.default);
+      } else if (column.hasDefault) {
         assert.equal(name, 'wallets');
         assert.ok(['balance_cents', 'reserved_cents'].includes(column.name));
         assert.equal(column.default, 0n);
@@ -68,6 +71,7 @@ test('preserves all twenty foreign keys, including the circular auction bid refe
     }
   }
   assert.deepEqual(actual.sort(), [
+    'auction_recoveries.auction_id -> auctions.id',
     'auctions.auctioneer_id -> users.id',
     'auctions.product_snapshot_id -> product_snapshots.id',
     'auctions.current_bid_id -> bids.id',
@@ -93,6 +97,10 @@ test('preserves unique columns and ordered composite unique indexes', () => {
   for (const [name, config] of configs) {
     const columns = config.columns.filter((column) => column.isUnique).map((column) => column.name);
     if (columns.length) uniqueColumns[name] = columns;
+    if (name === 'auction_recoveries') {
+      assert.deepEqual(config.indexes.map(index => index.config.columns.map(column => column.name)), [['state', 'next_attempt_at']]);
+      continue;
+    }
     if (name === 'login_rate_limits') {
       assert.deepEqual(config.indexes.map(index => index.config.columns.map(column => column.name)), [['expires_at']]);
       continue;

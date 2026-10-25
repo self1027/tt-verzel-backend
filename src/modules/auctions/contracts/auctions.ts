@@ -29,6 +29,21 @@ export interface Auction extends CreateAuctionInput {
 
 export interface AuctionWithSnapshot extends Auction {
   productSnapshot: ProductSnapshot;
+  cancellationReason?: 'SELLER_REQUEST' | 'AUDIT_TAMPERED' | null;
+  recovery?: AuctionRecoveryView | null;
+}
+
+export interface AuctionRecoveryView {
+  reason: string;
+  state: 'PENDING' | 'RELEASED' | 'COMPENSATION_REQUIRED';
+  detectedAt: string;
+  targetAt: string;
+  completedAt: string | null;
+  attempts: number;
+  lastError: string | null;
+  remainingReservedCents: string;
+  releasedCents: string;
+  capturedCents: string;
 }
 
 export interface AuctionView extends Omit<AuctionWithSnapshot, 'startingBidCents' | 'minIncrementCents'> {
