@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { and, asc, count, desc, eq, sql } from 'drizzle-orm';
+import { and, asc, count, desc, eq, ilike, or, sql } from 'drizzle-orm';
 import type { Database } from '../../../shared/database/client.js';
 import type { ImportResult, Pagination, ProductPage, ProductSnapshot, SnapshotInput, SnapshotRepository } from '../contracts/catalog.js';
 import { productSnapshots } from '../infrastructure/schema.js';
@@ -30,11 +30,17 @@ export class DrizzleSnapshotRepository implements SnapshotRepository {
     });
   }
 
-  async list(page: Pagination): Promise<ProductPage<ProductSnapshot>> {
+  async list(page: Pagination, query?: string): Promise<ProductPage<ProductSnapshot>> {
     return this.db.transaction(async (tx) => {
+      const search = query?.trim();
+      const filter = search ? or(
+        ilike(productSnapshots.title, `%${search}%`),
+        ilike(productSnapshots.description, `%${search}%`),
+        ilike(productSnapshots.externalId, `%${search}%`),
+      ) : undefined;
       const products = await tx.select().from(productSnapshots)
-        .orderBy(desc(productSnapshots.capturedAt), asc(productSnapshots.id)).limit(page.limit).offset(page.skip);
-      const [total] = await tx.select({ value: count() }).from(productSnapshots);
+        .where(filter).orderBy(desc(productSnapshots.capturedAt), asc(productSnapshots.id)).limit(page.limit).offset(page.skip);
+      const [total] = await tx.select({ value: count() }).from(productSnapshots).where(filter);
       return { products, total: total?.value ?? 0, ...page };
     }, { isolationLevel: 'repeatable read', accessMode: 'read only' });
   }

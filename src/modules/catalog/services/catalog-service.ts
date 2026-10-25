@@ -32,8 +32,8 @@ export class CatalogService implements CatalogUseCases {
     });
   }
 
-  listProducts(page: Pagination): Promise<ProductPage<ProductSnapshot>> {
-    return this.snapshots.list(page);
+  listProducts(page: Pagination, query?: string): Promise<ProductPage<ProductSnapshot>> {
+    return this.snapshots.list(page, query);
   }
 
   async getProduct(id: string): Promise<ProductSnapshot> {

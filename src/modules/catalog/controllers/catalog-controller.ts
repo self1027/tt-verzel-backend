@@ -6,6 +6,7 @@ const unsignedInteger = z.string().regex(/^\d+$/).transform(Number).pipe(z.numbe
 const limit = unsignedInteger.pipe(z.number().min(1).max(100)).default(30);
 const skip = unsignedInteger.pipe(z.number().max(2147483647)).default(0);
 const pagination = z.strictObject({ limit, skip });
+const productList = pagination.extend({ q: z.string().trim().max(200).optional() });
 const externalList = pagination.extend({ category: z.string().max(100).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional() });
 const externalSearch = pagination.extend({ q: z.string().trim().min(1).max(200) });
 const externalId = z.string().regex(/^[1-9]\d*$/).transform(Number).pipe(z.number().int().positive());
@@ -38,7 +39,8 @@ export class CatalogController {
   };
 
   listProducts = async (request: Request, response: Response): Promise<void> => {
-    response.json(await this.catalog.listProducts(pagination.parse(request.query)));
+    const { q, ...page } = productList.parse(request.query);
+    response.json(await this.catalog.listProducts(page, q));
   };
 
   getProduct = async (request: Request, response: Response): Promise<void> => {

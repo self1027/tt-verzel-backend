@@ -48,7 +48,7 @@ export interface ImportResult {
 export interface SnapshotRepository {
   findByExternalId(source: string, externalId: string): Promise<ProductSnapshot | null>;
   createIfAbsent(input: SnapshotInput): Promise<ImportResult>;
-  list(page: Pagination): Promise<ProductPage<ProductSnapshot>>;
+  list(page: Pagination, query?: string): Promise<ProductPage<ProductSnapshot>>;
   findById(id: string): Promise<ProductSnapshot | null>;
 }
 
@@ -58,6 +58,6 @@ export interface CatalogUseCases {
   getExternal(id: number): Promise<ExternalProduct>;
   listCategories(): Promise<string[]>;
   importProduct(id: number): Promise<ImportResult>;
-  listProducts(page: Pagination): Promise<ProductPage<ProductSnapshot>>;
+  listProducts(page: Pagination, query?: string): Promise<ProductPage<ProductSnapshot>>;
   getProduct(id: string): Promise<ProductSnapshot>;
 }

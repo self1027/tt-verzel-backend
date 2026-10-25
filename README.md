@@ -77,6 +77,8 @@ O Compose cria esse banco na primeira inicialização do volume.
   do início e cancelamento antes do encerramento. Não há cancelamento com estorno.
 - **Dependências externas:** o catálogo usa DummyJSON e as imagens exigem acesso
   ao host remoto; o seed não consulta a API externa.
+- **Busca em português:** a API externa pesquisa em inglês. Tradução automática
+  da consulta e dos resultados fica registrada como débito técnico.
 
 ## Documentação complementar
 

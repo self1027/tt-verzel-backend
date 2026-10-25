@@ -46,8 +46,9 @@ async function main(): Promise<void> {
     const publish = (): void => {
       if (publishing) return;
       publishing = true;
-      workerTask = audit.worker.runOnce().then(({ failed }) => {
+      workerTask = audit.worker.runOnce().then(({ failed, blocked }) => {
         if (failed) console.error(`Audit anchors pending retry: ${String(failed)}`);
+        if (blocked) console.warn(`Audit anchors withheld: ${String(blocked)}; audit state is invalid`);
       }).catch(() => { console.error('Audit publication temporarily unavailable'); }).finally(() => { publishing = false; });
     };
     const timer = auditConfig?.publishToken ? setInterval(publish, auditConfig.pollMs) : undefined;
