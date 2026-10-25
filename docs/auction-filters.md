@@ -1,37 +1,39 @@
-# Auction search and filters
+# Busca e filtros de leilões
 
-`GET /auctions` is public. `GET /auctions/mine` accepts the same query options
-and requires an authenticated AUCTIONEER; its results always belong to that user.
-Search uses stored product snapshots and needs no external catalog requests.
+`GET /auctions` é público. `GET /auctions/mine` aceita os mesmos parâmetros e
+exige autenticação como `AUCTIONEER`; os resultados sempre pertencem a esse usuário.
+A busca usa snapshots de produtos armazenados e não consulta o catálogo externo.
 
-| Parameter | Meaning |
+| Parâmetro | Significado |
 | --- | --- |
-| `q` | Case-insensitive literal substring of the local snapshot title; `%`, `_`, and backslash are ordinary characters. Empty text matches every title. |
-| `lifecycleState` | `SCHEDULED`, `LIVE`, `FINALIZING`, `CANCELLED`, `SETTLED`, or `CLOSED_NO_BIDS`. |
-| `minPriceCents`, `maxPriceCents` | Inclusive current-price bounds, canonical decimal strings from `0` through `9223372036854775807`. Minimum must not exceed maximum. |
-| `sort` | `price_asc`, `price_desc`, `endsAt_asc`, or `endsAt_desc`; all ties use ascending auction UUID. |
-| `limit` | Page size from 1 to 100, default 30. |
-| `skip` | Legacy zero-based offset from 0 through 2147483647, default 0. |
-| `page` | Optional one-based page; offset is `(page - 1) * limit` and cannot exceed 2147483647. Cannot appear together with `skip`, even `skip=0`. |
+| `q` | Trecho literal, sem distinção entre maiúsculas e minúsculas, do título do snapshot local. `%`, `_` e barra invertida são caracteres comuns. Texto vazio corresponde a todos os títulos. |
+| `lifecycleState` | `SCHEDULED`, `LIVE`, `FINALIZING`, `CANCELLED`, `SETTLED` ou `CLOSED_NO_BIDS`. |
+| `minPriceCents`, `maxPriceCents` | Limites inclusivos de preço atual, em strings decimais canônicas entre `0` e `9223372036854775807`. O mínimo não pode superar o máximo. |
+| `sort` | `price_asc`, `price_desc`, `endsAt_asc` ou `endsAt_desc`; empates são resolvidos pelo UUID do leilão em ordem crescente. |
+| `limit` | Tamanho da página entre 1 e 100; padrão 30. |
+| `skip` | Deslocamento legado baseado em zero, entre 0 e 2147483647; padrão 0. |
+| `page` | Página opcional baseada em um; o deslocamento é `(page - 1) * limit` e não pode superar 2147483647. Não pode ser usado com `skip`, nem mesmo `skip=0`. |
 
-Current price is the amount of the auction's current bid, or its starting amount
-when no valid own-auction current bid exists. A bid belonging to another auction
-cannot affect the price. Price comparisons and ordering run in PostgreSQL with
-BIGINT precision; clients must avoid converting cent strings to JavaScript Number.
-There is no additional current-price response field.
+O preço atual é o valor do lance atual do próprio leilão ou, quando ele não existe,
+o valor inicial. Um lance de outro leilão não altera o preço. Comparações e
+ordenação são executadas no PostgreSQL com precisão BIGINT; clientes não devem
+converter strings de centavos em `Number` do JavaScript. A resposta não inclui
+um campo separado para o preço atual.
 
-Example:
+Exemplo:
 
 ```text
 GET /auctions?q=phone&lifecycleState=LIVE&minPriceCents=10000&maxPriceCents=100000&sort=price_asc&limit=10&page=2
 ```
 
-Filters combine with AND and run before pagination and counting. `total` includes
-all matching rows. Rows and total share one read-only REPEATABLE READ transaction
-and one database `asOf` for lifecycle evaluation.
+Os filtros são combinados com AND antes da paginação e da contagem. `total`
+representa todas as linhas correspondentes. Linhas e total compartilham uma
+transação somente de leitura em REPEATABLE READ e o mesmo `asOf` do banco para
+avaliar o ciclo de vida.
 
-The response retains `{ auctions, total, limit, skip, asOf }`; `page` is translated
-to `skip` and is not echoed. With no sort, ordering remains `createdAt DESC, id ASC`.
-With no lifecycle filter, terminal auctions remain included. Unknown parameters,
-repeated values, invalid enums, malformed amounts, inverted bounds, and pagination
-overflow return HTTP 400 with the existing validation-error format.
+A resposta mantém `{ auctions, total, limit, skip, asOf }`; `page` é convertido
+em `skip` e não aparece na resposta. Sem ordenação explícita, a ordem é
+`createdAt DESC, id ASC`. Sem filtro de ciclo de vida, os leilões encerrados também
+são incluídos. Parâmetros desconhecidos ou repetidos, enums inválidos, valores
+malformados, limites invertidos e deslocamentos fora do intervalo retornam HTTP 400
+no formato de erro de validação existente.

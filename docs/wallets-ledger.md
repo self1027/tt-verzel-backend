@@ -1,4 +1,4 @@
-# Wallets & Ledger
+# Carteiras e ledger
 
 Depósitos exclusivamente simulados. O fluxo usa as tabelas e constraints existentes,
 sem migration ou dependência nova. Não há cadastro público: o seed cria uma carteira

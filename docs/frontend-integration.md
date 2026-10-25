@@ -1,67 +1,69 @@
-# Frontend integration handoff
+# Guia de integração com o frontend
 
-The backend serves HTTP and Socket.IO from the same origin. Local defaults:
-`http://localhost:3000` for the API, `http://localhost:5173` for a Vite frontend.
-The frontend and hosting/deployment remain outside this backend delivery.
-The maintained HTTP contract is [`openapi.json`](openapi.json).
+O backend oferece HTTP e Socket.IO na mesma origem. Endereços locais padrão:
+`http://localhost:3000` para a API e `http://localhost:5173` para o frontend Vite.
+O frontend e sua hospedagem não fazem parte deste repositório. O contrato HTTP
+mantido pelo projeto está em [`openapi.yaml`](openapi.yaml) e no Swagger UI em
+`/docs/`.
 
-Set frontend `VITE_API_URL=http://localhost:3000` and backend
-`CORS_ORIGINS=http://localhost:5173`. `CORS_ORIGINS` is a comma-separated list of
-exact allowed HTTP(S) origins. For Vercel, configure the backend with the actual
-frontend origin such as `https://your-project.vercel.app`; configure the frontend
-with the HTTPS backend URL. Add preview origins explicitly when needed. These
-settings document integration; they do not deploy either application.
+Configure `VITE_API_URL=http://localhost:3000` no frontend e
+`CORS_ORIGINS=http://localhost:5173` no backend. `CORS_ORIGINS` aceita uma lista
+separada por vírgulas de origens HTTP(S) exatas. Na Vercel, configure a origem real
+do frontend no backend e o endereço HTTPS do backend no frontend. Inclua origens
+de pré-visualização quando necessário; essas configurações não fazem o deploy.
 
-POST `/auth/login` with `{ "email": "bidder1@verzel.local", "password": "..." }`.
-Use the configured seed password, then attach `Authorization: Bearer <accessToken>`
-to protected requests. The login result contains `accessToken`, `tokenType`,
-`expiresIn`, and `user`. GET `/auth/me` restores current user state. A 401 means
-the session must be renewed; a 403 means the current role cannot perform the
-operation. There is no registration or administrator endpoint.
+Envie `POST /auth/login` com `{ "email": "bidder1@verzel.local", "password": "..." }`.
+Use a senha configurada no seed e envie `Authorization: Bearer <accessToken>` nas
+rotas protegidas. A resposta de login contém `accessToken`, `tokenType`, `expiresIn`
+e `user`. `GET /auth/me` recupera o usuário autenticado. Resposta 401 indica que
+a sessão precisa ser renovada; 403 indica que o papel não pode realizar a operação.
+Não há cadastro nem endpoint de administrador.
 
-| Screen/action | Endpoint and access |
+| Tela/ação | Endpoint e acesso |
 | --- | --- |
-| Browse/search catalog | GET `/catalog/external`, `/catalog/external/search?q=...`, `/catalog/categories`; Bearer |
-| Import product | POST `/catalog/import/{externalNumericId}`; AUCTIONEER; empty body |
-| Stored products | GET `/catalog/products`, `/catalog/products/{snapshotUuid}`; Bearer |
-| Public lots/details | GET `/auctions`, `/auctions/{uuid}`; public |
-| Own lots | GET `/auctions/mine`; AUCTIONEER |
-| Publish/edit/cancel | POST `/auctions`, PATCH `/auctions/{uuid}`, POST `/auctions/{uuid}/cancel`; owner AUCTIONEER |
-| Balance/history | GET `/wallet`, `/wallet/transactions`; Bearer |
-| Simulated deposit | POST `/wallet/deposits`; BIDDER; `Idempotency-Key` header and `{ "amountCents": "10000" }` |
-| Bid/history | POST or GET `/auctions/{uuid}/bids`; POST requires BIDDER, key header, amount body; GET is public |
-| Own bids | GET `/auctions/bids/mine`; BIDDER |
-| Audit | GET `/auctions/{uuid}/audit`, `/auctions/{uuid}/audit/events`; public |
-| Share receipt | GET `/auctions/{uuid}/receipt`; public after financial settlement |
+| Consultar/buscar catálogo | GET `/catalog/external`, `/catalog/external/search?q=...`, `/catalog/categories`; Bearer |
+| Importar produto | POST `/catalog/import/{externalNumericId}`; `AUCTIONEER`; corpo vazio |
+| Produtos armazenados | GET `/catalog/products`, `/catalog/products/{snapshotUuid}`; Bearer |
+| Leilões e detalhes públicos | GET `/auctions`, `/auctions/{uuid}`; público |
+| Leilões próprios | GET `/auctions/mine`; `AUCTIONEER` |
+| Publicar/editar/cancelar | POST `/auctions`, PATCH `/auctions/{uuid}`, POST `/auctions/{uuid}/cancel`; proprietário `AUCTIONEER` |
+| Saldo/histórico | GET `/wallet`, `/wallet/transactions`; Bearer |
+| Depósito simulado | POST `/wallet/deposits`; `BIDDER`; header `Idempotency-Key` e `{ "amountCents": "10000" }` |
+| Lance/histórico | POST ou GET `/auctions/{uuid}/bids`; POST exige `BIDDER`, chave e valor; GET é público |
+| Próprios lances | GET `/auctions/bids/mine`; `BIDDER` |
+| Auditoria | GET `/auctions/{uuid}/audit`, `/auctions/{uuid}/audit/events`; público |
+| Compartilhar comprovante | GET `/auctions/{uuid}/receipt`; público após liquidação financeira |
 
-All cents and sequences travel as decimal strings. Use `BigInt` for arithmetic
-and convert back to strings before JSON serialization. Display currency without
-passing large integer cents through JavaScript Number. Generate one idempotency
-key per intended deposit/bid, keep it across network retries, and use a new key
-for a different amount. Successful bid/deposit requests return 201, including
-idempotent replay. Render `error.code` from error responses; preserve a friendly
-message for validation failures and financial conflicts.
+Centavos e sequências são enviados como strings decimais. Use `BigInt` nos cálculos
+e converta o resultado de volta para string antes de serializar JSON. Formate a
+moeda sem converter valores grandes de centavos em `Number`. Gere uma chave de
+idempotência por depósito ou lance pretendido, reutilize-a nas tentativas da mesma
+requisição e use outra chave para um valor diferente. Depósitos e lances bem-sucedidos
+retornam 201, inclusive em repetição idempotente. Use `error.code` nas respostas de
+erro e apresente mensagens claras para erros de validação e conflitos financeiros.
 
-Auction search accepts `q`, `lifecycleState`, `minPriceCents`, `maxPriceCents`,
-`sort`, `limit`, and either one-based `page` or legacy `skip`. Example:
+A busca de leilões aceita `q`, `lifecycleState`, `minPriceCents`, `maxPriceCents`,
+`sort`, `limit` e `page` (baseado em um) ou `skip` legado. Exemplo:
 `/auctions?q=mascara&lifecycleState=LIVE&minPriceCents=1000&sort=price_asc&limit=10&page=1`.
-Unknown/repeated keys and `page` together with `skip` fail validation. Title
-search is a literal case-insensitive substring of stored snapshots, including
-literal `%`, `_` and backslash. Price means current own-auction bid amount or
-starting amount. Range bounds are inclusive canonical nonnegative BIGINT strings.
-Sort choices are `price_asc`, `price_desc`, `endsAt_asc`, `endsAt_desc`; ties use
-ascending UUID. Default is createdAt descending then UUID ascending, including
-terminal lots. Response remains `{ auctions, total, limit, skip, asOf }`.
+Chaves desconhecidas ou repetidas e o uso simultâneo de `page` e `skip` falham na
+validação. A busca pelo título é literal e não diferencia maiúsculas de minúsculas,
+incluindo `%`, `_` e barra invertida. O preço corresponde ao lance atual do leilão
+ou ao valor inicial. Os limites são inclusivos e usam strings BIGINT não negativas
+canônicas. As ordens aceitas são `price_asc`, `price_desc`, `endsAt_asc` e
+`endsAt_desc`; empates usam UUID crescente. A ordem padrão é `createdAt` decrescente
+e UUID crescente, incluindo lotes encerrados. A resposta é
+`{ auctions, total, limit, skip, asOf }`.
 
-The auction view exposes `currentBidId`; get `/auctions/{uuid}/bids` for
-`currentBid`, `endsAt`, status and `asOf`. Minimum bid is `startingBidCents` with
-no leader, otherwise current amount plus `minIncrementCents`. A leading bidder
-cannot rebid. LIVE means startsAt <= server time < endsAt and PUBLISHED status.
-An accepted bid in the final two minutes adds two minutes to the existing
-deadline. Treat all server responses as authoritative, including updated endsAt;
-derive countdowns from `asOf` and refresh after conflicts.
+A representação do leilão expõe `currentBidId`; consulte
+`GET /auctions/{uuid}/bids` para obter `currentBid`, `endsAt`, status e `asOf`.
+O lance mínimo é `startingBidCents` quando não há líder; caso contrário, é o valor
+atual mais `minIncrementCents`. O líder não pode dar outro lance. Um lote está
+`LIVE` quando `startsAt <=` horário do servidor `< endsAt` e o status é `PUBLISHED`.
+Um lance aceito nos dois minutos finais acrescenta dois minutos ao prazo existente.
+Considere as respostas do servidor como definitivas, inclusive `endsAt` atualizado;
+calcule a contagem regressiva a partir de `asOf` e atualize após conflitos.
 
-Use Socket.IO client v4 against the API origin with default `/socket.io` path:
+Use o cliente Socket.IO v4 com a origem da API e o caminho padrão `/socket.io`:
 
 ```js
 import { io } from 'socket.io-client';
@@ -70,7 +72,7 @@ const socket = io(api);
 const refresh = () => Promise.all([
   fetch(`${api}/auctions/${auctionId}`).then(r => r.json()),
   fetch(`${api}/auctions/${auctionId}/bids`).then(r => r.json()),
-]); // Apply the returned snapshots to your UI; include a protected wallet fetch when signed in.
+]); // Atualize a interface; busque também a carteira protegida quando houver sessão.
 socket.on('connect', () => {
   socket.emit('auction:join', { auctionId }, ack => {
     if (ack.ok) void refresh();
@@ -80,49 +82,51 @@ for (const name of ['bid:accepted', 'auction:extended', 'auction:ended',
   'auction:settled', 'auction:cancelled', 'auction:integrity-warning']) {
   socket.on(name, () => { void refresh(); });
 }
-// On screen cleanup: socket.emit('auction:leave', { auctionId }, ack => {});
-// Then remove handlers or disconnect this screen's socket.
+// Ao sair da tela: socket.emit('auction:leave', { auctionId }, ack => {});
+// Depois, remova os listeners ou desconecte o socket dessa tela.
 ```
 
-Set `api` to your API base URL and `auctionId` to the current auction UUID.
-Subscriptions are public and normalized to lowercase UUID. The server joins
-`auction:<uuid>` internally; emit `auction:join` with the object above, rather
-than sending a room name. Acknowledgment is `{ ok: true }` or
-`{ ok: false, error: 'INVALID_AUCTION' | 'ROOM_LIMIT' }`. Each connection may
-subscribe to 100 distinct rooms; leave unused rooms. Reconnect establishes a new
-subscription lifecycle, so rejoin and fetch authoritative REST snapshots on
-every `connect`. Add a modest polling fallback while the screen is visible.
+Defina `api` como a URL base da API e `auctionId` como o UUID do lote atual.
+As inscrições são públicas e normalizadas para UUID minúsculo. O servidor usa a sala
+`auction:<uuid>`; emita `auction:join` com o objeto acima, sem enviar o nome da sala.
+A confirmação é `{ ok: true }` ou `{ ok: false, error: 'INVALID_AUCTION' | 'ROOM_LIMIT' }`.
+Cada conexão pode entrar em até 100 salas diferentes; saia das salas sem uso.
+A reconexão inicia um novo ciclo de inscrição: entre na sala novamente e busque
+os dados REST em cada evento `connect`. Mantenha uma consulta periódica moderada
+como alternativa enquanto a tela estiver visível.
 
-Socket events are public hints after commit, with `auctionId` in their payload.
-They are not a wallet feed or a durable transaction receipt. Delivery can be
-missed during reconnect, and there is no multi-instance Redis adapter. Coalesce
-refreshes and ignore stale overlapping fetches. Keep user credentials and wallet
-data in authenticated HTTP flows.
+Os eventos Socket.IO são avisos públicos emitidos após o commit e incluem `auctionId`.
+Não substituem o histórico da carteira nem um comprovante durável. Eventos podem ser
+perdidos durante a reconexão e não há adaptador Redis para múltiplas instâncias.
+Agrupe atualizações e ignore respostas de buscas antigas que chegarem atrasadas.
+Credenciais e dados da carteira devem trafegar apenas pelas rotas HTTP autenticadas.
 
-When a lot becomes FINALIZING, the automatic settlement worker waits for an
-independently verified audit proof and rechecks it under financial locks. Pending
-anchoring or witness outage can delay settlement; do not show the winner's payment
-as complete merely because the countdown ended. No-bid auctions become
-`CLOSED_NO_BIDS`; winning auctions become `SETTLED`. There is no frontend manual
-settle endpoint.
+Quando um lote chega a `FINALIZING`, o worker de liquidação aguarda uma prova de
+auditoria verificada independentemente e volta a conferi-la sob bloqueios financeiros.
+A ancoragem pendente ou a indisponibilidade do witness podem atrasar o pagamento;
+não indique que o vencedor pagou só porque a contagem regressiva terminou. Lotes sem
+lances viram `CLOSED_NO_BIDS`; lotes com vencedor viram `SETTLED`. Não existe endpoint
+para liquidar manualmente pela API.
 
-Audit `/audit` returns `VERIFIED`, `PENDING_ANCHOR`, `TAMPERED`, or
-`VERIFICATION_UNAVAILABLE` (HTTP 503 for unavailable verification). VERIFIED means
-the current local chain and operational replay match the independent latest
-witness head. Pending does not mean verified. `/audit/events` uses `after` as an
-exclusive sequence cursor and labels successful pages `EVENT_PAGE_ONLY`; a page
-of hashes does not establish witness verification. A tamper warning needs an
-incident state in the UI, never an automatic seller refund/cancel action.
+`/audit` retorna `VERIFIED`, `PENDING_ANCHOR`, `TAMPERED` ou
+`VERIFICATION_UNAVAILABLE` (HTTP 503 quando a verificação está indisponível).
+`VERIFIED` significa que a cadeia local e a reprodução do estado operacional
+correspondem à última confirmação independente do witness. Pendente não significa
+verificado. `/audit/events` usa `after` como cursor exclusivo de sequência e marca
+páginas bem-sucedidas como `EVENT_PAGE_ONLY`; receber hashes de uma página não comprova
+a verificação pelo witness. Um alerta de adulteração deve abrir um estado de incidente
+na interface, nunca acionar estorno ou cancelamento automático pelo vendedor.
 
-Receipt returns `{ receipt }` with auction/product snapshot, canonical amount,
-endsAt, settledAt, settlementId, pseudonymous winningBid, auditUrl and receiptUrl.
-It returns 404 before financial settlement, including no-bid closure, and 409
-for inconsistent financial records. Treat relative links as relative to the API
-origin. The public receipt does not disclose email, bidder user ID, wallet IDs or
-the internal receipt token. Its existence is separate from witness verification.
+A resposta do comprovante contém `{ receipt }`, com snapshot do leilão/produto, valor
+canônico, `endsAt`, `settledAt`, `settlementId`, `winningBid` pseudonimizado, `auditUrl`
+e `receiptUrl`. Retorna 404 antes da liquidação financeira, inclusive para leilões
+encerrados sem lances, e 409 para registros financeiros inconsistentes. Resolva links
+relativos usando a origem da API. O comprovante público não revela e-mail, ID do
+licitante, IDs de carteira ou token interno do comprovante. Sua existência é distinta
+do estado de verificação pelo witness.
 
-Seller cancellation is limited to unexpired PUBLISHED lots without bids. There
-is no seller undo of a winning bid, administrator cancellation/refund flow, or
-automatic cancellation of a TAMPERED incident. The optional demo seed creates an
-initially LIVE lot and pristine-wallet simulated deposits; restarts preserve
-existing dates and balances. See [`demo-seed.md`](demo-seed.md).
+O vendedor só pode cancelar lotes `PUBLISHED` ainda não encerrados e sem lances.
+Não há opção para desfazer um lance vencedor, fluxo administrativo de cancelamento
+com estorno ou cancelamento automático de um incidente `TAMPERED`. O seed opcional
+cria um lote inicialmente `LIVE` e depósitos simulados para carteiras sem histórico;
+reinicializações preservam datas e saldos existentes. Consulte [`demo-seed.md`](demo-seed.md).
