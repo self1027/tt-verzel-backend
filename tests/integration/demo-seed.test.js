@@ -56,7 +56,7 @@ test('demonstration seed is atomic, audited, local, funded once and preserves ex
   assert.equal((await f.pool.query('SELECT * FROM audit_anchors')).rows.length, 30);
   const audit = await new DrizzleAuditRepository(f.db).snapshot(auction.id);
   assert.equal(checkChain(auction.id, audit.events).valid, true);
-  assert.deepEqual(audit.events[0].payload, audit.operational.auction);
+  assert.deepEqual(audit.events[0].payload, { ...audit.operational.auction, binding: audit.operational.binding });
   assert.equal((await f.pool.query('SELECT * FROM bids')).rows.length, 0);
   const funding = (await f.pool.query('SELECT * FROM ledger_transactions ORDER BY id')).rows;
   assert.equal(funding.length, 2);

@@ -7,6 +7,7 @@ import { createAuthModule } from '../../src/modules/auth/index.ts';
 import { createAuctionModule } from '../../src/modules/auctions/index.ts';
 import { createApp } from '../../src/app.ts';
 import { auctions, bids } from '../../src/modules/auctions/infrastructure/schema.ts';
+import { DrizzleAuditAppender } from '../../src/modules/audit/repositories/drizzle-audit-appender.ts';
 
 export async function auctionFixture() {
   const database = await isolatedDatabase();
@@ -40,7 +41,13 @@ export async function auctionFixture() {
     async function fixture(overrides = {}) {
       const now = await clock();
       const auction = { id: randomUUID(), auctioneerId: ownerId, productSnapshotId: snapshotId, currentBidId: null, startingBidCents: 1000n, minIncrementCents: 100n, startsAt: new Date(+now + 3600000), endsAt: new Date(+now + 7200000), status: 'PUBLISHED', createdAt: now, updatedAt: now, ...overrides };
-      await database.db.insert(auctions).values(auction);
+      await database.db.transaction(async tx => {
+        await tx.insert(auctions).values(auction);
+        if (auction.status === 'PUBLISHED') await new DrizzleAuditAppender(tx).append({ auctionId: auction.id, eventType: 'AUCTION_CREATED', createdAt: auction.createdAt.toISOString(), payload: {
+          productSnapshotId: auction.productSnapshotId, startingBidCents: String(auction.startingBidCents), minIncrementCents: String(auction.minIncrementCents),
+          startsAt: auction.startsAt.toISOString(), endsAt: auction.endsAt.toISOString(), status: 'PUBLISHED', currentBidId: null,
+        } });
+      });
       return auction;
     }
     async function addBid(auctionId, executor = database.db) {

@@ -30,7 +30,7 @@ test('a committed funded bid is externally verified only after the existing outb
     const repository = new DrizzleAuditRepository(f.db);
     const verifier = new AuditVerifier(repository, external);
     assert.equal((await verifier.verify(auction.id)).status, 'PENDING_ANCHOR');
-    assert.deepEqual(await new AnchorWorker(repository, external).runOnce(), { confirmed: 2, failed: 0 });
+    assert.deepEqual(await new AnchorWorker(repository, external).runOnce(), { confirmed: 2, failed: 0, blocked: 0 });
     const verified = await verifier.verify(auction.id);
     assert.equal(verified.status, 'VERIFIED');
     assert.equal(verified.externallyVerifiedSequence, '2');

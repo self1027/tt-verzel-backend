@@ -7,7 +7,8 @@ import { serve } from '../helpers/http.js';
 import { createApp } from '../../src/app.ts';
 import { createReceiptRouter } from '../../src/modules/settlements/receipt-router.ts';
 import { DrizzleReservationOperations } from '../../src/modules/wallets/repositories/drizzle-reservation-operations.ts';
-import { bidderReference } from '../../src/modules/audit/domain/cryptography.ts';
+import { bidderReference, hashEvent } from '../../src/modules/audit/domain/cryptography.ts';
+import { DrizzleAuditRepository } from '../../src/modules/audit/repositories/drizzle-audit-repository.ts';
 
 let f, http, auction, bidId, settlementId, reservation, token;
 before(async () => {
@@ -20,6 +21,12 @@ beforeEach(async () => {
   await f.reset();
   await f.deposit('bidder1', '1000');
   auction = await f.createAuction();
+  // This fixture handcrafts pre-audit financial history; keep it explicitly legacy.
+  const [original] = (await new DrizzleAuditRepository(f.db).snapshot(auction.id)).events;
+  const genesis = { ...original }; delete genesis.eventHash;
+  const terms = { ...genesis.payload }; delete terms.binding;
+  genesis.payload = terms; genesis.hashVersion = 1;
+  await f.pool.query('UPDATE audit_events SET payload=$1,hash_version=1,event_hash=$2 WHERE id=$3', [JSON.stringify(terms), hashEvent(genesis), genesis.id]);
   bidId = randomUUID(); settlementId = randomUUID(); token = randomUUID();
   await f.pool.query('INSERT INTO bids(id,auction_id,bidder_id,amount_cents,sequence,created_at) VALUES($1,$2,$3,400,1,now())', [bidId, auction.id, f.users.bidder1]);
   await f.pool.query('UPDATE auctions SET current_bid_id=$1,ends_at=now()-interval \'1 second\' WHERE id=$2', [bidId, auction.id]);
