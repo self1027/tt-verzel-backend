@@ -4,7 +4,7 @@ import type { Reservation } from '../../wallets/contracts/reservations.js';
 import type { StoredTransaction } from '../../ledger/contracts/ledger.js';
 
 export interface AuditProof { sequence: string; hash: string; stateHash: string }
-export interface AuditDecision { status: 'VERIFIED' | 'PENDING_ANCHOR' | 'VERIFICATION_UNAVAILABLE' | 'TAMPERED'; proof?: AuditProof }
+export interface AuditDecision { status: 'VERIFIED' | 'PENDING_ANCHOR' | 'VERIFICATION_UNAVAILABLE' | 'TAMPERED'; proof?: AuditProof; reason?: string }
 export interface SettlementAuditGate { inspect(auctionId: string): Promise<AuditDecision> }
 export interface Settlement {
   id: string; auctionId: string; winningBidId: string; ledgerTransactionId: string;

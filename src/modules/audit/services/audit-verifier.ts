@@ -1,5 +1,5 @@
 import type { AnchorVerifier, ExternalAnchor } from '../contracts/anchors.js';
-import type { AuditRepository, AuditSnapshot } from '../contracts/audit.js';
+import type { AuditRepository, AuditSnapshot, IntegrityCoverage } from '../contracts/audit.js';
 import { checkChain } from '../domain/cryptography.js';
 import { AppError } from '../../../shared/http/app-error.js';
 import { checkOperational } from './operational-integrity.js';
@@ -13,12 +13,14 @@ export interface VerificationResult {
   externalHeadSequence: string | null;
   operationalCoverage: 'CONSISTENT' | 'NOT_RECORDED' | 'DIVERGENT' | 'UNAVAILABLE';
   reason: string | null;
+  integrityCoverage: IntegrityCoverage;
 }
 
 export function inspectSnapshot(snapshot: AuditSnapshot, anchor: ExternalAnchor | null): VerificationResult {
   const last = snapshot.events.at(-1)?.sequence ?? 0n;
   const result: VerificationResult = { auctionId: snapshot.auctionId, status: 'PENDING_ANCHOR', localSequence: String(last),
-    externallyVerifiedSequence: '0', externalHeadSequence: anchor?.sequence ?? null, operationalCoverage: 'UNAVAILABLE', reason: null };
+    externallyVerifiedSequence: '0', externalHeadSequence: anchor?.sequence ?? null, operationalCoverage: 'UNAVAILABLE', reason: null,
+    integrityCoverage: snapshot.events[0]?.hashVersion === 2 ? 'SELLER_PRODUCT_V2' : snapshot.events[0]?.hashVersion === 1 ? 'LEGACY_V1' : 'UNAVAILABLE' };
   const chain = checkChain(snapshot.auctionId, snapshot.events);
   if (!chain.valid) return { ...result, status: 'TAMPERED', reason: chain.reason };
   const operational = checkOperational(snapshot);
@@ -45,18 +47,18 @@ export class AuditVerifier {
     try { snapshot = await this.repository.snapshot(auctionId); }
     catch (error) { return { auctionId, status: error instanceof AuditCorruptionError ? 'TAMPERED' : 'VERIFICATION_UNAVAILABLE',
       localSequence: '0', externallyVerifiedSequence: '0', externalHeadSequence: anchor?.sequence ?? null,
-      operationalCoverage: 'UNAVAILABLE', reason: error instanceof AuditCorruptionError ? 'NONCANONICAL_STORED_TIMESTAMP' : 'SNAPSHOT_UNAVAILABLE' }; }
+      operationalCoverage: 'UNAVAILABLE', integrityCoverage: 'UNAVAILABLE', reason: error instanceof AuditCorruptionError ? 'NONCANONICAL_STORED_TIMESTAMP' : 'SNAPSHOT_UNAVAILABLE' }; }
     if (!snapshot) {
       if (anchor) return { auctionId, status: 'TAMPERED', localSequence: '0', externallyVerifiedSequence: '0', externalHeadSequence: anchor.sequence,
-        operationalCoverage: 'DIVERGENT', reason: 'ANCHORED_AUCTION_MISSING' };
+        operationalCoverage: 'DIVERGENT', integrityCoverage: 'UNAVAILABLE', reason: 'ANCHORED_AUCTION_MISSING' };
       if (!available) return { auctionId, status: 'VERIFICATION_UNAVAILABLE', localSequence: '0', externallyVerifiedSequence: '0',
-        externalHeadSequence: null, operationalCoverage: 'UNAVAILABLE', reason: 'WITNESS_UNAVAILABLE' };
+        externalHeadSequence: null, operationalCoverage: 'UNAVAILABLE', integrityCoverage: 'UNAVAILABLE', reason: 'WITNESS_UNAVAILABLE' };
       throw new AppError(404, 'AUCTION_NOT_FOUND', 'Auction not found');
     }
     let result: VerificationResult;
     try { result = inspectSnapshot(snapshot, anchor); }
     catch { return { auctionId, status: 'TAMPERED', localSequence: '0', externallyVerifiedSequence: '0',
-      externalHeadSequence: anchor?.sequence ?? null, operationalCoverage: 'DIVERGENT', reason: 'INVALID_STORED_EVENT' }; }
+      externalHeadSequence: anchor?.sequence ?? null, operationalCoverage: 'DIVERGENT', integrityCoverage: 'UNAVAILABLE', reason: 'INVALID_STORED_EVENT' }; }
     if (!available && result.status !== 'TAMPERED') return { ...result, status: 'VERIFICATION_UNAVAILABLE', reason: 'WITNESS_UNAVAILABLE' };
     return result;
   }

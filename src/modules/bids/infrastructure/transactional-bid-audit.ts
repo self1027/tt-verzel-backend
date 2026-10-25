@@ -19,7 +19,7 @@ export async function appendAcceptedBid(tx: DatabaseTransaction, bid: Bid, endsA
       .orderBy(asc(auditEvents.sequence)).limit(MAX_AUDIT_EVENTS + 1);
     if (records.length > MAX_AUDIT_EVENTS) throw new Error('Audit history limit exceeded');
     const events = records.map(selectedAuditEvent);
-    const operational = await readAuctionAuditState(tx, bid.auctionId);
+    const operational = await readAuctionAuditState(tx, bid.auctionId, events[0]?.hashVersion === 2);
     if (!operational || !checkChain(bid.auctionId, events).valid) throw new Error('Invalid audit state');
     const check = checkOperational({ auctionId: bid.auctionId, events, operational });
     if (!check.recorded || !check.consistent) throw new Error('Invalid audit coverage');

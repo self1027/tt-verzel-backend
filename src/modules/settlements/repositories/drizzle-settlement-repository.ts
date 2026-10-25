@@ -12,6 +12,7 @@ import { checkOperational } from '../../audit/services/operational-integrity.js'
 import { canonicalJson, checkChain } from '../../audit/domain/cryptography.js';
 import { readSettlementProof } from '../infrastructure/settlement-proof.js';
 import type { SettlementContext, SettlementRepository } from '../contracts/settlements.js';
+import { productSnapshots } from '../../catalog/infrastructure/schema.js';
 
 export class DrizzleSettlementRepository implements SettlementRepository {
   constructor(private readonly db: Database) {}
@@ -43,7 +44,11 @@ export class DrizzleSettlementRepository implements SettlementRepository {
         if (!checkOperational(state.snapshot).consistent) throw new AppError(409, 'AUDIT_STATE_CONFLICT', 'Settlement audit is inconsistent');
       }
       return work({
-        async lockAuction(id) { const [row] = await tx.select().from(auctions).where(eq(auctions.id, id)).for('update'); return row ?? null; },
+        async lockAuction(id) {
+          const [row] = await tx.select().from(auctions).where(eq(auctions.id, id)).for('update');
+          if (row) await tx.select({ id: productSnapshots.id }).from(productSnapshots).where(eq(productSnapshots.id, row.productSnapshotId)).for('share');
+          return row ?? null;
+        },
         async now() {
           const result = await tx.execute<{ at: string }>(sql`SELECT to_char(clock_timestamp() AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS at`);
           const at = result.rows[0]?.at; if (!at) throw new Error('Database clock unavailable'); return new Date(at);
@@ -51,7 +56,10 @@ export class DrizzleSettlementRepository implements SettlementRepository {
         async findSettlement(id) { const [row] = await tx.select().from(auctionSettlements).where(eq(auctionSettlements.auctionId, id)); return row ?? null; },
         async proofMatches(id, proof) {
           const current = await readSettlementProof(tx, id);
-          return canonicalJson(current.proof) === canonicalJson(proof) && checkChain(id, current.snapshot.events).valid && checkOperational(current.snapshot).consistent;
+          const version = current.snapshot.events[0]?.hashVersion;
+          const boundOrNoBids = version === 2 || (version === 1 && current.snapshot.operational.bids.length === 0);
+          return boundOrNoBids && canonicalJson(current.proof) === canonicalJson(proof)
+            && checkChain(id, current.snapshot.events).valid && checkOperational(current.snapshot).consistent;
         },
         history: id => tx.select().from(bids).where(eq(bids.auctionId, id)).orderBy(asc(bids.sequence)),
         async lockWallets(userIds) {

@@ -1,4 +1,5 @@
 import { and, asc, eq, gt, isNull } from 'drizzle-orm';
+import { AuditCorruptionError } from '../contracts/errors.js';
 import type { Database } from '../../../shared/database/client.js';
 import { readAuctionAuditState } from '../../auctions/repositories/drizzle-auction-audit-reader.js';
 import type { AuditRepository, AuditSnapshot, PendingAnchor } from '../contracts/audit.js';
@@ -10,11 +11,11 @@ export class DrizzleAuditRepository implements AuditRepository {
 
   snapshot(auctionId: string): Promise<AuditSnapshot | null> {
     return this.db.transaction(async (tx) => {
-      const operational = await readAuctionAuditState(tx, auctionId);
-      if (!operational) return null;
       const records = await tx.select(auditSelection).from(auditEvents).where(eq(auditEvents.auctionId, auctionId))
         .orderBy(asc(auditEvents.sequence)).limit(MAX_AUDIT_EVENTS + 1);
-      if (records.length > MAX_AUDIT_EVENTS) throw new Error('Audit snapshot limit of 10000 events exceeded');
+      if (records.length > MAX_AUDIT_EVENTS) throw new AuditCorruptionError('Audit snapshot event limit exceeded');
+      const operational = await readAuctionAuditState(tx, auctionId, records[0]?.record.hashVersion === 2);
+      if (!operational) return null;
       return { auctionId, events: records.map(selectedAuditEvent), operational };
     }, { isolationLevel: 'repeatable read', accessMode: 'read only' });
   }
@@ -31,8 +32,20 @@ export class DrizzleAuditRepository implements AuditRepository {
     if (!Number.isSafeInteger(limit) || limit < 1 || limit > MAX_AUDIT_EVENTS) throw new Error('Invalid pending anchor limit');
     return this.db.select({ id: auditAnchors.id, auctionId: auditAnchors.auctionId,
       sequence: auditAnchors.lastSequence, hash: auditAnchors.lastHash }).from(auditAnchors)
-      .where(isNull(auditAnchors.externalReference))
+      .where(and(isNull(auditAnchors.externalReference), isNull(auditAnchors.blockedReason)))
       .orderBy(asc(auditAnchors.lastSequence), asc(auditAnchors.auctionId), asc(auditAnchors.id)).limit(limit);
+  }
+
+  async quarantine(expected: PendingAnchor, reason: string): Promise<void> {
+    const changed = await this.db.update(auditAnchors).set({ blockedReason: reason, blockedAt: new Date() })
+      .where(and(eq(auditAnchors.id, expected.id), eq(auditAnchors.auctionId, expected.auctionId),
+        eq(auditAnchors.lastSequence, expected.sequence), eq(auditAnchors.lastHash, expected.hash),
+        isNull(auditAnchors.externalReference), isNull(auditAnchors.blockedReason))).returning({ id: auditAnchors.id });
+    if (changed.length) return;
+    const [existing] = await this.db.select().from(auditAnchors).where(and(eq(auditAnchors.id, expected.id),
+      eq(auditAnchors.auctionId, expected.auctionId), eq(auditAnchors.lastSequence, expected.sequence),
+      eq(auditAnchors.lastHash, expected.hash)));
+    if (!existing?.blockedReason || existing.externalReference) throw new Error('Anchor quarantine conflict');
   }
 
   async confirm(id: string, reference: string, at: string, expected?: PendingAnchor): Promise<void> {
@@ -41,7 +54,7 @@ export class DrizzleAuditRepository implements AuditRepository {
     const commitment = expected ? and(eq(auditAnchors.auctionId, expected.auctionId),
       eq(auditAnchors.lastSequence, expected.sequence), eq(auditAnchors.lastHash, expected.hash)) : undefined;
     const changed = await this.db.update(auditAnchors).set({ externalReference: reference, anchoredAt: date })
-      .where(and(eq(auditAnchors.id, id), commitment, isNull(auditAnchors.externalReference))).returning({ id: auditAnchors.id });
+      .where(and(eq(auditAnchors.id, id), commitment, isNull(auditAnchors.externalReference), isNull(auditAnchors.blockedReason))).returning({ id: auditAnchors.id });
     if (changed.length) return;
     const [existing] = await this.db.select({ reference: auditAnchors.externalReference }).from(auditAnchors)
       .where(and(eq(auditAnchors.id, id), commitment));

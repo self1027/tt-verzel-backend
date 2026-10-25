@@ -2,9 +2,12 @@ import type { Auction } from '../../auctions/contracts/auctions.js';
 import type { Bid } from '../../bids/contracts/bids.js';
 import type { ProductSnapshot } from '../../catalog/contracts/catalog.js';
 import type { Settlement } from './settlements.js';
+import type { IntegrityCoverage } from '../../audit/contracts/audit.js';
 
 export type ReceiptProduct = Pick<ProductSnapshot, 'id' | 'title' | 'description' | 'imageUrl' | 'capturedAt'>;
 export interface ReceiptRecords {
+  integrityCoverage?: IntegrityCoverage;
+  integrityConsistent?: boolean;
   auction: Auction;
   settlement: Omit<Settlement, 'receiptToken'>;
   product: ReceiptProduct | null;
@@ -15,6 +18,7 @@ export interface ReceiptRecords {
 }
 export interface ReceiptRepository { find(auctionId: string): Promise<ReceiptRecords | null> }
 export interface PublicReceipt {
+  integrityCoverage: IntegrityCoverage;
   auctionId: string;
   productSnapshot: Omit<ReceiptProduct, 'capturedAt'> & { capturedAt: string };
   amountCents: string;

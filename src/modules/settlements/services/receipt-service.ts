@@ -10,7 +10,7 @@ export class ReceiptService implements ReceiptUseCases {
     const records = await this.repository.find(auctionId);
     if (!records || records.auction.status !== 'SETTLED') throw new AppError(404, 'RECEIPT_NOT_AVAILABLE', 'Receipt is not available');
     const { auction, settlement, product, bid, reservation, transaction, entries } = records;
-    if (!product || !bid || !reservation || !transaction
+    if (records.integrityConsistent === false || !product || !bid || !reservation || !transaction
       || auction.id !== auctionId || product.id !== auction.productSnapshotId || settlement.auctionId !== auctionId
       || auction.currentBidId !== bid.id || bid.id !== settlement.winningBidId || bid.auctionId !== auctionId
       || settlement.amountCents <= 0n || settlement.amountCents > MAX_CENTS || bid.amountCents !== settlement.amountCents
@@ -25,6 +25,7 @@ export class ReceiptService implements ReceiptUseCases {
       throw new AppError(409, 'RECEIPT_INCONSISTENT', 'Receipt financial records are inconsistent');
     }
     return {
+      integrityCoverage: records.integrityCoverage ?? 'UNAVAILABLE',
       auctionId, productSnapshot: { id: product.id, title: product.title, description: product.description,
         imageUrl: product.imageUrl, capturedAt: product.capturedAt.toISOString() },
       amountCents: settlement.amountCents.toString(), endsAt: auction.endsAt.toISOString(), settledAt: settlement.settledAt.toISOString(),

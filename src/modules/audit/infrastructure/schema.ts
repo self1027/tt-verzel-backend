@@ -21,6 +21,8 @@ export const auditAnchors = pgTable('audit_anchors', {
   lastSequence: bigint('last_sequence', { mode: 'bigint' }).notNull(),
   lastHash: varchar('last_hash', { length: 64 }).notNull(),
   externalReference: text('external_reference'),
+  blockedReason: text('blocked_reason'),
+  blockedAt: timestamp('blocked_at'),
   anchoredAt: timestamp('anchored_at').notNull(),
 }, (table) => [
   uniqueIndex('audit_anchors_auction_id_last_sequence_unique').on(table.auctionId, table.lastSequence),

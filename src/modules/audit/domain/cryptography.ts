@@ -7,13 +7,14 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const HASH = /^[0-9a-f]{64}$/;
 
 /** Only JSON data properties participate; never invoke accessors or toJSON. */
-export function canonicalJson(value: unknown): string {
+export function canonicalJson(value: unknown, fractionalNumbers = false): string {
   const active = new Set<object>();
   function encode(item: unknown): string {
     if (item === null) return 'null';
     if (typeof item === 'string' || typeof item === 'boolean') return JSON.stringify(item);
     if (typeof item === 'number') {
-      if (!Number.isSafeInteger(item) || Object.is(item, -0)) throw new Error('Invalid JSON number');
+      if ((fractionalNumbers ? !Number.isFinite(item) || Math.abs(item) > Number.MAX_SAFE_INTEGER : !Number.isSafeInteger(item))
+        || Object.is(item, -0)) throw new Error('Invalid JSON number');
       return JSON.stringify(item);
     }
     if (typeof item !== 'object') throw new Error('Invalid JSON value');
@@ -77,7 +78,7 @@ function timestamp(value: unknown): asserts value is string {
   if (!Number.isFinite(date.getTime()) || date.toISOString() !== value) throw new Error('Invalid UTC timestamp');
 }
 
-export function validateInput(input: AuditInput): void {
+export function validateInput(input: AuditInput, hashVersion = 1): void {
   canonicalJson(input);
   fields(input, ['auctionId', 'eventType', 'payload', 'createdAt']);
   uuid(input.auctionId);
@@ -88,7 +89,13 @@ export function validateInput(input: AuditInput): void {
     case 'AUCTION_UPDATED':
     case 'AUCTION_CANCELLED':
       fields(payload, ['productSnapshotId', 'startingBidCents', 'minIncrementCents', 'startsAt', 'endsAt', 'status', 'currentBidId',
-        ...(input.eventType === 'AUCTION_CANCELLED' && 'reason' in payload ? ['reason'] : [])]);
+        ...(input.eventType === 'AUCTION_CANCELLED' && 'reason' in payload ? ['reason'] : []),
+        ...(hashVersion === 2 && input.eventType === 'AUCTION_CREATED' ? ['binding'] : [])]);
+      if (hashVersion === 2 && input.eventType === 'AUCTION_CREATED') {
+        fields(payload.binding, ['sellerRef', 'productHash']);
+        hash(payload.binding.sellerRef);
+        hash(payload.binding.productHash);
+      }
       if ('reason' in payload && payload.reason !== 'SELLER_REQUEST') throw new Error('Invalid cancellation reason');
       uuid(payload.productSnapshotId);
       decimal(payload.startingBidCents, true);
@@ -127,14 +134,14 @@ export function validateInput(input: AuditInput): void {
 
 export function hashEvent(event: Omit<AuditEvent, 'eventHash'>): string {
   fields(event, ['id', 'auctionId', 'sequence', 'eventType', 'payload', 'createdAt', 'previousHash', 'hashVersion']);
-  validateInput({ auctionId: event.auctionId, eventType: event.eventType, payload: event.payload, createdAt: event.createdAt });
+  validateInput({ auctionId: event.auctionId, eventType: event.eventType, payload: event.payload, createdAt: event.createdAt }, event.hashVersion);
   uuid(event.id);
   hash(event.previousHash);
-  if (event.hashVersion !== 1) throw new Error('Unsupported audit hash version');
+  if (event.hashVersion !== 1 && event.hashVersion !== 2) throw new Error('Unsupported audit hash version');
   if (typeof event.sequence !== 'bigint' || event.sequence < 1n || event.sequence > MAX_BIGINT) throw new Error('Invalid audit sequence');
-  return createHash('sha256').update('verzel:audit:event:v1\0').update(canonicalJson({
+  return createHash('sha256').update(`verzel:audit:event:v${String(event.hashVersion)}\0`).update(canonicalJson({
     id: event.id, auctionId: event.auctionId, sequence: event.sequence.toString(), eventType: event.eventType,
-    payload: event.payload, createdAt: event.createdAt, previousHash: event.previousHash, hashVersion: '1',
+    payload: event.payload, createdAt: event.createdAt, previousHash: event.previousHash, hashVersion: String(event.hashVersion),
   })).digest('hex');
 }
 
@@ -145,6 +152,7 @@ export function checkChain(auctionId: string, events: AuditEvent[]): { valid: bo
     let sequence = 1n;
     const ids = new Set<string>();
     for (const event of events) {
+      if (event.hashVersion !== events[0]?.hashVersion) throw new Error('Mixed audit hash versions');
       if (event.auctionId !== auctionId) throw new Error('Audit auction mismatch');
       if (event.sequence !== sequence) throw new Error('Audit sequence gap or reordering');
       if (event.previousHash !== previousHash) throw new Error('Audit previous hash mismatch');

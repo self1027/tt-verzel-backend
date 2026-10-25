@@ -4,7 +4,10 @@ import { auditEvents } from '../infrastructure/schema.js';
 import { sql } from 'drizzle-orm';
 import { AuditCorruptionError } from '../contracts/errors.js';
 
-export const MAX_AUDIT_EVENTS = 10000;
+// Normal writes reserve a closing slot within the original 10000-event budget.
+export const MAX_NONTERMINAL_AUDIT_EVENTS = 9999;
+// One extra terminal slot also recovers valid histories already at the old limit.
+export const MAX_AUDIT_EVENTS = 10001;
 export const auditSelection = { record: auditEvents,
   timestampCanonical: sql<boolean>`${auditEvents.createdAt} = date_trunc('milliseconds', ${auditEvents.createdAt})` };
 

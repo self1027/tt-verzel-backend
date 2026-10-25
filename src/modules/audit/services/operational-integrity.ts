@@ -1,4 +1,4 @@
-import type { AuctionCommitment, AuditSnapshot, BidCommitment, SettlementCommitment } from '../contracts/audit.js';
+import type { AuctionBinding, AuctionCommitment, AuditSnapshot, BidCommitment, SettlementCommitment } from '../contracts/audit.js';
 import { canonicalJson } from '../domain/cryptography.js';
 
 export interface OperationalCheck { consistent: boolean; recorded: boolean; reason: string | null }
@@ -9,11 +9,17 @@ export function checkOperational(snapshot: AuditSnapshot): OperationalCheck {
   let auction: AuctionCommitment | undefined;
   const bids: BidCommitment[] = [];
   let settlement: SettlementCommitment | null = null;
+  let binding: AuctionBinding | undefined;
   for (const event of snapshot.events) {
     const p = event.payload;
     if (event.eventType === 'AUCTION_CREATED') {
       if (auction || event.sequence !== 1n) return mismatch('INVALID_AUCTION_GENESIS');
-      auction = p as unknown as AuctionCommitment;
+      if (event.hashVersion === 2) {
+        const { binding: original, ...terms } = p;
+        binding = original as unknown as AuctionBinding | undefined;
+        if (!binding || canonicalJson(binding) !== canonicalJson(snapshot.operational.binding ?? null)) return mismatch('AUCTION_BINDING_MISMATCH');
+        auction = terms as unknown as AuctionCommitment;
+      } else auction = p as unknown as AuctionCommitment;
       if (auction.currentBidId !== null) return mismatch('INVALID_AUCTION_GENESIS');
     } else if (!auction) {
       return mismatch('MISSING_AUCTION_COMMITMENT');
@@ -56,7 +62,7 @@ export function checkOperational(snapshot: AuditSnapshot): OperationalCheck {
     return snapshot.operational.bids.length || snapshot.operational.settlement || snapshot.operational.auction.currentBidId
       ? mismatch('UNRECORDED_OPERATIONAL_HISTORY') : { consistent: true, recorded: false, reason: null };
   }
-  const expected = { auction, bids, settlement };
+  const expected = { ...(binding ? { binding } : {}), auction, bids, settlement };
   if (canonicalJson(expected) !== canonicalJson(snapshot.operational)) return mismatch('OPERATIONAL_STATE_MISMATCH');
   return { consistent: true, recorded: true, reason: null };
 }

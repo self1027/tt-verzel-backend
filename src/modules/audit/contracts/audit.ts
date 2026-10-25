@@ -14,6 +14,8 @@ export interface AuditEvent extends AuditInput {
   hashVersion: number;
 }
 export interface AuditAppender { append(input: AuditInput): Promise<AuditEvent> }
+export type IntegrityCoverage = 'SELLER_PRODUCT_V2' | 'LEGACY_V1' | 'UNAVAILABLE';
+export interface AuctionBinding { sellerRef: string; productHash: string }
 export interface AuctionCommitment {
   productSnapshotId: string;
   startingBidCents: string;
@@ -39,6 +41,7 @@ export interface SettlementCommitment {
   receiptHash: string;
 }
 export interface OperationalState {
+  binding?: AuctionBinding;
   auction: AuctionCommitment;
   bids: BidCommitment[];
   settlement: SettlementCommitment | null;
@@ -49,5 +52,6 @@ export interface AuditRepository {
   snapshot(auctionId: string): Promise<AuditSnapshot | null>;
   page(auctionId: string, after: bigint, limit: number): Promise<AuditEvent[]>;
   pending(limit: number): Promise<PendingAnchor[]>;
+  quarantine(expected: PendingAnchor, reason: string): Promise<void>;
   confirm(id: string, reference: string, at: string, expected?: PendingAnchor): Promise<void>;
 }

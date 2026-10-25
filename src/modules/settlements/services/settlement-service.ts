@@ -18,7 +18,7 @@ export class SettlementService implements SettlementUseCases {
       return { auctionId: id, status: 'TAMPERED', reason: 'AUDIT_TAMPERED' };
     }
     const proof = decision.proof;
-    if (decision.status !== 'VERIFIED' || !proof) return { auctionId: id, status: 'DEFERRED', reason: decision.status };
+    if (decision.status !== 'VERIFIED' || !proof) return { auctionId: id, status: 'DEFERRED', reason: decision.reason ?? decision.status };
     const result = await this.repository.transaction(async tx => {
       const auction = await tx.lockAuction(id);
       if (!auction) throw new AppError(404, 'AUCTION_NOT_FOUND', 'Auction not found');

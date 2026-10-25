@@ -13,11 +13,11 @@ import type { SettlementAuditGate } from '../contracts/settlements.js';
 
 export async function readSettlementProof(tx: DatabaseTransaction, id: string) {
   const [auction] = await tx.select({ sellerId: auctions.auctioneerId }).from(auctions).where(eq(auctions.id, id));
-  const operational = await readAuctionAuditState(tx, id);
-  if (!auction || !operational) throw new AuditCorruptionError('Auction missing');
   const rows = await tx.select(auditSelection).from(auditEvents).where(eq(auditEvents.auctionId, id)).orderBy(asc(auditEvents.sequence)).limit(MAX_AUDIT_EVENTS + 1);
   if (rows.length > MAX_AUDIT_EVENTS) throw new Error('Audit history limit exceeded');
   const events = rows.map(selectedAuditEvent);
+  const operational = await readAuctionAuditState(tx, id, events[0]?.hashVersion === 2);
+  if (!auction || !operational) throw new AuditCorruptionError('Auction missing');
   const last = events.at(-1);
   return { snapshot: { auctionId: id, operational, events }, proof: {
     sequence: String(last?.sequence ?? 0n), hash: last?.eventHash ?? GENESIS_HASH,
@@ -35,6 +35,9 @@ export class DrizzleSettlementAuditGate implements SettlementAuditGate {
       return await this.db.transaction(async tx => {
         const state = await readSettlementProof(tx, id);
         const result = inspectSnapshot(state.snapshot, anchor);
+        if (result.status === 'VERIFIED' && result.integrityCoverage !== 'SELLER_PRODUCT_V2' && state.snapshot.operational.bids.length > 0) {
+          return { status: 'VERIFICATION_UNAVAILABLE' as const, reason: 'LEGACY_INTEGRITY_UNBOUND' };
+        }
         return result.status === 'VERIFIED' ? { status: result.status, proof: state.proof } : { status: result.status };
       }, { isolationLevel: 'repeatable read', accessMode: 'read only' });
     } catch (error) {

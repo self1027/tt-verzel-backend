@@ -1,0 +1,81 @@
+{
+  "type": "diff",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "424fcfec-b972-49cb-8eef-0077066c4ba1",
+  "prevIds": [
+    "5f830a24-6060-4b8e-843a-6d3824ff2439"
+  ],
+  "footprints": [
+    {
+      "statementType": "add_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "audit_anchors",
+        "blocked_reason"
+      ],
+      "writes": [
+        "s|col|public.audit_anchors.blocked_reason",
+        "n|col|public.audit_anchors.blocked_reason",
+        "e|col|public.audit_anchors.blocked_reason"
+      ],
+      "reads": [
+        "n|tbl|public.audit_anchors",
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "add_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "audit_anchors",
+        "blocked_at"
+      ],
+      "writes": [
+        "s|col|public.audit_anchors.blocked_at",
+        "n|col|public.audit_anchors.blocked_at",
+        "e|col|public.audit_anchors.blocked_at"
+      ],
+      "reads": [
+        "n|tbl|public.audit_anchors",
+        "n|sch|public"
+      ]
+    }
+  ],
+  "deltas": [
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "audit_anchors",
+        "name": "blocked_reason",
+        "type": "text",
+        "typeSchema": null,
+        "notNull": false,
+        "dimensions": 0,
+        "default": null,
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "audit_anchors",
+        "name": "blocked_at",
+        "type": "timestamp",
+        "typeSchema": null,
+        "notNull": false,
+        "dimensions": 0,
+        "default": null,
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    }
+  ]
+}

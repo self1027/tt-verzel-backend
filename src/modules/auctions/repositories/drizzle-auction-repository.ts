@@ -81,7 +81,7 @@ export class DrizzleAuctionRepository implements AuctionRepository {
         databaseNow: () => databaseNow(tx),
         async snapshotExists(id) {
           const [snapshot] = await tx.select({ id: productSnapshots.id }).from(productSnapshots)
-            .where(eq(productSnapshots.id, id)).for('key share');
+            .where(eq(productSnapshots.id, id)).for('share');
           return snapshot !== undefined;
         },
         async hasBids(id) {
