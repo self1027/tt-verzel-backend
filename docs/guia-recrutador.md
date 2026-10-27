@@ -8,6 +8,13 @@ A proposta é simples: você pode percorrer a aplicação, repetir uma jornada c
 dois licitantes ou conferir as regras mais delicadas em testes isolados de banco.
 Cada verificação abaixo diz o que observar e resume como a funcionalidade funciona.
 
+## Materiais complementares
+
+Como complemento à avaliação do código, o [vídeo do desenvolvimento](https://youtu.be/8orSPS_3zkE)
+(com capítulos) e a [transcrição em JSON](final.transcript.json) permitem consultar
+o raciocínio técnico, as decisões arquiteturais e as etapas de implementação e
+validação registradas. A transcrição pode ser pesquisada ou analisada com ferramentas de IA.
+
 ## Comece por aqui
 
 O projeto tem dois repositórios independentes:

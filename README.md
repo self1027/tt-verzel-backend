@@ -105,6 +105,12 @@ regras de negócio ou na auditoria, use `npm run test:requirements:rules` ou
 - **Busca em português:** a API externa pesquisa em inglês. Tradução automática
   da consulta e dos resultados fica registrada como débito técnico.
 
+## Processo de desenvolvimento
+
+O [vídeo do desenvolvimento](https://youtu.be/8orSPS_3zkE) contém capítulos para
+navegar pelos tópicos. A [transcrição em JSON](docs/final.transcript.json) permite
+pesquisar o conteúdo ou analisá-lo com ferramentas de IA.
+
 ## Documentação complementar
 
 [Arquitetura](docs/architecture.md) · [Seed](docs/demo-seed.md) ·

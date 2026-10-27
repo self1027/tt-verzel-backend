@@ -1,0 +1,10262 @@
+[
+  {
+    "start": 1.04,
+    "end": 2.7,
+    "text": "Olá, tudo bem? Boa noite."
+  },
+  {
+    "start": 4.06,
+    "end": 8.9,
+    "text": "Meu nome é Murilo e eu vou estar resolvendo aqui esse teste técnico da Verso."
+  },
+  {
+    "start": 9.82,
+    "end": 18.46,
+    "text": "Vamos tentar solucionar aqui esse desafio, que é o da casa de leilões."
+  },
+  {
+    "start": 19.28,
+    "end": 21.9,
+    "text": "Vou estar gravando do começo ao fim."
+  },
+  {
+    "start": 21.98,
+    "end": 26.98,
+    "text": "Não prometo que vai ser ininterrupto, porque muito possivelmente eu não vou conseguir terminar em um dia só."
+  },
+  {
+    "start": 26.98,
+    "end": 34.34,
+    "text": "Mas, ainda assim, eu vou tentar deixar em um vídeo só."
+  },
+  {
+    "start": 34.76,
+    "end": 38.38,
+    "text": "E aqui embaixo eu vou colocar as timestamps do que for acontecendo."
+  },
+  {
+    "start": 38.54,
+    "end": 42.22,
+    "text": "Então você vai poder pular direto para quando eu começo o desenvolvimento."
+  },
+  {
+    "start": 42.36,
+    "end": 48.08,
+    "text": "Vai poder ver como é que eu faço o planejamento e como que eu chego às decisões que eu tomo."
+  },
+  {
+    "start": 51.26,
+    "end": 52.62,
+    "text": "Bom, vamos começar então."
+  },
+  {
+    "start": 53.22,
+    "end": 59.61,
+    "text": "Eu vou começar fazendo a levantação dos requisitos."
+  },
+  {
+    "start": 59.61,
+    "end": 60.63,
+    "text": "Então eu tenho aqui o PDF."
+  },
+  {
+    "start": 60.63,
+    "end": 65.67,
+    "text": "Eu dei uma folheada, mas não peguei para ler completamente de fato."
+  },
+  {
+    "start": 65.79,
+    "end": 67.61,
+    "text": "Então vamos começar já."
+  },
+  {
+    "start": 68.25,
+    "end": 72.83,
+    "text": "O que eu sempre gosto de fazer é fazer a separação dos requisitos do que o teste pede."
+  },
+  {
+    "start": 73.97,
+    "end": 75.41,
+    "text": "Então vamos dar uma analisada."
+  },
+  {
+    "start": 75.97,
+    "end": 99.16,
+    "text": "Eu tenho um tipo de usuário, tenho um leiloeiro e um licitante."
+  },
+  {
+    "start": 99.74,
+    "end": 111.38,
+    "text": "Então os requisitos é usar API."
+  },
+  {
+    "start": 173.44,
+    "end": 189.97,
+    "text": "Nesse incremento será que vai ser em porcentagem?"
+  },
+  {
+    "start": 189.97,
+    "end": 191.51,
+    "text": "Uma decisão, né?"
+  },
+  {
+    "start": 191.97,
+    "end": 197.87,
+    "text": "Que vai ser..."
+  },
+  {
+    "start": 198.21,
+    "end": 199.47,
+    "text": "Em saldo mesmo."
+  },
+  {
+    "start": 202.46,
+    "end": 203.22,
+    "text": "Horário início."
+  },
+  {
+    "start": 239.12,
+    "end": 240.4,
+    "text": "Tem depósito."
+  },
+  {
+    "start": 242.56,
+    "end": 243.98,
+    "text": "Depósito de saldo."
+  },
+  {
+    "start": 252.24,
+    "end": 289.07,
+    "text": "Recebe comprovante."
+  },
+  {
+    "start": 314.54,
+    "end": 315.2,
+    "text": "Tá, então..."
+  },
+  {
+    "start": 316.44,
+    "end": 319.02,
+    "text": "Ele disse aqui que qualquer pessoa mesmo sem login."
+  },
+  {
+    "start": 319.16,
+    "end": 322.26,
+    "text": "Então talvez a gente possa imaginar que além de leiloeiro e licitante,"
+  },
+  {
+    "start": 322.88,
+    "end": 323.92,
+    "text": "nós vamos ter um guest."
+  },
+  {
+    "start": 324.6,
+    "end": 326.1,
+    "text": "Que ele pode licitar."
+  },
+  {
+    "start": 326.46,
+    "end": 337.45,
+    "text": "Licitar qualquer lote."
+  },
+  {
+    "start": 338.27,
+    "end": 338.79,
+    "text": "Vamos pôr assim."
+  },
+  {
+    "start": 339.29,
+    "end": 349.51,
+    "text": "Não necessariamente um tipo de usuário, né?"
+  },
+  {
+    "start": 349.53,
+    "end": 350.39,
+    "text": "A gente pode só..."
+  },
+  {
+    "start": 350.39,
+    "end": 354.11,
+    "text": "Dispôr isso aí e não ficar esperando nada, né?"
+  },
+  {
+    "start": 354.11,
+    "end": 356.75,
+    "text": "Que vai acabar como vai ser implementado."
+  },
+  {
+    "start": 356.89,
+    "end": 359.17,
+    "text": "Só que ainda assim é bom discriminar aqui."
+  },
+  {
+    "start": 361.75,
+    "end": 362.19,
+    "text": "Deploy."
+  },
+  {
+    "start": 362.45,
+    "end": 363.45,
+    "text": "Não é problema pra mim."
+  },
+  {
+    "start": 364.01,
+    "end": 370.64,
+    "text": "Fazer um deploy."
+  },
+  {
+    "start": 371.14,
+    "end": 383.58,
+    "text": "Leiloeiro não pode dar lances."
+  },
+  {
+    "start": 405.14,
+    "end": 406.24,
+    "text": "Arremata itens."
+  },
+  {
+    "start": 406.86,
+    "end": 414.88,
+    "text": "Essa arrematação de itens, muito possivelmente, ela é a respeito do comprovante, né?"
+  },
+  {
+    "start": 415.88,
+    "end": 422.58,
+    "text": "Como não tem o negócio de verdade, nada vai ser enviado, nem..."
+  },
+  {
+    "start": 423.88,
+    "end": 429.72,
+    "text": "Provavelmente é só o comprovante que ele tá falando."
+  },
+  {
+    "start": 429.72,
+    "end": 430.72,
+    "text": "Tem algumas referências."
+  },
+  {
+    "start": 430.72,
+    "end": 431.72,
+    "text": "Talvez a gente pudesse dar uma olhada, né?"
+  },
+  {
+    "start": 431.72,
+    "end": 432.72,
+    "text": "Tem algumas categorias, né?"
+  },
+  {
+    "start": 432.72,
+    "end": 447.03,
+    "text": "Talvez seja interessante a gente fazer um..."
+  },
+  {
+    "start": 447.03,
+    "end": 448.03,
+    "text": "Um semeador, né?"
+  },
+  {
+    "start": 448.03,
+    "end": 453.7,
+    "text": "Iniciar com algumas coisas dentro do site."
+  },
+  {
+    "start": 453.7,
+    "end": 454.7,
+    "text": "Semeador."
+  },
+  {
+    "start": 454.7,
+    "end": 455.7,
+    "text": "Colocar um ponto de interrogação."
+  },
+  {
+    "start": 455.7,
+    "end": 456.7,
+    "text": "Interessante."
+  },
+  {
+    "start": 456.7,
+    "end": 457.7,
+    "text": "Vamos ver mais informações."
+  },
+  {
+    "start": 457.7,
+    "end": 458.7,
+    "text": "Tá ok."
+  },
+  {
+    "start": 458.7,
+    "end": 459.7,
+    "text": "Tá tudo bem."
+  },
+  {
+    "start": 459.7,
+    "end": 460.7,
+    "text": "Não é problema."
+  },
+  {
+    "start": 460.7,
+    "end": 461.7,
+    "text": "O front-end eu vou deixar por último."
+  },
+  {
+    "start": 461.7,
+    "end": 462.7,
+    "text": "Só que vamos dar uma olhada como é que vai ser, né?"
+  },
+  {
+    "start": 462.7,
+    "end": 465.49,
+    "text": "O front-end eu vou deixar por último."
+  },
+  {
+    "start": 465.49,
+    "end": 466.49,
+    "text": "Só que vamos dar uma olhada como é que vai ser, né?"
+  },
+  {
+    "start": 466.49,
+    "end": 467.49,
+    "text": "O front-end eu vou deixar por último."
+  },
+  {
+    "start": 467.49,
+    "end": 474.57,
+    "text": "Só que vamos dar uma olhada como é que vai ser, né?"
+  },
+  {
+    "start": 474.57,
+    "end": 491.16,
+    "text": "Fazer uma discriminação melhor."
+  },
+  {
+    "start": 491.16,
+    "end": 498.08,
+    "text": "E a gente tem as informações do back."
+  },
+  {
+    "start": 498.08,
+    "end": 503.72,
+    "text": "E vamos colocar as informações do front aqui embaixo."
+  },
+  {
+    "start": 503.72,
+    "end": 504.72,
+    "text": "É uma vitrine muito parecida com isso, né?"
+  },
+  {
+    "start": 504.72,
+    "end": 508.79,
+    "text": "Tá."
+  },
+  {
+    "start": 508.79,
+    "end": 509.79,
+    "text": "Agendados e encerrados."
+  },
+  {
+    "start": 509.79,
+    "end": 510.79,
+    "text": "Descriminando."
+  },
+  {
+    "start": 510.79,
+    "end": 511.79,
+    "text": "Sem cancelados."
+  },
+  {
+    "start": 511.79,
+    "end": 512.79,
+    "text": "Lotes cancelados, né?"
+  },
+  {
+    "start": 512.79,
+    "end": 513.79,
+    "text": "O que que será que vai acontecer?"
+  },
+  {
+    "start": 513.79,
+    "end": 514.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 514.79,
+    "end": 515.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 515.79,
+    "end": 516.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 516.79,
+    "end": 517.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 517.79,
+    "end": 518.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 518.79,
+    "end": 519.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 519.79,
+    "end": 520.79,
+    "text": "Não sei."
+  },
+  {
+    "start": 520.79,
+    "end": 531.84,
+    "text": "Não sei."
+  },
+  {
+    "start": 531.84,
+    "end": 532.84,
+    "text": "Não sei."
+  },
+  {
+    "start": 532.84,
+    "end": 533.84,
+    "text": "Não sei."
+  },
+  {
+    "start": 533.84,
+    "end": 536.82,
+    "text": "Não sei."
+  },
+  {
+    "start": 536.82,
+    "end": 541.15,
+    "text": "Não sei."
+  },
+  {
+    "start": 541.15,
+    "end": 542.15,
+    "text": "Não sei."
+  },
+  {
+    "start": 542.15,
+    "end": 553.55,
+    "text": "Não sei."
+  },
+  {
+    "start": 553.55,
+    "end": 573.46,
+    "text": "Não sei."
+  },
+  {
+    "start": 573.46,
+    "end": 574.46,
+    "text": "Não sei."
+  },
+  {
+    "start": 574.46,
+    "end": 577.8,
+    "text": "Não sei."
+  },
+  {
+    "start": 577.8,
+    "end": 578.8,
+    "text": "Não sei."
+  },
+  {
+    "start": 578.8,
+    "end": 579.8,
+    "text": "Não sei."
+  },
+  {
+    "start": 579.8,
+    "end": 580.8,
+    "text": "Não sei."
+  },
+  {
+    "start": 580.8,
+    "end": 581.8,
+    "text": "Não sei."
+  },
+  {
+    "start": 581.8,
+    "end": 582.8,
+    "text": "Será que seria isso?"
+  },
+  {
+    "start": 582.8,
+    "end": 585.68,
+    "text": "Será que ele pode ser cancelado durante..."
+  },
+  {
+    "start": 585.68,
+    "end": 588.64,
+    "text": "Bom, vamos ter que decidir isso, né?"
+  },
+  {
+    "start": 588.64,
+    "end": 591.84,
+    "text": "Painel do leiloeiro."
+  },
+  {
+    "start": 591.84,
+    "end": 594.16,
+    "text": "Aqui vai ter informação interessante pro leiloeiro."
+  },
+  {
+    "start": 594.16,
+    "end": 595.32,
+    "text": "Vamos ver."
+  },
+  {
+    "start": 595.32,
+    "end": 596.32,
+    "text": "Buscar item."
+  },
+  {
+    "start": 596.32,
+    "end": 597.48,
+    "text": "Crie um lote."
+  },
+  {
+    "start": 597.48,
+    "end": 602.14,
+    "text": "Imagem, título, atributo, data, início e fim, valor mínimo."
+  },
+  {
+    "start": 602.14,
+    "end": 604.82,
+    "text": "Cancela um lote que ainda não sofreu lances."
+  },
+  {
+    "start": 604.82,
+    "end": 607.28,
+    "text": "Cancelaram um lote que ainda não sofreu lances."
+  },
+  {
+    "start": 607.28,
+    "end": 608.28,
+    "text": "Tá."
+  },
+  {
+    "start": 608.28,
+    "end": 609.28,
+    "text": "Então isso é..."
+  },
+  {
+    "start": 609.28,
+    "end": 617.56,
+    "text": "É isso que significa então."
+  },
+  {
+    "start": 617.56,
+    "end": 618.56,
+    "text": "Cancela lotes."
+  },
+  {
+    "start": 619.02,
+    "end": 663.13,
+    "text": "sem lances, exibe o lance atual, histórico, sala do lote ao vivo, ok, saldo comprometido"
+  },
+  {
+    "start": 663.13,
+    "end": 702.24,
+    "text": "tá, isso seria informação a respeito de saldo né, pode ser adicionado, pode estar comprometido, pode ser listado"
+  },
+  {
+    "start": 702.24,
+    "end": 725.63,
+    "text": "tá, ok, interessante, tá bom, depósito assimilado, deu lances e os lotes vencidos, os lotes vencidos?"
+  },
+  {
+    "start": 725.63,
+    "end": 752.28,
+    "text": "ah, entendi, não é vencido de finalizado, é vencido de que ele ganhou, tá, então os lotes eles vão ter, eles vão ter um produto"
+  },
+  {
+    "start": 752.28,
+    "end": 754.28,
+    "text": "que vem da..."
+  },
+  {
+    "start": 754.64,
+    "end": 784.8,
+    "text": "da API, vamos pegar um pouquinho daqui né, eles têm lance inicial, eles têm incremento, eles têm início e fim definidos"
+  },
+  {
+    "start": 784.8,
+    "end": 840.51,
+    "text": "interessante, estamos esquecendo alguma coisa? cancelamento, início e fim definidos, e eles evidentemente são arrematados"
+  },
+  {
+    "start": 840.51,
+    "end": 844.51,
+    "text": "não, pera, eles podem ser cancelados se..."
+  },
+  {
+    "start": 844.51,
+    "end": 867.22,
+    "text": "sem lance, ok, eles podem ser, e no fim eles têm que gerar um link né, link, link público"
+  },
+  {
+    "start": 867.22,
+    "end": 913.13,
+    "text": "o que a gente pode colocar aqui? auditoria, página não, na verdade listagem de lotes finalizados, listagem de lotes finalizados"
+  },
+  {
+    "start": 913.13,
+    "end": 920.42,
+    "text": "e depois específicos de cada lote"
+  },
+  {
+    "start": 921.42,
+    "end": 932.45,
+    "text": "será que vai mostrar lote em andamento? vamos dar uma olhada né"
+  },
+  {
+    "start": 932.45,
+    "end": 963.16,
+    "text": "aqui tem algumas regras de negócio né, fazer também uma série de feedback"
+  },
+  {
+    "start": 963.16,
+    "end": 973.77,
+    "text": "mas nem vai acabar sendo né, bom, enfim, aqui tem algumas regras de lance né, vamos lá"
+  },
+  {
+    "start": 973.77,
+    "end": 998.96,
+    "text": "ok, interessante, então tá bom, vamos falar a respeito da API, API Handling, API Handling"
+  },
+  {
+    "start": 998.96,
+    "end": 1018.3,
+    "text": "então tem que garantir integridade basicamente o que eu vou fazer"
+  },
+  {
+    "start": 1018.3,
+    "end": 1024.9,
+    "text": "eu posso trabalhar com um sistema de cache né cache ou será que uma vez que o"
+  },
+  {
+    "start": 1024.9,
+    "end": 1031.8,
+    "text": "produto criado igual ao produto salvo lote criado"
+  },
+  {
+    "start": 1031.8,
+    "end": 1051.51,
+    "text": "vamos decidir ainda garantir a integridade também significa garantir"
+  },
+  {
+    "start": 1051.51,
+    "end": 1062.13,
+    "text": "criação de lotes sem API né então se a API cair eu devia conseguir"
+  },
+  {
+    "start": 1062.13,
+    "end": 1068.73,
+    "text": "criar o os meus lotes ainda assim né ele não fala só a"
+  },
+  {
+    "start": 1068.73,
+    "end": 1075.75,
+    "text": "respeito bom na verdade ele fala né só que faz"
+  },
+  {
+    "start": 1075.75,
+    "end": 1081.27,
+    "text": "sentido fazer essa implementação né não está sendo pedido mas"
+  },
+  {
+    "start": 1081.27,
+    "end": 1081.47,
+    "text": "é"
+  },
+  {
+    "start": 1081.47,
+    "end": 1081.49,
+    "text": "é"
+  },
+  {
+    "start": 1081.49,
+    "end": 1096.65,
+    "text": ", ainda assim a gente pode imaginar tudo bem interessante talvez a gente"
+  },
+  {
+    "start": 1096.65,
+    "end": 1108.96,
+    "text": "pode colocar aqui no lance em lotes ao vivo"
+  },
+  {
+    "start": 1108.96,
+    "end": 1126.27,
+    "text": "e a gente pode usar o início e fim definidos definidos do lote legal quando"
+  },
+  {
+    "start": 1126.27,
+    "end": 1130.47,
+    "text": "o licitante libera o valor fica comprometido"
+  },
+  {
+    "start": 1130.47,
+    "end": 1138.75,
+    "text": "interessante valor comprometido somente quando"
+  },
+  {
+    "start": 1138.75,
+    "end": 1144.21,
+    "text": "um é licitar importante lidera ou seja ele foi para segundo já liberou libera o"
+  },
+  {
+    "start": 1144.21,
+    "end": 1155.51,
+    "text": "saldo dele tá o lance só é aceita-se coberno disponível que que significa"
+  },
+  {
+    "start": 1155.51,
+    "end": 1193.84,
+    "text": "ficou berno disponível não sei berno disponível vai sabe antes de dependente"
+  },
+  {
+    "start": 1193.84,
+    "end": 1194.84,
+    "text": "Maravilha!"
+  },
+  {
+    "start": 1194.84,
+    "end": 1197.79,
+    "text": "Liquidação."
+  },
+  {
+    "start": 1197.79,
+    "end": 1208.86,
+    "text": "Sem lanches, patch, sem lances..."
+  },
+  {
+    "start": 1208.86,
+    "end": 1209.86,
+    "text": "É..."
+  },
+  {
+    "start": 1209.86,
+    "end": 1212.86,
+    "text": "Lance só vai... opa..."
+  },
+  {
+    "start": 1212.86,
+    "end": 1217.36,
+    "text": "Vai pro leilo..."
+  },
+  {
+    "start": 1217.36,
+    "end": 1224.85,
+    "text": "Tá ok."
+  },
+  {
+    "start": 1224.85,
+    "end": 1237.85,
+    "text": "Qualquer alteração, remoção, incessor ou inserção posterior no histórico, mesmo que direto no meu resultado, deve ser detectada pela auditoria."
+  },
+  {
+    "start": 1237.85,
+    "end": 1254.64,
+    "text": "Então talvez a gente trabalhe com logs?"
+  },
+  {
+    "start": 1254.64,
+    "end": 1257.64,
+    "text": "A gente tá falando do histórico dos lances, né?"
+  },
+  {
+    "start": 1257.64,
+    "end": 1259.64,
+    "text": "Não necessariamente do lote."
+  },
+  {
+    "start": 1259.64,
+    "end": 1264.1,
+    "text": "Não, a gente tá falando do histórico do lote."
+  },
+  {
+    "start": 1264.1,
+    "end": 1266.1,
+    "text": "Porque o lote tem lances."
+  },
+  {
+    "start": 1266.1,
+    "end": 1270.75,
+    "text": "Acaba sendo, né?"
+  },
+  {
+    "start": 1270.75,
+    "end": 1276.94,
+    "text": "Acaba sendo."
+  },
+  {
+    "start": 1276.94,
+    "end": 1281.89,
+    "text": "Então tá."
+  },
+  {
+    "start": 1281.89,
+    "end": 1290.33,
+    "text": "Deve haver logs de auditoria."
+  },
+  {
+    "start": 1290.33,
+    "end": 1295.69,
+    "text": "Maravilha!"
+  },
+  {
+    "start": 1295.69,
+    "end": 1299.69,
+    "text": "Auditoria ou comprovante indicam licitantes sem expor dados pessoais."
+  },
+  {
+    "start": 1299.69,
+    "end": 1304.11,
+    "text": "Ok."
+  },
+  {
+    "start": 1304.11,
+    "end": 1309.82,
+    "text": "Sem dados pessoais."
+  },
+  {
+    "start": 1309.82,
+    "end": 1321.26,
+    "text": "A auditoria só é liberada depois da liquidação, então."
+  },
+  {
+    "start": 1321.26,
+    "end": 1323.26,
+    "text": "Claramente."
+  },
+  {
+    "start": 1323.26,
+    "end": 1327.6,
+    "text": "Ou seja, não vai mostrar o lote em andamento."
+  },
+  {
+    "start": 1327.6,
+    "end": 1343.51,
+    "text": "Maravilha!"
+  },
+  {
+    "start": 1343.51,
+    "end": 1346.51,
+    "text": "Funcionalidades com comportamento."
+  },
+  {
+    "start": 1346.51,
+    "end": 1349.05,
+    "text": "Ok."
+  },
+  {
+    "start": 1349.05,
+    "end": 1352.58,
+    "text": "Vamos definir a stack, então."
+  },
+  {
+    "start": 1352.58,
+    "end": 1356.25,
+    "text": "Stack node..."
+  },
+  {
+    "start": 1356.25,
+    "end": 1359.82,
+    "text": "Vamos usar o node 22, pode ser?"
+  },
+  {
+    "start": 1359.82,
+    "end": 1368.06,
+    "text": "22 plus..."
+  },
+  {
+    "start": 1368.06,
+    "end": 1370.06,
+    "text": "Eu gosto de trabalhar com experts, né?"
+  },
+  {
+    "start": 1370.06,
+    "end": 1375.68,
+    "text": "Mas poderia fazer em nest também."
+  },
+  {
+    "start": 1375.68,
+    "end": 1379.68,
+    "text": "Só que por que eu vou escolher o experts, né?"
+  },
+  {
+    "start": 1379.68,
+    "end": 1392.68,
+    "text": "Como a gente tá fazendo um teste técnico que evidentemente deve ser não somente pra demonstrar nossa capacidade de tomar essas decisões, né?"
+  },
+  {
+    "start": 1392.68,
+    "end": 1394.68,
+    "text": "Como também a nossa implementação."
+  },
+  {
+    "start": 1394.68,
+    "end": 1401.68,
+    "text": "Eu acho que não faz sentido usar um framework tão overkill como o nest, né?"
+  },
+  {
+    "start": 1401.68,
+    "end": 1404.68,
+    "text": "Porque o experts vai atender as nossas necessidades."
+  },
+  {
+    "start": 1404.68,
+    "end": 1409.68,
+    "text": "Perfeitamente."
+  },
+  {
+    "start": 1409.68,
+    "end": 1412.68,
+    "text": "Por isso eu acredito que pode ser..."
+  },
+  {
+    "start": 1412.68,
+    "end": 1417.25,
+    "text": "Pode ser demais usar o nest."
+  },
+  {
+    "start": 1417.25,
+    "end": 1418.25,
+    "text": "Mas tudo bem."
+  },
+  {
+    "start": 1418.25,
+    "end": 1420.25,
+    "text": "Vamos ver o banco de dados agora."
+  },
+  {
+    "start": 1420.25,
+    "end": 1430.06,
+    "text": "PostgreSQL ou um banco no SQL."
+  },
+  {
+    "start": 1430.06,
+    "end": 1432.06,
+    "text": "Ele não fala de SQLite, né?"
+  },
+  {
+    "start": 1432.06,
+    "end": 1436.92,
+    "text": "Não fala de SQLite."
+  },
+  {
+    "start": 1436.92,
+    "end": 1439.92,
+    "text": "Então fica entre o Postgre e uma SQL."
+  },
+  {
+    "start": 1439.92,
+    "end": 1446.06,
+    "text": "Eu gostaria de usar o..."
+  },
+  {
+    "start": 1446.06,
+    "end": 1448.06,
+    "text": "O SQLite, só que não vai dar."
+  },
+  {
+    "start": 1448.06,
+    "end": 1449.06,
+    "text": "Tudo bem."
+  },
+  {
+    "start": 1449.06,
+    "end": 1453.06,
+    "text": "Por que que eu não vou usar o Mongo?"
+  },
+  {
+    "start": 1453.06,
+    "end": 1457.91,
+    "text": "Porque eu acredito que quando a gente tem uma..."
+  },
+  {
+    "start": 1457.91,
+    "end": 1460.91,
+    "text": "Esse tipo de..."
+  },
+  {
+    "start": 1460.91,
+    "end": 1461.91,
+    "text": "De aplicação, né?"
+  },
+  {
+    "start": 1461.91,
+    "end": 1463.91,
+    "text": "Que uma coisa leva a outra."
+  },
+  {
+    "start": 1463.91,
+    "end": 1469.96,
+    "text": "É muito importante a gente trabalhar com a..."
+  },
+  {
+    "start": 1469.96,
+    "end": 1470.96,
+    "text": "Com a relação, né?"
+  },
+  {
+    "start": 1470.96,
+    "end": 1473.96,
+    "text": "A relação que o SQL permite."
+  },
+  {
+    "start": 1473.96,
+    "end": 1476.96,
+    "text": "Então por isso que eu não vou usar um banco no SQL."
+  },
+  {
+    "start": 1476.96,
+    "end": 1478.96,
+    "text": "Então pode ver que eu já tô pensando, por exemplo..."
+  },
+  {
+    "start": 1478.96,
+    "end": 1480.96,
+    "text": "Um lote, ele tem lance."
+  },
+  {
+    "start": 1480.96,
+    "end": 1482.96,
+    "text": "Um usuário, ele tem saldo."
+  },
+  {
+    "start": 1482.96,
+    "end": 1484.96,
+    "text": "Esse tipo de coisa."
+  },
+  {
+    "start": 1484.96,
+    "end": 1486.96,
+    "text": "Ela pode ser feita no Mongo."
+  },
+  {
+    "start": 1486.96,
+    "end": 1488.96,
+    "text": "Só que..."
+  },
+  {
+    "start": 1488.96,
+    "end": 1490.96,
+    "text": "É onde o SQL brilha, né?"
+  },
+  {
+    "start": 1490.96,
+    "end": 1492.96,
+    "text": "O Mongo, ele tem as suas..."
+  },
+  {
+    "start": 1492.96,
+    "end": 1493.96,
+    "text": "Suas peculiaridades."
+  },
+  {
+    "start": 1493.96,
+    "end": 1495.96,
+    "text": "Sua área de atuação."
+  },
+  {
+    "start": 1495.96,
+    "end": 1497.96,
+    "text": "E ele é muito bom em quesito de velocidade."
+  },
+  {
+    "start": 1497.96,
+    "end": 1499.96,
+    "text": "E esse tipo de coisa, né?"
+  },
+  {
+    "start": 1501.96,
+    "end": 1503.96,
+    "text": "Mas não necessariamente em relacionamento."
+  },
+  {
+    "start": 1505.96,
+    "end": 1511.83,
+    "text": "Um leiloeiro, dois clientes."
+  },
+  {
+    "start": 1511.83,
+    "end": 1512.83,
+    "text": "Ao menos..."
+  },
+  {
+    "start": 1512.83,
+    "end": 1516.04,
+    "text": "Sem montar tudo do zero."
+  },
+  {
+    "start": 1517.04,
+    "end": 1526.39,
+    "text": "Um treinador."
+  },
+  {
+    "start": 1526.39,
+    "end": 1529.86,
+    "text": "Um leiloeiro."
+  },
+  {
+    "start": 1529.86,
+    "end": 1530.86,
+    "text": "Um leiloeiro."
+  },
+  {
+    "start": 1530.86,
+    "end": 1531.86,
+    "text": "Um leiloeiro."
+  },
+  {
+    "start": 1531.86,
+    "end": 1533.86,
+    "text": "E dois..."
+  },
+  {
+    "start": 1533.86,
+    "end": 1534.86,
+    "text": "Hum..."
+  },
+  {
+    "start": 1534.86,
+    "end": 1535.86,
+    "text": "Dois clientes, né?"
+  },
+  {
+    "start": 1535.86,
+    "end": 1541.9,
+    "text": "Dois, o que seria ali, licitantes."
+  },
+  {
+    "start": 1541.9,
+    "end": 1545.9,
+    "text": "Agora como que eu vou fazer para garantir uma..."
+  },
+  {
+    "start": 1545.9,
+    "end": 1547.9,
+    "text": "Para garantir que só vai entrar o pessoal da..."
+  },
+  {
+    "start": 1547.9,
+    "end": 1548.9,
+    "text": "Da Verge, ou, né?"
+  },
+  {
+    "start": 1548.9,
+    "end": 1565.21,
+    "text": "Vai que entra alguém e dá uma zoada."
+  },
+  {
+    "start": 1565.21,
+    "end": 1566.21,
+    "text": "Talvez eu faça a senha, né?"
+  },
+  {
+    "start": 1566.21,
+    "end": 1569.21,
+    "text": "E aí eu informo a senha."
+  },
+  {
+    "start": 1569.21,
+    "end": 1572.21,
+    "text": "Parece interessante."
+  },
+  {
+    "start": 1572.21,
+    "end": 1573.21,
+    "text": "E eu posso fazer numa branch diferente, né?"
+  },
+  {
+    "start": 1573.21,
+    "end": 1581.37,
+    "text": "branch diferente né, posso fazer na branch main manter o aplicativo da forma como ele"
+  },
+  {
+    "start": 1581.37,
+    "end": 1593.69,
+    "text": "é né, completamente limpo para ele funcionar da mesma forma que funciona aqui ó, e aí"
+  },
+  {
+    "start": 1593.69,
+    "end": 1612.07,
+    "text": "fazer uma outra branch que seria a demo né, pode ser interessante. Funcionalidades com"
+  },
+  {
+    "start": 1612.07,
+    "end": 1621.56,
+    "text": "comportamento inesperado devem ser mencionadas, sem problema. Opcionais, busca e filtro de"
+  },
+  {
+    "start": 1621.56,
+    "end": 1637.66,
+    "text": "lotes, ah tem que ter né, busca e filtro, cancelamento do lote com estorno automático,"
+  },
+  {
+    "start": 1637.66,
+    "end": 1657.92,
+    "text": "é bom né, é bom né, cancelamento pelo leiloeiro com estorno, interessante. Docker eu vou utilizar,"
+  },
+  {
+    "start": 1657.92,
+    "end": 1658.52,
+    "text": "testes."
+  },
+  {
+    "start": 1658.58,
+    "end": 1667.92,
+    "text": "Nota fiscal revenda, não precisa fazer, tá, já me deu uns opcionais aqui e me disse"
+  },
+  {
+    "start": 1667.92,
+    "end": 1678.55,
+    "text": "o que eles não querem que eu faça, tudo bem, não tem problema. Bom, então maravilha,"
+  },
+  {
+    "start": 1678.55,
+    "end": 1689.88,
+    "text": "fiz aqui a minha listagem né, vamo, vamo ver algumas, algumas melhorias que a gente"
+  },
+  {
+    "start": 1689.88,
+    "end": 1701.68,
+    "text": "pode fazer né, o que que eu vou fazer, eu vou pegar aqui o pdf, vou jogar pra cá, baseado"
+  },
+  {
+    "start": 1701.68,
+    "end": 1702.32,
+    "text": "no pdf assim,"
+  },
+  {
+    "start": 1702.34,
+    "end": 1724.58,
+    "text": "eu fiz o seguinte, faltou colocar o, vamo usar o pushgres ou mais que l? acredito que a gente pode"
+  },
+  {
+    "start": 1724.58,
+    "end": 1750.99,
+    "text": "usar o pushgres né, e o docker? fazer o seguinte, levantamento de requisitos, discutir primeiro o"
+  },
+  {
+    "start": 1750.99,
+    "end": 1757.39,
+    "text": "levantamento de requisitos do back-end,"
+  },
+  {
+    "start": 1759.51,
+    "end": 1838.56,
+    "text": "e falar a respeito da decisão das ferramentas tem algumas coisas que eu tenho em mente é isso"
+  },
+  {
+    "start": 1838.56,
+    "end": 1849.13,
+    "text": "aqui que ele tá falando mesmo né eu acredito que isso aqui a gente vai poder fazer cadê"
+  },
+  {
+    "start": 1849.13,
+    "end": 1859.06,
+    "text": "onde eu tava escrevendo do incremento vai ser em reais ou na moeda né moedas"
+  },
+  {
+    "start": 1859.06,
+    "end": 2002.78,
+    "text": "não tem necessariamente um cache né realmente é isso que eu tava"
+  },
+  {
+    "start": 2003.92,
+    "end": 2014.18,
+    "text": "é isso que eu tava pensando snapshot de fato sim"
+  },
+  {
+    "start": 2014.18,
+    "end": 2022.99,
+    "text": "então como funcionaria deixa eu pegar o meu escalidró"
+  },
+  {
+    "start": 2022.99,
+    "end": 2037.64,
+    "text": "então eu tenho aqui a minha API"
+  },
+  {
+    "start": 2044.42,
+    "end": 2047.44,
+    "text": "e eu tenho ela aqui e aí no momento da requisição"
+  },
+  {
+    "start": 2047.44,
+    "end": 2063.59,
+    "text": "no momento do meu servidor ele pediu nos produtos"
+  },
+  {
+    "start": 2063.75,
+    "end": 2066.69,
+    "text": "fat"
+  },
+  {
+    "start": 2066.69,
+    "end": 2068.83,
+    "text": "quando ele receber de volta"
+  },
+  {
+    "start": 2068.85,
+    "end": 2076.09,
+    "text": "ele recebeu, vamos lá, tanto faz"
+  },
+  {
+    "start": 2076.09,
+    "end": 2080.28,
+    "text": "obting prodts"
+  },
+  {
+    "start": 2080.28,
+    "end": 2083.4,
+    "text": "obting recebe... sei lá"
+  },
+  {
+    "start": 2083.4,
+    "end": 2084.72,
+    "text": "blablablabla"
+  },
+  {
+    "start": 2084.72,
+    "end": 2091.48,
+    "text": "no momento que eu fizer a seleção"
+  },
+  {
+    "start": 2091.48,
+    "end": 2142.38,
+    "text": "Vou salvar o snapshot, parece bom né? Parece bom na minha opinião. É isso que eu"
+  },
+  {
+    "start": 2142.38,
+    "end": 2151.33,
+    "text": "estava pensando, eu vou usar uma ORM, não só para ter uma facilidade melhor, como"
+  },
+  {
+    "start": 2151.33,
+    "end": 2160.15,
+    "text": "também eu não vou ter, eu não vou ter muito problema de ficar tendo que fazer"
+  },
+  {
+    "start": 2160.15,
+    "end": 2165.13,
+    "text": "aquelas validaçõezinhas né, procurando SQL injection, esse tipo de coisa, o Drizzle"
+  },
+  {
+    "start": 2165.13,
+    "end": 2174.9,
+    "text": "ele dá uma segurança a mais, eu consigo segurar melhor. A gente pode usar também o Zodio como"
+  },
+  {
+    "start": 2174.9,
+    "end": 2181.08,
+    "text": "ele disse, é uma boa prática de validação em backend, tudo aquilo que for entrar de"
+  },
+  {
+    "start": 2181.08,
+    "end": 2196.62,
+    "text": "uma API externa a gente passar por um Zodio né, pode ser interessante. Então isso que eu"
+  },
+  {
+    "start": 2196.62,
+    "end": 2203.18,
+    "text": "estava pensando, como é que a gente vai fazer no tempo real? A gente pode fazer um WebSocket"
+  },
+  {
+    "start": 2203.18,
+    "end": 2206.22,
+    "text": "e manter"
+  },
+  {
+    "start": 2206.22,
+    "end": 2213.3,
+    "text": "ele aberto quando a pessoa estiver dentro do lance, só que imagina que a gente está numa tela de"
+  },
+  {
+    "start": 2213.3,
+    "end": 2219.66,
+    "text": "listagem, imagina que a gente está aqui ó, e aí aqui a gente tem cheio de informação, meu Deus do céu,"
+  },
+  {
+    "start": 2219.66,
+    "end": 2229.5,
+    "text": "tempo e quantos lances tem, esse tipo de coisa, um cardzinho para várias informações né,"
+  },
+  {
+    "start": 2229.5,
+    "end": 2237.09,
+    "text": "isso pode deixar o website um pouco bloated né, então o que que a gente pode fazer? Talvez uma"
+  },
+  {
+    "start": 2237.75,
+    "end": 2247.37,
+    "text": "coisa no front-end, de como tá e tal, imagina que isso aqui seja o lance máximo atual né,"
+  },
+  {
+    "start": 2247.37,
+    "end": 2255.51,
+    "text": "de quanto tá e os que estão para finalizar né, uma coisa parecida com isso aqui ó, imagina que falta"
+  },
+  {
+    "start": 2255.51,
+    "end": 2262.51,
+    "text": "tipo 12 horas, aí coloca um avisozinho aqui ó, finaliza em 12 horas, parece mais interessante né."
+  },
+  {
+    "start": 2262.51,
+    "end": 2265.63,
+    "text": "A gente pode fazer isso para"
+  },
+  {
+    "start": 2267.75,
+    "end": 2272.19,
+    "text": "evitar de ficar um tráfego muito grande, porque imagina você escalar um"
+  },
+  {
+    "start": 2272.19,
+    "end": 2279.33,
+    "text": "WebSocket para centenas de usuários numa listagem que não necessariamente é o mais interessante né,"
+  },
+  {
+    "start": 2279.33,
+    "end": 2288.3,
+    "text": "então a gente pode fazer dessa forma na minha opinião, mesma coisa aqui, o Express,"
+  },
+  {
+    "start": 2288.3,
+    "end": 2326.93,
+    "text": "eu também vou de Drizzle, valores inteiros em centavos com certeza né,"
+  },
+  {
+    "start": 2326.93,
+    "end": 2337.22,
+    "text": "muito por conta daquele problema que a gente tem no JavaScript não né, na programação em geral."
+  },
+  {
+    "start": 2337.46,
+    "end": 2351.18,
+    "text": "De você fazer soma, de você fazer uma soma e ele não"
+  },
+  {
+    "start": 2351.18,
+    "end": 2359.32,
+    "text": "somar corretamente os números decimais né, por causa de como funciona o computador,"
+  },
+  {
+    "start": 2359.32,
+    "end": 2364.64,
+    "text": "as questões dos bits de memória né, tudo ele passa para 0 e 1, se você ficar adicionando"
+  },
+  {
+    "start": 2364.64,
+    "end": 2373.06,
+    "text": "muita casa, você vai ter algumas imprecisões, eu acabei de criar 4 microcentavos à base de nada,"
+  },
+  {
+    "start": 2373.58,
+    "end": 2390.24,
+    "text": "Então a gente faz em centavos mesmo, a gente faz em centavos mesmo e a gente evita esse"
+  },
+  {
+    "start": 2390.24,
+    "end": 2405.67,
+    "text": "tipo de complexidade."
+  },
+  {
+    "start": 2405.67,
+    "end": 2416.57,
+    "text": "Isso aqui é interessante, a gente adotar uma timezone única e só fazer a inversão"
+  },
+  {
+    "start": 2416.57,
+    "end": 2420.27,
+    "text": "na tela do usuário."
+  },
+  {
+    "start": 2420.27,
+    "end": 2424.95,
+    "text": "Então imagina que, por exemplo, eu estou no horário de Brasília, imagina que eu faço"
+  },
+  {
+    "start": 2424.95,
+    "end": 2434.82,
+    "text": "a abertura aqui às 21h30, mas eu estou 3 horas atrasado, então já seria na verdade"
+  },
+  {
+    "start": 2434.82,
+    "end": 2447.08,
+    "text": "1h30 da manhã, 22h, 23h, na verdade seria meia noite e meia, seria meia noite e meia"
+  },
+  {
+    "start": 2447.08,
+    "end": 2454.98,
+    "text": "no servidor, só que ele vai disponibilizar para mim como 9h30, pode ser interessante."
+  },
+  {
+    "start": 2454.98,
+    "end": 2526.54,
+    "text": "Bom."
+  },
+  {
+    "start": 2526.54,
+    "end": 2548.06,
+    "text": "Vou começar a fazer o modelamento do banco de dados, acredito que pode ser interessante."
+  },
+  {
+    "start": 2548.06,
+    "end": 2552.34,
+    "text": "Eu acredito que essa opção aqui seja interessante."
+  },
+  {
+    "start": 2552.34,
+    "end": 2574.1,
+    "text": "Vamos discutir dados, o que eu vou fazer, eu vou abrir um db model aqui na internet,"
+  },
+  {
+    "start": 2574.1,
+    "end": 2589.81,
+    "text": "vamos ver o que a gente tem, esse db diagram eu já usei."
+  },
+  {
+    "start": 2589.81,
+    "end": 2590.81,
+    "text": "Cadê os diagramas?"
+  },
+  {
+    "start": 2590.81,
+    "end": 2597.15,
+    "text": "O que é isso?"
+  },
+  {
+    "start": 2597.15,
+    "end": 2601.19,
+    "text": "Draw db, será?"
+  },
+  {
+    "start": 2601.19,
+    "end": 2602.19,
+    "text": "Vamos dar uma olhada."
+  },
+  {
+    "start": 2602.19,
+    "end": 2614.12,
+    "text": "Não liga essa tradução, velho."
+  },
+  {
+    "start": 2614.36,
+    "end": 2631.16,
+    "text": "Graças a Deus."
+  },
+  {
+    "start": 2631.16,
+    "end": 2632.16,
+    "text": "Interessante."
+  },
+  {
+    "start": 2632.16,
+    "end": 2648.77,
+    "text": "Vamos pedir uma codificação no SQL e a gente faz as mudanças conforme a gente identificar,"
+  },
+  {
+    "start": 2648.77,
+    "end": 2651.91,
+    "text": "né?"
+  },
+  {
+    "start": 2651.91,
+    "end": 2653.91,
+    "text": "Vamos dar uma olhada como é que ele faz."
+  },
+  {
+    "start": 2653.91,
+    "end": 2686.49,
+    "text": "O que que ele sugere para a gente, né?"
+  },
+  {
+    "start": 2686.49,
+    "end": 2860.24,
+    "text": "Write yourself, push this, diagram friendly, maravilha, vamos dar uma olhada como é que"
+  },
+  {
+    "start": 2860.24,
+    "end": 2861.24,
+    "text": "isso aqui funciona."
+  },
+  {
+    "start": 2861.24,
+    "end": 2862.24,
+    "text": "Tabela de usuários."
+  },
+  {
+    "start": 2862.24,
+    "end": 2863.24,
+    "text": "Essa daqui faz bastante coisa, né?"
+  },
+  {
+    "start": 2863.24,
+    "end": 2874.67,
+    "text": "Essa daqui faz só auditoria."
+  },
+  {
+    "start": 2874.67,
+    "end": 2875.67,
+    "text": "Vamos colocar auditoria aqui em cima."
+  },
+  {
+    "start": 2875.67,
+    "end": 2876.67,
+    "text": "Interessante."
+  },
+  {
+    "start": 2876.67,
+    "end": 2877.67,
+    "text": "Ah, tem dois tipos de auditoria diferentes."
+  },
+  {
+    "start": 2877.67,
+    "end": 2878.67,
+    "text": "Está ok."
+  },
+  {
+    "start": 2878.67,
+    "end": 2879.67,
+    "text": "Snapshot do produto, legal."
+  },
+  {
+    "start": 2879.67,
+    "end": 2880.67,
+    "text": "As bits, né?"
+  },
+  {
+    "start": 2880.67,
+    "end": 2881.67,
+    "text": "Que são os lances."
+  },
+  {
+    "start": 2881.67,
+    "end": 2885.14,
+    "text": "Interessante."
+  },
+  {
+    "start": 2885.14,
+    "end": 2886.14,
+    "text": "Um pouco melhor, né?"
+  },
+  {
+    "start": 2886.14,
+    "end": 2887.14,
+    "text": "Um pouco melhor."
+  },
+  {
+    "start": 2887.14,
+    "end": 2888.14,
+    "text": "Bom, por enquanto fazer a relação entre os dados."
+  },
+  {
+    "start": 2888.14,
+    "end": 2898.13,
+    "text": "Vamos ver aqui."
+  },
+  {
+    "start": 2898.13,
+    "end": 2901.4,
+    "text": "Vamos ver aqui."
+  },
+  {
+    "start": 2901.4,
+    "end": 2902.4,
+    "text": "Está ok."
+  },
+  {
+    "start": 2902.4,
+    "end": 2903.4,
+    "text": "Está ok."
+  },
+  {
+    "start": 2903.4,
+    "end": 2904.4,
+    "text": "Está ok."
+  },
+  {
+    "start": 2904.4,
+    "end": 2905.4,
+    "text": "Está ok."
+  },
+  {
+    "start": 2905.4,
+    "end": 2906.4,
+    "text": "Está ok."
+  },
+  {
+    "start": 2906.4,
+    "end": 2916.84,
+    "text": "Está ok."
+  },
+  {
+    "start": 2916.84,
+    "end": 2925.49,
+    "text": "Está ok."
+  },
+  {
+    "start": 2925.49,
+    "end": 2927.93,
+    "text": "Está ok."
+  },
+  {
+    "start": 2927.93,
+    "end": 2928.93,
+    "text": "Está ok."
+  },
+  {
+    "start": 2928.93,
+    "end": 2933.26,
+    "text": "Está ok."
+  },
+  {
+    "start": 2933.26,
+    "end": 2965.07,
+    "text": "Está ok."
+  },
+  {
+    "start": 2965.07,
+    "end": 2966.07,
+    "text": "Está ok."
+  },
+  {
+    "start": 2966.07,
+    "end": 2968.99,
+    "text": "Está ok."
+  },
+  {
+    "start": 2968.99,
+    "end": 2969.99,
+    "text": "Está ok."
+  },
+  {
+    "start": 2969.99,
+    "end": 2988.5,
+    "text": "Está ok."
+  },
+  {
+    "start": 2988.5,
+    "end": 2989.5,
+    "text": "Está ok."
+  },
+  {
+    "start": 2989.5,
+    "end": 2991.56,
+    "text": "Ola, como que é a relação entre usuário e carteira?"
+  },
+  {
+    "start": 2991.56,
+    "end": 3009.23,
+    "text": "Acredito que pode ser o mais simples pra gente começar."
+  },
+  {
+    "start": 3009.23,
+    "end": 3010.23,
+    "text": "Acredito que pode ser."
+  },
+  {
+    "start": 3010.23,
+    "end": 3014.35,
+    "text": "Eu já preparei uma pasta pra gente começar."
+  },
+  {
+    "start": 3014.35,
+    "end": 3017.78,
+    "text": "Vamos lá."
+  },
+  {
+    "start": 3017.78,
+    "end": 3028.32,
+    "text": "Acredito que a gente pode começar já."
+  },
+  {
+    "start": 3028.32,
+    "end": 3039.9,
+    "text": "Vamos abrir aqui o terminal."
+  },
+  {
+    "start": 3039.9,
+    "end": 3047.76,
+    "text": "Fechar esse aqui."
+  },
+  {
+    "start": 3047.76,
+    "end": 3051.39,
+    "text": "Getting started."
+  },
+  {
+    "start": 3051.39,
+    "end": 3057.86,
+    "text": "É com npm mesmo?"
+  },
+  {
+    "start": 3057.86,
+    "end": 3062.81,
+    "text": "Não tem necessidade do pnpm não?"
+  },
+  {
+    "start": 3062.81,
+    "end": 3063.81,
+    "text": "Vamos fazer um."
+  },
+  {
+    "start": 3063.81,
+    "end": 3064.81,
+    "text": "Onde é que você está?"
+  },
+  {
+    "start": 3064.81,
+    "end": 3068.47,
+    "text": "server.ts"
+  },
+  {
+    "start": 3068.47,
+    "end": 3071.01,
+    "text": "que maravilha"
+  },
+  {
+    "start": 3071.01,
+    "end": 3073.39,
+    "text": "a gente precisa instalar o express"
+  },
+  {
+    "start": 3073.39,
+    "end": 3118.05,
+    "text": "inicialização"
+  },
+  {
+    "start": 3118.05,
+    "end": 3136.17,
+    "text": "vamos voltar aqui então"
+  },
+  {
+    "start": 3136.17,
+    "end": 3140.53,
+    "text": "fazer o nosso ts configuration"
+  },
+  {
+    "start": 3140.53,
+    "end": 3143.03,
+    "text": "vamos apontar"
+  },
+  {
+    "start": 3143.03,
+    "end": 3144.07,
+    "text": "o altdir"
+  },
+  {
+    "start": 3144.07,
+    "end": 3147.69,
+    "text": "altdir"
+  },
+  {
+    "start": 3147.69,
+    "end": 3218.35,
+    "text": "muito provavelmente eu tenho que reiniciar"
+  },
+  {
+    "start": 3218.35,
+    "end": 3219.35,
+    "text": "a pasta do projeto"
+  },
+  {
+    "start": 3219.35,
+    "end": 3262.64,
+    "text": "foi criada mesmo, tudo bem"
+  },
+  {
+    "start": 3262.64,
+    "end": 3276.97,
+    "text": "certo por aqui"
+  },
+  {
+    "start": 3276.97,
+    "end": 3282.63,
+    "text": ".git ignore"
+  },
+  {
+    "start": 3282.63,
+    "end": 3291.22,
+    "text": "a gente pode colocar"
+  },
+  {
+    "start": 3291.22,
+    "end": 3296.13,
+    "text": "nmodules"
+  },
+  {
+    "start": 3296.13,
+    "end": 3299.51,
+    "text": "e a gente pode colocar dist também"
+  },
+  {
+    "start": 3299.51,
+    "end": 3300.61,
+    "text": "além do .env"
+  },
+  {
+    "start": 3300.61,
+    "end": 3301.83,
+    "text": "ainda não tem mas"
+  },
+  {
+    "start": 3301.83,
+    "end": 3304.45,
+    "text": "muito possivelmente vai ser usado"
+  },
+  {
+    "start": 3304.45,
+    "end": 3309.38,
+    "text": ".example"
+  },
+  {
+    "start": 3309.38,
+    "end": 3313.95,
+    "text": "show"
+  },
+  {
+    "start": 3313.95,
+    "end": 3328.6,
+    "text": "strict true"
+  },
+  {
+    "start": 3328.6,
+    "end": 3330.7,
+    "text": "noimplicity"
+  },
+  {
+    "start": 3330.7,
+    "end": 3334.28,
+    "text": "noimplicity"
+  },
+  {
+    "start": 3336.86,
+    "end": 3338.52,
+    "text": "noimplicity.n"
+  },
+  {
+    "start": 3338.52,
+    "end": 3435.2,
+    "text": ".src"
+  },
+  {
+    "start": 3435.2,
+    "end": 3436.64,
+    "text": "por que não né"
+  },
+  {
+    "start": 3436.64,
+    "end": 3438.7,
+    "text": ".src"
+  },
+  {
+    "start": 3438.7,
+    "end": 3451.02,
+    "text": ".ts"
+  },
+  {
+    "start": 3451.02,
+    "end": 3451.66,
+    "text": "legal"
+  },
+  {
+    "start": 3451.66,
+    "end": 3468.86,
+    "text": ".ts"
+  },
+  {
+    "start": 3468.86,
+    "end": 3469.9,
+    "text": "maravilha"
+  },
+  {
+    "start": 3477.62,
+    "end": 3479.18,
+    "text": "a gente pode fazer"
+  },
+  {
+    "start": 3479.18,
+    "end": 3505.17,
+    "text": "servers running on port 3000"
+  },
+  {
+    "start": 3505.17,
+    "end": 3536.55,
+    "text": "ok"
+  },
+  {
+    "start": 3536.55,
+    "end": 3542.45,
+    "text": "é aqui?"
+  },
+  {
+    "start": 3542.45,
+    "end": 3544.25,
+    "text": "é aqui que ele pediu a alteração?"
+  },
+  {
+    "start": 3544.25,
+    "end": 3549.85,
+    "text": "não"
+  },
+  {
+    "start": 3549.85,
+    "end": 3554.77,
+    "text": "é no package.json"
+  },
+  {
+    "start": 3554.77,
+    "end": 3555.87,
+    "text": "que seja aqui né"
+  },
+  {
+    "start": 3555.87,
+    "end": 3557.07,
+    "text": "module"
+  },
+  {
+    "start": 3557.07,
+    "end": 3575.69,
+    "text": "module é o"
+  },
+  {
+    "start": 3575.69,
+    "end": 3576.39,
+    "text": "module"
+  },
+  {
+    "start": 3576.43,
+    "end": 3589.31,
+    "text": "cannot be written in common"
+  },
+  {
+    "start": 3589.31,
+    "end": 3719.56,
+    "text": "então é module import"
+  },
+  {
+    "start": 3719.56,
+    "end": 3720.56,
+    "text": "que vergonha"
+  },
+  {
+    "start": 3720.56,
+    "end": 3889.4,
+    "text": "ok"
+  },
+  {
+    "start": 3889.4,
+    "end": 3895.37,
+    "text": "sensacional"
+  },
+  {
+    "start": 3895.37,
+    "end": 3896.37,
+    "text": "que maravilha né"
+  },
+  {
+    "start": 3896.37,
+    "end": 3897.37,
+    "text": "começamos"
+  },
+  {
+    "start": 3897.37,
+    "end": 3909.2,
+    "text": "então o download do"
+  },
+  {
+    "start": 3909.2,
+    "end": 3911.2,
+    "text": "postgres"
+  },
+  {
+    "start": 3911.2,
+    "end": 3915.53,
+    "text": "postgresql"
+  },
+  {
+    "start": 3915.53,
+    "end": 3917.53,
+    "text": "downloads"
+  },
+  {
+    "start": 3917.53,
+    "end": 4039.37,
+    "text": "drizzle"
+  },
+  {
+    "start": 4039.37,
+    "end": 4041.37,
+    "text": "estou fazendo uma instalação"
+  },
+  {
+    "start": 4041.37,
+    "end": 4129.84,
+    "text": "o docker não está iniciado"
+  },
+  {
+    "start": 4129.84,
+    "end": 4174.65,
+    "text": "na porta tudo aqui já é setado"
+  },
+  {
+    "start": 4174.65,
+    "end": 4176.65,
+    "text": "interessante"
+  },
+  {
+    "start": 4176.65,
+    "end": 4177.25,
+    "text": "pode ter certeza que no .git ignore não está iniciado"
+  },
+  {
+    "start": 4177.25,
+    "end": 4182.39,
+    "text": "interessante pode ter certeza que no .git ignore não está iniciado"
+  },
+  {
+    "start": 4182.39,
+    "end": 4184.39,
+    "text": "está o env"
+  },
+  {
+    "start": 4184.39,
+    "end": 4186.39,
+    "text": "maravilha"
+  },
+  {
+    "start": 4186.39,
+    "end": 4196.17,
+    "text": "vou colocar esse aqui também"
+  },
+  {
+    "start": 4196.17,
+    "end": 4300.89,
+    "text": "vamos fazer isso"
+  },
+  {
+    "start": 4300.89,
+    "end": 4340.26,
+    "text": "create a table"
+  },
+  {
+    "start": 4340.26,
+    "end": 4342.26,
+    "text": "vamos continuar aqui então de onde a gente parou né"
+  },
+  {
+    "start": 4342.26,
+    "end": 4344.26,
+    "text": "e"
+  },
+  {
+    "start": 4344.26,
+    "end": 4346.26,
+    "text": "eu tomei uma decisão arquitetural"
+  },
+  {
+    "start": 4346.26,
+    "end": 4348.26,
+    "text": "que eu vou fazer o seguinte"
+  },
+  {
+    "start": 4348.26,
+    "end": 4350.26,
+    "text": "isso aqui é uma"
+  },
+  {
+    "start": 4350.26,
+    "end": 4352.26,
+    "text": "uma dependência"
+  },
+  {
+    "start": 4352.26,
+    "end": 4354.26,
+    "text": "hardcodada né"
+  },
+  {
+    "start": 4354.26,
+    "end": 4356.26,
+    "text": "e a gente não quer isso a gente quer poder mudar o drizzle quando a gente quiser"
+  },
+  {
+    "start": 4356.26,
+    "end": 4358.26,
+    "text": "a gente quer poder mudar o banco de dados quando a gente quiser"
+  },
+  {
+    "start": 4358.26,
+    "end": 4360.26,
+    "text": "a gente quer poder mudar o banco de dados quando a gente quiser"
+  },
+  {
+    "start": 4360.26,
+    "end": 4364.22,
+    "text": "parece que"
+  },
+  {
+    "start": 4364.22,
+    "end": 4366.22,
+    "text": "são segundo que minha televisão está"
+  },
+  {
+    "start": 4366.22,
+    "end": 4382.17,
+    "text": "com som"
+  },
+  {
+    "start": 4382.17,
+    "end": 4384.17,
+    "text": "antes de mais nada tem algumas configurações no"
+  },
+  {
+    "start": 4384.17,
+    "end": 4386.17,
+    "text": "modelo de IA que eu vou estar"
+  },
+  {
+    "start": 4386.17,
+    "end": 4388.17,
+    "text": "usando para me ajudar eu vou estar trabalhando"
+  },
+  {
+    "start": 4388.17,
+    "end": 4390.17,
+    "text": "junto com o"
+  },
+  {
+    "start": 4390.17,
+    "end": 4392.17,
+    "text": "junto com o codex"
+  },
+  {
+    "start": 4392.17,
+    "end": 4394.17,
+    "text": "nesse projeto"
+  },
+  {
+    "start": 4394.17,
+    "end": 4396.17,
+    "text": "e eu vou pedir para ele fazer"
+  },
+  {
+    "start": 4396.17,
+    "end": 4398.17,
+    "text": "algumas coisas né"
+  },
+  {
+    "start": 4398.17,
+    "end": 4400.17,
+    "text": "de começo eu vou"
+  },
+  {
+    "start": 4400.17,
+    "end": 4402.17,
+    "text": "fazer a instalação de algumas skills"
+  },
+  {
+    "start": 4402.17,
+    "end": 4404.17,
+    "text": "de algumas skills"
+  },
+  {
+    "start": 4404.17,
+    "end": 4406.17,
+    "text": "que eu acho importante para trabalhar em especial"
+  },
+  {
+    "start": 4406.17,
+    "end": 4413.7,
+    "text": "no backend"
+  },
+  {
+    "start": 4413.7,
+    "end": 4415.7,
+    "text": "eu vou usar"
+  },
+  {
+    "start": 4415.7,
+    "end": 4417.7,
+    "text": "ponytail"
+  },
+  {
+    "start": 4417.7,
+    "end": 4419.7,
+    "text": "e eu vou usar agora"
+  },
+  {
+    "start": 4419.7,
+    "end": 4421.7,
+    "text": "do topo da minha cabeça também"
+  },
+  {
+    "start": 4421.7,
+    "end": 4423.7,
+    "text": "a"
+  },
+  {
+    "start": 4423.7,
+    "end": 4430.66,
+    "text": "graphify"
+  },
+  {
+    "start": 4436.42,
+    "end": 4445.75,
+    "text": "maravilha"
+  },
+  {
+    "start": 4445.75,
+    "end": 4447.75,
+    "text": "a ponytail ela serve para"
+  },
+  {
+    "start": 4447.75,
+    "end": 4451.13,
+    "text": "primeiro que ela economiza um pouco de tokens"
+  },
+  {
+    "start": 4451.13,
+    "end": 4453.13,
+    "text": "segundo que"
+  },
+  {
+    "start": 4453.13,
+    "end": 4455.13,
+    "text": "ela fica evitando"
+  },
+  {
+    "start": 4455.13,
+    "end": 4457.13,
+    "text": "muito código bloated"
+  },
+  {
+    "start": 4457.13,
+    "end": 4459.13,
+    "text": "ela gera menos código"
+  },
+  {
+    "start": 4459.13,
+    "end": 4461.13,
+    "text": "ela gasta menos tokens"
+  },
+  {
+    "start": 4461.13,
+    "end": 4463.13,
+    "text": "ela tem menos custo demora menos"
+  },
+  {
+    "start": 4463.13,
+    "end": 4465.13,
+    "text": "enfim ela fica se livrando um pouco"
+  },
+  {
+    "start": 4465.13,
+    "end": 4467.13,
+    "text": "daquilo que"
+  },
+  {
+    "start": 4467.13,
+    "end": 4469.13,
+    "text": "daquilo que a IA tem de problema"
+  },
+  {
+    "start": 4469.13,
+    "end": 4474.2,
+    "text": "na questão"
+  },
+  {
+    "start": 4474.2,
+    "end": 4476.2,
+    "text": "de ficar mandando muita coisa"
+  },
+  {
+    "start": 4476.2,
+    "end": 4478.2,
+    "text": "e o graphify"
+  },
+  {
+    "start": 4478.2,
+    "end": 4480.2,
+    "text": "ele serve para criar os nodes"
+  },
+  {
+    "start": 4480.2,
+    "end": 4482.2,
+    "text": "que o"
+  },
+  {
+    "start": 4482.2,
+    "end": 4484.2,
+    "text": "o projeto"
+  },
+  {
+    "start": 4484.2,
+    "end": 4486.2,
+    "text": "ele consegue ler para não ter que ficar"
+  },
+  {
+    "start": 4486.2,
+    "end": 4488.2,
+    "text": "relendo muitas vezes o mesmo arquivo que por"
+  },
+  {
+    "start": 4488.2,
+    "end": 4490.2,
+    "text": "acaso foi ele mesmo que escreveu e tal"
+  },
+  {
+    "start": 4490.2,
+    "end": 4492.2,
+    "text": "esse tipo de coisa né"
+  },
+  {
+    "start": 4492.2,
+    "end": 4494.2,
+    "text": "então vou pegar isso aqui"
+  },
+  {
+    "start": 4494.2,
+    "end": 4496.2,
+    "text": "vou pedir para ele instalar"
+  },
+  {
+    "start": 4496.2,
+    "end": 4498.2,
+    "text": "as skills"
+  },
+  {
+    "start": 4498.2,
+    "end": 4509.42,
+    "text": "vou pedir para ele também"
+  },
+  {
+    "start": 4509.42,
+    "end": 4511.42,
+    "text": "só que antes disso o que eu vou fazer"
+  },
+  {
+    "start": 4511.42,
+    "end": 4513.42,
+    "text": "vamos comitar né"
+  },
+  {
+    "start": 4513.42,
+    "end": 4515.42,
+    "text": "vamos iniciar aqui"
+  },
+  {
+    "start": 4515.42,
+    "end": 4522.38,
+    "text": "o projeto no git"
+  },
+  {
+    "start": 4522.38,
+    "end": 4527.54,
+    "text": "teste técnico"
+  },
+  {
+    "start": 4527.54,
+    "end": 4529.54,
+    "text": "elite version"
+  },
+  {
+    "start": 4529.54,
+    "end": 4531.54,
+    "text": "teste"
+  },
+  {
+    "start": 4531.54,
+    "end": 4533.54,
+    "text": "técnico"
+  },
+  {
+    "start": 4533.54,
+    "end": 4535.54,
+    "text": "elite"
+  },
+  {
+    "start": 4535.54,
+    "end": 4537.54,
+    "text": "version"
+  },
+  {
+    "start": 4537.54,
+    "end": 4539.54,
+    "text": "deixar público não tem problema"
+  },
+  {
+    "start": 4539.54,
+    "end": 4559.27,
+    "text": "maravilha"
+  },
+  {
+    "start": 4559.27,
+    "end": 4561.27,
+    "text": "então a gente pode"
+  },
+  {
+    "start": 4561.27,
+    "end": 4564.87,
+    "text": "mandar já"
+  },
+  {
+    "start": 4564.87,
+    "end": 4566.87,
+    "text": "que está certo"
+  },
+  {
+    "start": 4566.87,
+    "end": 4568.87,
+    "text": "você você você"
+  },
+  {
+    "start": 4568.87,
+    "end": 4570.87,
+    "text": "você você"
+  },
+  {
+    "start": 4570.87,
+    "end": 4572.87,
+    "text": "você"
+  },
+  {
+    "start": 4572.87,
+    "end": 4574.87,
+    "text": "você"
+  },
+  {
+    "start": 4574.87,
+    "end": 4576.87,
+    "text": "você não tem nada né"
+  },
+  {
+    "start": 4576.87,
+    "end": 4578.87,
+    "text": "você está aqui assim"
+  },
+  {
+    "start": 4578.87,
+    "end": 4580.87,
+    "text": "a gente pode mandar"
+  },
+  {
+    "start": 4580.87,
+    "end": 4585.94,
+    "text": "apesar de talvez a gente apague"
+  },
+  {
+    "start": 4585.94,
+    "end": 4589.8,
+    "text": "o drizzle daqui"
+  },
+  {
+    "start": 4589.8,
+    "end": 4612.09,
+    "text": "então a gente"
+  },
+  {
+    "start": 4612.09,
+    "end": 4614.09,
+    "text": "é assim que faz"
+  },
+  {
+    "start": 4614.09,
+    "end": 4616.09,
+    "text": "então a gente pode falar um"
+  },
+  {
+    "start": 4616.09,
+    "end": 4618.09,
+    "text": "vamos mandar como"
+  },
+  {
+    "start": 4618.09,
+    "end": 4620.09,
+    "text": "fit"
+  },
+  {
+    "start": 4620.09,
+    "end": 4625.93,
+    "text": "commit"
+  },
+  {
+    "start": 4625.93,
+    "end": 4627.93,
+    "text": "setups"
+  },
+  {
+    "start": 4627.93,
+    "end": 4635.66,
+    "text": "script"
+  },
+  {
+    "start": 4635.66,
+    "end": 4640.02,
+    "text": "environment"
+  },
+  {
+    "start": 4640.02,
+    "end": 4642.02,
+    "text": "acredito que está bom né"
+  },
+  {
+    "start": 4642.02,
+    "end": 4651.54,
+    "text": "e a gente já pode dar um push ainda"
+  },
+  {
+    "start": 4651.54,
+    "end": 4655.43,
+    "text": "essa sequência de comandos"
+  },
+  {
+    "start": 4655.43,
+    "end": 4659.06,
+    "text": "então maravilha"
+  },
+  {
+    "start": 4659.06,
+    "end": 4662.92,
+    "text": "para dizer a verdade eu vou até deletar isso"
+  },
+  {
+    "start": 4662.92,
+    "end": 4664.92,
+    "text": "então show estamos com tudo em dia né"
+  },
+  {
+    "start": 4664.92,
+    "end": 4666.92,
+    "text": "depois analise o projeto"
+  },
+  {
+    "start": 4666.92,
+    "end": 4668.92,
+    "text": "e preencha"
+  },
+  {
+    "start": 4668.92,
+    "end": 4676.78,
+    "text": "o graphify"
+  },
+  {
+    "start": 4676.78,
+    "end": 4678.78,
+    "text": "então vamos esperar ele fazer essa"
+  },
+  {
+    "start": 4678.78,
+    "end": 4680.78,
+    "text": "essa isso aqui que a gente pediu né"
+  },
+  {
+    "start": 4680.78,
+    "end": 4691.74,
+    "text": "na verdade enquanto"
+  },
+  {
+    "start": 4691.74,
+    "end": 4693.74,
+    "text": "enquanto"
+  },
+  {
+    "start": 4693.74,
+    "end": 4695.74,
+    "text": "o codex faz a instalação"
+  },
+  {
+    "start": 4695.74,
+    "end": 4697.74,
+    "text": "do das skills e preenche o graphify"
+  },
+  {
+    "start": 4697.74,
+    "end": 4699.74,
+    "text": "é talvez"
+  },
+  {
+    "start": 4699.74,
+    "end": 4701.74,
+    "text": "eu pudesse falar um pouco a respeito de como eu"
+  },
+  {
+    "start": 4701.74,
+    "end": 4703.74,
+    "text": "enxergo a inteligência artificial"
+  },
+  {
+    "start": 4703.74,
+    "end": 4705.74,
+    "text": "no ambiente de desenvolvimento né"
+  },
+  {
+    "start": 4705.74,
+    "end": 4707.74,
+    "text": "eu seria"
+  },
+  {
+    "start": 4707.74,
+    "end": 4709.74,
+    "text": "muito ingênuo se eu dissesse que eu"
+  },
+  {
+    "start": 4709.74,
+    "end": 4711.74,
+    "text": "consigo escrever código"
+  },
+  {
+    "start": 4711.74,
+    "end": 4713.74,
+    "text": "melhor ou pelo menos"
+  },
+  {
+    "start": 4713.74,
+    "end": 4715.74,
+    "text": "tão bom quanto o codex"
+  },
+  {
+    "start": 4715.74,
+    "end": 4717.74,
+    "text": "ao menos"
+  },
+  {
+    "start": 4717.74,
+    "end": 4719.74,
+    "text": "dentro da mesma velocidade né"
+  },
+  {
+    "start": 4719.74,
+    "end": 4721.74,
+    "text": "então"
+  },
+  {
+    "start": 4721.74,
+    "end": 4723.74,
+    "text": "qual que eu acredito que"
+  },
+  {
+    "start": 4723.74,
+    "end": 4725.74,
+    "text": "seja a minha funcionalidade"
+  },
+  {
+    "start": 4725.74,
+    "end": 4727.74,
+    "text": "fazer da forma como eu estou fazendo"
+  },
+  {
+    "start": 4727.74,
+    "end": 4729.74,
+    "text": "eu estou tomando as decisões arquiteturais"
+  },
+  {
+    "start": 4729.74,
+    "end": 4731.74,
+    "text": "então eu"
+  },
+  {
+    "start": 4731.74,
+    "end": 4733.74,
+    "text": "decidi que eu vou usar o postgres"
+  },
+  {
+    "start": 4733.74,
+    "end": 4735.74,
+    "text": "eu decidi como que eu vou fazer"
+  },
+  {
+    "start": 4735.74,
+    "end": 4737.74,
+    "text": "eu decidi que vai ser com drizzle"
+  },
+  {
+    "start": 4737.74,
+    "end": 4739.74,
+    "text": "eu estou pensando como que vai ser a respeito"
+  },
+  {
+    "start": 4739.74,
+    "end": 4741.74,
+    "text": "dos race conditions"
+  },
+  {
+    "start": 4741.74,
+    "end": 4743.74,
+    "text": "o que acontece se duas pessoas fizerem um lance"
+  },
+  {
+    "start": 4743.74,
+    "end": 4745.74,
+    "text": "ao mesmo tempo"
+  },
+  {
+    "start": 4745.74,
+    "end": 4747.74,
+    "text": "já tenho mais ou menos uma ideia de como que eu posso resolver"
+  },
+  {
+    "start": 4747.74,
+    "end": 4749.74,
+    "text": "isso, esse tipo de coisa"
+  },
+  {
+    "start": 4749.74,
+    "end": 4751.74,
+    "text": "hora que for chegar a vez do"
+  },
+  {
+    "start": 4751.74,
+    "end": 4753.74,
+    "text": "do deploy também eu vou fazer"
+  },
+  {
+    "start": 4753.74,
+    "end": 4755.74,
+    "text": "no braço"
+  },
+  {
+    "start": 4755.74,
+    "end": 4757.74,
+    "text": "fazer um"
+  },
+  {
+    "start": 4757.74,
+    "end": 4759.74,
+    "text": "port forwarding com nginx"
+  },
+  {
+    "start": 4759.74,
+    "end": 4761.74,
+    "text": "né"
+  },
+  {
+    "start": 4761.74,
+    "end": 4763.74,
+    "text": "e também"
+  },
+  {
+    "start": 4763.74,
+    "end": 4768.36,
+    "text": "mais a parte de decisão"
+  },
+  {
+    "start": 4768.36,
+    "end": 4770.36,
+    "text": "de engenharia no geral"
+  },
+  {
+    "start": 4770.36,
+    "end": 4772.36,
+    "text": "né"
+  },
+  {
+    "start": 4772.36,
+    "end": 4774.36,
+    "text": "então"
+  },
+  {
+    "start": 4774.36,
+    "end": 4776.36,
+    "text": "é"
+  },
+  {
+    "start": 4776.36,
+    "end": 4788.7,
+    "text": "a gente acaba entrando um pouco"
+  },
+  {
+    "start": 4788.7,
+    "end": 4790.7,
+    "text": "com a"
+  },
+  {
+    "start": 4790.7,
+    "end": 4792.7,
+    "text": "experiência né"
+  },
+  {
+    "start": 4792.7,
+    "end": 4794.7,
+    "text": "aquilo que a gente"
+  },
+  {
+    "start": 4794.7,
+    "end": 4796.7,
+    "text": "sabe, aquilo que a gente aprendeu"
+  },
+  {
+    "start": 4796.7,
+    "end": 4798.7,
+    "text": "aquilo que a gente usa de boas práticas"
+  },
+  {
+    "start": 4798.7,
+    "end": 4800.7,
+    "text": "né"
+  },
+  {
+    "start": 4800.7,
+    "end": 4802.7,
+    "text": "então agora eu vou pedir para ele"
+  },
+  {
+    "start": 4802.7,
+    "end": 4806.58,
+    "text": "instale, configure"
+  },
+  {
+    "start": 4806.58,
+    "end": 4808.58,
+    "text": "o"
+  },
+  {
+    "start": 4808.58,
+    "end": 4812.22,
+    "text": "hum"
+  },
+  {
+    "start": 4812.22,
+    "end": 4814.22,
+    "text": "como é o nome daquele"
+  },
+  {
+    "start": 4814.22,
+    "end": 4818.9,
+    "text": "pre tier"
+  },
+  {
+    "start": 4818.9,
+    "end": 4820.9,
+    "text": "não"
+  },
+  {
+    "start": 4820.9,
+    "end": 4824.22,
+    "text": "pre tier"
+  },
+  {
+    "start": 4824.22,
+    "end": 4826.22,
+    "text": "slint"
+  },
+  {
+    "start": 4826.22,
+    "end": 4828.22,
+    "text": "configuro"
+  },
+  {
+    "start": 4828.22,
+    "end": 4830.22,
+    "text": "slint"
+  },
+  {
+    "start": 4830.22,
+    "end": 4832.22,
+    "text": "modo strict"
+  },
+  {
+    "start": 4832.22,
+    "end": 4838.66,
+    "text": "mais ou menos esse tipo de coisa"
+  },
+  {
+    "start": 4838.66,
+    "end": 4840.66,
+    "text": "então por exemplo se eu não pedisse"
+  },
+  {
+    "start": 4840.66,
+    "end": 4842.66,
+    "text": "ele não"
+  },
+  {
+    "start": 4842.66,
+    "end": 4844.66,
+    "text": "faria a instalação com slint"
+  },
+  {
+    "start": 4844.66,
+    "end": 4846.66,
+    "text": "se eu não pedisse"
+  },
+  {
+    "start": 4846.66,
+    "end": 4848.66,
+    "text": "ele não faria os módulos desacoplados"
+  },
+  {
+    "start": 4848.66,
+    "end": 4850.66,
+    "text": "então vamos supor"
+  },
+  {
+    "start": 4850.66,
+    "end": 4852.66,
+    "text": "amanhã ou depois a gente troca o drizzle"
+  },
+  {
+    "start": 4852.66,
+    "end": 4854.66,
+    "text": "aí"
+  },
+  {
+    "start": 4854.66,
+    "end": 4856.66,
+    "text": "eu tenho que ficar trocando"
+  },
+  {
+    "start": 4856.66,
+    "end": 4858.66,
+    "text": "alterando a lógica em vários pontos"
+  },
+  {
+    "start": 4858.66,
+    "end": 4860.66,
+    "text": "do código entendeu isso não vai acontecer"
+  },
+  {
+    "start": 4860.66,
+    "end": 4862.66,
+    "text": "aqui porque"
+  },
+  {
+    "start": 4862.66,
+    "end": 4864.66,
+    "text": "vem muito"
+  },
+  {
+    "start": 4864.66,
+    "end": 4866.66,
+    "text": "do princípio do solid isso né"
+  },
+  {
+    "start": 4866.66,
+    "end": 4868.66,
+    "text": "a criação de factories e tal"
+  },
+  {
+    "start": 4868.66,
+    "end": 4870.66,
+    "text": "o módulo dependência externa ele deveria"
+  },
+  {
+    "start": 4870.66,
+    "end": 4872.66,
+    "text": "ser desacoplado do"
+  },
+  {
+    "start": 4872.66,
+    "end": 4874.66,
+    "text": "do código a gente trabalhar também"
+  },
+  {
+    "start": 4874.66,
+    "end": 4876.66,
+    "text": "com as interfaces"
+  },
+  {
+    "start": 4876.66,
+    "end": 4878.66,
+    "text": "né que são os contratos"
+  },
+  {
+    "start": 4878.66,
+    "end": 4880.66,
+    "text": "para as classes"
+  },
+  {
+    "start": 4880.66,
+    "end": 4882.66,
+    "text": "então esse tipo de"
+  },
+  {
+    "start": 4882.66,
+    "end": 4884.66,
+    "text": "coisa que é o que a gente tem"
+  },
+  {
+    "start": 4884.66,
+    "end": 4886.66,
+    "text": "além de"
+  },
+  {
+    "start": 4888.66,
+    "end": 4890.66,
+    "text": "talvez não costume"
+  },
+  {
+    "start": 4890.66,
+    "end": 4892.66,
+    "text": "mas um pouco de padrão"
+  },
+  {
+    "start": 4892.66,
+    "end": 4894.66,
+    "text": "de engenharia"
+  },
+  {
+    "start": 4894.66,
+    "end": 4896.66,
+    "text": "a inteligência artificial ela ainda não faz"
+  },
+  {
+    "start": 4896.66,
+    "end": 4898.66,
+    "text": "por conta né"
+  },
+  {
+    "start": 4898.66,
+    "end": 4900.66,
+    "text": "então é muito importante"
+  },
+  {
+    "start": 4900.66,
+    "end": 4902.66,
+    "text": "a gente conhecer também por conta disso"
+  },
+  {
+    "start": 4902.66,
+    "end": 4904.66,
+    "text": "fora que"
+  },
+  {
+    "start": 4904.66,
+    "end": 4906.66,
+    "text": "tudo aquilo que vier da inteligência artificial"
+  },
+  {
+    "start": 4906.66,
+    "end": 4908.66,
+    "text": "a gente sempre precisa estar revisando"
+  },
+  {
+    "start": 4908.66,
+    "end": 4912.23,
+    "text": "hoje em dia é muito pouco"
+  },
+  {
+    "start": 4912.23,
+    "end": 4914.23,
+    "text": "provável que passe alguma coisa que seja"
+  },
+  {
+    "start": 4914.23,
+    "end": 4916.23,
+    "text": "muito"
+  },
+  {
+    "start": 4916.23,
+    "end": 4918.23,
+    "text": "discriminada que está errada numa"
+  },
+  {
+    "start": 4918.23,
+    "end": 4920.23,
+    "text": "primeira batida de olho mas"
+  },
+  {
+    "start": 4920.23,
+    "end": 4922.23,
+    "text": "ainda assim é importante dar uma"
+  },
+  {
+    "start": 4922.23,
+    "end": 4934.6,
+    "text": "olhada olha ele fez ele trocou"
+  },
+  {
+    "start": 4934.6,
+    "end": 4936.6,
+    "text": "a versão no typescript"
+  },
+  {
+    "start": 4936.6,
+    "end": 4939.94,
+    "text": "isso vai atrapalhar a gente"
+  },
+  {
+    "start": 4939.94,
+    "end": 4941.94,
+    "text": "o que que isso muda"
+  },
+  {
+    "start": 4941.94,
+    "end": 4943.94,
+    "text": "não sei"
+  },
+  {
+    "start": 4943.94,
+    "end": 4945.94,
+    "text": "vamos dar uma olhada"
+  },
+  {
+    "start": 4945.94,
+    "end": 4947.94,
+    "text": "o que acontece se eu dou"
+  },
+  {
+    "start": 4947.94,
+    "end": 4953.14,
+    "text": "npm start"
+  },
+  {
+    "start": 4953.14,
+    "end": 4969.38,
+    "text": "quebrou não então ok"
+  },
+  {
+    "start": 4969.38,
+    "end": 4971.38,
+    "text": "maravilha"
+  },
+  {
+    "start": 4971.38,
+    "end": 4973.38,
+    "text": "é"
+  },
+  {
+    "start": 4973.38,
+    "end": 4975.38,
+    "text": "eu"
+  },
+  {
+    "start": 4975.38,
+    "end": 4977.38,
+    "text": ","
+  },
+  {
+    "start": 4977.38,
+    "end": 4980.66,
+    "text": "eu tenho um background"
+  },
+  {
+    "start": 4980.66,
+    "end": 4982.66,
+    "text": "de um curso que uma vez eu fiz"
+  },
+  {
+    "start": 4982.66,
+    "end": 4984.66,
+    "text": "e ele passava um pouco pra gente"
+  },
+  {
+    "start": 4984.66,
+    "end": 4986.66,
+    "text": "a respeito"
+  },
+  {
+    "start": 4986.66,
+    "end": 4988.66,
+    "text": "de"
+  },
+  {
+    "start": 4988.66,
+    "end": 4995.14,
+    "text": "a respeito da"
+  },
+  {
+    "start": 4995.14,
+    "end": 4997.14,
+    "text": "a melhor"
+  },
+  {
+    "start": 4997.14,
+    "end": 4999.14,
+    "text": "poxa vida como eu posso dizer isso"
+  },
+  {
+    "start": 4999.14,
+    "end": 5001.14,
+    "text": "a melhor forma de"
+  },
+  {
+    "start": 5001.14,
+    "end": 5003.14,
+    "text": "você definir uma"
+  },
+  {
+    "start": 5003.14,
+    "end": 5005.14,
+    "text": "estrutura para"
+  },
+  {
+    "start": 5005.14,
+    "end": 5007.14,
+    "text": "a inteligência artificial né"
+  },
+  {
+    "start": 5007.14,
+    "end": 5009.14,
+    "text": "então deixa eu ver se eu consigo dar um"
+  },
+  {
+    "start": 5009.14,
+    "end": 5011.14,
+    "text": "uma passada aqui"
+  },
+  {
+    "start": 5011.14,
+    "end": 5013.14,
+    "text": "rápida só pra confirmar"
+  },
+  {
+    "start": 5013.14,
+    "end": 5015.14,
+    "text": "né eu já"
+  },
+  {
+    "start": 5015.14,
+    "end": 5017.14,
+    "text": "já imagino que eu me lembro como seja"
+  },
+  {
+    "start": 5028.01,
+    "end": 5039.9,
+    "text": "antes da gente poder definir né"
+  },
+  {
+    "start": 5039.9,
+    "end": 5043.91,
+    "text": "esse curso que eu fiz"
+  },
+  {
+    "start": 5043.91,
+    "end": 5045.91,
+    "text": "ele é do"
+  },
+  {
+    "start": 5045.91,
+    "end": 5047.91,
+    "text": "Samuel"
+  },
+  {
+    "start": 5047.91,
+    "end": 5052.47,
+    "text": "que trabalha na Monist"
+  },
+  {
+    "start": 5052.47,
+    "end": 5057.42,
+    "text": "em san santos"
+  },
+  {
+    "start": 5057.42,
+    "end": 5059.42,
+    "text": "é bem influente dentro do nicho de"
+  },
+  {
+    "start": 5059.42,
+    "end": 5061.42,
+    "text": "node e essas outras"
+  },
+  {
+    "start": 5061.42,
+    "end": 5063.42,
+    "text": "tecnologias né"
+  },
+  {
+    "start": 5063.42,
+    "end": 5065.42,
+    "text": "um dos top voicers do linkedin"
+  },
+  {
+    "start": 5065.42,
+    "end": 5163.51,
+    "text": "vai pro domínio isso"
+  },
+  {
+    "start": 5163.51,
+    "end": 5169.54,
+    "text": "maravilha começar"
+  },
+  {
+    "start": 5169.54,
+    "end": 5171.54,
+    "text": "com uma criação"
+  },
+  {
+    "start": 5171.54,
+    "end": 5173.54,
+    "text": "das tables"
+  },
+  {
+    "start": 5173.54,
+    "end": 5189.05,
+    "text": "no drizzle"
+  },
+  {
+    "start": 5189.05,
+    "end": 5191.05,
+    "text": "e desacoplada"
+  },
+  {
+    "start": 5191.05,
+    "end": 5216.95,
+    "text": "as tables"
+  },
+  {
+    "start": 5216.95,
+    "end": 5218.95,
+    "text": "e a gente pode pegar as tables"
+  },
+  {
+    "start": 5218.95,
+    "end": 5223.1,
+    "text": "aqui que eu já tenho no control c"
+  },
+  {
+    "start": 5223.1,
+    "end": 5233.77,
+    "text": "as tables"
+  },
+  {
+    "start": 5233.77,
+    "end": 5241.69,
+    "text": "vamos só confirmar"
+  },
+  {
+    "start": 5241.69,
+    "end": 5246.15,
+    "text": "usando"
+  },
+  {
+    "start": 5246.15,
+    "end": 5260.22,
+    "text": "ponytail"
+  },
+  {
+    "start": 5260.22,
+    "end": 5262.22,
+    "text": "maravilha estou trabalhando com modelos mais light"
+  },
+  {
+    "start": 5262.22,
+    "end": 5264.22,
+    "text": "porque"
+  },
+  {
+    "start": 5264.22,
+    "end": 5266.22,
+    "text": "nós já tomamos as decisões que poderiam"
+  },
+  {
+    "start": 5266.22,
+    "end": 5270.39,
+    "text": "que poderiam nos custar bastante"
+  },
+  {
+    "start": 5270.39,
+    "end": 5272.39,
+    "text": "bastante raciocínio né"
+  },
+  {
+    "start": 5272.39,
+    "end": 5301.21,
+    "text": "então tá"
+  },
+  {
+    "start": 5301.21,
+    "end": 5339.62,
+    "text": "maravilha enquanto isso vamos verificar"
+  },
+  {
+    "start": 5339.62,
+    "end": 5352.25,
+    "text": "o notepad"
+  },
+  {
+    "start": 5352.25,
+    "end": 5354.25,
+    "text": "se a gente pudesse aproveitar esse tempo"
+  },
+  {
+    "start": 5354.25,
+    "end": 5368.7,
+    "text": "pra procurar uma api né"
+  },
+  {
+    "start": 5368.7,
+    "end": 5370.7,
+    "text": "ai descreve os testes primeiros"
+  },
+  {
+    "start": 5370.7,
+    "end": 5372.7,
+    "text": "test driven development"
+  },
+  {
+    "start": 5372.7,
+    "end": 5377.13,
+    "text": "tdd"
+  },
+  {
+    "start": 5377.13,
+    "end": 5379.13,
+    "text": "o tdd ele pode ser interessante"
+  },
+  {
+    "start": 5379.13,
+    "end": 5381.13,
+    "text": "contanto que"
+  },
+  {
+    "start": 5381.13,
+    "end": 5383.13,
+    "text": "você não tenha problemas com"
+  },
+  {
+    "start": 5383.13,
+    "end": 5385.13,
+    "text": "talvez um pouco mais de demora"
+  },
+  {
+    "start": 5385.13,
+    "end": 5387.13,
+    "text": "mas isso era pelo menos"
+  },
+  {
+    "start": 5387.13,
+    "end": 5389.13,
+    "text": "é"
+  },
+  {
+    "start": 5389.13,
+    "end": 5391.13,
+    "text": "quando a gente"
+  },
+  {
+    "start": 5391.13,
+    "end": 5393.13,
+    "text": "fazia código na mão"
+  },
+  {
+    "start": 5393.13,
+    "end": 5395.13,
+    "text": "agora hoje em dia"
+  },
+  {
+    "start": 5395.13,
+    "end": 5397.13,
+    "text": "não tenho certeza se o tdd"
+  },
+  {
+    "start": 5397.13,
+    "end": 5399.13,
+    "text": "continua tendo"
+  },
+  {
+    "start": 5399.13,
+    "end": 5401.13,
+    "text": "esse"
+  },
+  {
+    "start": 5401.13,
+    "end": 5410.17,
+    "text": "downside né"
+  },
+  {
+    "start": 5410.17,
+    "end": 5414.18,
+    "text": "não tenho certeza"
+  },
+  {
+    "start": 5414.18,
+    "end": 5417.56,
+    "text": "acredito que não"
+  },
+  {
+    "start": 5417.56,
+    "end": 5419.56,
+    "text": "hum"
+  },
+  {
+    "start": 5419.56,
+    "end": 5421.56,
+    "text": "api publica"
+  },
+  {
+    "start": 5421.56,
+    "end": 5423.56,
+    "text": "e produtos diversos"
+  },
+  {
+    "start": 5423.56,
+    "end": 5427.0,
+    "text": "vamos ver o que a gente tem"
+  },
+  {
+    "start": 5427.0,
+    "end": 5447.98,
+    "text": "isso aqui é legal né uma paginação"
+  },
+  {
+    "start": 5447.98,
+    "end": 5449.98,
+    "text": "seria interessante que a nossa api"
+  },
+  {
+    "start": 5449.98,
+    "end": 5451.98,
+    "text": "ela tivesse isso"
+  },
+  {
+    "start": 5451.98,
+    "end": 5453.98,
+    "text": "dummyjson"
+  },
+  {
+    "start": 5453.98,
+    "end": 5455.98,
+    "text": "produto"
+  },
+  {
+    "start": 5455.98,
+    "end": 5457.98,
+    "text": "título preço interessante"
+  },
+  {
+    "start": 5457.98,
+    "end": 5469.22,
+    "text": "vamos dar uma olhada"
+  },
+  {
+    "start": 5471.22,
+    "end": 5473.22,
+    "text": "dummyjson data"
+  },
+  {
+    "start": 5473.22,
+    "end": 5498.46,
+    "text": "dá uma olhada"
+  },
+  {
+    "start": 5498.46,
+    "end": 5553.86,
+    "text": "vamos ver se isso aqui funciona"
+  },
+  {
+    "start": 5553.86,
+    "end": 5616.15,
+    "text": "não tem nada"
+  },
+  {
+    "start": 5616.15,
+    "end": 5618.15,
+    "text": "na verdade isso aqui que eu estou fazendo é muita coisa né"
+  },
+  {
+    "start": 5618.15,
+    "end": 5620.15,
+    "text": "posso simplesmente"
+  },
+  {
+    "start": 5620.15,
+    "end": 5623.43,
+    "text": "copiar isso aqui"
+  },
+  {
+    "start": 5623.43,
+    "end": 5630.62,
+    "text": "e esses últimos dois né"
+  },
+  {
+    "start": 5630.62,
+    "end": 5663.66,
+    "text": "rejected"
+  },
+  {
+    "start": 5663.66,
+    "end": 5665.66,
+    "text": "bom retomando"
+  },
+  {
+    "start": 5667.66,
+    "end": 5669.66,
+    "text": "foi criado"
+  },
+  {
+    "start": 5669.66,
+    "end": 5671.66,
+    "text": "os"
+  },
+  {
+    "start": 5671.66,
+    "end": 5677.18,
+    "text": "alguns arquivos aqui"
+  },
+  {
+    "start": 5677.18,
+    "end": 5736.46,
+    "text": "vamos dar uma olhada neles"
+  },
+  {
+    "start": 5736.46,
+    "end": 5738.46,
+    "text": "interessante"
+  },
+  {
+    "start": 5738.46,
+    "end": 5740.46,
+    "text": "acredito que a gente já pode testar"
+  },
+  {
+    "start": 5740.46,
+    "end": 5744.66,
+    "text": "sem necessariamente finalizar"
+  },
+  {
+    "start": 5744.66,
+    "end": 5746.66,
+    "text": "o"
+  },
+  {
+    "start": 5746.66,
+    "end": 5775.9,
+    "text": "o servidor né"
+  },
+  {
+    "start": 5775.9,
+    "end": 5794.63,
+    "text": "vamos ver que teste é esse"
+  },
+  {
+    "start": 5794.63,
+    "end": 5801.43,
+    "text": "migration domain"
+  },
+  {
+    "start": 5801.43,
+    "end": 5824.74,
+    "text": "o teste quebrou né"
+  },
+  {
+    "start": 5824.74,
+    "end": 5836.06,
+    "text": "vamos ver se aqui ele falou alguma coisa"
+  },
+  {
+    "start": 5836.06,
+    "end": 5852.68,
+    "text": "talvez porque não está no banco do"
+  },
+  {
+    "start": 5852.68,
+    "end": 5859.22,
+    "text": "projeto"
+  },
+  {
+    "start": 5859.22,
+    "end": 5861.22,
+    "text": "antes de migrar propriamente dito"
+  },
+  {
+    "start": 5861.22,
+    "end": 5863.22,
+    "text": "vamos"
+  },
+  {
+    "start": 5863.22,
+    "end": 5865.22,
+    "text": "dar uma olhada"
+  },
+  {
+    "start": 5865.22,
+    "end": 5867.22,
+    "text": "aqui que a gente tem aqui né"
+  },
+  {
+    "start": 5867.22,
+    "end": 5869.22,
+    "text": "se a gente consegue ver que criou"
+  },
+  {
+    "start": 5869.22,
+    "end": 5873.46,
+    "text": "é"
+  },
+  {
+    "start": 5873.46,
+    "end": 5875.46,
+    "text": "foram criados vários arquivos né tudo bem modularizado"
+  },
+  {
+    "start": 5875.46,
+    "end": 5879.29,
+    "text": "vamos ver o que isso aqui significa"
+  },
+  {
+    "start": 5879.29,
+    "end": 5888.07,
+    "text": "wallet"
+  },
+  {
+    "start": 5888.07,
+    "end": 5890.07,
+    "text": "reservation da forma como a gente"
+  },
+  {
+    "start": 5890.07,
+    "end": 5892.07,
+    "text": "pediu né"
+  },
+  {
+    "start": 5892.07,
+    "end": 5921.66,
+    "text": "cadê"
+  },
+  {
+    "start": 5921.66,
+    "end": 5923.66,
+    "text": "se pesquisa model db"
+  },
+  {
+    "start": 5923.66,
+    "end": 5925.66,
+    "text": "sai uma coisa se pesquisa db model"
+  },
+  {
+    "start": 5925.66,
+    "end": 5927.66,
+    "text": "sai outra"
+  },
+  {
+    "start": 5927.66,
+    "end": 5941.14,
+    "text": "não tem necessidade disso né"
+  },
+  {
+    "start": 5941.14,
+    "end": 5943.14,
+    "text": "combinar que não tem necessidade disso né"
+  },
+  {
+    "start": 5943.14,
+    "end": 5945.14,
+    "text": "então a gente tem"
+  },
+  {
+    "start": 5945.14,
+    "end": 5947.14,
+    "text": "wallet e wallet reservation"
+  },
+  {
+    "start": 5947.14,
+    "end": 5950.46,
+    "text": "vamos dar uma olhada bem rápida né"
+  },
+  {
+    "start": 5950.46,
+    "end": 5954.02,
+    "text": "para a gente não perder muito tempo"
+  },
+  {
+    "start": 5954.02,
+    "end": 5967.8,
+    "text": "cents"
+  },
+  {
+    "start": 5967.8,
+    "end": 5969.8,
+    "text": "ele está tratando o dinheiro como cents"
+  },
+  {
+    "start": 5969.8,
+    "end": 5971.8,
+    "text": "né interessante"
+  },
+  {
+    "start": 5971.8,
+    "end": 5975.94,
+    "text": "vou explicar"
+  },
+  {
+    "start": 5975.94,
+    "end": 5977.94,
+    "text": "created updated hatch legal"
+  },
+  {
+    "start": 5977.94,
+    "end": 5979.94,
+    "text": "e wallet reservation"
+  },
+  {
+    "start": 5979.94,
+    "end": 5983.64,
+    "text": "o id da reservation está aqui"
+  },
+  {
+    "start": 5983.64,
+    "end": 5995.53,
+    "text": "legal"
+  },
+  {
+    "start": 5995.53,
+    "end": 5997.53,
+    "text": "not new nick"
+  },
+  {
+    "start": 5997.53,
+    "end": 5999.53,
+    "text": "é aqui tudo certinho"
+  },
+  {
+    "start": 5999.53,
+    "end": 6001.53,
+    "text": "vamos dar uma olhada então agora"
+  },
+  {
+    "start": 6001.53,
+    "end": 6003.53,
+    "text": "nos users"
+  },
+  {
+    "start": 6003.53,
+    "end": 6005.53,
+    "text": "como é que nós estamos né"
+  },
+  {
+    "start": 6005.53,
+    "end": 6007.53,
+    "text": "id está aqui"
+  },
+  {
+    "start": 6007.53,
+    "end": 6009.53,
+    "text": "e-mail password hash"
+  },
+  {
+    "start": 6009.53,
+    "end": 6011.53,
+    "text": "legal display name"
+  },
+  {
+    "start": 6011.53,
+    "end": 6013.53,
+    "text": "tá bom role"
+  },
+  {
+    "start": 6013.53,
+    "end": 6015.53,
+    "text": "ótimo"
+  },
+  {
+    "start": 6015.53,
+    "end": 6020.6,
+    "text": "e nós estamos falando das ledgers"
+  },
+  {
+    "start": 6020.6,
+    "end": 6022.6,
+    "text": "então vamos liberar as ledger"
+  },
+  {
+    "start": 6022.6,
+    "end": 6030.81,
+    "text": "não dá para arrastar mais para cá né"
+  },
+  {
+    "start": 6030.81,
+    "end": 6034.22,
+    "text": "tudo bem não tem problema"
+  },
+  {
+    "start": 6036.22,
+    "end": 6038.22,
+    "text": "ledger ledger transaction"
+  },
+  {
+    "start": 6038.22,
+    "end": 6040.22,
+    "text": "a wallet eu vou deixar aqui"
+  },
+  {
+    "start": 6040.22,
+    "end": 6042.22,
+    "text": "ledger account"
+  },
+  {
+    "start": 6042.22,
+    "end": 6051.86,
+    "text": "e wallet reservation"
+  },
+  {
+    "start": 6051.86,
+    "end": 6053.86,
+    "text": "são 3 ledger"
+  },
+  {
+    "start": 6053.86,
+    "end": 6055.86,
+    "text": "isso"
+  },
+  {
+    "start": 6055.86,
+    "end": 6070.76,
+    "text": "interessante"
+  },
+  {
+    "start": 6070.76,
+    "end": 6072.76,
+    "text": "deixa eu ver se eu consigo jogar isso aqui"
+  },
+  {
+    "start": 6072.76,
+    "end": 6074.76,
+    "text": "de modo fácil um pouco mais para baixo"
+  },
+  {
+    "start": 6074.76,
+    "end": 6084.31,
+    "text": "maravilha"
+  },
+  {
+    "start": 6084.31,
+    "end": 6100.3,
+    "text": "excelente"
+  },
+  {
+    "start": 6100.3,
+    "end": 6102.3,
+    "text": "tá parece ótimo"
+  },
+  {
+    "start": 6102.3,
+    "end": 6105.86,
+    "text": "product snapshot"
+  },
+  {
+    "start": 6105.86,
+    "end": 6107.86,
+    "text": "é um db solitário né"
+  },
+  {
+    "start": 6107.86,
+    "end": 6109.86,
+    "text": "não tem nenhum tipo de relacionamento"
+  },
+  {
+    "start": 6109.86,
+    "end": 6117.98,
+    "text": "simplesmente é o que é"
+  },
+  {
+    "start": 6117.98,
+    "end": 6123.4,
+    "text": "audit events"
+  },
+  {
+    "start": 6123.4,
+    "end": 6125.4,
+    "text": "as auditorias né"
+  },
+  {
+    "start": 6125.4,
+    "end": 6138.92,
+    "text": "dois bancos solitários né"
+  },
+  {
+    "start": 6138.92,
+    "end": 6164.44,
+    "text": "excelente"
+  },
+  {
+    "start": 6164.44,
+    "end": 6166.44,
+    "text": "auction settlements"
+  },
+  {
+    "start": 6166.44,
+    "end": 6201.62,
+    "text": "opa"
+  },
+  {
+    "start": 6201.62,
+    "end": 6203.62,
+    "text": "maravilha auction e bids"
+  },
+  {
+    "start": 6203.62,
+    "end": 6205.62,
+    "text": "só que falta"
+  },
+  {
+    "start": 6205.62,
+    "end": 6207.62,
+    "text": "opa"
+  },
+  {
+    "start": 6207.62,
+    "end": 6213.11,
+    "text": "bids primeiro"
+  },
+  {
+    "start": 6213.11,
+    "end": 6215.11,
+    "text": "esses dois são os bancos mais difíceis"
+  },
+  {
+    "start": 6215.11,
+    "end": 6217.11,
+    "text": "são as tables mais difíceis"
+  },
+  {
+    "start": 6217.11,
+    "end": 6238.98,
+    "text": "isso aí"
+  },
+  {
+    "start": 6238.98,
+    "end": 6240.98,
+    "text": "são as tables com maiores relacionamentos"
+  },
+  {
+    "start": 6240.98,
+    "end": 6242.98,
+    "text": "né"
+  },
+  {
+    "start": 6242.98,
+    "end": 6247.54,
+    "text": "vou tentar deixar aqui assim ó"
+  },
+  {
+    "start": 6247.54,
+    "end": 6258.31,
+    "text": "parece bom né"
+  },
+  {
+    "start": 6258.31,
+    "end": 6260.31,
+    "text": "bids ok auctions agora"
+  },
+  {
+    "start": 6260.31,
+    "end": 6277.35,
+    "text": "nossa"
+  },
+  {
+    "start": 6277.35,
+    "end": 6328.95,
+    "text": "não tem relacionamento nada né"
+  },
+  {
+    "start": 6328.95,
+    "end": 6330.95,
+    "text": "depois a gente arruma para ficar bonito né"
+  },
+  {
+    "start": 6330.95,
+    "end": 6373.4,
+    "text": "o mais importante é que esteja correto"
+  },
+  {
+    "start": 6373.4,
+    "end": 6375.4,
+    "text": "maravilha"
+  },
+  {
+    "start": 6375.4,
+    "end": 6377.4,
+    "text": "parece que tudo ok"
+  },
+  {
+    "start": 6377.4,
+    "end": 6379.4,
+    "text": "com as nossas"
+  },
+  {
+    "start": 6379.4,
+    "end": 6402.65,
+    "text": "com as nossas marcações né"
+  },
+  {
+    "start": 6402.65,
+    "end": 6404.65,
+    "text": "na verdade ele gerou uma"
+  },
+  {
+    "start": 6404.65,
+    "end": 6406.65,
+    "text": "uma snapshot né"
+  },
+  {
+    "start": 6406.65,
+    "end": 6408.65,
+    "text": "migration snapshot"
+  },
+  {
+    "start": 6408.65,
+    "end": 6413.11,
+    "text": "é era mais fácil"
+  },
+  {
+    "start": 6413.11,
+    "end": 6417.54,
+    "text": "ter olhado por aqui né"
+  },
+  {
+    "start": 6417.54,
+    "end": 6428.44,
+    "text": "tudo bem não é problema"
+  },
+  {
+    "start": 6428.44,
+    "end": 6438.89,
+    "text": "vamos migrar então"
+  },
+  {
+    "start": 6438.89,
+    "end": 6440.89,
+    "text": "config path provided"
+  },
+  {
+    "start": 6440.89,
+    "end": 6456.81,
+    "text": "tem database url"
+  },
+  {
+    "start": 6456.81,
+    "end": 6465.62,
+    "text": "db credential"
+  },
+  {
+    "start": 6465.62,
+    "end": 6469.74,
+    "text": "database esquema"
+  },
+  {
+    "start": 6469.74,
+    "end": 6471.74,
+    "text": "e agora como a gente pode saber se está certo ou não"
+  },
+  {
+    "start": 6471.74,
+    "end": 6475.69,
+    "text": "hummm"
+  },
+  {
+    "start": 6475.69,
+    "end": 6479.42,
+    "text": "test"
+  },
+  {
+    "start": 6479.42,
+    "end": 6483.59,
+    "text": "ah tá"
+  },
+  {
+    "start": 6483.59,
+    "end": 6502.07,
+    "text": "ah tá"
+  },
+  {
+    "start": 6502.07,
+    "end": 6505.58,
+    "text": "estamos sem test database url né"
+  },
+  {
+    "start": 6505.58,
+    "end": 6507.58,
+    "text": "estamos sem url de test né"
+  },
+  {
+    "start": 6507.58,
+    "end": 6520.78,
+    "text": "seria bom a gente ter né"
+  },
+  {
+    "start": 6520.78,
+    "end": 6526.04,
+    "text": "seria bom a gente ter"
+  },
+  {
+    "start": 6526.04,
+    "end": 6530.63,
+    "text": "setup e test"
+  },
+  {
+    "start": 6530.63,
+    "end": 6535.0,
+    "text": "setup e test"
+  },
+  {
+    "start": 6535.0,
+    "end": 6537.0,
+    "text": "database"
+  },
+  {
+    "start": 6537.0,
+    "end": 6582.26,
+    "text": "return"
+  },
+  {
+    "start": 6582.26,
+    "end": 6584.26,
+    "text": "aí a gente pode mudar o compose também né"
+  },
+  {
+    "start": 6584.26,
+    "end": 6586.26,
+    "text": "ou não"
+  },
+  {
+    "start": 6586.26,
+    "end": 6588.26,
+    "text": "na verdade não né"
+  },
+  {
+    "start": 6588.26,
+    "end": 6592.86,
+    "text": "porque o test ele é pro dev né"
+  },
+  {
+    "start": 6592.86,
+    "end": 6605.86,
+    "text": "porque o teste ele é pra mim"
+  },
+  {
+    "start": 6605.86,
+    "end": 6645.11,
+    "text": "maravilha"
+  },
+  {
+    "start": 6645.11,
+    "end": 6655.21,
+    "text": "ele vai alterar aqui pra gente"
+  },
+  {
+    "start": 6655.21,
+    "end": 6657.21,
+    "text": "uma coisa que eu não fiz foi colocar o"
+  },
+  {
+    "start": 6657.21,
+    "end": 6659.21,
+    "text": "o pdf do teste técnico aqui né"
+  },
+  {
+    "start": 6659.21,
+    "end": 6668.57,
+    "text": "não é ideal né"
+  },
+  {
+    "start": 6668.57,
+    "end": 6683.72,
+    "text": "agora ele abre"
+  },
+  {
+    "start": 6683.72,
+    "end": 6690.14,
+    "text": "certo"
+  },
+  {
+    "start": 6690.14,
+    "end": 6701.93,
+    "text": "ah eu coloco ele no gitignore né"
+  },
+  {
+    "start": 6701.93,
+    "end": 6709.18,
+    "text": "vou mudar o nome disso aqui"
+  },
+  {
+    "start": 6709.18,
+    "end": 6713.16,
+    "text": "requirements ok ótimo"
+  },
+  {
+    "start": 6713.16,
+    "end": 6717.75,
+    "text": "requirements ponto"
+  },
+  {
+    "start": 6717.75,
+    "end": 6719.75,
+    "text": "pdf"
+  },
+  {
+    "start": 6719.75,
+    "end": 6721.75,
+    "text": "hum"
+  },
+  {
+    "start": 6721.75,
+    "end": 6723.75,
+    "text": "só pedir pra ele dar uma revisada"
+  },
+  {
+    "start": 6723.75,
+    "end": 6725.75,
+    "text": "revídeo"
+  },
+  {
+    "start": 6725.75,
+    "end": 6738.66,
+    "text": "gitignore"
+  },
+  {
+    "start": 6738.66,
+    "end": 6740.66,
+    "text": "maravilha"
+  },
+  {
+    "start": 6740.66,
+    "end": 6785.03,
+    "text": "vamos só comitar aqui o que a gente está fazendo né"
+  },
+  {
+    "start": 6785.03,
+    "end": 6787.03,
+    "text": "então maravilha vamos fazer os nossos commits então"
+  },
+  {
+    "start": 6787.03,
+    "end": 6802.63,
+    "text": "modificação do gitignore né"
+  },
+  {
+    "start": 6802.63,
+    "end": 6807.67,
+    "text": "vamos mandar ele primeiro"
+  },
+  {
+    "start": 6807.67,
+    "end": 6811.66,
+    "text": "ok"
+  },
+  {
+    "start": 6811.66,
+    "end": 6813.66,
+    "text": "a gente fez a configuração"
+  },
+  {
+    "start": 6813.66,
+    "end": 6815.66,
+    "text": "do eslint"
+  },
+  {
+    "start": 6815.66,
+    "end": 6819.48,
+    "text": "e mudou os packages"
+  },
+  {
+    "start": 6819.48,
+    "end": 6821.48,
+    "text": "também teve a configuração do drizzle e do compose"
+  },
+  {
+    "start": 6821.48,
+    "end": 6823.48,
+    "text": "né"
+  },
+  {
+    "start": 6823.48,
+    "end": 6832.46,
+    "text": "talvez a gente manda isso tudo aqui junto"
+  },
+  {
+    "start": 6832.46,
+    "end": 6834.46,
+    "text": "maravilha"
+  },
+  {
+    "start": 6834.46,
+    "end": 6836.46,
+    "text": "agora o que vai fazer sentido isso daqui é documentação"
+  },
+  {
+    "start": 6836.46,
+    "end": 6838.46,
+    "text": "vou mandar por ultimo"
+  },
+  {
+    "start": 6838.46,
+    "end": 6840.46,
+    "text": "hum tudo que teve de novo aqui"
+  },
+  {
+    "start": 6840.46,
+    "end": 6842.46,
+    "text": "no source"
+  },
+  {
+    "start": 6842.46,
+    "end": 6844.46,
+    "text": "e nos testes"
+  },
+  {
+    "start": 6844.46,
+    "end": 6846.46,
+    "text": "junto do drizzle"
+  },
+  {
+    "start": 6846.46,
+    "end": 6851.56,
+    "text": "eu vou mandar"
+  },
+  {
+    "start": 6851.56,
+    "end": 6853.56,
+    "text": "talvez eu mande esse aqui também"
+  },
+  {
+    "start": 6853.56,
+    "end": 6855.56,
+    "text": "e ai por ultimo a documentação"
+  },
+  {
+    "start": 6855.56,
+    "end": 6861.82,
+    "text": "parece bom"
+  },
+  {
+    "start": 6861.82,
+    "end": 6868.33,
+    "text": "ótimo"
+  },
+  {
+    "start": 6868.33,
+    "end": 6870.33,
+    "text": "docs docs docs"
+  },
+  {
+    "start": 6870.33,
+    "end": 6872.33,
+    "text": "docs"
+  },
+  {
+    "start": 6872.33,
+    "end": 6874.33,
+    "text": "manda tudo"
+  },
+  {
+    "start": 6874.33,
+    "end": 6925.61,
+    "text": "nossa parece interessante isso aqui em"
+  },
+  {
+    "start": 6925.61,
+    "end": 6955.54,
+    "text": "interesting"
+  },
+  {
+    "start": 6955.54,
+    "end": 6957.54,
+    "text": "eu to com o postman aqui"
+  },
+  {
+    "start": 6957.54,
+    "end": 6959.54,
+    "text": "não to cara"
+  },
+  {
+    "start": 6959.54,
+    "end": 6984.52,
+    "text": "ah para sério"
+  },
+  {
+    "start": 6984.52,
+    "end": 6988.06,
+    "text": "thumbnail"
+  },
+  {
+    "start": 6988.06,
+    "end": 6993.03,
+    "text": "é essa mesma"
+  },
+  {
+    "start": 6993.03,
+    "end": 6998.46,
+    "text": "adorei"
+  },
+  {
+    "start": 6998.46,
+    "end": 7000.46,
+    "text": "talvez antes talvez essa semeadura"
+  },
+  {
+    "start": 7000.46,
+    "end": 7002.46,
+    "text": "a gente pudesse fazer com script né"
+  },
+  {
+    "start": 7002.46,
+    "end": 7009.8,
+    "text": "deixa eu prestar um pouco mais de atenção"
+  },
+  {
+    "start": 7009.8,
+    "end": 7011.8,
+    "text": "de como funciona isso aqui"
+  },
+  {
+    "start": 7011.8,
+    "end": 7029.1,
+    "text": "se eu posso fazer isso aqui"
+  },
+  {
+    "start": 7029.1,
+    "end": 7031.1,
+    "text": "vai ser um pouco melhor né"
+  },
+  {
+    "start": 7031.1,
+    "end": 7035.46,
+    "text": "price e tal não sei o que"
+  },
+  {
+    "start": 7035.46,
+    "end": 7037.46,
+    "text": "aqui tem um id né"
+  },
+  {
+    "start": 7037.46,
+    "end": 7039.46,
+    "text": "e eu posso pegar esse id"
+  },
+  {
+    "start": 7039.46,
+    "end": 7045.46,
+    "text": "e fazer no"
+  },
+  {
+    "start": 7045.46,
+    "end": 7050.54,
+    "text": "get one product"
+  },
+  {
+    "start": 7050.54,
+    "end": 7055.26,
+    "text": "srl aqui"
+  },
+  {
+    "start": 7055.26,
+    "end": 7057.26,
+    "text": "e eu troco por você"
+  },
+  {
+    "start": 7057.26,
+    "end": 7066.36,
+    "text": "interessante"
+  },
+  {
+    "start": 7066.36,
+    "end": 7070.7,
+    "text": "ó tem reviews"
+  },
+  {
+    "start": 7070.7,
+    "end": 7072.7,
+    "text": "image 0 e image thumbnail"
+  },
+  {
+    "start": 7072.7,
+    "end": 7074.7,
+    "text": "o que é image 0"
+  },
+  {
+    "start": 7074.7,
+    "end": 7076.7,
+    "text": "image grande image thumbnail"
+  },
+  {
+    "start": 7076.7,
+    "end": 7078.7,
+    "text": "image 0 só que menor"
+  },
+  {
+    "start": 7078.7,
+    "end": 7082.87,
+    "text": "interessante"
+  },
+  {
+    "start": 7082.87,
+    "end": 7084.87,
+    "text": "title description mobile"
+  },
+  {
+    "start": 7084.87,
+    "end": 7086.87,
+    "text": "electronics"
+  },
+  {
+    "start": 7086.87,
+    "end": 7088.87,
+    "text": "ai que interessante"
+  },
+  {
+    "start": 7088.87,
+    "end": 7113.98,
+    "text": "ai que interessante"
+  },
+  {
+    "start": 7113.98,
+    "end": 7117.32,
+    "text": "de volta aos requisitos"
+  },
+  {
+    "start": 7117.32,
+    "end": 7192.66,
+    "text": "os requirements"
+  },
+  {
+    "start": 7192.66,
+    "end": 7194.66,
+    "text": "2 clientes e"
+  },
+  {
+    "start": 7194.66,
+    "end": 7196.66,
+    "text": "3 lotes"
+  },
+  {
+    "start": 7196.66,
+    "end": 7203.91,
+    "text": "leads validas"
+  },
+  {
+    "start": 7203.91,
+    "end": 7205.91,
+    "text": "não"
+  },
+  {
+    "start": 7205.91,
+    "end": 7209.42,
+    "text": "não vou bidar ainda"
+  },
+  {
+    "start": 7209.42,
+    "end": 7211.42,
+    "text": "na verdade talvez eu crie os"
+  },
+  {
+    "start": 7211.42,
+    "end": 7213.42,
+    "text": "todos os requisitos e"
+  },
+  {
+    "start": 7213.42,
+    "end": 7215.42,
+    "text": "as regras de negócio"
+  },
+  {
+    "start": 7215.42,
+    "end": 7217.42,
+    "text": "antes de fazer a semeação"
+  },
+  {
+    "start": 7217.42,
+    "end": 7222.3,
+    "text": "semeadura"
+  },
+  {
+    "start": 7222.3,
+    "end": 7227.37,
+    "text": "acredito que eu posso fazer isso né"
+  },
+  {
+    "start": 7227.37,
+    "end": 7229.37,
+    "text": "o que pode ser criado primeiro"
+  },
+  {
+    "start": 7229.37,
+    "end": 7233.06,
+    "text": "a gente pode primeiro começar"
+  },
+  {
+    "start": 7233.06,
+    "end": 7235.06,
+    "text": "talvez com o"
+  },
+  {
+    "start": 7235.06,
+    "end": 7237.06,
+    "text": "lote né"
+  },
+  {
+    "start": 7237.06,
+    "end": 7245.24,
+    "text": "parece o mais simples"
+  },
+  {
+    "start": 7245.24,
+    "end": 7247.24,
+    "text": "vamos conversar um pouco aqui"
+  },
+  {
+    "start": 7247.24,
+    "end": 7268.89,
+    "text": "os lotes"
+  },
+  {
+    "start": 7268.89,
+    "end": 7304.07,
+    "text": "isso"
+  },
+  {
+    "start": 7304.07,
+    "end": 7315.7,
+    "text": "na verdade"
+  },
+  {
+    "start": 7315.7,
+    "end": 7326.79,
+    "text": "será que é"
+  },
+  {
+    "start": 7326.79,
+    "end": 7328.79,
+    "text": "de fato talvez a gente pudesse começar com"
+  },
+  {
+    "start": 7328.79,
+    "end": 7330.79,
+    "text": "com o login"
+  },
+  {
+    "start": 7330.79,
+    "end": 7335.74,
+    "text": "ele tem razão"
+  },
+  {
+    "start": 7335.74,
+    "end": 7337.74,
+    "text": "tudo depende do"
+  },
+  {
+    "start": 7337.74,
+    "end": 7339.74,
+    "text": "dos usuários"
+  },
+  {
+    "start": 7339.74,
+    "end": 7420.55,
+    "text": "dos leiloeiros"
+  },
+  {
+    "start": 7420.55,
+    "end": 7422.55,
+    "text": "de inicial já estão implementados"
+  },
+  {
+    "start": 7422.55,
+    "end": 7446.7,
+    "text": "na verdade não estão"
+  },
+  {
+    "start": 7446.7,
+    "end": 7451.58,
+    "text": "ai a gente já começa a falar de rota né"
+  },
+  {
+    "start": 7451.58,
+    "end": 7453.58,
+    "text": "vamos ver uma coisa que eu não quero aqui"
+  },
+  {
+    "start": 7453.58,
+    "end": 7455.58,
+    "text": "esse GPT aqui ele gere para mim"
+  },
+  {
+    "start": 7455.58,
+    "end": 7479.94,
+    "text": "estrutura"
+  },
+  {
+    "start": 7479.94,
+    "end": 7486.36,
+    "text": "vamos lá mas eu vou dar uma modificada"
+  },
+  {
+    "start": 7486.36,
+    "end": 7488.36,
+    "text": "não altere"
+  },
+  {
+    "start": 7488.36,
+    "end": 7490.36,
+    "text": "sem necessidade de justificada não"
+  },
+  {
+    "start": 7490.36,
+    "end": 7492.36,
+    "text": "sem pedir autorização"
+  },
+  {
+    "start": 7492.36,
+    "end": 7499.93,
+    "text": "parece bom"
+  },
+  {
+    "start": 7508.97,
+    "end": 7510.97,
+    "text": "essa linha aqui eu vou tirar"
+  },
+  {
+    "start": 7510.97,
+    "end": 7530.09,
+    "text": "funciona o grafo"
+  },
+  {
+    "start": 7530.09,
+    "end": 7532.09,
+    "text": "também pelo docker compose"
+  },
+  {
+    "start": 7532.09,
+    "end": 7538.12,
+    "text": "muito bom muito bom"
+  },
+  {
+    "start": 7538.12,
+    "end": 7540.12,
+    "text": "validação de entradas com o zod"
+  },
+  {
+    "start": 7540.12,
+    "end": 7542.12,
+    "text": "ótimo ótimo ótimo"
+  },
+  {
+    "start": 7542.12,
+    "end": 7547.45,
+    "text": "estamos falando de"
+  },
+  {
+    "start": 7549.45,
+    "end": 7551.45,
+    "text": "estamos falando de hash de senha aqui"
+  },
+  {
+    "start": 7551.45,
+    "end": 7553.45,
+    "text": "de cript"
+  },
+  {
+    "start": 7553.45,
+    "end": 7558.87,
+    "text": "bcrypt"
+  },
+  {
+    "start": 7558.87,
+    "end": 7560.87,
+    "text": "bcrypt"
+  },
+  {
+    "start": 7560.87,
+    "end": 7562.87,
+    "text": "não tem bcrypt"
+  },
+  {
+    "start": 7562.87,
+    "end": 7564.87,
+    "text": "ah hash argon"
+  },
+  {
+    "start": 7564.87,
+    "end": 7566.87,
+    "text": "ah tá"
+  },
+  {
+    "start": 7566.87,
+    "end": 7568.87,
+    "text": "esse aqui é o bcrypt"
+  },
+  {
+    "start": 7568.87,
+    "end": 7570.87,
+    "text": "qual será que é"
+  },
+  {
+    "start": 7570.87,
+    "end": 7581.29,
+    "text": "a diferença"
+  },
+  {
+    "start": 7581.29,
+    "end": 7583.29,
+    "text": "argon 2 id é mais recomendado"
+  },
+  {
+    "start": 7583.29,
+    "end": 7606.02,
+    "text": "entendi"
+  },
+  {
+    "start": 7606.02,
+    "end": 7626.52,
+    "text": "então ótimo"
+  },
+  {
+    "start": 7626.52,
+    "end": 7650.76,
+    "text": "aqui já está falando da api"
+  },
+  {
+    "start": 7650.76,
+    "end": 7668.98,
+    "text": "ok ótimo"
+  },
+  {
+    "start": 7668.98,
+    "end": 7670.98,
+    "text": "enquanto isso a gente pode continuar"
+  },
+  {
+    "start": 7670.98,
+    "end": 7672.98,
+    "text": "conversando"
+  },
+  {
+    "start": 7672.98,
+    "end": 7674.98,
+    "text": "a respeito"
+  },
+  {
+    "start": 7674.98,
+    "end": 7676.98,
+    "text": "esse aqui eu vou jogar por último"
+  },
+  {
+    "start": 7676.98,
+    "end": 7678.98,
+    "text": "não posso perder"
+  },
+  {
+    "start": 7678.98,
+    "end": 7680.98,
+    "text": "conversando a respeito do"
+  },
+  {
+    "start": 7680.98,
+    "end": 7685.35,
+    "text": "na verdade"
+  },
+  {
+    "start": 7685.35,
+    "end": 7687.35,
+    "text": "vou jogar aqui"
+  },
+  {
+    "start": 7687.35,
+    "end": 7689.35,
+    "text": "agora eu posso fechar esse aqui"
+  },
+  {
+    "start": 7689.35,
+    "end": 7691.35,
+    "text": "deixa eu fechar esse aqui também"
+  },
+  {
+    "start": 7691.35,
+    "end": 7707.08,
+    "text": "interessante isso aqui"
+  },
+  {
+    "start": 7707.08,
+    "end": 7736.63,
+    "text": "muito interessante"
+  },
+  {
+    "start": 7736.63,
+    "end": 7738.63,
+    "text": "ver o que ele acha dessa api para os produtos"
+  },
+  {
+    "start": 7738.63,
+    "end": 7783.19,
+    "text": "é uma coisa que talvez a gente"
+  },
+  {
+    "start": 7783.19,
+    "end": 7785.19,
+    "text": "errou é que a gente"
+  },
+  {
+    "start": 7785.19,
+    "end": 7787.19,
+    "text": "definiu"
+  },
+  {
+    "start": 7787.19,
+    "end": 7790.66,
+    "text": "a gente definiu o snapshot"
+  },
+  {
+    "start": 7790.66,
+    "end": 7792.66,
+    "text": "antes de definir a api"
+  },
+  {
+    "start": 7792.66,
+    "end": 7798.47,
+    "text": "talvez não foi muito interessante"
+  },
+  {
+    "start": 7798.47,
+    "end": 7800.47,
+    "text": "isso né então a gente pode"
+  },
+  {
+    "start": 7800.47,
+    "end": 7802.47,
+    "text": "ou alterar isso aqui conforme a api"
+  },
+  {
+    "start": 7802.47,
+    "end": 7836.95,
+    "text": "necessita né interessante"
+  },
+  {
+    "start": 7836.95,
+    "end": 7841.48,
+    "text": "pegar isso aqui"
+  },
+  {
+    "start": 7841.48,
+    "end": 7843.48,
+    "text": "vamos pegar também"
+  },
+  {
+    "start": 7843.48,
+    "end": 7851.53,
+    "text": "audit"
+  },
+  {
+    "start": 7851.53,
+    "end": 7919.13,
+    "text": "ledger"
+  },
+  {
+    "start": 7919.13,
+    "end": 7921.13,
+    "text": "talvez a gente não precise fazer modificações"
+  },
+  {
+    "start": 7921.13,
+    "end": 7948.22,
+    "text": "do th256"
+  },
+  {
+    "start": 7948.22,
+    "end": 7953.8,
+    "text": "a gente pode pesquisar aqui"
+  },
+  {
+    "start": 7953.8,
+    "end": 8001.4,
+    "text": "cuidado com essa chave"
+  },
+  {
+    "start": 8001.4,
+    "end": 8020.23,
+    "text": "o certo seria a gente já ir"
+  },
+  {
+    "start": 8020.23,
+    "end": 8022.23,
+    "text": "mapeando a api"
+  },
+  {
+    "start": 8022.23,
+    "end": 8081.67,
+    "text": "dar uma olhada"
+  },
+  {
+    "start": 8081.67,
+    "end": 8093.37,
+    "text": "essa parte de documentação"
+  },
+  {
+    "start": 8093.37,
+    "end": 8095.37,
+    "text": "na verdade é mais para ele"
+  },
+  {
+    "start": 8095.37,
+    "end": 8125.18,
+    "text": "ele criou um docker ignore"
+  },
+  {
+    "start": 8125.18,
+    "end": 8129.13,
+    "text": "importante né"
+  },
+  {
+    "start": 8129.13,
+    "end": 8131.13,
+    "text": "melhorou um pouco meu env example"
+  },
+  {
+    "start": 8131.13,
+    "end": 8135.14,
+    "text": "ah passou a porta para cá"
+  },
+  {
+    "start": 8135.14,
+    "end": 8140.82,
+    "text": "legal eu ia fazer isso mesmo"
+  },
+  {
+    "start": 8140.82,
+    "end": 8142.82,
+    "text": "vamos jogar o wt secret"
+  },
+  {
+    "start": 8142.82,
+    "end": 8144.82,
+    "text": "ele gerou um para mim"
+  },
+  {
+    "start": 8144.82,
+    "end": 8161.19,
+    "text": "gerou um ai para mim ótimo"
+  },
+  {
+    "start": 8161.19,
+    "end": 8163.19,
+    "text": "minimo de 12 caracteres"
+  },
+  {
+    "start": 8163.19,
+    "end": 8165.19,
+    "text": "vamos mudar isso ai"
+  },
+  {
+    "start": 8165.19,
+    "end": 8196.06,
+    "text": "os docs"
+  },
+  {
+    "start": 8196.06,
+    "end": 8198.06,
+    "text": "vamos ver o que mudou de fato"
+  },
+  {
+    "start": 8198.06,
+    "end": 8200.06,
+    "text": "app.ts"
+  },
+  {
+    "start": 8200.06,
+    "end": 8202.06,
+    "text": "create app"
+  },
+  {
+    "start": 8202.06,
+    "end": 8206.07,
+    "text": "bom"
+  },
+  {
+    "start": 8206.07,
+    "end": 8208.07,
+    "text": "bom"
+  },
+  {
+    "start": 8208.07,
+    "end": 8210.07,
+    "text": "e a mudança no server"
+  },
+  {
+    "start": 8210.07,
+    "end": 8236.62,
+    "text": "o que aconteceu"
+  },
+  {
+    "start": 8236.62,
+    "end": 8238.62,
+    "text": "é basicamente um tratamento melhor"
+  },
+  {
+    "start": 8238.62,
+    "end": 8240.62,
+    "text": "não mudou muita coisa"
+  },
+  {
+    "start": 8240.62,
+    "end": 8242.62,
+    "text": "quer dizer mudou bastante coisa"
+  },
+  {
+    "start": 8242.62,
+    "end": 8244.62,
+    "text": "mas coisas coisas de verdade mesmo"
+  },
+  {
+    "start": 8244.62,
+    "end": 8246.62,
+    "text": "então ta"
+  },
+  {
+    "start": 8246.62,
+    "end": 8248.62,
+    "text": "em modules ele criou alph"
+  },
+  {
+    "start": 8248.62,
+    "end": 8252.18,
+    "text": "não tinha né"
+  },
+  {
+    "start": 8252.18,
+    "end": 8254.18,
+    "text": "então temos vários alphs agora"
+  },
+  {
+    "start": 8254.18,
+    "end": 8256.18,
+    "text": "para a gente analisar"
+  },
+  {
+    "start": 8256.18,
+    "end": 8258.18,
+    "text": "tem um index de alph"
+  },
+  {
+    "start": 8258.18,
+    "end": 8260.18,
+    "text": "o que isso ai faz"
+  },
+  {
+    "start": 8260.18,
+    "end": 8266.28,
+    "text": "create alph module"
+  },
+  {
+    "start": 8266.28,
+    "end": 8270.3,
+    "text": "imagino que aqui eu faço"
+  },
+  {
+    "start": 8270.3,
+    "end": 8272.3,
+    "text": "opa"
+  },
+  {
+    "start": 8272.3,
+    "end": 8274.3,
+    "text": "tá"
+  },
+  {
+    "start": 8274.3,
+    "end": 8285.26,
+    "text": "as interfaces"
+  },
+  {
+    "start": 8285.26,
+    "end": 8287.26,
+    "text": "passando pelos odds"
+  },
+  {
+    "start": 8287.26,
+    "end": 8308.42,
+    "text": "incrível"
+  },
+  {
+    "start": 8308.42,
+    "end": 8310.42,
+    "text": "o hasher vem de contract"
+  },
+  {
+    "start": 8310.42,
+    "end": 8312.42,
+    "text": "então o hasher ele pode ser mudado de"
+  },
+  {
+    "start": 8312.42,
+    "end": 8317.94,
+    "text": "de qualquer modo"
+  },
+  {
+    "start": 8317.94,
+    "end": 8319.94,
+    "text": "password hasher"
+  },
+  {
+    "start": 8319.94,
+    "end": 8321.94,
+    "text": "então a gente pode"
+  },
+  {
+    "start": 8321.94,
+    "end": 8323.94,
+    "text": "mudar o hasher quando a gente quiser"
+  },
+  {
+    "start": 8323.94,
+    "end": 8325.94,
+    "text": "na verdade não porque a gente vai"
+  },
+  {
+    "start": 8325.94,
+    "end": 8327.94,
+    "text": "perder tudo no banco de dados"
+  },
+  {
+    "start": 8327.94,
+    "end": 8329.94,
+    "text": "mas assim poderia"
+  },
+  {
+    "start": 8329.94,
+    "end": 8331.94,
+    "text": "é possível estar desacoplado"
+  },
+  {
+    "start": 8331.94,
+    "end": 8371.58,
+    "text": "aqui muito bom"
+  },
+  {
+    "start": 8371.58,
+    "end": 8397.54,
+    "text": "Invalidação de permissão e invalidação de autenticação. Muito bom, muito bom. Parece ótimo pra mim."
+  },
+  {
+    "start": 8397.54,
+    "end": 8407.34,
+    "text": "Bom, vamos testar? Ele deixou aqui pra gente como que a gente pode fazer os testes, né?"
+  },
+  {
+    "start": 8407.34,
+    "end": 8500.5,
+    "text": "Por que PNPM? Nossa, tava no prompt e eu não me liguei, véi."
+  },
+  {
+    "start": 8500.5,
+    "end": 8502.5,
+    "text": "PNPM..."
+  },
+  {
+    "start": 8502.5,
+    "end": 8506.5,
+    "text": "Nossa senhora..."
+  },
+  {
+    "start": 8506.5,
+    "end": 8516.57,
+    "text": "Nossa, que azar."
+  },
+  {
+    "start": 8516.57,
+    "end": 8521.57,
+    "text": "Bom, eu não prestei atenção. Vamos manter uma padronização então."
+  },
+  {
+    "start": 8521.57,
+    "end": 8533.42,
+    "text": "Poxa vida."
+  },
+  {
+    "start": 8533.42,
+    "end": 8555.27,
+    "text": "Vamos pedir aqui um script em Python, né?"
+  },
+  {
+    "start": 8555.27,
+    "end": 8561.28,
+    "text": "Só pra gente pegar isso."
+  },
+  {
+    "start": 8561.28,
+    "end": 8575.94,
+    "text": "Então a gente pode fazer aqui um novo. A gente cria um temp."
+  },
+  {
+    "start": 8575.94,
+    "end": 8589.29,
+    "text": "E aqui nesse temp a gente cria um documento de texto, mas não é um novo script."
+  },
+  {
+    "start": 8589.29,
+    "end": 8591.29,
+    "text": "script.py"
+  },
+  {
+    "start": 8591.29,
+    "end": 8597.29,
+    "text": "E nele a gente pode pegar e roubar esse texto."
+  },
+  {
+    "start": 8597.29,
+    "end": 8598.29,
+    "text": "Esse aqui, né?"
+  },
+  {
+    "start": 8598.29,
+    "end": 8623.54,
+    "text": "New terminal. Python script.py"
+  },
+  {
+    "start": 8623.54,
+    "end": 8627.54,
+    "text": "Sensacional. Aí a gente pode salvar essas rotas aqui."
+  },
+  {
+    "start": 8627.54,
+    "end": 8631.54,
+    "text": "E tal. Deixa só isso aí pra fazer sentido, né?"
+  },
+  {
+    "start": 8631.54,
+    "end": 8697.9,
+    "text": "Pode pôr no gitignore."
+  },
+  {
+    "start": 8697.9,
+    "end": 8702.9,
+    "text": "Esse temp não vai ficar muito tempo, mano. Só pra..."
+  },
+  {
+    "start": 8702.9,
+    "end": 8708.21,
+    "text": "De volta aqui."
+  },
+  {
+    "start": 8708.21,
+    "end": 8729.28,
+    "text": "Ele tinha deixado aqui um..."
+  },
+  {
+    "start": 8729.28,
+    "end": 8730.28,
+    "text": "É, mas o..."
+  },
+  {
+    "start": 8730.28,
+    "end": 8734.28,
+    "text": "O run dev tá rodando aqui, né? Não tá mais."
+  },
+  {
+    "start": 8734.28,
+    "end": 8742.67,
+    "text": "Legal."
+  },
+  {
+    "start": 8742.67,
+    "end": 8744.67,
+    "text": "Demo seed completed."
+  },
+  {
+    "start": 8744.67,
+    "end": 8765.23,
+    "text": "Server is running."
+  },
+  {
+    "start": 8765.23,
+    "end": 8770.98,
+    "text": "Tem coisa rodando na porta?"
+  },
+  {
+    "start": 8770.98,
+    "end": 8775.66,
+    "text": "É eu, hein?"
+  },
+  {
+    "start": 8775.66,
+    "end": 8810.42,
+    "text": "Service server."
+  },
+  {
+    "start": 8810.42,
+    "end": 8812.42,
+    "text": "Será que pelo docker aqui?"
+  },
+  {
+    "start": 8812.42,
+    "end": 8820.04,
+    "text": "Tem um método que eu poderia acessar isso aqui?"
+  },
+  {
+    "start": 8820.04,
+    "end": 8824.25,
+    "text": "Vamos ver o que que tem."
+  },
+  {
+    "start": 8824.25,
+    "end": 8827.68,
+    "text": "Ah..."
+  },
+  {
+    "start": 8827.68,
+    "end": 8854.95,
+    "text": "Files."
+  },
+  {
+    "start": 8854.95,
+    "end": 8855.95,
+    "text": "Acho que não, né?"
+  },
+  {
+    "start": 8855.95,
+    "end": 8860.86,
+    "text": "Tem um console que eu poderia utilizar."
+  },
+  {
+    "start": 8860.86,
+    "end": 8915.95,
+    "text": "Tem alguma coisa correndo na porta 3000, velho?"
+  },
+  {
+    "start": 8915.95,
+    "end": 8979.86,
+    "text": "Vou pedir pra ele comando de teste pro nosso docker aqui."
+  },
+  {
+    "start": 8979.86,
+    "end": 8994.39,
+    "text": "Esse aqui?"
+  },
+  {
+    "start": 8994.39,
+    "end": 8995.39,
+    "text": "Não."
+  },
+  {
+    "start": 8995.39,
+    "end": 9000.87,
+    "text": "Tá falando aqui?"
+  },
+  {
+    "start": 9000.87,
+    "end": 9001.87,
+    "text": "Tá."
+  },
+  {
+    "start": 9001.87,
+    "end": 9008.76,
+    "text": "Universal."
+  },
+  {
+    "start": 9008.76,
+    "end": 9013.01,
+    "text": "Vejo os usuários. Vejaremos."
+  },
+  {
+    "start": 9013.01,
+    "end": 9024.86,
+    "text": "Demo bidder 1 demo."
+  },
+  {
+    "start": 9024.86,
+    "end": 9030.1,
+    "text": "Olha que incrível."
+  },
+  {
+    "start": 9042.7,
+    "end": 9043.7,
+    "text": "Carteiras. Balanço."
+  },
+  {
+    "start": 9043.7,
+    "end": 9045.7,
+    "text": "Centavos reservados."
+  },
+  {
+    "start": 9045.7,
+    "end": 9050.01,
+    "text": "Ótimo, ótimo."
+  },
+  {
+    "start": 9050.01,
+    "end": 9059.75,
+    "text": "Simulation clearing tá aqui."
+  },
+  {
+    "start": 9059.75,
+    "end": 9063.77,
+    "text": "Sensacional."
+  },
+  {
+    "start": 9063.77,
+    "end": 9072.06,
+    "text": "3 usuários, 3 carteiras, 4 ledger accounts."
+  },
+  {
+    "start": 9072.06,
+    "end": 9073.06,
+    "text": "Legal."
+  },
+  {
+    "start": 9073.06,
+    "end": 9109.18,
+    "text": "Vou fazer uma separação dos commits de até 500 linhas."
+  },
+  {
+    "start": 9109.18,
+    "end": 9115.99,
+    "text": "Particularmente eu acho o ideal pra tá fazendo as revisões, né?"
+  },
+  {
+    "start": 9115.99,
+    "end": 9119.37,
+    "text": "Aqui eu vou dar merge em tudo."
+  },
+  {
+    "start": 9119.37,
+    "end": 9120.37,
+    "text": "Não tem..."
+  },
+  {
+    "start": 9120.37,
+    "end": 9126.59,
+    "text": "Não tem..."
+  },
+  {
+    "start": 9126.59,
+    "end": 9129.59,
+    "text": "Essa discriminação, né?"
+  },
+  {
+    "start": 9129.59,
+    "end": 9132.59,
+    "text": "Mas na empresa como a gente trabalha com pull requests..."
+  },
+  {
+    "start": 9132.59,
+    "end": 9402.62,
+    "text": "Ah, os testes."
+  },
+  {
+    "start": 9402.62,
+    "end": 9498.83,
+    "text": "Conquistamos de limite."
+  },
+  {
+    "start": 9498.83,
+    "end": 9499.83,
+    "text": "Vixi."
+  },
+  {
+    "start": 9499.83,
+    "end": 9500.83,
+    "text": "Longe de acabar."
+  },
+  {
+    "start": 9500.83,
+    "end": 9523.15,
+    "text": "FET nativo."
+  },
+  {
+    "start": 9523.15,
+    "end": 9527.65,
+    "text": "FET versus..."
+  },
+  {
+    "start": 9528.65,
+    "end": 9532.65,
+    "text": "Aquela ferramenta que deu..."
+  },
+  {
+    "start": 9532.65,
+    "end": 9534.65,
+    "text": "Que deu problema uma vez, véi."
+  },
+  {
+    "start": 9534.65,
+    "end": 9561.98,
+    "text": "Axios."
+  },
+  {
+    "start": 9561.98,
+    "end": 9564.9,
+    "text": "Axios."
+  },
+  {
+    "start": 9564.9,
+    "end": 9567.9,
+    "text": "Ela deu problema na época."
+  },
+  {
+    "start": 9567.9,
+    "end": 9570.9,
+    "text": "Mas acredito que ela já..."
+  },
+  {
+    "start": 9570.9,
+    "end": 9572.9,
+    "text": "Tá tranquila, né?"
+  },
+  {
+    "start": 9572.9,
+    "end": 9592.03,
+    "text": "Será que a Axios já está segura?"
+  },
+  {
+    "start": 9592.03,
+    "end": 9601.9,
+    "text": "Perguntada."
+  },
+  {
+    "start": 9601.9,
+    "end": 9632.34,
+    "text": "Entendi."
+  },
+  {
+    "start": 9632.34,
+    "end": 9634.34,
+    "text": "Tá, ok."
+  },
+  {
+    "start": 9634.34,
+    "end": 9646.34,
+    "text": "Validar as respostas externas com o Zod."
+  },
+  {
+    "start": 9646.34,
+    "end": 9647.34,
+    "text": "Ótimo, ótimo."
+  },
+  {
+    "start": 9647.34,
+    "end": 9668.46,
+    "text": "Um caso de uso."
+  },
+  {
+    "start": 9668.46,
+    "end": 9669.46,
+    "text": "Um caso de uso?"
+  },
+  {
+    "start": 9669.46,
+    "end": 9671.46,
+    "text": "Isso não vai ser o padrão?"
+  },
+  {
+    "start": 9671.46,
+    "end": 9701.63,
+    "text": "E aqui embaixo, contexto adicional antes de implementar."
+  },
+  {
+    "start": 9701.63,
+    "end": 9712.54,
+    "text": "Os arquivos e o gráfico."
+  },
+  {
+    "start": 9712.54,
+    "end": 9717.57,
+    "text": "Mapeamento das respostas."
+  },
+  {
+    "start": 9717.57,
+    "end": 9719.57,
+    "text": "Depois implemente a integração."
+  },
+  {
+    "start": 9719.57,
+    "end": 9721.57,
+    "text": "Depois..."
+  },
+  {
+    "start": 9721.57,
+    "end": 9727.63,
+    "text": "Após permissão."
+  },
+  {
+    "start": 9727.63,
+    "end": 9728.63,
+    "text": "Tá."
+  },
+  {
+    "start": 9728.63,
+    "end": 9732.52,
+    "text": "Acho que isso pode..."
+  },
+  {
+    "start": 9732.52,
+    "end": 9734.52,
+    "text": "Parece bom, né?"
+  },
+  {
+    "start": 9734.52,
+    "end": 9735.52,
+    "text": "Vamos só."
+  },
+  {
+    "start": 9735.52,
+    "end": 9746.98,
+    "text": "Aqui ele terminou o exame."
+  },
+  {
+    "start": 9746.98,
+    "end": 9773.94,
+    "text": "Essa separação tá muito boa."
+  },
+  {
+    "start": 9773.94,
+    "end": 9797.27,
+    "text": "Skip não negativo."
+  },
+  {
+    "start": 9797.27,
+    "end": 9798.27,
+    "text": "Ótimo."
+  },
+  {
+    "start": 9798.27,
+    "end": 9800.74,
+    "text": "Ótimo."
+  },
+  {
+    "start": 9800.74,
+    "end": 9801.74,
+    "text": "Filtro por categoria."
+  },
+  {
+    "start": 9801.74,
+    "end": 9802.74,
+    "text": "Bom."
+  },
+  {
+    "start": 9802.74,
+    "end": 9803.74,
+    "text": "Vamos voltar então?"
+  },
+  {
+    "start": 9803.74,
+    "end": 9837.16,
+    "text": "É..."
+  },
+  {
+    "start": 9837.16,
+    "end": 9838.16,
+    "text": "Ok."
+  },
+  {
+    "start": 9838.16,
+    "end": 9839.16,
+    "text": "Provider Confetti."
+  },
+  {
+    "start": 9839.16,
+    "end": 9840.16,
+    "text": "Separados."
+  },
+  {
+    "start": 9840.16,
+    "end": 9842.54,
+    "text": "Já fez os testes também."
+  },
+  {
+    "start": 9842.54,
+    "end": 9849.94,
+    "text": "É, isso aqui eu quero ver."
+  },
+  {
+    "start": 9849.94,
+    "end": 9850.94,
+    "text": "Onde será que foi que rolou a..."
+  },
+  {
+    "start": 9850.94,
+    "end": 9853.44,
+    "text": "Ah, olha só."
+  },
+  {
+    "start": 9853.44,
+    "end": 9854.44,
+    "text": "O Zod."
+  },
+  {
+    "start": 9854.44,
+    "end": 9873.04,
+    "text": "Excelente."
+  },
+  {
+    "start": 9873.04,
+    "end": 9874.04,
+    "text": "Ah, isso aqui eu tô interessado."
+  },
+  {
+    "start": 9874.04,
+    "end": 9899.97,
+    "text": "Pera."
+  },
+  {
+    "start": 9899.97,
+    "end": 9900.97,
+    "text": "Primeiro eu quero ver..."
+  },
+  {
+    "start": 9900.97,
+    "end": 9901.97,
+    "text": "Onde será que foi que rolou a..."
+  },
+  {
+    "start": 9901.97,
+    "end": 9902.97,
+    "text": "Ah, olha só."
+  },
+  {
+    "start": 9902.97,
+    "end": 9903.97,
+    "text": "O Zod."
+  },
+  {
+    "start": 9903.97,
+    "end": 9904.97,
+    "text": "Excelente."
+  },
+  {
+    "start": 9904.97,
+    "end": 9909.49,
+    "text": "Ah, isso aqui eu tô interessado."
+  },
+  {
+    "start": 9909.49,
+    "end": 9925.21,
+    "text": "Pera."
+  },
+  {
+    "start": 9925.21,
+    "end": 9926.21,
+    "text": "Primeiro eu quero ver..."
+  },
+  {
+    "start": 9926.21,
+    "end": 9942.6,
+    "text": "Onde será que foi que rolou a..."
+  },
+  {
+    "start": 9942.6,
+    "end": 9949.58,
+    "text": "Ah, olha só."
+  },
+  {
+    "start": 9949.58,
+    "end": 9950.58,
+    "text": "O Zod."
+  },
+  {
+    "start": 9950.58,
+    "end": 9951.58,
+    "text": "Excelente."
+  },
+  {
+    "start": 9951.58,
+    "end": 9952.58,
+    "text": "Pera."
+  },
+  {
+    "start": 9952.58,
+    "end": 9953.58,
+    "text": "Primeiro vamos ler tudo, né?"
+  },
+  {
+    "start": 9953.58,
+    "end": 9959.93,
+    "text": "Reimportação retorna 200."
+  },
+  {
+    "start": 9959.93,
+    "end": 9960.93,
+    "text": "É."
+  },
+  {
+    "start": 9960.93,
+    "end": 9974.98,
+    "text": "Malta e erros."
+  },
+  {
+    "start": 9974.98,
+    "end": 9975.98,
+    "text": "Uma validação completa, né?"
+  },
+  {
+    "start": 9975.98,
+    "end": 10018.36,
+    "text": "Bom, teste rodou."
+  },
+  {
+    "start": 10018.36,
+    "end": 10019.36,
+    "text": "Teste DB."
+  },
+  {
+    "start": 10019.36,
+    "end": 10029.1,
+    "text": "Tudo certo também."
+  },
+  {
+    "start": 10029.1,
+    "end": 10030.1,
+    "text": "Toma com 23."
+  },
+  {
+    "start": 10030.1,
+    "end": 10031.1,
+    "text": "Passado."
+  },
+  {
+    "start": 10031.1,
+    "end": 10032.1,
+    "text": "Nenhum ignorado."
+  },
+  {
+    "start": 10032.1,
+    "end": 10033.1,
+    "text": "Nenhum falhado."
+  },
+  {
+    "start": 10033.1,
+    "end": 10034.1,
+    "text": "Type check."
+  },
+  {
+    "start": 10034.1,
+    "end": 10035.1,
+    "text": "Tudo parece que tá passando."
+  },
+  {
+    "start": 10035.1,
+    "end": 10036.1,
+    "text": "Legal."
+  },
+  {
+    "start": 10036.1,
+    "end": 10037.1,
+    "text": "Eu acredito que a gente já pode fazer a remoção dessa temp, né?"
+  },
+  {
+    "start": 10037.1,
+    "end": 10038.1,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10038.1,
+    "end": 10039.1,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10039.1,
+    "end": 10040.1,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10040.1,
+    "end": 10045.58,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10045.58,
+    "end": 10048.4,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10048.4,
+    "end": 10055.96,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10055.96,
+    "end": 10056.96,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10056.96,
+    "end": 10057.96,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10057.96,
+    "end": 10058.96,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10058.96,
+    "end": 10065.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10065.98,
+    "end": 10066.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10066.98,
+    "end": 10067.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10067.98,
+    "end": 10068.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10068.98,
+    "end": 10069.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10069.98,
+    "end": 10070.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10070.98,
+    "end": 10071.98,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10071.98,
+    "end": 10075.76,
+    "text": "Passa os commits."
+  },
+  {
+    "start": 10075.76,
+    "end": 10078.2,
+    "text": "Passa os20 mindset."
+  },
+  {
+    "start": 10078.2,
+    "end": 10079.2,
+    "text": "Passa os� mindset."
+  },
+  {
+    "start": 10079.2,
+    "end": 10080.2,
+    "text": "Passa os0 mindset."
+  },
+  {
+    "start": 10080.2,
+    "end": 10081.2,
+    "text": "Passa os0 mindset."
+  },
+  {
+    "start": 10081.2,
+    "end": 10082.2,
+    "text": "V agency consistent."
+  },
+  {
+    "start": 10082.2,
+    "end": 10086.18,
+    "text": "Passa osọ content."
+  },
+  {
+    "start": 10086.18,
+    "end": 10087.18,
+    "text": "V oCP."
+  },
+  {
+    "start": 10087.18,
+    "end": 10088.18,
+    "text": "Assim."
+  },
+  {
+    "start": 10088.18,
+    "end": 10179.71,
+    "text": "Passa o"
+  },
+  {
+    "start": 10179.71,
+    "end": 10394.4,
+    "text": "â´"
+  },
+  {
+    "start": 10394.4,
+    "end": 10399.46,
+    "text": "Desculpa."
+  },
+  {
+    "start": 10399.46,
+    "end": 10399.86,
+    "text": "Desculpa."
+  },
+  {
+    "start": 10400.06,
+    "end": 10422.06,
+    "text": "Ah, sem push. Então vamos dar push, né?"
+  },
+  {
+    "start": 10422.06,
+    "end": 10425.06,
+    "text": "E push."
+  },
+  {
+    "start": 10425.06,
+    "end": 10427.06,
+    "text": "Conquistamos de limite também."
+  },
+  {
+    "start": 10427.06,
+    "end": 10459.57,
+    "text": "Esse aqui é bastante teço, né? Vamos dar uma lida?"
+  },
+  {
+    "start": 10459.57,
+    "end": 10460.57,
+    "text": "Melhor ler aqui, né?"
+  },
+  {
+    "start": 10460.57,
+    "end": 10480.13,
+    "text": "Barra Temp não..."
+  },
+  {
+    "start": 10480.13,
+    "end": 10482.13,
+    "text": "Não devia ter saído ainda, né?"
+  },
+  {
+    "start": 10482.13,
+    "end": 10484.13,
+    "text": "Vamos devolver lá a Barra Temp."
+  },
+  {
+    "start": 10484.13,
+    "end": 10590.29,
+    "text": "Dojata WT, muito bom."
+  },
+  {
+    "start": 10590.29,
+    "end": 10750.56,
+    "text": "Isso. Banco..."
+  },
+  {
+    "start": 10750.56,
+    "end": 10752.56,
+    "text": "Ótimo, ótimo, ótimo."
+  },
+  {
+    "start": 10752.56,
+    "end": 10761.02,
+    "text": "Excelente."
+  },
+  {
+    "start": 10761.02,
+    "end": 10771.21,
+    "text": "Tudo bem."
+  },
+  {
+    "start": 10771.21,
+    "end": 10811.69,
+    "text": "A gente fez a finalização do último prompt que a gente fez."
+  },
+  {
+    "start": 10811.69,
+    "end": 10813.69,
+    "text": "Então..."
+  },
+  {
+    "start": 10813.69,
+    "end": 10822.58,
+    "text": "Essas rotas aqui foram criadas."
+  },
+  {
+    "start": 10822.58,
+    "end": 10824.58,
+    "text": "Aí o que eu fiz?"
+  },
+  {
+    "start": 10824.58,
+    "end": 10828.58,
+    "text": "Como o próximo..."
+  },
+  {
+    "start": 10828.58,
+    "end": 10834.58,
+    "text": "A próxima implementação a gente já vai começar a mexer com as carteiras."
+  },
+  {
+    "start": 10834.58,
+    "end": 10840.58,
+    "text": "Eu pedi para o outro modelo fazer para mim um script de teste."
+  },
+  {
+    "start": 10840.58,
+    "end": 10843.58,
+    "text": "Para a gente ver como foi implementado isso aqui."
+  },
+  {
+    "start": 10843.58,
+    "end": 10845.58,
+    "text": "E eu forneci para ele esse..."
+  },
+  {
+    "start": 10845.58,
+    "end": 10847.58,
+    "text": "Actions.md"
+  },
+  {
+    "start": 10847.58,
+    "end": 10849.58,
+    "text": "Que é como se fosse uma..."
+  },
+  {
+    "start": 10849.58,
+    "end": 10852.58,
+    "text": "É como se fosse, não. É a documentação do..."
+  },
+  {
+    "start": 10852.58,
+    "end": 10854.58,
+    "text": "Da Actions aqui."
+  },
+  {
+    "start": 10854.58,
+    "end": 10856.58,
+    "text": "Praticamente tudo o que foi feito, né?"
+  },
+  {
+    "start": 10856.58,
+    "end": 10859.58,
+    "text": "E ele gerou para mim um PowerShell."
+  },
+  {
+    "start": 10859.58,
+    "end": 10861.58,
+    "text": "Agora a gente vai executar ele."
+  },
+  {
+    "start": 10861.58,
+    "end": 10865.14,
+    "text": "Ele está aqui, ó."
+  },
+  {
+    "start": 10865.14,
+    "end": 10867.14,
+    "text": "Teste Actions."
+  },
+  {
+    "start": 10867.14,
+    "end": 10875.93,
+    "text": "Então vamos executar ele."
+  },
+  {
+    "start": 10875.93,
+    "end": 10877.93,
+    "text": "E ver que tipo..."
+  },
+  {
+    "start": 10877.93,
+    "end": 10879.93,
+    "text": "Ele pede duas..."
+  },
+  {
+    "start": 10879.93,
+    "end": 10881.93,
+    "text": "Ele pede duas..."
+  },
+  {
+    "start": 10881.93,
+    "end": 10883.93,
+    "text": "Duas variáveis, né?"
+  },
+  {
+    "start": 10883.93,
+    "end": 10910.7,
+    "text": "Temos CIDR."
+  },
+  {
+    "start": 10910.7,
+    "end": 10956.0,
+    "text": "Para a gente fazer os nossos testes."
+  },
+  {
+    "start": 10956.0,
+    "end": 10969.62,
+    "text": "E uma senha."
+  },
+  {
+    "start": 10969.62,
+    "end": 10970.62,
+    "text": "Está rodando, né?"
+  },
+  {
+    "start": 10970.62,
+    "end": 10980.33,
+    "text": "LoginBuilder."
+  },
+  {
+    "start": 10980.33,
+    "end": 10982.33,
+    "text": "LoginBuilder passou."
+  },
+  {
+    "start": 10982.33,
+    "end": 11003.98,
+    "text": "Os testes parece que estão passando, né?"
+  },
+  {
+    "start": 11003.98,
+    "end": 11005.98,
+    "text": "Vamos só dar uma lida."
+  },
+  {
+    "start": 11005.98,
+    "end": 11009.48,
+    "text": "Por desencargo."
+  },
+  {
+    "start": 11009.48,
+    "end": 11032.79,
+    "text": "Para ver como que está, então."
+  },
+  {
+    "start": 11032.79,
+    "end": 11034.79,
+    "text": "Sim, isso aqui é muito interessante, né?"
+  },
+  {
+    "start": 11034.79,
+    "end": 11036.79,
+    "text": "Como que está funcionando no banco."
+  },
+  {
+    "start": 11036.79,
+    "end": 11037.79,
+    "text": "É..."
+  },
+  {
+    "start": 11037.79,
+    "end": 11040.79,
+    "text": "A gente tem vários status de ciclo de vida."
+  },
+  {
+    "start": 11040.79,
+    "end": 11042.79,
+    "text": "Só que para a aplicação."
+  },
+  {
+    "start": 11042.79,
+    "end": 11043.79,
+    "text": "Só que para o Node."
+  },
+  {
+    "start": 11043.79,
+    "end": 11045.79,
+    "text": "Só que no banco a gente mantém um só."
+  },
+  {
+    "start": 11045.79,
+    "end": 11049.79,
+    "text": "Porque senão a gente precisaria ficar trabalhando com CronJob."
+  },
+  {
+    "start": 11049.79,
+    "end": 11051.79,
+    "text": "E não faz muito sentido, né?"
+  },
+  {
+    "start": 11051.79,
+    "end": 11053.79,
+    "text": "A gente só faz esses cálculos aqui, ó."
+  },
+  {
+    "start": 11053.79,
+    "end": 11055.79,
+    "text": "Se agora for..."
+  },
+  {
+    "start": 11055.79,
+    "end": 11058.79,
+    "text": "Antes do Start At, está Schedule."
+  },
+  {
+    "start": 11058.79,
+    "end": 11059.79,
+    "text": "Se agora for..."
+  },
+  {
+    "start": 11059.79,
+    "end": 11061.79,
+    "text": "Mais ou menos..."
+  },
+  {
+    "start": 11061.79,
+    "end": 11067.84,
+    "text": "Se for agora ou for um pouco mais do que o momento que..."
+  },
+  {
+    "start": 11067.84,
+    "end": 11068.84,
+    "text": "Começa."
+  },
+  {
+    "start": 11068.84,
+    "end": 11070.84,
+    "text": "Já está em Live."
+  },
+  {
+    "start": 11070.84,
+    "end": 11071.84,
+    "text": "Finalizing."
+  },
+  {
+    "start": 11071.84,
+    "end": 11098.45,
+    "text": "MinIncrements."
+  },
+  {
+    "start": 11098.45,
+    "end": 11099.45,
+    "text": "É, ó."
+  },
+  {
+    "start": 11099.45,
+    "end": 11107.46,
+    "text": "Excelente."
+  },
+  {
+    "start": 11107.46,
+    "end": 11109.46,
+    "text": "Como que está o nosso script?"
+  },
+  {
+    "start": 11109.46,
+    "end": 11111.46,
+    "text": "Passou 40 testes."
+  },
+  {
+    "start": 11111.46,
+    "end": 11129.34,
+    "text": "A gente pode fazer os testes como ele..."
+  },
+  {
+    "start": 11129.34,
+    "end": 11130.34,
+    "text": "Sugere aqui."
+  },
+  {
+    "start": 11130.34,
+    "end": 11140.55,
+    "text": "Sensacional."
+  },
+  {
+    "start": 11140.55,
+    "end": 11152.41,
+    "text": "Dá um build também."
+  },
+  {
+    "start": 11152.41,
+    "end": 11155.85,
+    "text": "Ótimo, ótimo, ótimo."
+  },
+  {
+    "start": 11155.85,
+    "end": 11180.62,
+    "text": "Faz sentido, né?"
+  },
+  {
+    "start": 11180.62,
+    "end": 11182.62,
+    "text": "Primeiro a gente define qual que vai ser o nosso financeiro."
+  },
+  {
+    "start": 11182.62,
+    "end": 11185.62,
+    "text": "Antes da gente começar a mexer com ele, né?"
+  },
+  {
+    "start": 11185.62,
+    "end": 11187.62,
+    "text": "Isso."
+  },
+  {
+    "start": 11187.62,
+    "end": 11189.62,
+    "text": "Olha que excelente."
+  },
+  {
+    "start": 11189.62,
+    "end": 11201.99,
+    "text": "KingsDCMais na API."
+  },
+  {
+    "start": 11201.99,
+    "end": 11260.72,
+    "text": "Ah, sim."
+  },
+  {
+    "start": 11260.72,
+    "end": 11261.72,
+    "text": "Era isso mesmo."
+  },
+  {
+    "start": 11261.72,
+    "end": 11268.46,
+    "text": "Era isso que eu esperava."
+  },
+  {
+    "start": 11268.46,
+    "end": 11271.46,
+    "text": "Eu achei que a gente estava..."
+  },
+  {
+    "start": 11271.46,
+    "end": 11272.46,
+    "text": "Mudando agora."
+  },
+  {
+    "start": 11272.46,
+    "end": 11277.46,
+    "text": "Eu imaginei que a gente começou com centavos e agora a gente está usando reais."
+  },
+  {
+    "start": 11277.46,
+    "end": 11282.46,
+    "text": "Porque ele falou aqui a respeito de..."
+  },
+  {
+    "start": 11282.46,
+    "end": 11283.46,
+    "text": "StringsDecimais."
+  },
+  {
+    "start": 11283.46,
+    "end": 11286.46,
+    "text": "Então eu imaginei que a API fosse trafegar reais."
+  },
+  {
+    "start": 11286.46,
+    "end": 11287.46,
+    "text": "Mas não."
+  },
+  {
+    "start": 11287.46,
+    "end": 11288.46,
+    "text": "A gente continua trafegando centavos."
+  },
+  {
+    "start": 11288.46,
+    "end": 11289.46,
+    "text": "É só..."
+  },
+  {
+    "start": 11289.46,
+    "end": 11292.46,
+    "text": "Só uma modificaçãozinha que a gente vai fazer no front-end."
+  },
+  {
+    "start": 11292.46,
+    "end": 11316.82,
+    "text": "Que no front-end vai ficar melhor a gente mostrar em reais do que em centavos, né?"
+  },
+  {
+    "start": 11316.82,
+    "end": 11317.82,
+    "text": "Deixa eu pedir..."
+  },
+  {
+    "start": 11317.82,
+    "end": 11318.82,
+    "text": "Deixa eu pedir..."
+  },
+  {
+    "start": 11318.82,
+    "end": 11320.82,
+    "text": "Faça os comits."
+  },
+  {
+    "start": 11320.82,
+    "end": 11326.82,
+    "text": "E aí eu removo o..."
+  },
+  {
+    "start": 11326.82,
+    "end": 11327.82,
+    "text": "Teste."
+  },
+  {
+    "start": 11328.82,
+    "end": 11343.03,
+    "text": "Tchau."
+  },
+  {
+    "start": 11343.03,
+    "end": 11344.03,
+    "text": "Perdão."
+  },
+  {
+    "start": 11345.03,
+    "end": 11415.29,
+    "text": "Uma chave de indepotência."
+  },
+  {
+    "start": 11415.29,
+    "end": 11416.29,
+    "text": "Sim."
+  },
+  {
+    "start": 11416.29,
+    "end": 11506.89,
+    "text": "Pedi para ele explicar."
+  },
+  {
+    "start": 11506.89,
+    "end": 11515.89,
+    "text": "Explique um pouco melhor a indepotência e os mecanismos."
+  },
+  {
+    "start": 11516.89,
+    "end": 11520.16,
+    "text": "Evitar..."
+  },
+  {
+    "start": 11520.16,
+    "end": 11521.16,
+    "text": "RaceCondition."
+  },
+  {
+    "start": 11521.16,
+    "end": 11529.23,
+    "text": "Eu achei o prompt sensacional."
+  },
+  {
+    "start": 11529.23,
+    "end": 11530.23,
+    "text": "Mas eu vou perguntar."
+  },
+  {
+    "start": 11530.23,
+    "end": 11573.57,
+    "text": "Vamos perguntar."
+  },
+  {
+    "start": 11573.57,
+    "end": 11578.57,
+    "text": "Na parte de indepotência."
+  },
+  {
+    "start": 11578.57,
+    "end": 11589.81,
+    "text": "Se o usuário faz duas hacks de depósito ao mesmo tempo."
+  },
+  {
+    "start": 11589.81,
+    "end": 11591.81,
+    "text": "Tudo bem."
+  },
+  {
+    "start": 11591.81,
+    "end": 11594.81,
+    "text": "São duas hacks..."
+  },
+  {
+    "start": 11594.81,
+    "end": 11595.81,
+    "text": "Fálicas."
+  },
+  {
+    "start": 11595.81,
+    "end": 11603.75,
+    "text": "Entendi."
+  },
+  {
+    "start": 11603.75,
+    "end": 11604.75,
+    "text": "Maravilha."
+  },
+  {
+    "start": 11604.75,
+    "end": 11615.9,
+    "text": "Entendi."
+  },
+  {
+    "start": 11615.9,
+    "end": 11616.9,
+    "text": "Ótimo."
+  },
+  {
+    "start": 11616.9,
+    "end": 11617.9,
+    "text": "Ótimo."
+  },
+  {
+    "start": 11617.9,
+    "end": 11618.9,
+    "text": "Ótimo."
+  },
+  {
+    "start": 11618.9,
+    "end": 11619.9,
+    "text": "Ótimo."
+  },
+  {
+    "start": 11619.9,
+    "end": 11620.9,
+    "text": "Vamos lá."
+  },
+  {
+    "start": 11620.9,
+    "end": 11666.79,
+    "text": "Vamos voltar aqui."
+  },
+  {
+    "start": 11666.79,
+    "end": 11667.99,
+    "text": "Então a junção dos dois."
+  },
+  {
+    "start": 11667.99,
+    "end": 11685.73,
+    "text": "Deixa eu passar."
+  },
+  {
+    "start": 11685.73,
+    "end": 11687.73,
+    "text": "Duas hacks iguais..."
+  },
+  {
+    "start": 11687.73,
+    "end": 11692.73,
+    "text": "O banco não deixa eu passar."
+  },
+  {
+    "start": 11692.73,
+    "end": 11695.73,
+    "text": "Dois debitos iguais."
+  },
+  {
+    "start": 11695.73,
+    "end": 11702.55,
+    "text": "Mas o que acontece?"
+  },
+  {
+    "start": 11702.55,
+    "end": 11705.55,
+    "text": "Se eu passar duas hacks."
+  },
+  {
+    "start": 11705.55,
+    "end": 11718.8,
+    "text": "com chaves diferentes, ao mesmo tempo, para o mesmo, poxa vida, como é o nome que a gente usa?"
+  },
+  {
+    "start": 11718.8,
+    "end": 11760.24,
+    "text": "No mesmo lote, que eu tenha 200, e faço um lance de 80, chave 1, e ao mesmo tempo, um lance de 80, chave 2, e os dois passam pelo node, porque foram feitos ao mesmo tempo."
+  },
+  {
+    "start": 11760.24,
+    "end": 11785.77,
+    "text": "O node começou."
+  },
+  {
+    "start": 11785.79,
+    "end": 11790.89,
+    "text": "Pode começar a processar as duas requisições antes mesmo de que qualquer uma termine."
+  },
+  {
+    "start": 11791.73,
+    "end": 11794.71,
+    "text": "Ambas podem chegar até o push praticamente ao mesmo tempo."
+  },
+  {
+    "start": 11795.35,
+    "end": 11801.19,
+    "text": "Mas nossa arquitetura exige que cada transação bloqueie a linha do leilão antes de tomar decisões."
+  },
+  {
+    "start": 11801.39,
+    "end": 11802.09,
+    "text": "Ah, tá."
+  },
+  {
+    "start": 11802.71,
+    "end": 11811.57,
+    "text": "A primeira requisição é processada."
+  },
+  {
+    "start": 11842.29,
+    "end": 11842.93,
+    "text": "Ah, olha só."
+  },
+  {
+    "start": 11878.46,
+    "end": 11878.92,
+    "text": "Entendi."
+  },
+  {
+    "start": 11887.12,
+    "end": 11888.86,
+    "text": "Você já foi integrado, né?"
+  },
+  {
+    "start": 11935.98,
+    "end": 11937.9,
+    "text": "Subiu um pouco a..."
+  },
+  {
+    "start": 11937.9,
+    "end": 11942.35,
+    "text": "Subiu um pouco o raciocínio?"
+  },
+  {
+    "start": 11988.16,
+    "end": 11988.64,
+    "text": "Maravilha."
+  },
+  {
+    "start": 11988.7,
+    "end": 11988.96,
+    "text": "Talvez eu tenha que fazer uma coisa."
+  },
+  {
+    "start": 11988.96,
+    "end": 11988.98,
+    "text": "Talvez eu tenha que fazer uma coisa."
+  },
+  {
+    "start": 11988.98,
+    "end": 11990.52,
+    "text": "Talvez a gente pode até pegar isso aqui."
+  },
+  {
+    "start": 11992.08,
+    "end": 11993.74,
+    "text": "Pegar um Markdown Preview."
+  },
+  {
+    "start": 11996.64,
+    "end": 11998.44,
+    "text": "E a gente joga aqui."
+  },
+  {
+    "start": 12000.18,
+    "end": 12066.29,
+    "text": "Tá horrível, né? Mas..."
+  },
+  {
+    "start": 12066.29,
+    "end": 12067.01,
+    "text": "Vou deixar aqui embaixo."
+  },
+  {
+    "start": 12082.24,
+    "end": 12192.0,
+    "text": "Quanto dinheiro é isso, no máximo?"
+  },
+  {
+    "start": 12197.69,
+    "end": 12198.41,
+    "text": "Centavo."
+  },
+  {
+    "start": 12199.45,
+    "end": 12200.17,
+    "text": "Centena."
+  },
+  {
+    "start": 12201.23,
+    "end": 12201.67,
+    "text": "Mil."
+  },
+  {
+    "start": 12202.59,
+    "end": 12203.31,
+    "text": "Milhão."
+  },
+  {
+    "start": 12204.57,
+    "end": 12205.29,
+    "text": "Bilhão."
+  },
+  {
+    "start": 12206.53,
+    "end": 12207.07,
+    "text": "Trilhão."
+  },
+  {
+    "start": 12208.23,
+    "end": 12208.75,
+    "text": "É, só..."
+  },
+  {
+    "start": 12208.75,
+    "end": 12209.75,
+    "text": "Só dá pra..."
+  },
+  {
+    "start": 12209.75,
+    "end": 12210.73,
+    "text": "Só dá pra..."
+  },
+  {
+    "start": 12210.75,
+    "end": 12213.45,
+    "text": "Fazer 92 quadrilhões de reais."
+  },
+  {
+    "start": 12214.31,
+    "end": 12214.69,
+    "text": "Num item."
+  },
+  {
+    "start": 12216.39,
+    "end": 12217.15,
+    "text": "Tem que ver se dá, né?"
+  },
+  {
+    "start": 12217.53,
+    "end": 12242.9,
+    "text": "Os testes."
+  },
+  {
+    "start": 12243.26,
+    "end": 12312.36,
+    "text": "Como que foi a decisão?"
+  },
+  {
+    "start": 12376.92,
+    "end": 12377.76,
+    "text": "Malete Router."
+  },
+  {
+    "start": 12399.95,
+    "end": 12401.57,
+    "text": "Não me preocupar com auditoria agora."
+  },
+  {
+    "start": 12402.05,
+    "end": 12454.22,
+    "text": "Acho que eu vou parar um pouco agora."
+  },
+  {
+    "start": 12456.88,
+    "end": 12458.52,
+    "text": "Depois eu volto e continuo."
+  },
+  {
+    "start": 12459.62,
+    "end": 12460.34,
+    "text": "Até logo."
+  },
+  {
+    "start": 12462.47,
+    "end": 12462.69,
+    "text": "Bom."
+  },
+  {
+    "start": 12463.59,
+    "end": 12464.63,
+    "text": "Vamos continuar então."
+  },
+  {
+    "start": 12464.99,
+    "end": 12465.67,
+    "text": "Hoje é sábado."
+  },
+  {
+    "start": 12467.29,
+    "end": 12467.85,
+    "text": "E..."
+  },
+  {
+    "start": 12467.85,
+    "end": 12470.09,
+    "text": "Minha pretensão é terminar isso..."
+  },
+  {
+    "start": 12470.09,
+    "end": 12471.13,
+    "text": "Essa parte do backend."
+  },
+  {
+    "start": 12471.13,
+    "end": 12473.27,
+    "text": "Hoje, pelo menos."
+  },
+  {
+    "start": 12473.85,
+    "end": 12474.07,
+    "text": "Né?"
+  },
+  {
+    "start": 12475.51,
+    "end": 12480.71,
+    "text": "Então ficou faltando a gente dar uma revisada aqui que ele implementou aqui na parte das carteiras, né?"
+  },
+  {
+    "start": 12481.19,
+    "end": 12487.16,
+    "text": "E a gente fazer o commit e seguir pro próximo passo, né?"
+  },
+  {
+    "start": 12488.12,
+    "end": 12489.78,
+    "text": "O que eu vou fazer, na verdade?"
+  },
+  {
+    "start": 12491.0,
+    "end": 12494.12,
+    "text": "Vamos agilizar um pouco, uma vez que a gente tem o..."
+  },
+  {
+    "start": 12494.12,
+    "end": 12498.75,
+    "text": "Uma vez que a gente tem um planejamento."
+  },
+  {
+    "start": 12505.04,
+    "end": 12505.36,
+    "text": "Isso."
+  },
+  {
+    "start": 12505.48,
+    "end": 12507.46,
+    "text": "Agora a gente ia fazer a parte da auditoria, né?"
+  },
+  {
+    "start": 12508.8,
+    "end": 12509.26,
+    "text": "Então tá."
+  },
+  {
+    "start": 12509.8,
+    "end": 12565.28,
+    "text": "Aqui uma referência ponto barra."
+  },
+  {
+    "start": 12566.6,
+    "end": 12571.6,
+    "text": "Requirements.pdf"
+  },
+  {
+    "start": 12571.6,
+    "end": 12584.42,
+    "text": "Vamos dar uma investigada aqui que ele fez, né?"
+  },
+  {
+    "start": 12585.18,
+    "end": 12586.84,
+    "text": "Isso aqui é a parte do planejamento, né?"
+  },
+  {
+    "start": 12588.2,
+    "end": 12590.1,
+    "text": "Vem com uma skill que a gente instalou."
+  },
+  {
+    "start": 12733.62,
+    "end": 12734.06,
+    "text": "Excelente."
+  },
+  {
+    "start": 12734.32,
+    "end": 12735.92,
+    "text": "Eu adoro esse tipo de arquitetura."
+  },
+  {
+    "start": 12736.94,
+    "end": 12738.52,
+    "text": "Deixa tudo separado, certinho."
+  },
+  {
+    "start": 12738.62,
+    "end": 12740.38,
+    "text": "Qualquer pessoa que chegar já..."
+  },
+  {
+    "start": 12740.38,
+    "end": 12743.94,
+    "text": "Já entende o que o contrato é a respeito das interfaces."
+  },
+  {
+    "start": 12745.16,
+    "end": 12746.6,
+    "text": "Aí depois acaba sendo um..."
+  },
+  {
+    "start": 12746.6,
+    "end": 12746.8,
+    "text": "Um..."
+  },
+  {
+    "start": 12746.8,
+    "end": 12750.88,
+    "text": "Aquele esquema de controle repositório."
+  },
+  {
+    "start": 12751.04,
+    "end": 12751.46,
+    "text": "Service."
+  },
+  {
+    "start": 12752.16,
+    "end": 12754.02,
+    "text": "Tudo bem modularzinho."
+  },
+  {
+    "start": 12754.22,
+    "end": 12754.92,
+    "text": "Cara, bom, hein?"
+  },
+  {
+    "start": 12867.43,
+    "end": 12868.21,
+    "text": "Vai entender, né?"
+  },
+  {
+    "start": 12868.71,
+    "end": 12880.86,
+    "text": "24."
+  },
+  {
+    "start": 12881.24,
+    "end": 12881.62,
+    "text": "Meu..."
+  },
+  {
+    "start": 12881.62,
+    "end": 12882.5,
+    "text": "Realmente."
+  },
+  {
+    "start": 12882.5,
+    "end": 12884.5,
+    "text": "Teste."
+  },
+  {
+    "start": 12885.1,
+    "end": 12893.97,
+    "text": "O docker não tá ligado, ó."
+  },
+  {
+    "start": 12944.8,
+    "end": 12946.08,
+    "text": "Web sockets, né?"
+  },
+  {
+    "start": 12948.32,
+    "end": 12948.82,
+    "text": "E agora?"
+  },
+  {
+    "start": 12948.94,
+    "end": 12950.66,
+    "text": "Web sockets ou sockets IO?"
+  },
+  {
+    "start": 12974.08,
+    "end": 12975.22,
+    "text": "Aqui fala socket?"
+  },
+  {
+    "start": 12975.86,
+    "end": 12981.96,
+    "text": "Não fala."
+  },
+  {
+    "start": 12985.5,
+    "end": 12986.78,
+    "text": "Vamos deixar discriminado."
+  },
+  {
+    "start": 13013.54,
+    "end": 13014.5,
+    "text": "Ah, entendi."
+  },
+  {
+    "start": 13084.1,
+    "end": 13086.4,
+    "text": "Forma de eu ver esses commits, velho."
+  },
+  {
+    "start": 13086.8,
+    "end": 13116.22,
+    "text": "Open changes."
+  },
+  {
+    "start": 13116.68,
+    "end": 13117.24,
+    "text": "Ah, olha."
+  },
+  {
+    "start": 13117.26,
+    "end": 13117.76,
+    "text": "Olha só."
+  },
+  {
+    "start": 13121.28,
+    "end": 13122.78,
+    "text": "Ah, mais fácil agora, né?"
+  },
+  {
+    "start": 13164.18,
+    "end": 13165.78,
+    "text": "Tudo seguindo um contrato, cara."
+  },
+  {
+    "start": 13165.78,
+    "end": 13168.34,
+    "text": "Isso aqui que eu acho a coisa mais linda do TypeScript, né?"
+  },
+  {
+    "start": 13168.34,
+    "end": 13170.34,
+    "text": "As interfaces que você pode delegar."
+  },
+  {
+    "start": 13173.76,
+    "end": 13175.22,
+    "text": "E aí fica tudo uma centraliza..."
+  },
+  {
+    "start": 13175.22,
+    "end": 13177.22,
+    "text": "Uma coisa centralizada só, né?"
+  },
+  {
+    "start": 13179.88,
+    "end": 13180.88,
+    "text": "Sensacional, cara."
+  },
+  {
+    "start": 13191.85,
+    "end": 13192.35,
+    "text": "Vamos lá."
+  },
+  {
+    "start": 13226.03,
+    "end": 13226.67,
+    "text": "Lindo."
+  },
+  {
+    "start": 13252.09,
+    "end": 13253.59,
+    "text": "Vou botar um pouco mais de..."
+  },
+  {
+    "start": 13254.15,
+    "end": 13255.57,
+    "text": "Um pouco mais de effort."
+  },
+  {
+    "start": 13256.49,
+    "end": 13258.49,
+    "text": "Que agora ele vai tá como orquestrador, né?"
+  },
+  {
+    "start": 13261.38,
+    "end": 13262.0,
+    "text": "É melhor."
+  },
+  {
+    "start": 13262.0,
+    "end": 13263.24,
+    "text": "Quanto que eu tenho de uso ainda?"
+  },
+  {
+    "start": 13264.78,
+    "end": 13265.82,
+    "text": "Ah, ainda tá bom."
+  },
+  {
+    "start": 13266.9,
+    "end": 13267.82,
+    "text": "Dá pra pôr um raio?"
+  },
+  {
+    "start": 13268.06,
+    "end": 13268.4,
+    "text": "Dá, né?"
+  },
+  {
+    "start": 13269.16,
+    "end": 13269.54,
+    "text": "Então bora."
+  },
+  {
+    "start": 13280.97,
+    "end": 13281.53,
+    "text": "Maravilha."
+  },
+  {
+    "start": 13281.67,
+    "end": 13286.85,
+    "text": "Enquanto isso, vamos discutir as próximas etapas."
+  },
+  {
+    "start": 13287.35,
+    "end": 13303.84,
+    "text": "A próxima etapa, no caso, seria..."
+  },
+  {
+    "start": 13303.84,
+    "end": 13304.76,
+    "text": "Bid service."
+  },
+  {
+    "start": 13434.99,
+    "end": 13435.67,
+    "text": "Dá uma olhada, né?"
+  },
+  {
+    "start": 13448.03,
+    "end": 13448.51,
+    "text": "É, né?"
+  },
+  {
+    "start": 13449.21,
+    "end": 13450.81,
+    "text": "Não pode dar lances."
+  },
+  {
+    "start": 13453.69,
+    "end": 13457.15,
+    "text": "Não tá específico que não pode dar lances no próprio, né?"
+  },
+  {
+    "start": 13457.57,
+    "end": 13479.22,
+    "text": "Dá uma olhada aqui se tem mais informações, né?"
+  },
+  {
+    "start": 13480.22,
+    "end": 13483.68,
+    "text": "Leidoeiro gerencia os próprios lotes e não pode dar lances."
+  },
+  {
+    "start": 13484.28,
+    "end": 13490.24,
+    "text": "Leidoeiro monta um lote."
+  },
+  {
+    "start": 13490.28,
+    "end": 13494.28,
+    "text": "Define o lance incremental e incrementa o mili no horário."
+  },
+  {
+    "start": 13494.28,
+    "end": 13498.28,
+    "text": "Licitante deposita o saldo, acompanha ao vivo e dá lances."
+  },
+  {
+    "start": 13498.28,
+    "end": 13512.57,
+    "text": "Não pode dar lances."
+  },
+  {
+    "start": 13512.57,
+    "end": 13514.57,
+    "text": "É."
+  },
+  {
+    "start": 13514.57,
+    "end": 13549.02,
+    "text": "É."
+  },
+  {
+    "start": 13549.02,
+    "end": 13551.02,
+    "text": "Talvez..."
+  },
+  {
+    "start": 13551.02,
+    "end": 13553.02,
+    "text": "Talvez ele tenha..."
+  },
+  {
+    "start": 13553.02,
+    "end": 13555.02,
+    "text": "Talvez ele tenha uma..."
+  },
+  {
+    "start": 13555.02,
+    "end": 13557.02,
+    "text": "Uma outra conta, né?"
+  },
+  {
+    "start": 13557.02,
+    "end": 13566.03,
+    "text": "Bom, vamo lá, né?"
+  },
+  {
+    "start": 13566.03,
+    "end": 13585.9,
+    "text": "O líder anterior ocupa sua reserva."
+  },
+  {
+    "start": 13585.9,
+    "end": 13762.04,
+    "text": "Tô com um pouco de dificuldade de entender."
+  },
+  {
+    "start": 13762.04,
+    "end": 13913.58,
+    "text": "Entendi esse ponto."
+  },
+  {
+    "start": 13913.58,
+    "end": 13948.51,
+    "text": "Entendi."
+  },
+  {
+    "start": 13948.51,
+    "end": 13961.23,
+    "text": "Entendi, entendi."
+  },
+  {
+    "start": 13961.23,
+    "end": 14009.92,
+    "text": "Entendi, acho que entendi tudo."
+  },
+  {
+    "start": 14009.92,
+    "end": 14013.2,
+    "text": "Entendi tudo."
+  },
+  {
+    "start": 14013.2,
+    "end": 14015.2,
+    "text": "Seria algo como..."
+  },
+  {
+    "start": 14015.2,
+    "end": 14019.4,
+    "text": "É..."
+  },
+  {
+    "start": 14019.4,
+    "end": 14029.12,
+    "text": "É algo como a gente ter algumas etapas, né?"
+  },
+  {
+    "start": 14029.12,
+    "end": 14031.12,
+    "text": "É algo como a gente ter algumas etapas, né?"
+  },
+  {
+    "start": 14031.12,
+    "end": 14033.12,
+    "text": "Pegar esse aqui, copiar esse aqui..."
+  },
+  {
+    "start": 14033.12,
+    "end": 14044.75,
+    "text": "Joga esse aqui aqui..."
+  },
+  {
+    "start": 14044.75,
+    "end": 14048.75,
+    "text": "E aí a gente tem validação, reserva, registro, atualizo, líder e audita."
+  },
+  {
+    "start": 14048.75,
+    "end": 14053.6,
+    "text": "E aí a gente tem validação, reserva, registro, atualizo, líder e audita."
+  },
+  {
+    "start": 14053.6,
+    "end": 14062.44,
+    "text": "E aí a gente tem validação, reserva, registro, atualizo, líder e audita."
+  },
+  {
+    "start": 14062.44,
+    "end": 14072.35,
+    "text": "E aí a gente tem validação, reserva, registro, atualizo, líder e audita."
+  },
+  {
+    "start": 14072.35,
+    "end": 14101.61,
+    "text": "E aí a gente tem validação, reserva, registro, atualizo, líder e audita."
+  },
+  {
+    "start": 14101.61,
+    "end": 14105.15,
+    "text": "Tá uma maravilha."
+  },
+  {
+    "start": 14105.15,
+    "end": 14107.15,
+    "text": "Seria algo como"
+  },
+  {
+    "start": 14107.15,
+    "end": 14109.15,
+    "text": "pegar isso aqui tudo,"
+  },
+  {
+    "start": 14109.15,
+    "end": 14113.15,
+    "text": "em vez de você colocar isso aqui"
+  },
+  {
+    "start": 14113.15,
+    "end": 14115.15,
+    "text": "pra rodar diretamente,"
+  },
+  {
+    "start": 14115.15,
+    "end": 14117.15,
+    "text": "você pegar isso aqui tudo"
+  },
+  {
+    "start": 14117.15,
+    "end": 14119.15,
+    "text": "e você encapsular"
+  },
+  {
+    "start": 14119.15,
+    "end": 14121.01,
+    "text": "dentro do que seria o"
+  },
+  {
+    "start": 14121.01,
+    "end": 14121.15,
+    "text": "Bid... opa! Tudo errado?"
+  },
+  {
+    "start": 14121.15,
+    "end": 14124.49,
+    "text": "... Bid Service"
+  },
+  {
+    "start": 14124.49,
+    "end": 14126.69,
+    "text": "Seria você encapsular isso aqui aqui dentro."
+  },
+  {
+    "start": 14127.87,
+    "end": 14130.09,
+    "text": "Aí imagina que ao invés..."
+  },
+  {
+    "start": 14130.09,
+    "end": 14211.05,
+    "text": "Isso, isso."
+  },
+  {
+    "start": 14214.03,
+    "end": 14215.23,
+    "text": "Tá, peraí."
+  },
+  {
+    "start": 14215.57,
+    "end": 14245.18,
+    "text": "Aqui tem Bruno, aqui tem Ana."
+  },
+  {
+    "start": 14287.13,
+    "end": 14288.49,
+    "text": "Ah, aqui ele fez pra gente, né?"
+  },
+  {
+    "start": 14294.27,
+    "end": 14295.17,
+    "text": "Líder 100."
+  },
+  {
+    "start": 14295.39,
+    "end": 14296.85,
+    "text": "As duas transações começam."
+  },
+  {
+    "start": 14297.61,
+    "end": 14299.31,
+    "text": "Decide qual consegue o lock primeiro."
+  },
+  {
+    "start": 14299.81,
+    "end": 14299.97,
+    "text": "Tá."
+  },
+  {
+    "start": 14306.7,
+    "end": 14307.86,
+    "text": "Ana bloqueia a linha do leilão."
+  },
+  {
+    "start": 14307.96,
+    "end": 14310.56,
+    "text": "Bruno fica esperando, sem prosseguir pra validar o lance."
+  },
+  {
+    "start": 14310.72,
+    "end": 14311.58,
+    "text": "O Bruno aguarda."
+  },
+  {
+    "start": 14311.58,
+    "end": 14320.17,
+    "text": "Ana valida, bloqueia as carteiras necessárias, libera a reserva e cria nova reserva."
+  },
+  {
+    "start": 14320.25,
+    "end": 14321.39,
+    "text": "Tudo ainda sem comit."
+  },
+  {
+    "start": 14321.97,
+    "end": 14322.57,
+    "text": "Certo."
+  },
+  {
+    "start": 14323.65,
+    "end": 14325.49,
+    "text": "Ana confirma o lance e libera o lock."
+  },
+  {
+    "start": 14325.61,
+    "end": 14327.83,
+    "text": "Bruno agora consegue acessar o leilão atualizado."
+  },
+  {
+    "start": 14329.19,
+    "end": 14333.95,
+    "text": "Bruno encontra o lance e como oferece respeito ao incremento, pode prosseguir se tiver saldo."
+  },
+  {
+    "start": 14334.97,
+    "end": 14337.45,
+    "text": "Bruno libera a Ana, registra o lance."
+  },
+  {
+    "start": 14338.89,
+    "end": 14339.83,
+    "text": "Ah, entendi."
+  },
+  {
+    "start": 14339.83,
+    "end": 14343.47,
+    "text": "Isso aqui é uma aplicação de banco de dados."
+  },
+  {
+    "start": 14343.47,
+    "end": 14356.68,
+    "text": "Se Bruno oferecer 110, aceita, atende ao mínimo, após Ana o mínimo passou a ser 120."
+  },
+  {
+    "start": 14356.68,
+    "end": 14360.16,
+    "text": "Não rejeita Bruno, ele faz o Bruno esperar."
+  },
+  {
+    "start": 14360.16,
+    "end": 14364.74,
+    "text": "Entendi."
+  },
+  {
+    "start": 14364.74,
+    "end": 14365.74,
+    "text": "Ótimo, ótimo."
+  },
+  {
+    "start": 14365.74,
+    "end": 14366.74,
+    "text": "Consegui entender."
+  },
+  {
+    "start": 14366.74,
+    "end": 14367.74,
+    "text": "Consegui entender."
+  },
+  {
+    "start": 14367.74,
+    "end": 14368.74,
+    "text": "Então isso aqui, na verdade, é uma aplicação de banco de dados, né?"
+  },
+  {
+    "start": 14368.74,
+    "end": 14372.17,
+    "text": "Agora eu entendi."
+  },
+  {
+    "start": 14372.17,
+    "end": 14373.17,
+    "text": "Agora eu entendi."
+  },
+  {
+    "start": 14373.17,
+    "end": 14374.17,
+    "text": "Tudo depende de quem vai pegar o lock primeiro, né?"
+  },
+  {
+    "start": 14374.17,
+    "end": 14375.17,
+    "text": "Entendi."
+  },
+  {
+    "start": 14375.17,
+    "end": 14376.17,
+    "text": "Entendi."
+  },
+  {
+    "start": 14376.17,
+    "end": 14377.17,
+    "text": "Entendi."
+  },
+  {
+    "start": 14377.17,
+    "end": 14378.17,
+    "text": "Entendi."
+  },
+  {
+    "start": 14378.17,
+    "end": 14447.24,
+    "text": "Entendi."
+  },
+  {
+    "start": 14447.24,
+    "end": 14448.24,
+    "text": "Entendi."
+  },
+  {
+    "start": 14448.24,
+    "end": 14449.24,
+    "text": "Entendi."
+  },
+  {
+    "start": 14449.24,
+    "end": 14450.24,
+    "text": "Entendi."
+  },
+  {
+    "start": 14450.24,
+    "end": 14451.24,
+    "text": "Entendi."
+  },
+  {
+    "start": 14451.24,
+    "end": 14452.24,
+    "text": "Entendi."
+  },
+  {
+    "start": 14452.24,
+    "end": 14452.36,
+    "text": "Entendi."
+  },
+  {
+    "start": 14452.36,
+    "end": 14453.36,
+    "text": "Entendi."
+  },
+  {
+    "start": 14453.36,
+    "end": 14453.44,
+    "text": "Entendi."
+  },
+  {
+    "start": 14453.44,
+    "end": 14453.56,
+    "text": "Entendi."
+  },
+  {
+    "start": 14453.56,
+    "end": 14453.58,
+    "text": "Entendi."
+  },
+  {
+    "start": 14453.58,
+    "end": 14454.58,
+    "text": "Entendi."
+  },
+  {
+    "start": 14454.58,
+    "end": 14455.58,
+    "text": "Entendi."
+  },
+  {
+    "start": 14455.58,
+    "end": 14456.58,
+    "text": "Entendi."
+  },
+  {
+    "start": 14456.58,
+    "end": 14458.95,
+    "text": "Entendi."
+  },
+  {
+    "start": 14458.95,
+    "end": 14459.95,
+    "text": "Entendi."
+  },
+  {
+    "start": 14459.95,
+    "end": 14460.95,
+    "text": "Entendi."
+  },
+  {
+    "start": 14460.95,
+    "end": 14461.95,
+    "text": "Então, mesmo que Bruno e Ana mandem uma mensagem ao mesmo tempo, o banco de dados vai decidir um dos dois, baseado em que?"
+  },
+  {
+    "start": 14461.95,
+    "end": 14462.95,
+    "text": "Tanto faz."
+  },
+  {
+    "start": 14462.95,
+    "end": 14463.95,
+    "text": "Vai decidir um dos dois."
+  },
+  {
+    "start": 14463.95,
+    "end": 14467.9,
+    "text": "Agora eu entendi."
+  },
+  {
+    "start": 14467.9,
+    "end": 14468.9,
+    "text": "Não posso usar o raio aí, senão..."
+  },
+  {
+    "start": 14468.9,
+    "end": 14469.9,
+    "text": "Vou fazer um relatório técnico."
+  },
+  {
+    "start": 14469.9,
+    "end": 14470.9,
+    "text": "Antes de eu começar a ler isso aqui, vamos terminar de conversar a respeito da próxima"
+  },
+  {
+    "start": 14470.9,
+    "end": 14471.9,
+    "text": "etapa."
+  },
+  {
+    "start": 14471.9,
+    "end": 14478.37,
+    "text": "Só que a gente vai olhar o pós-comit, assim, maravilha."
+  },
+  {
+    "start": 14478.37,
+    "end": 14479.37,
+    "text": "Leilão está aberto das nossas violências."
+  },
+  {
+    "start": 14479.37,
+    "end": 14480.37,
+    "text": "Vamos ter uma reserva 80 na partida dela, 80 de Л."
+  },
+  {
+    "start": 14480.37,
+    "end": 14481.37,
+    "text": "Depois, vamos ver se ele está aberto."
+  },
+  {
+    "start": 14481.37,
+    "end": 14482.37,
+    "text": "Vamos ver se ele está aberto."
+  },
+  {
+    "start": 14482.37,
+    "end": 14487.02,
+    "text": "Vamos ver se ele está aberto."
+  },
+  {
+    "start": 14487.02,
+    "end": 14489.02,
+    "text": "Eu vou terminar de conversar a respeito da próxima etapa"
+  },
+  {
+    "start": 14489.02,
+    "end": 14543.78,
+    "text": "Só que eu tirei o pause do commit sim"
+  },
+  {
+    "start": 14543.78,
+    "end": 14562.26,
+    "text": "Maravilha"
+  },
+  {
+    "start": 14562.26,
+    "end": 14568.14,
+    "text": "Leilão está aberto e ainda não resolveu o lance"
+  },
+  {
+    "start": 14568.14,
+    "end": 14570.14,
+    "text": "Reserva 80 na cartilha dela"
+  },
+  {
+    "start": 14570.14,
+    "end": 14572.14,
+    "text": "80 reservado"
+  },
+  {
+    "start": 14572.14,
+    "end": 14574.14,
+    "text": "0 reservado"
+  },
+  {
+    "start": 14574.14,
+    "end": 14576.14,
+    "text": "200 disponível"
+  },
+  {
+    "start": 14576.14,
+    "end": 14578.14,
+    "text": "Isso"
+  },
+  {
+    "start": 14578.14,
+    "end": 14587.94,
+    "text": "O mesmo usuário"
+  },
+  {
+    "start": 14587.94,
+    "end": 14589.94,
+    "text": "Pode liderar ledões diferentes"
+  },
+  {
+    "start": 14589.94,
+    "end": 14610.63,
+    "text": "Sim, pode"
+  },
+  {
+    "start": 14610.63,
+    "end": 14614.2,
+    "text": "Isso aqui é importante"
+  },
+  {
+    "start": 14614.2,
+    "end": 14616.2,
+    "text": "Porque nem todo lance vai gerar uma transação ledger"
+  },
+  {
+    "start": 14616.2,
+    "end": 14618.2,
+    "text": "Isso é importante"
+  },
+  {
+    "start": 14618.2,
+    "end": 14685.35,
+    "text": "Permitir que um participante"
+  },
+  {
+    "start": 14685.35,
+    "end": 14687.35,
+    "text": "aumente o próprio lance enquanto ainda não é líder"
+  },
+  {
+    "start": 14687.35,
+    "end": 14689.35,
+    "text": "Não, né? Está nos requerimentos"
+  },
+  {
+    "start": 14689.35,
+    "end": 14699.86,
+    "text": "Licitante líder não pode"
+  },
+  {
+    "start": 14699.86,
+    "end": 14703.59,
+    "text": "cobrir o próprio lance"
+  },
+  {
+    "start": 14703.59,
+    "end": 14743.67,
+    "text": "É não permitir isso"
+  },
+  {
+    "start": 14743.67,
+    "end": 14745.67,
+    "text": "Vamos verificar o que foi feito"
+  },
+  {
+    "start": 14745.67,
+    "end": 14747.67,
+    "text": "Depois a gente dá uma olhada no código"
+  },
+  {
+    "start": 14747.67,
+    "end": 14791.78,
+    "text": "Deixa eu pegar um"
+  },
+  {
+    "start": 14791.78,
+    "end": 14793.78,
+    "text": "Tem que ficar marcando, velho"
+  },
+  {
+    "start": 14793.78,
+    "end": 15022.28,
+    "text": "Brabo, hein"
+  },
+  {
+    "start": 15022.28,
+    "end": 15111.1,
+    "text": "Depois eu vou querer entender"
+  },
+  {
+    "start": 15111.1,
+    "end": 15113.1,
+    "text": "o que é esse Audit Witness"
+  },
+  {
+    "start": 15113.1,
+    "end": 15117.62,
+    "text": "Mas tudo bem, vamos continuar"
+  },
+  {
+    "start": 15117.62,
+    "end": 15159.59,
+    "text": "Arquitetura, estado atual"
+  },
+  {
+    "start": 15159.59,
+    "end": 15173.78,
+    "text": "Pedir para ele usar o grafo, né?"
+  },
+  {
+    "start": 15173.78,
+    "end": 15179.78,
+    "text": "Do Graphify"
+  },
+  {
+    "start": 15179.78,
+    "end": 15181.78,
+    "text": "Expansione o grafo"
+  },
+  {
+    "start": 15181.78,
+    "end": 15185.29,
+    "text": "O grafo"
+  },
+  {
+    "start": 15185.29,
+    "end": 15187.29,
+    "text": "Graphify"
+  },
+  {
+    "start": 15251.88,
+    "end": 15302.01,
+    "text": "Use o relógio do Postgres"
+  },
+  {
+    "start": 15302.01,
+    "end": 15371.24,
+    "text": "Isso, ótimo"
+  },
+  {
+    "start": 15371.24,
+    "end": 15373.24,
+    "text": "Esse era o módulo maiorzinho, né?"
+  },
+  {
+    "start": 15373.24,
+    "end": 15376.94,
+    "text": "A parte de auditoria, na verdade"
+  },
+  {
+    "start": 15376.94,
+    "end": 15381.46,
+    "text": "ela deveria ter sido feita primeiro, né?"
+  },
+  {
+    "start": 15381.46,
+    "end": 15383.46,
+    "text": "Por isso que CanonicalJson"
+  },
+  {
+    "start": 15383.46,
+    "end": 15503.16,
+    "text": "Tentei melhor"
+  },
+  {
+    "start": 15503.16,
+    "end": 15676.36,
+    "text": "Se eu não entender, vou mandar tirar"
+  },
+  {
+    "start": 15676.36,
+    "end": 15688.47,
+    "text": "Falta configurar o Witness"
+  },
+  {
+    "start": 15688.47,
+    "end": 15690.47,
+    "text": "Cara, que interessante, velho"
+  },
+  {
+    "start": 15690.47,
+    "end": 15692.47,
+    "text": "Talvez a gente"
+  },
+  {
+    "start": 15692.47,
+    "end": 15697.67,
+    "text": "Devesse alterar o Docker"
+  },
+  {
+    "start": 15697.67,
+    "end": 15699.67,
+    "text": "Para já configurar em Witness"
+  },
+  {
+    "start": 15699.67,
+    "end": 15737.16,
+    "text": "Só que não precisa ser extremamente"
+  },
+  {
+    "start": 15737.16,
+    "end": 15833.27,
+    "text": "Interessante"
+  },
+  {
+    "start": 15833.27,
+    "end": 15840.9,
+    "text": "De fato, talvez a gente"
+  },
+  {
+    "start": 15840.9,
+    "end": 15842.9,
+    "text": "Nossa, que ideia boa mandar para o"
+  },
+  {
+    "start": 15842.9,
+    "end": 15844.9,
+    "text": "Compose, né?"
+  },
+  {
+    "start": 15844.9,
+    "end": 15849.98,
+    "text": "Parece que caiu bem"
+  },
+  {
+    "start": 15849.98,
+    "end": 15917.22,
+    "text": "Cara, excelente"
+  },
+  {
+    "start": 15917.22,
+    "end": 15981.72,
+    "text": "Excelente"
+  },
+  {
+    "start": 15981.72,
+    "end": 15983.72,
+    "text": "É, fazer uma finalização, né?"
+  },
+  {
+    "start": 15983.72,
+    "end": 15985.72,
+    "text": "É, fazer uma finalização, né?"
+  },
+  {
+    "start": 15985.72,
+    "end": 16069.06,
+    "text": "O certo seria"
+  },
+  {
+    "start": 16069.06,
+    "end": 16169.3,
+    "text": "Antes de começar a fazer o front-end"
+  },
+  {
+    "start": 16169.3,
+    "end": 16171.3,
+    "text": "Antes de começar a fazer o front-end"
+  },
+  {
+    "start": 16171.3,
+    "end": 16175.19,
+    "text": "Eu vou querer usar"
+  },
+  {
+    "start": 16175.19,
+    "end": 16177.19,
+    "text": "Algumas skills de teste"
+  },
+  {
+    "start": 16177.19,
+    "end": 16179.19,
+    "text": "Para ver como é que esse"
+  },
+  {
+    "start": 16179.19,
+    "end": 16181.19,
+    "text": "Como é que esse back-end"
+  },
+  {
+    "start": 16181.19,
+    "end": 16183.19,
+    "text": "Ele vai se sair"
+  },
+  {
+    "start": 16183.19,
+    "end": 16185.19,
+    "text": "Sendo atacado"
+  },
+  {
+    "start": 16185.19,
+    "end": 16191.16,
+    "text": "Vamos tentar ver o que que"
+  },
+  {
+    "start": 16191.16,
+    "end": 16193.16,
+    "text": "Acontece"
+  },
+  {
+    "start": 16193.16,
+    "end": 16200.98,
+    "text": "Ou talvez eu pudesse fazer isso depois, né?"
+  },
+  {
+    "start": 16200.98,
+    "end": 16202.98,
+    "text": "Ou talvez eu pudesse fazer isso depois, né?"
+  },
+  {
+    "start": 16202.98,
+    "end": 16204.98,
+    "text": "Talvez eu pudesse fazer esses testes"
+  },
+  {
+    "start": 16204.98,
+    "end": 16206.98,
+    "text": "Talvez eu pudesse fazer esses testes"
+  },
+  {
+    "start": 16206.98,
+    "end": 16208.98,
+    "text": "Quando eu terminar o front, né?"
+  },
+  {
+    "start": 16208.98,
+    "end": 16210.98,
+    "text": "Quando eu terminar o front, né?"
+  },
+  {
+    "start": 16210.98,
+    "end": 16217.72,
+    "text": "Que eu poderia usar o playwright"
+  },
+  {
+    "start": 16217.72,
+    "end": 16219.72,
+    "text": "Pode ser um pouco mais interessante, né?"
+  },
+  {
+    "start": 16219.72,
+    "end": 16221.72,
+    "text": "Deixar para fazer esses testes pesados"
+  },
+  {
+    "start": 16221.72,
+    "end": 16223.72,
+    "text": "Deixar para fazer esses testes pesados"
+  },
+  {
+    "start": 16223.72,
+    "end": 16225.72,
+    "text": "Do sistema"
+  },
+  {
+    "start": 16225.72,
+    "end": 16227.72,
+    "text": "Uma vez que ele estiver todo pronto, né?"
+  },
+  {
+    "start": 16227.72,
+    "end": 16249.3,
+    "text": "Pode ser mais interessante"
+  },
+  {
+    "start": 16249.3,
+    "end": 16251.3,
+    "text": "Porque parando para pensar"
+  },
+  {
+    "start": 16251.3,
+    "end": 16253.3,
+    "text": "É..."
+  },
+  {
+    "start": 16253.3,
+    "end": 16255.3,
+    "text": "Se eu for colocar"
+  },
+  {
+    "start": 16255.3,
+    "end": 16257.3,
+    "text": "Dentro desse agent"
+  },
+  {
+    "start": 16257.3,
+    "end": 16259.3,
+    "text": "Pedir para ele fazer uma revisão"
+  },
+  {
+    "start": 16259.3,
+    "end": 16261.3,
+    "text": "Ele vai ler os documentos aqui"
+  },
+  {
+    "start": 16261.3,
+    "end": 16263.3,
+    "text": "Uma rota ou outra"
+  },
+  {
+    "start": 16263.3,
+    "end": 16265.3,
+    "text": "E já era, entendeu?"
+  },
+  {
+    "start": 16265.3,
+    "end": 16267.3,
+    "text": "Acabou o meu limite"
+  },
+  {
+    "start": 16267.3,
+    "end": 16269.3,
+    "text": "Que terrível, hein?"
+  },
+  {
+    "start": 16271.3,
+    "end": 16279.16,
+    "text": "Vamos esperar, né?"
+  },
+  {
+    "start": 16279.16,
+    "end": 16281.16,
+    "text": "Uma coisa que eu estava vendo é que"
+  },
+  {
+    "start": 16281.16,
+    "end": 16283.16,
+    "text": "Enquanto eu esperava o limite"
+  },
+  {
+    "start": 16283.16,
+    "end": 16285.16,
+    "text": "Resetar, eu estava pensando um pouco a respeito"
+  },
+  {
+    "start": 16285.16,
+    "end": 16287.16,
+    "text": "Do..."
+  },
+  {
+    "start": 16287.16,
+    "end": 16289.16,
+    "text": "Da testemunha, né?"
+  },
+  {
+    "start": 16289.16,
+    "end": 16291.16,
+    "text": "Que o Codex implementou para mim"
+  },
+  {
+    "start": 16291.16,
+    "end": 16293.16,
+    "text": "E eu percebi que talvez"
+  },
+  {
+    "start": 16293.16,
+    "end": 16295.16,
+    "text": "Eu não tenha certeza do que que isso significa"
+  },
+  {
+    "start": 16295.16,
+    "end": 16297.16,
+    "text": "Então"
+  },
+  {
+    "start": 16297.16,
+    "end": 16299.16,
+    "text": "Enquanto ainda não"
+  },
+  {
+    "start": 16299.16,
+    "end": 16301.16,
+    "text": "Não voltou o meu limite"
+  },
+  {
+    "start": 16301.16,
+    "end": 16303.16,
+    "text": "Vamos tentar entender um pouco melhor"
+  },
+  {
+    "start": 16303.16,
+    "end": 16305.16,
+    "text": "Como é que isso funciona"
+  },
+  {
+    "start": 16305.16,
+    "end": 16307.16,
+    "text": "Eu vou copiar isso aqui"
+  },
+  {
+    "start": 16307.16,
+    "end": 16309.16,
+    "text": "E vou pedir"
+  },
+  {
+    "start": 16309.16,
+    "end": 16311.16,
+    "text": "Eu estava conversando já com esse chat aqui"
+  },
+  {
+    "start": 16311.16,
+    "end": 16314.44,
+    "text": "Que é o nosso chat"
+  },
+  {
+    "start": 16314.44,
+    "end": 16316.44,
+    "text": "Que a gente está usando"
+  },
+  {
+    "start": 16316.44,
+    "end": 16318.44,
+    "text": "Então vamos tentar entender um pouco melhor"
+  },
+  {
+    "start": 16318.44,
+    "end": 16324.7,
+    "text": "Como que isso aqui funciona"
+  },
+  {
+    "start": 16324.7,
+    "end": 16326.7,
+    "text": "Talvez a gente possa também dar uma olhada"
+  },
+  {
+    "start": 16330.7,
+    "end": 16332.7,
+    "text": "Audit"
+  },
+  {
+    "start": 16332.7,
+    "end": 16334.7,
+    "text": "Witness Journal"
+  },
+  {
+    "start": 16334.7,
+    "end": 16336.7,
+    "text": "Talvez a gente possa entender um pouco"
+  },
+  {
+    "start": 16336.7,
+    "end": 16338.7,
+    "text": "Como é que o jornal funciona melhor também"
+  },
+  {
+    "start": 16338.7,
+    "end": 16347.29,
+    "text": "Witness Witness Journal"
+  },
+  {
+    "start": 16347.29,
+    "end": 16386.44,
+    "text": "Mantido pelo processo"
+  },
+  {
+    "start": 16386.44,
+    "end": 16388.44,
+    "text": "Isso quer dizer que"
+  },
+  {
+    "start": 16388.44,
+    "end": 16397.35,
+    "text": "Isso quer dizer que se eu reiniciar o container"
+  },
+  {
+    "start": 16397.35,
+    "end": 16399.35,
+    "text": "Vai limpar? Porque é isso que eu entendo"
+  },
+  {
+    "start": 16399.35,
+    "end": 16401.35,
+    "text": "Como mantido como processo"
+  },
+  {
+    "start": 16401.35,
+    "end": 16446.14,
+    "text": "Não"
+  },
+  {
+    "start": 16446.14,
+    "end": 16610.98,
+    "text": "Vou pedir um diagrama"
+  },
+  {
+    "start": 16610.98,
+    "end": 16623.26,
+    "text": "DL Draw"
+  },
+  {
+    "start": 16623.26,
+    "end": 16625.26,
+    "text": "Enquanto isso"
+  },
+  {
+    "start": 16625.26,
+    "end": 16650.17,
+    "text": "Por favor, continue"
+  },
+  {
+    "start": 16650.17,
+    "end": 16652.17,
+    "text": "Vai fazer um diagrama para a gente"
+  },
+  {
+    "start": 16652.17,
+    "end": 16654.17,
+    "text": "Um pouco melhor de entender"
+  },
+  {
+    "start": 16654.17,
+    "end": 16656.17,
+    "text": "Mas enquanto isso"
+  },
+  {
+    "start": 16656.17,
+    "end": 16770.87,
+    "text": "Essa parte de auditoria"
+  },
+  {
+    "start": 16770.87,
+    "end": 16772.87,
+    "text": "Ela foi implementada"
+  },
+  {
+    "start": 16772.87,
+    "end": 16774.87,
+    "text": "Mas eu preciso entender depois"
+  },
+  {
+    "start": 16774.87,
+    "end": 16829.29,
+    "text": "O que ele fez para mim"
+  },
+  {
+    "start": 16829.29,
+    "end": 16831.29,
+    "text": "Aqui ainda está trabalhando"
+  },
+  {
+    "start": 16831.29,
+    "end": 16857.93,
+    "text": "Meus olhos"
+  },
+  {
+    "start": 16857.93,
+    "end": 16865.11,
+    "text": "Cadê?"
+  },
+  {
+    "start": 16865.11,
+    "end": 16896.14,
+    "text": "Hum hum hum"
+  },
+  {
+    "start": 16896.14,
+    "end": 16902.68,
+    "text": "Mas isso é requerimento?"
+  },
+  {
+    "start": 16902.68,
+    "end": 16922.34,
+    "text": "Isso não é requerimento"
+  },
+  {
+    "start": 16922.34,
+    "end": 16930.78,
+    "text": "Qualquer alteração"
+  },
+  {
+    "start": 16930.78,
+    "end": 16932.78,
+    "text": "Deve ser detectada pela auditoria"
+  },
+  {
+    "start": 16932.78,
+    "end": 16968.86,
+    "text": "Tá"
+  },
+  {
+    "start": 16968.86,
+    "end": 17027.69,
+    "text": "Vamos executar a aplicação"
+  },
+  {
+    "start": 17027.69,
+    "end": 17042.74,
+    "text": "Passamos"
+  },
+  {
+    "start": 17042.74,
+    "end": 17044.74,
+    "text": "Histórico público de consulta"
+  },
+  {
+    "start": 17044.74,
+    "end": 17126.58,
+    "text": "Paginação"
+  },
+  {
+    "start": 17126.58,
+    "end": 17149.64,
+    "text": "Operação independente"
+  },
+  {
+    "start": 17149.64,
+    "end": 17151.64,
+    "text": "Não há chamada externa enquanto a transação mantém os locks"
+  },
+  {
+    "start": 17151.64,
+    "end": 17351.75,
+    "text": "Ótimo"
+  },
+  {
+    "start": 17351.75,
+    "end": 17355.64,
+    "text": "Ok"
+  },
+  {
+    "start": 17355.64,
+    "end": 17406.57,
+    "text": "Para você"
+  },
+  {
+    "start": 17406.57,
+    "end": 17419.16,
+    "text": "Várias validações de erros aqui"
+  },
+  {
+    "start": 17419.16,
+    "end": 17421.16,
+    "text": "Independência é uma coisa tão"
+  },
+  {
+    "start": 17421.16,
+    "end": 17423.16,
+    "text": "Tão boba de implementar"
+  },
+  {
+    "start": 17423.16,
+    "end": 17425.16,
+    "text": "E faz toda a diferença"
+  },
+  {
+    "start": 17425.16,
+    "end": 17429.82,
+    "text": "Teste pra caramba"
+  },
+  {
+    "start": 17429.82,
+    "end": 17541.29,
+    "text": "Teste, teste, teste"
+  },
+  {
+    "start": 17541.29,
+    "end": 17543.29,
+    "text": "Eu nem acreditava"
+  },
+  {
+    "start": 17543.29,
+    "end": 17545.29,
+    "text": "Como uma"
+  },
+  {
+    "start": 17545.29,
+    "end": 17547.29,
+    "text": "Uma API que"
+  },
+  {
+    "start": 17547.29,
+    "end": 17549.29,
+    "text": "É"
+  },
+  {
+    "start": 17549.29,
+    "end": 17551.29,
+    "text": "Sobre circunstâncias normais"
+  },
+  {
+    "start": 17551.29,
+    "end": 17556.36,
+    "text": "Seria uma coisa tão simples"
+  },
+  {
+    "start": 17556.36,
+    "end": 17558.36,
+    "text": "Simples por definição"
+  },
+  {
+    "start": 17558.36,
+    "end": 17560.36,
+    "text": "Mas na hora que você vai fazer a implementação de verdade"
+  },
+  {
+    "start": 17560.36,
+    "end": 17562.36,
+    "text": "Você vê que"
+  },
+  {
+    "start": 17562.36,
+    "end": 17564.36,
+    "text": "É bem mais em baixo"
+  },
+  {
+    "start": 17564.36,
+    "end": 17566.36,
+    "text": "Essa que é a beleza"
+  },
+  {
+    "start": 17566.36,
+    "end": 17568.36,
+    "text": "Dos sistemas em tempo real"
+  },
+  {
+    "start": 17568.36,
+    "end": 17570.36,
+    "text": "Tudo pode dar errado"
+  },
+  {
+    "start": 17570.36,
+    "end": 17576.36,
+    "text": "Não atoa que"
+  },
+  {
+    "start": 17576.36,
+    "end": 17578.36,
+    "text": "Agora eu estou a 20 minutos"
+  },
+  {
+    "start": 17578.36,
+    "end": 17580.36,
+    "text": "Mas eu já tenho mais"
+  },
+  {
+    "start": 17580.36,
+    "end": 17582.36,
+    "text": "3 vídeos aqui"
+  },
+  {
+    "start": 17582.36,
+    "end": 17588.71,
+    "text": "De 6 gigas total"
+  },
+  {
+    "start": 17588.71,
+    "end": 17590.71,
+    "text": "Bastante planejamento"
+  },
+  {
+    "start": 17590.71,
+    "end": 17592.71,
+    "text": "A pior parte"
+  },
+  {
+    "start": 17592.71,
+    "end": 17594.71,
+    "text": "É não poder"
+  },
+  {
+    "start": 17594.71,
+    "end": 17596.71,
+    "text": "De maneira muito simples"
+  },
+  {
+    "start": 17596.71,
+    "end": 17598.71,
+    "text": "Pelo menos durante essa etapa"
+  },
+  {
+    "start": 17598.71,
+    "end": 17600.71,
+    "text": "Ver"
+  },
+  {
+    "start": 17600.71,
+    "end": 17602.71,
+    "text": "Efetivamente"
+  },
+  {
+    "start": 17602.71,
+    "end": 17604.71,
+    "text": "Em"
+  },
+  {
+    "start": 17604.71,
+    "end": 17608.41,
+    "text": "Aí já é teste de documento"
+  },
+  {
+    "start": 17608.41,
+    "end": 17610.41,
+    "text": "Vou subir"
+  },
+  {
+    "start": 17610.41,
+    "end": 17612.41,
+    "text": "É triste não poder ver"
+  },
+  {
+    "start": 17612.41,
+    "end": 17614.41,
+    "text": "Em"
+  },
+  {
+    "start": 17614.41,
+    "end": 17616.41,
+    "text": "Em ação de uma vez"
+  },
+  {
+    "start": 17616.41,
+    "end": 17618.41,
+    "text": "Ainda vai ter algumas etapas"
+  },
+  {
+    "start": 17618.41,
+    "end": 17620.41,
+    "text": "Até a gente conseguir ver em ação"
+  },
+  {
+    "start": 17620.41,
+    "end": 17622.41,
+    "text": "Mas tudo bem"
+  },
+  {
+    "start": 17622.41,
+    "end": 17624.41,
+    "text": "Isso acontece"
+  },
+  {
+    "start": 17624.41,
+    "end": 17626.41,
+    "text": "Vamos setar então"
+  },
+  {
+    "start": 17626.41,
+    "end": 17628.41,
+    "text": "Fazer aqueles ajustes no nosso"
+  },
+  {
+    "start": 17628.41,
+    "end": 17630.41,
+    "text": "Na nossa testemunha"
+  },
+  {
+    "start": 17630.41,
+    "end": 17645.21,
+    "text": "O que nós estamos de uso"
+  },
+  {
+    "start": 17645.21,
+    "end": 17649.19,
+    "text": "Estamos bem"
+  },
+  {
+    "start": 17649.19,
+    "end": 17651.19,
+    "text": "Fazer alguns ajustes na nossa testemunha"
+  },
+  {
+    "start": 17651.19,
+    "end": 17653.19,
+    "text": "Pra que ela possa funcionar da maneira como a gente espera"
+  },
+  {
+    "start": 17653.19,
+    "end": 17655.19,
+    "text": "Esse arquivo"
+  },
+  {
+    "start": 17655.19,
+    "end": 17657.19,
+    "text": "Temporário aqui eu já posso excluir"
+  },
+  {
+    "start": 17657.19,
+    "end": 17659.19,
+    "text": "Com certeza que eu posso excluir ele"
+  },
+  {
+    "start": 17659.19,
+    "end": 17663.94,
+    "text": "Depois eu quero fazer uma alteração no slint"
+  },
+  {
+    "start": 17663.94,
+    "end": 17665.94,
+    "text": "O duro de alterar o slint é que ele vai"
+  },
+  {
+    "start": 17665.94,
+    "end": 17667.94,
+    "text": "Fazer um commit mudando todos os arquivos do código"
+  },
+  {
+    "start": 17667.94,
+    "end": 17669.94,
+    "text": "Não é mais"
+  },
+  {
+    "start": 17669.94,
+    "end": 17675.94,
+    "text": "Fazer o que né"
+  },
+  {
+    "start": 17675.94,
+    "end": 17677.94,
+    "text": "Vamos voltar a estudar como é que funciona"
+  },
+  {
+    "start": 17677.94,
+    "end": 17683.59,
+    "text": "A nossa implementação"
+  },
+  {
+    "start": 17683.59,
+    "end": 17769.66,
+    "text": "Deixa eu ver se é mais simples"
+  },
+  {
+    "start": 17769.66,
+    "end": 17799.02,
+    "text": "De se entender"
+  },
+  {
+    "start": 17799.02,
+    "end": 17801.02,
+    "text": "Deixa eu me livrar dessa documentação do dummy jason"
+  },
+  {
+    "start": 17801.02,
+    "end": 17803.02,
+    "text": "Não preciso dela"
+  },
+  {
+    "start": 17803.02,
+    "end": 17869.24,
+    "text": "Estou começando a entender"
+  },
+  {
+    "start": 17869.24,
+    "end": 17871.24,
+    "text": "Não precisa de ajuda não"
+  },
+  {
+    "start": 17871.24,
+    "end": 17905.98,
+    "text": "Não"
+  },
+  {
+    "start": 17905.98,
+    "end": 17907.98,
+    "text": "Deixa eu abrir o que"
+  },
+  {
+    "start": 17907.98,
+    "end": 17913.02,
+    "text": "Como é que é o nome"
+  },
+  {
+    "start": 17913.02,
+    "end": 17929.0,
+    "text": "Abre histórico"
+  },
+  {
+    "start": 17929.0,
+    "end": 17952.18,
+    "text": "Nossa"
+  },
+  {
+    "start": 17952.18,
+    "end": 17994.34,
+    "text": "Me dá essa imagem ai é melhor"
+  },
+  {
+    "start": 17994.34,
+    "end": 17996.34,
+    "text": "Tá acho que eu entendi como é que funciona esse diagrama"
+  },
+  {
+    "start": 17996.34,
+    "end": 18001.03,
+    "text": "Vamos começar então"
+  },
+  {
+    "start": 18001.03,
+    "end": 18003.03,
+    "text": "Pra ver se a gente consegue entender legal"
+  },
+  {
+    "start": 18003.03,
+    "end": 18014.79,
+    "text": "Que ótimo"
+  },
+  {
+    "start": 18014.79,
+    "end": 18016.79,
+    "text": "De todo modo"
+  },
+  {
+    "start": 18016.79,
+    "end": 18018.79,
+    "text": "Vamos focar aqui"
+  },
+  {
+    "start": 18018.79,
+    "end": 18020.79,
+    "text": "Meu deus terrível"
+  },
+  {
+    "start": 18020.79,
+    "end": 18022.79,
+    "text": "Post"
+  },
+  {
+    "start": 18022.79,
+    "end": 18024.79,
+    "text": "Nossa rota ta"
+  },
+  {
+    "start": 18024.79,
+    "end": 18026.79,
+    "text": "Bid"
+  },
+  {
+    "start": 18026.79,
+    "end": 18028.79,
+    "text": "Begin lock do leilão"
+  },
+  {
+    "start": 18028.79,
+    "end": 18030.79,
+    "text": "Consulta"
+  },
+  {
+    "start": 18030.79,
+    "end": 18032.79,
+    "text": "Devolver estado"
+  },
+  {
+    "start": 18032.79,
+    "end": 18034.79,
+    "text": "Validas as regras"
+  },
+  {
+    "start": 18034.79,
+    "end": 18038.2,
+    "text": "Ok"
+  },
+  {
+    "start": 18038.2,
+    "end": 18040.2,
+    "text": "Ai se o lance é inválido"
+  },
+  {
+    "start": 18040.2,
+    "end": 18042.2,
+    "text": "Rollback pra lá"
+  },
+  {
+    "start": 18042.2,
+    "end": 18044.2,
+    "text": "E lance recusado pra cá"
+  },
+  {
+    "start": 18044.2,
+    "end": 18046.2,
+    "text": "Maravilha"
+  },
+  {
+    "start": 18046.2,
+    "end": 18048.2,
+    "text": "Ai se o lance é válido"
+  },
+  {
+    "start": 18048.2,
+    "end": 18050.2,
+    "text": "Insere bid"
+  },
+  {
+    "start": 18050.2,
+    "end": 18052.2,
+    "text": "Insere commit"
+  },
+  {
+    "start": 18052.2,
+    "end": 18054.2,
+    "text": "Aham"
+  },
+  {
+    "start": 18054.2,
+    "end": 18056.2,
+    "text": "Lance aceito"
+  },
+  {
+    "start": 18056.2,
+    "end": 18058.2,
+    "text": "Legal"
+  },
+  {
+    "start": 18058.2,
+    "end": 18060.2,
+    "text": "Ai"
+  },
+  {
+    "start": 18060.2,
+    "end": 18062.2,
+    "text": "É isso"
+  },
+  {
+    "start": 18062.2,
+    "end": 18064.2,
+    "text": "Legal"
+  },
+  {
+    "start": 18064.2,
+    "end": 18066.2,
+    "text": "Mas ai acontece alguma coisa no 12"
+  },
+  {
+    "start": 18066.2,
+    "end": 18068.2,
+    "text": "O anchor worker"
+  },
+  {
+    "start": 18068.2,
+    "end": 18072.2,
+    "text": "Busca o anchor pendente"
+  },
+  {
+    "start": 18072.2,
+    "end": 18075.99,
+    "text": "Consulta rede atual"
+  },
+  {
+    "start": 18075.99,
+    "end": 18077.99,
+    "text": "Ah ta"
+  },
+  {
+    "start": 18077.99,
+    "end": 18079.99,
+    "text": "Ah isso aqui fica fora do post"
+  },
+  {
+    "start": 18079.99,
+    "end": 18081.99,
+    "text": "Acho que eu entendi"
+  },
+  {
+    "start": 18081.99,
+    "end": 18083.99,
+    "text": "É esse cara aqui"
+  },
+  {
+    "start": 18083.99,
+    "end": 18091.75,
+    "text": "Witness controller"
+  },
+  {
+    "start": 18091.75,
+    "end": 18104.6,
+    "text": "Aqui"
+  },
+  {
+    "start": 18104.6,
+    "end": 18108.04,
+    "text": "Tem que ter um contrato dele também"
+  },
+  {
+    "start": 18108.04,
+    "end": 18110.04,
+    "text": "Não tem?"
+  },
+  {
+    "start": 18110.04,
+    "end": 18112.04,
+    "text": "Tem aqui"
+  },
+  {
+    "start": 18112.04,
+    "end": 18174.2,
+    "text": "Então ta"
+  },
+  {
+    "start": 18174.2,
+    "end": 18176.2,
+    "text": "Olha aqui o checkpoint que ele tava falando"
+  },
+  {
+    "start": 18176.2,
+    "end": 18193.78,
+    "text": "Interessante"
+  },
+  {
+    "start": 18193.78,
+    "end": 18195.78,
+    "text": "Mas qual que é o gatilho que faz o anchor worker"
+  },
+  {
+    "start": 18195.78,
+    "end": 18197.78,
+    "text": "Vim buscar esses"
+  },
+  {
+    "start": 18197.78,
+    "end": 18199.78,
+    "text": "Anchors pendentes"
+  },
+  {
+    "start": 18199.78,
+    "end": 18231.58,
+    "text": "Entendi"
+  },
+  {
+    "start": 18231.58,
+    "end": 18233.58,
+    "text": "É um set timeout ai"
+  },
+  {
+    "start": 18233.58,
+    "end": 18235.58,
+    "text": "Que faz ele ficar batendo na porta"
+  },
+  {
+    "start": 18235.58,
+    "end": 18237.58,
+    "text": "Aqui não tem"
+  },
+  {
+    "start": 18237.58,
+    "end": 18244.63,
+    "text": "Ah olha só ele aqui"
+  },
+  {
+    "start": 18244.63,
+    "end": 18312.68,
+    "text": "Entendido"
+  },
+  {
+    "start": 18312.68,
+    "end": 18314.68,
+    "text": "Ele está alterado"
+  },
+  {
+    "start": 18314.68,
+    "end": 18322.28,
+    "text": "DotM.example"
+  },
+  {
+    "start": 18322.28,
+    "end": 18330.04,
+    "text": "Compose.file"
+  },
+  {
+    "start": 18330.04,
+    "end": 18331.0,
+    "text": "Ou seja"
+  },
+  {
+    "start": 18331.0,
+    "end": 18376.74,
+    "text": "Em teoria quando eu jogar isso aqui"
+  },
+  {
+    "start": 18376.74,
+    "end": 18378.42,
+    "text": "Que ótimo cara"
+  },
+  {
+    "start": 18378.42,
+    "end": 18419.88,
+    "text": "Que ótimo"
+  },
+  {
+    "start": 18419.88,
+    "end": 18497.27,
+    "text": "Vou só confirmar"
+  },
+  {
+    "start": 18497.27,
+    "end": 18520.42,
+    "text": "Estamos de boa então"
+  },
+  {
+    "start": 18520.42,
+    "end": 18521.62,
+    "text": "Ótimo"
+  },
+  {
+    "start": 18521.62,
+    "end": 18712.63,
+    "text": "Depois eu vou dar uma polida nisso"
+  },
+  {
+    "start": 18712.63,
+    "end": 18714.63,
+    "text": "Então cara"
+  },
+  {
+    "start": 18714.63,
+    "end": 18716.63,
+    "text": "Será que eu devo invalidar um lote"
+  },
+  {
+    "start": 18716.63,
+    "end": 18718.63,
+    "text": "Se"
+  },
+  {
+    "start": 18718.63,
+    "end": 18724.41,
+    "text": "Será que eu devo invalidar um lote"
+  },
+  {
+    "start": 18724.41,
+    "end": 18726.41,
+    "text": "se tiver"
+  },
+  {
+    "start": 18726.41,
+    "end": 18727.45,
+    "text": "é"
+  },
+  {
+    "start": 18727.61,
+    "end": 18729.61,
+    "text": "Maracutaia?"
+  },
+  {
+    "start": 18729.61,
+    "end": 18753.5,
+    "text": "Qualquer pessoa, mesmo sem login, pode auditar o histórico de lances de um lote e verificar que ele não foi adulterado."
+  },
+  {
+    "start": 18753.5,
+    "end": 18755.5,
+    "text": "O deploy da aplicação é obrigatório."
+  },
+  {
+    "start": 18755.5,
+    "end": 18759.33,
+    "text": "Deposita da saldo..."
+  },
+  {
+    "start": 18759.33,
+    "end": 18761.33,
+    "text": "Tá."
+  },
+  {
+    "start": 18761.33,
+    "end": 18763.33,
+    "text": "Front-end, blá blá blá..."
+  },
+  {
+    "start": 18763.33,
+    "end": 18769.21,
+    "text": "Por conta disso, as vitrines, a sala, comprovante..."
+  },
+  {
+    "start": 18769.21,
+    "end": 18771.21,
+    "text": "Mesmo que a API caia."
+  },
+  {
+    "start": 18771.21,
+    "end": 18773.21,
+    "text": "Só são acervos ao vivo..."
+  },
+  {
+    "start": 18773.21,
+    "end": 18775.21,
+    "text": "Ahn..."
+  },
+  {
+    "start": 18775.21,
+    "end": 18777.21,
+    "text": "Decidente não pode..."
+  },
+  {
+    "start": 18777.21,
+    "end": 18779.21,
+    "text": "...verificado..."
+  },
+  {
+    "start": 18779.21,
+    "end": 18781.21,
+    "text": "...ante sniping, tá bom."
+  },
+  {
+    "start": 18781.21,
+    "end": 18790.0,
+    "text": "Não é encerrado, evita devaluar..."
+  },
+  {
+    "start": 18790.0,
+    "end": 18798.0,
+    "text": "Qualquer adulteração, remoção ou inserção posterior do histórico, mesmo direto do banco de dados, deve ser detectada pela auditoria."
+  },
+  {
+    "start": 18798.0,
+    "end": 18803.87,
+    "text": "Tá bom, mas..."
+  },
+  {
+    "start": 18803.87,
+    "end": 18806.87,
+    "text": "E aí, eu detecto e..."
+  },
+  {
+    "start": 18806.87,
+    "end": 18808.87,
+    "text": "...e fica por isso?"
+  },
+  {
+    "start": 18808.87,
+    "end": 18810.87,
+    "text": "Ou eu detecto e invalido?"
+  },
+  {
+    "start": 18810.87,
+    "end": 18815.69,
+    "text": "Um pouco difícil de decidir, né?"
+  },
+  {
+    "start": 18815.69,
+    "end": 18840.66,
+    "text": "Talvez a gente invalida..."
+  },
+  {
+    "start": 18840.66,
+    "end": 18842.66,
+    "text": "...e aplique esse cancelamento de lote..."
+  },
+  {
+    "start": 18842.66,
+    "end": 18844.66,
+    "text": "...com esse torno automático, né?"
+  },
+  {
+    "start": 18844.66,
+    "end": 18846.66,
+    "text": "Pode ser interessante."
+  },
+  {
+    "start": 18846.66,
+    "end": 19088.47,
+    "text": ".url?"
+  },
+  {
+    "start": 19088.47,
+    "end": 19098.11,
+    "text": "Duro, hein?"
+  },
+  {
+    "start": 19098.11,
+    "end": 19106.47,
+    "text": "Ai, ai..."
+  },
+  {
+    "start": 19106.47,
+    "end": 19517.78,
+    "text": "Ah, sim, sim..."
+  },
+  {
+    "start": 19517.78,
+    "end": 19567.31,
+    "text": "Será que a gente não tá complicando demais?"
+  },
+  {
+    "start": 19567.31,
+    "end": 19804.54,
+    "text": "Bastante coisa nesse último, né?"
+  },
+  {
+    "start": 19804.54,
+    "end": 20110.58,
+    "text": "Maravilha."
+  },
+  {
+    "start": 20110.58,
+    "end": 20112.58,
+    "text": "Vamos voltar pra isso aqui então."
+  },
+  {
+    "start": 20112.58,
+    "end": 20164.44,
+    "text": "Cara, essa imagem aqui, ela ficou muito boa pra entender, cara."
+  },
+  {
+    "start": 20164.44,
+    "end": 20176.82,
+    "text": "Excelente, excelente."
+  },
+  {
+    "start": 20176.82,
+    "end": 20233.05,
+    "text": "Maravilha."
+  },
+  {
+    "start": 20233.05,
+    "end": 20236.05,
+    "text": "Acredito que de forma concorrente a gente pode começar a trabalhar no..."
+  },
+  {
+    "start": 20236.05,
+    "end": 20239.05,
+    "text": "...no front, né?"
+  },
+  {
+    "start": 20239.05,
+    "end": 20300.57,
+    "text": "React convite."
+  },
+  {
+    "start": 20300.57,
+    "end": 20327.06,
+    "text": "Vou fazer uma seleção das skills que eu vou usar no front-end, então..."
+  },
+  {
+    "start": 20327.06,
+    "end": 20338.99,
+    "text": "...eu quero essa, eu quero essa..."
+  },
+  {
+    "start": 20338.99,
+    "end": 20341.99,
+    "text": "...tejo skill, eu quero essa..."
+  },
+  {
+    "start": 20341.99,
+    "end": 20344.99,
+    "text": "...tem mais algumas que eu preciso ver, só um segundo."
+  },
+  {
+    "start": 20344.99,
+    "end": 20346.99,
+    "text": "Me esqueci de voltar à gravação."
+  },
+  {
+    "start": 20346.99,
+    "end": 20348.99,
+    "text": "Basicamente, eu encontrei..."
+  },
+  {
+    "start": 20348.99,
+    "end": 20349.99,
+    "text": "...encontrei não, né?"
+  },
+  {
+    "start": 20349.99,
+    "end": 20352.99,
+    "text": "Fui buscar esses..."
+  },
+  {
+    "start": 20352.99,
+    "end": 20355.99,
+    "text": "...essas skills aqui, que eu não me lembrava direito..."
+  },
+  {
+    "start": 20356.99,
+    "end": 20357.99,
+    "text": "...skills de front-end."
+  },
+  {
+    "start": 20357.99,
+    "end": 20360.99,
+    "text": "Então, tem design motion principles, que é uma skill de..."
+  },
+  {
+    "start": 20360.99,
+    "end": 20363.99,
+    "text": "...é..."
+  },
+  {
+    "start": 20363.99,
+    "end": 20364.99,
+    "text": "...animações, né?"
+  },
+  {
+    "start": 20364.99,
+    "end": 20366.99,
+    "text": "Date skills, que é uma biblioteca..."
+  },
+  {
+    "start": 20366.99,
+    "end": 20371.99,
+    "text": "...que é uma skill que serve pra tirar aquela cara de gerado por IA, né?"
+  },
+  {
+    "start": 20371.99,
+    "end": 20374.99,
+    "text": "UI UX Pro Max, que deixa o..."
+  },
+  {
+    "start": 20374.99,
+    "end": 20376.99,
+    "text": "...o nosso agente..."
+  },
+  {
+    "start": 20376.99,
+    "end": 20382.34,
+    "text": "...um pouco mais esperto na parte de UX, de UI."
+  },
+  {
+    "start": 20382.34,
+    "end": 20384.34,
+    "text": "Front-end design, que é do próprio..."
+  },
+  {
+    "start": 20384.34,
+    "end": 20386.34,
+    "text": "...da própria Antropica..."
+  },
+  {
+    "start": 20386.34,
+    "end": 20387.34,
+    "text": "...da própria..."
+  },
+  {
+    "start": 20387.34,
+    "end": 20389.34,
+    "text": "...Antropic, que eles..."
+  },
+  {
+    "start": 20389.34,
+    "end": 20390.34,
+    "text": "...admitindo, né?"
+  },
+  {
+    "start": 20390.34,
+    "end": 20392.34,
+    "text": "Que a própria IA não tem..."
+  },
+  {
+    "start": 20392.34,
+    "end": 20395.34,
+    "text": "...não tem gosto por si só e a gente precisa adicionar um..."
+  },
+  {
+    "start": 20395.34,
+    "end": 20397.34,
+    "text": "...umas skills a mais."
+  },
+  {
+    "start": 20397.34,
+    "end": 20400.34,
+    "text": "Playwright, que vai deixar o meu agente..."
+  },
+  {
+    "start": 20400.34,
+    "end": 20404.34,
+    "text": "...abrir um navegador e olhar como é que ele tá por dentro sem..."
+  },
+  {
+    "start": 20404.34,
+    "end": 20406.34,
+    "text": "...olhar como é que ele tá por dentro de verdade, né?"
+  },
+  {
+    "start": 20406.34,
+    "end": 20410.34,
+    "text": "Não imaginar, baseado nas tags HTML que ele vai escrever."
+  },
+  {
+    "start": 20410.34,
+    "end": 20415.34,
+    "text": "E Awesome Cloud Design, que vai entregar pra ele algumas..."
+  },
+  {
+    "start": 20415.34,
+    "end": 20416.34,
+    "text": "...alguns..."
+  },
+  {
+    "start": 20416.34,
+    "end": 20418.34,
+    "text": "...designs pré-prontos, né?"
+  },
+  {
+    "start": 20418.34,
+    "end": 20424.26,
+    "text": "Aí eu joguei tudo aqui e..."
+  },
+  {
+    "start": 20424.26,
+    "end": 20427.26,
+    "text": "...tô perguntando qual que é..."
+  },
+  {
+    "start": 20427.26,
+    "end": 20429.26,
+    "text": "...qual que é muito, né?"
+  },
+  {
+    "start": 20429.26,
+    "end": 20430.26,
+    "text": "Qual que tá..."
+  },
+  {
+    "start": 20430.26,
+    "end": 20433.26,
+    "text": "...qual que é conflitante, qual que é desnecessário."
+  },
+  {
+    "start": 20433.26,
+    "end": 20454.37,
+    "text": "Tá, então ele gosta do Front-end Designs..."
+  },
+  {
+    "start": 20454.37,
+    "end": 20461.86,
+    "text": "...ele gosta do Playwright MCP..."
+  },
+  {
+    "start": 20461.86,
+    "end": 20464.86,
+    "text": "...ele gosta do Design Motion Principles."
+  },
+  {
+    "start": 20464.86,
+    "end": 20468.86,
+    "text": "Ai, mas essas duas aqui, elas são tão importantes..."
+  },
+  {
+    "start": 20468.86,
+    "end": 20497.76,
+    "text": "...não é?"
+  },
+  {
+    "start": 20497.76,
+    "end": 20499.76,
+    "text": "T-Skill, IOX..."
+  },
+  {
+    "start": 20499.76,
+    "end": 20501.76,
+    "text": "...Front-end Design..."
+  },
+  {
+    "start": 20501.76,
+    "end": 20526.14,
+    "text": "Maravilha, então acabamos..."
+  },
+  {
+    "start": 20526.14,
+    "end": 20550.18,
+    "text": "...concordando um pouco aqui."
+  },
+  {
+    "start": 20550.18,
+    "end": 20589.82,
+    "text": "Eu adorei essa imagem, né?"
+  },
+  {
+    "start": 20589.82,
+    "end": 20591.82,
+    "text": "Não parece que eu me comuniquei muito bem, né?"
+  },
+  {
+    "start": 20591.82,
+    "end": 20601.06,
+    "text": "O agente tinha entendido que..."
+  },
+  {
+    "start": 20601.06,
+    "end": 20605.06,
+    "text": "...já era pra começar construindo e tal, mas na verdade nós vamos só..."
+  },
+  {
+    "start": 20605.06,
+    "end": 20608.06,
+    "text": "...iniciar o projeto."
+  },
+  {
+    "start": 20608.06,
+    "end": 20612.7,
+    "text": "Eu tenho alguma especificação aqui de..."
+  },
+  {
+    "start": 20612.7,
+    "end": 20613.7,
+    "text": "...de linguagem?"
+  },
+  {
+    "start": 20613.7,
+    "end": 20616.33,
+    "text": "Como?"
+  },
+  {
+    "start": 20616.33,
+    "end": 20617.33,
+    "text": "Sem framework?"
+  },
+  {
+    "start": 20617.33,
+    "end": 20618.33,
+    "text": "O que preferir?"
+  },
+  {
+    "start": 20618.33,
+    "end": 20619.33,
+    "text": "Não, né?"
+  },
+  {
+    "start": 20619.33,
+    "end": 20625.61,
+    "text": "Foi superado?"
+  },
+  {
+    "start": 20625.61,
+    "end": 20626.61,
+    "text": "Tudo não sei o quê?"
+  },
+  {
+    "start": 20626.61,
+    "end": 20628.61,
+    "text": "Tá, eu vou copiar..."
+  },
+  {
+    "start": 20628.61,
+    "end": 20645.1,
+    "text": "...requirements..."
+  },
+  {
+    "start": 20645.1,
+    "end": 20649.1,
+    "text": "...projeto react, vit, typescript, independências..."
+  },
+  {
+    "start": 20649.1,
+    "end": 20653.47,
+    "text": "...ah..."
+  },
+  {
+    "start": 20653.47,
+    "end": 20654.47,
+    "text": "...ótimo."
+  },
+  {
+    "start": 20654.47,
+    "end": 20657.47,
+    "text": "É só isso que eu queria mesmo."
+  },
+  {
+    "start": 20657.47,
+    "end": 20659.47,
+    "text": "E como é tarefa simples..."
+  },
+  {
+    "start": 20659.47,
+    "end": 20661.47,
+    "text": "...o Lite vai dar conta."
+  },
+  {
+    "start": 20661.47,
+    "end": 20670.9,
+    "text": "Excelente."
+  },
+  {
+    "start": 20670.9,
+    "end": 20692.54,
+    "text": "Falta ajustar o Git, né?"
+  },
+  {
+    "start": 20692.54,
+    "end": 20694.54,
+    "text": "Talvez eu possa alterar isso aqui..."
+  },
+  {
+    "start": 20694.54,
+    "end": 20701.18,
+    "text": "...teste técnico..."
+  },
+  {
+    "start": 20701.18,
+    "end": 20703.18,
+    "text": "...versal..."
+  },
+  {
+    "start": 20703.18,
+    "end": 20705.69,
+    "text": "...backend."
+  },
+  {
+    "start": 20705.69,
+    "end": 20709.16,
+    "text": "Acredito que sim, né?"
+  },
+  {
+    "start": 20709.16,
+    "end": 20710.16,
+    "text": "E aí, foi renamed?"
+  },
+  {
+    "start": 20710.16,
+    "end": 20712.5,
+    "text": "Foi."
+  },
+  {
+    "start": 20712.5,
+    "end": 20714.5,
+    "text": "Ah, vamos fazer um novo repo então?"
+  },
+  {
+    "start": 20714.5,
+    "end": 20718.62,
+    "text": "Teste técnico..."
+  },
+  {
+    "start": 20718.62,
+    "end": 20721.62,
+    "text": "...versal..."
+  },
+  {
+    "start": 20721.62,
+    "end": 20723.62,
+    "text": "...frontend."
+  },
+  {
+    "start": 20723.62,
+    "end": 20725.62,
+    "text": "Ótimo."
+  },
+  {
+    "start": 20725.62,
+    "end": 20732.7,
+    "text": "Público..."
+  },
+  {
+    "start": 20732.7,
+    "end": 20733.7,
+    "text": "Excelente."
+  },
+  {
+    "start": 20733.7,
+    "end": 20734.7,
+    "text": "Vamos roubar um terminal aqui?"
+  },
+  {
+    "start": 20771.41,
+    "end": 20774.41,
+    "text": "Ótimo, ótimo, ótimo."
+  },
+  {
+    "start": 20774.41,
+    "end": 20788.53,
+    "text": "Uma pausa."
+  },
+  {
+    "start": 20788.53,
+    "end": 20790.97,
+    "text": "Só dando uma..."
+  },
+  {
+    "start": 20790.97,
+    "end": 20792.97,
+    "text": "...finalizada rápida aqui."
+  },
+  {
+    "start": 20792.97,
+    "end": 20794.97,
+    "text": "É..."
+  },
+  {
+    "start": 20794.97,
+    "end": 20796.97,
+    "text": "..."
+  },
+  {
+    "start": 20796.97,
+    "end": 20799.97,
+    "text": "...ele terminou aqui no frontend, né?"
+  },
+  {
+    "start": 20799.97,
+    "end": 20801.97,
+    "text": "Ah..."
+  },
+  {
+    "start": 20801.97,
+    "end": 20803.97,
+    "text": "...ele já fez a estrutura que eu pedi..."
+  },
+  {
+    "start": 20803.97,
+    "end": 20805.97,
+    "text": "...com Preacher, com React..."
+  },
+  {
+    "start": 20805.97,
+    "end": 20807.97,
+    "text": "...e..."
+  },
+  {
+    "start": 20807.97,
+    "end": 20809.97,
+    "text": "...já entendeu o que vai ser com socket..."
+  },
+  {
+    "start": 20809.97,
+    "end": 20811.97,
+    "text": "...já configurou..."
+  },
+  {
+    "start": 20811.97,
+    "end": 20813.97,
+    "text": "...o playwright..."
+  },
+  {
+    "start": 20813.97,
+    "end": 20815.97,
+    "text": "...a única coisa que eu pedi de diferente..."
+  },
+  {
+    "start": 20815.97,
+    "end": 20817.97,
+    "text": "...é que ele mandasse pro Git e ele já mandou."
+  },
+  {
+    "start": 20817.97,
+    "end": 20819.97,
+    "text": "Na verdade não mandou ainda."
+  },
+  {
+    "start": 20819.97,
+    "end": 20826.22,
+    "text": "Agora mandou."
+  },
+  {
+    "start": 20826.22,
+    "end": 20829.63,
+    "text": "E agora vai faltar então só..."
+  },
+  {
+    "start": 20829.63,
+    "end": 20832.63,
+    "text": "...a gente terminar aqui..."
+  },
+  {
+    "start": 20832.63,
+    "end": 20834.63,
+    "text": "...rodar os nossos testes..."
+  },
+  {
+    "start": 20834.63,
+    "end": 20835.63,
+    "text": "...e..."
+  },
+  {
+    "start": 20835.63,
+    "end": 20837.63,
+    "text": "...botar pra funcionar no front..."
+  },
+  {
+    "start": 20837.63,
+    "end": 20839.63,
+    "text": "...e depois o deploy."
+  },
+  {
+    "start": 20839.63,
+    "end": 20841.63,
+    "text": "Falta bem pouquinho pra gente finalizar."
+  }
+]
